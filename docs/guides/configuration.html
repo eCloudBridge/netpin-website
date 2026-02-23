@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" type="image/png" href="/docs/assets/images/logo-icon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuration - Netpin Documentation</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="docs-container">
+
+        <main class="main-content">
+            <h1>Configuration</h1>
+            <p class="lead">
+                Complete reference for configuring Netpin services and components.
+            </p>
+
+            <h2>Environment Variables</h2>
+
+            <h3>Core Settings</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Variable</th>
+                        <th>Default</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>JWT_SECRET</code></td>
+                        <td>-</td>
+                        <td>Secret for signing JWT tokens (min 32 chars)</td>
+                    </tr>
+                    <tr>
+                        <td><code>JWT_EXPIRY</code></td>
+                        <td>24h</td>
+                        <td>JWT token expiration time</td>
+                    </tr>
+                    <tr>
+                        <td><code>ENCRYPTION_KEY</code></td>
+                        <td>-</td>
+                        <td>32-byte base64-encoded AES key</td>
+                    </tr>
+                    <tr>
+                        <td><code>LOG_LEVEL</code></td>
+                        <td>info</td>
+                        <td>Logging level (debug, info, warn, error)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Database Settings</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Variable</th>
+                        <th>Default</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>DATABASE_URL</code></td>
+                        <td>-</td>
+                        <td>PostgreSQL connection string</td>
+                    </tr>
+                    <tr>
+                        <td><code>POSTGRES_HOST</code></td>
+                        <td>postgres</td>
+                        <td>PostgreSQL hostname</td>
+                    </tr>
+                    <tr>
+                        <td><code>POSTGRES_PORT</code></td>
+                        <td>5432</td>
+                        <td>PostgreSQL port</td>
+                    </tr>
+                    <tr>
+                        <td><code>POSTGRES_USER</code></td>
+                        <td>netpin</td>
+                        <td>PostgreSQL username</td>
+                    </tr>
+                    <tr>
+                        <td><code>POSTGRES_PASSWORD</code></td>
+                        <td>-</td>
+                        <td>PostgreSQL password</td>
+                    </tr>
+                    <tr>
+                        <td><code>POSTGRES_DB</code></td>
+                        <td>netpin</td>
+                        <td>PostgreSQL database name</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Redis Settings</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Variable</th>
+                        <th>Default</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>REDIS_URL</code></td>
+                        <td>redis://redis:6379</td>
+                        <td>Redis connection URL</td>
+                    </tr>
+                    <tr>
+                        <td><code>REDIS_PASSWORD</code></td>
+                        <td>-</td>
+                        <td>Redis password (if required)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>IDI Thresholds</h2>
+            <p>Configure IDI scoring thresholds in the IDI service:</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Variable</th>
+                        <th>Default</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>IDI_THRESHOLD_CRITICAL</code></td>
+                        <td>85</td>
+                        <td>Score above which IDI is critical</td>
+                    </tr>
+                    <tr>
+                        <td><code>IDI_THRESHOLD_HIGH</code></td>
+                        <td>70</td>
+                        <td>Score above which IDI is high</td>
+                    </tr>
+                    <tr>
+                        <td><code>IDI_THRESHOLD_WARNING</code></td>
+                        <td>50</td>
+                        <td>Score above which IDI is warning</td>
+                    </tr>
+                    <tr>
+                        <td><code>GATE_BLOCK_THRESHOLD</code></td>
+                        <td>70</td>
+                        <td>IDI score that blocks deployments</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Docker Compose Override</h2>
+            <p>Use <code>docker-compose.override.yml</code> for local customizations:</p>
+            <pre><code>version: "3.8"
+services:
+  frontend:
+    volumes:
+      - ./frontend/src:/app/src
+    environment:
+      - VITE_API_URL=http://localhost:3000
+      
+  kubernetes-api:
+    environment:
+      - LOG_LEVEL=debug</code></pre>
+
+        </main>
+    </div>
+<script src="/docs/assets/js/layout.js"></script></body>
+
+</html>

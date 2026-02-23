@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" type="image/png" href="/docs/assets/images/logo-icon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Authentication - Netpin Documentation</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="docs-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo" style="display: flex; align-items: center; gap: 8px;">
+                     <span style="font-size: 1.25rem; font-weight: 800; color: #818cf8; letter-spacing: -0.025em;">netpin.io</span>
+                    
+                </div>
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">Getting Started</div>
+                    <ul class="nav-links">
+                        <li><a href="../index.html" class="nav-link">Overview</a></li>
+                        <li><a href="../guides/quick-start.html" class="nav-link">Quick Start</a></li>
+                        <li><a href="../guides/installation.html" class="nav-link">Installation</a></li>
+                    </ul>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-section-title">Architecture</div>
+                    <ul class="nav-links">
+                        <li><a href="../architecture/overview.html" class="nav-link">System Overview</a></li>
+                        <li><a href="../architecture/services.html" class="nav-link">Microservices</a></li>
+                        <li><a href="../architecture/database.html" class="nav-link">Database Schema</a></li>
+                    </ul>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-section-title">Features</div>
+                    <ul class="nav-links">
+                        <li><a href="../guides/clusters.html" class="nav-link">Cluster Management</a></li>
+                        <li><a href="../guides/topology.html" class="nav-link">Topology Visualization</a></li>
+                        <li><a href="../guides/idi.html" class="nav-link">Infrastructure Debt Index</a></li>
+                        <li><a href="../guides/agent.html" class="nav-link">Netpin Agent</a></li>
+                        <li><a href="../guides/stacks.html" class="nav-link">Application Stacks</a></li>
+                    </ul>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-section-title">API Reference</div>
+                    <ul class="nav-links">
+                        <li><a href="authentication.html" class="nav-link active">Authentication</a></li>
+                        <li><a href="clusters.html" class="nav-link">Clusters API</a></li>
+                        <li><a href="idi.html" class="nav-link">IDI API</a></li>
+                        <li><a href="kubernetes.html" class="nav-link">Kubernetes API</a></li>
+                    </ul>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-section-title">Operations</div>
+                    <ul class="nav-links">
+                        <li><a href="../guides/configuration.html" class="nav-link">Configuration</a></li>
+                        <li><a href="../guides/troubleshooting.html" class="nav-link">Troubleshooting</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <h1>API Authentication</h1>
+            <p class="lead">
+                Netpin uses JWT (JSON Web Tokens) for authentication. This guide covers how to
+                authenticate and make API requests.
+            </p>
+
+            <h2>Authentication Methods</h2>
+            <p>Netpin supports two authentication methods:</p>
+
+            <div class="card-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔑</div>
+                    <div class="feature-title">JWT Tokens</div>
+                    <div class="feature-desc">
+                        For user-based authentication. Tokens are obtained by logging in with email/password.
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <div class="feature-title">API Keys</div>
+                    <div class="feature-desc">
+                        For programmatic access. Used by agents, CI/CD pipelines, and integrations.
+                    </div>
+                </div>
+            </div>
+
+            <h2>User Authentication (JWT)</h2>
+
+            <h3>Login</h3>
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="badge badge-post">POST</span>
+                    <code class="endpoint-path">/api/auth/login</code>
+                </div>
+                <div class="endpoint-body">
+                    <p>Authenticate with email and password to receive a JWT token.</p>
+
+                    <h4>Request Body</h4>
+                    <pre><code>{
+  "email": "user@example.com",
+  "password": "your-password"
+}</code></pre>
+
+                    <h4>Response</h4>
+                    <pre><code>{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "user": {
+    "id": "550e8400-e29b-41d4-a716-446655440000",
+    "email": "user@example.com",
+    "name": "John Doe",
+    "created_at": "2026-01-01T00:00:00Z"
+  }
+}</code></pre>
+
+                    <h4>Example</h4>
+                    <pre><code>curl -X POST https://netpin.example.com/api/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"email": "user@example.com", "password": "your-password"}'</code></pre>
+                </div>
+            </div>
+
+            <h3>Register</h3>
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="badge badge-post">POST</span>
+                    <code class="endpoint-path">/api/auth/register</code>
+                </div>
+                <div class="endpoint-body">
+                    <p>Create a new user account.</p>
+
+                    <h4>Request Body</h4>
+                    <pre><code>{
+  "email": "newuser@example.com",
+  "password": "secure-password-123",
+  "name": "New User"
+}</code></pre>
+
+                    <h4>Response</h4>
+                    <pre><code>{
+  "message": "User created successfully",
+  "user": {
+    "id": "550e8400-e29b-41d4-a716-446655440001",
+    "email": "newuser@example.com",
+    "name": "New User"
+  }
+}</code></pre>
+                </div>
+            </div>
+
+            <h3>Get Current User</h3>
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="badge badge-get">GET</span>
+                    <code class="endpoint-path">/api/auth/me</code>
+                </div>
+                <div class="endpoint-body">
+                    <p>Get the current authenticated user's profile.</p>
+
+                    <h4>Headers</h4>
+                    <pre><code>Authorization: Bearer &lt;token&gt;</code></pre>
+
+                    <h4>Response</h4>
+                    <pre><code>{
+  "id": "550e8400-e29b-41d4-a716-446655440000",
+  "email": "user@example.com",
+  "name": "John Doe",
+  "created_at": "2026-01-01T00:00:00Z",
+  "updated_at": "2026-01-10T00:00:00Z"
+}</code></pre>
+                </div>
+            </div>
+
+            <h3>Change Password</h3>
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="badge badge-post">POST</span>
+                    <code class="endpoint-path">/api/auth/change-password</code>
+                </div>
+                <div class="endpoint-body">
+                    <p>Change the current user's password.</p>
+
+                    <h4>Headers</h4>
+                    <pre><code>Authorization: Bearer &lt;token&gt;</code></pre>
+
+                    <h4>Request Body</h4>
+                    <pre><code>{
+  "current_password": "old-password",
+  "new_password": "new-secure-password"
+}</code></pre>
+
+                    <h4>Response</h4>
+                    <pre><code>{
+  "message": "Password changed successfully"
+}</code></pre>
+                </div>
+            </div>
+
+            <h2>Using JWT Tokens</h2>
+            <p>
+                After obtaining a JWT token, include it in the <code>Authorization</code> header
+                of all subsequent requests:
+            </p>
+
+            <pre><code># Include the token in the Authorization header
+curl -X GET https://netpin.example.com/api/clusters \
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."</code></pre>
+
+            <h3>Token Expiry</h3>
+            <p>JWT tokens expire after <strong>24 hours</strong> by default. When a token expires:</p>
+            <ul style="margin-left: 20px; color: var(--text-secondary); margin-bottom: 16px;">
+                <li>API requests return <code>401 Unauthorized</code></li>
+                <li>Re-authenticate using the login endpoint</li>
+                <li>Update the stored token in your application</li>
+            </ul>
+
+            <h2>API Keys</h2>
+            <p>
+                API keys are used for programmatic access, such as from the Netpin Agent or CI/CD pipelines.
+            </p>
+
+            <h3>Creating an API Key</h3>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-title">Navigate to Settings</div>
+                    <div class="step-content">
+                        <p>Go to Settings → API Keys in the Netpin dashboard.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-title">Create New Key</div>
+                    <div class="step-content">
+                        <p>Click "Create API Key" and give it a descriptive name.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-title">Copy and Store Securely</div>
+                    <div class="step-content">
+                        <p>Copy the key immediately — it won't be shown again.</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Using API Keys</h3>
+            <p>API keys can be used in the <code>Authorization</code> header:</p>
+
+            <pre><code>curl -X POST https://netpin.example.com/api/agent/findings \
+  -H "Authorization: Bearer np_api_1234567890abcdef" \
+  -H "Content-Type: application/json" \
+  -d '{"findings": [...]}'</code></pre>
+
+            <div class="alert alert-warning">
+                <span class="alert-icon">⚠️</span>
+                <div>
+                    <strong>Security Best Practice:</strong> Store API keys in secure secret management
+                    systems (Kubernetes Secrets, AWS Secrets Manager, etc.). Never commit them to version control.
+                </div>
+            </div>
+
+            <h2>Error Responses</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Status Code</th>
+                        <th>Description</th>
+                        <th>Common Causes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>400</code></td>
+                        <td>Bad Request</td>
+                        <td>Invalid request body, missing required fields</td>
+                    </tr>
+                    <tr>
+                        <td><code>401</code></td>
+                        <td>Unauthorized</td>
+                        <td>Missing/invalid token, expired token</td>
+                    </tr>
+                    <tr>
+                        <td><code>403</code></td>
+                        <td>Forbidden</td>
+                        <td>Valid token but insufficient permissions</td>
+                    </tr>
+                    <tr>
+                        <td><code>404</code></td>
+                        <td>Not Found</td>
+                        <td>Resource doesn't exist</td>
+                    </tr>
+                    <tr>
+                        <td><code>500</code></td>
+                        <td>Internal Server Error</td>
+                        <td>Server-side error, check logs</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Error Response Format</h3>
+            <pre><code>{
+  "error": "Unauthorized",
+  "message": "Token has expired",
+  "code": "TOKEN_EXPIRED"
+}</code></pre>
+
+            <h2>Rate Limiting</h2>
+            <p>API requests are rate-limited to prevent abuse:</p>
+            <ul style="margin-left: 20px; color: var(--text-secondary); margin-bottom: 16px;">
+                <li><strong>Authentication endpoints:</strong> 10 requests/minute per IP</li>
+                <li><strong>API endpoints:</strong> 100 requests/minute per user</li>
+                <li><strong>Agent endpoints:</strong> 60 requests/minute per cluster</li>
+            </ul>
+
+            <p>Rate limit headers are included in responses:</p>
+            <pre><code>X-RateLimit-Limit: 100
+X-RateLimit-Remaining: 95
+X-RateLimit-Reset: 1704067200</code></pre>
+
+            <div class="docs-footer">
+                <p>Netpin Documentation — Built with ❤️ for the DevOps community</p>
+                <p>© 2026 Netpin. All rights reserved.</p>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>

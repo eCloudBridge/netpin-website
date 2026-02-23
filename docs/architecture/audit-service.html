@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" type="image/png" href="/docs/assets/images/logo-icon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audit Service - Netpin Documentation</title>
+    <link rel="stylesheet" href="/docs/assets/css/style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="docs-container">
+        <!-- Sidebar will be injected by layout.js -->
+
+        <main class="main-content">
+            <h1>Audit Service</h1>
+            <p class="lead">
+                The Audit Service provides a centralized, immutable log of all significant events and user actions
+                within
+                the platform.
+            </p>
+
+            <h2>Event Flow</h2>
+            <pre class="mermaid">
+sequenceDiagram
+    participant User
+    participant API as API Gateway
+    participant Service as Any Microservice
+    participant Audit as Audit Service
+    participant DB as Audit DB
+
+    User->>API: Mutable Action (POST/PUT/DELETE)
+    API->>Service: Forward Request
+    Service->>Service: Process Action
+    
+    par Async Logging
+        Service-->>Audit: Emit Event (gRPC/HTTP)
+        Audit->>DB: Persist Event
+    end
+    
+    Service-->>User: 200 OK
+            </pre>
+
+            <h2>Event Schema</h2>
+            <p>Every audit event follows a strict schema:</p>
+            <pre><code class="language-json">{
+  "event_id": "evt_123456789",
+  "actor": {
+    "user_id": "u_8877",
+    "ip_address": "203.0.113.1"
+  },
+  "action": "cluster.delete",
+  "resource": {
+    "type": "cluster",
+    "id": "c_prod_01"
+  },
+  "timestamp": "2026-02-03T12:00:00Z",
+  "metadata": {
+    "reason": "Decommissioning"
+  }
+}</code></pre>
+
+        </main>
+    </div>
+
+    <!-- Layout Script -->
+    <script src="/docs/assets/js/layout.js"></script>
+
+    <!-- External Libs -->
+    <script src="/docs/assets/js/mermaid.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            mermaid.initialize({
+                startOnLoad: true,
+                theme: 'dark',
+                securityLevel: 'loose',
+            });
+        });
+    </script>
+</body>
+
+</html>

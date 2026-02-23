@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" type="image/png" href="/docs/assets/images/logo-icon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kubernetes API Reference - Netpin Documentation</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="docs-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo" style="display: flex; align-items: center; gap: 8px;">
+                     <span style="font-size: 1.25rem; font-weight: 800; color: #818cf8; letter-spacing: -0.025em;">netpin.io</span>
+                    
+                </div>
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">API Reference</div>
+                    <ul class="nav-links">
+                        <li><a href="authentication.html" class="nav-link">Authentication</a></li>
+                        <li><a href="clusters.html" class="nav-link">Clusters API</a></li>
+                        <li><a href="idi.html" class="nav-link">IDI API</a></li>
+                        <li><a href="kubernetes.html" class="nav-link active">Kubernetes API</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <h1>Kubernetes API Reference</h1>
+            <p class="lead">
+                API endpoints for Kubernetes operations, topology visualization, and Helm management.
+            </p>
+
+            <h2>Topology</h2>
+
+            <h3>Get Cluster Topology</h3>
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="badge badge-get">GET</span>
+                    <code class="endpoint-path">/api/k8s/:clusterId/topology</code>
+                </div>
+                <div class="endpoint-body">
+                    <p>Get the complete topology graph for a cluster.</p>
+
+                    <h4>Query Parameters</h4>
+                    <table>
+                        <tr>
+                            <td><code>namespaces</code></td>
+                            <td><span class="badge badge-optional">Optional</span></td>
+                            <td>Comma-separated list of namespaces to include</td>
+                        </tr>
+                    </table>
+
+                    <h4>Response</h4>
+                    <pre><code>{
+  "nodes": [
+    {
+      "id": "deployment-default-api-server",
+      "type": "Deployment",
+      "name": "api-server",
+      "namespace": "default",
+      "status": "Running",
+      "replicas": 3,
+      "labels": {
+        "app": "api-server",
+        "tier": "backend"
+      }
+    },
+    {
+      "id": "service-default-api-server",
+      "type": "Service",
+      "name": "api-server",
+      "namespace": "default",
+      "serviceType": "ClusterIP",
+      "ports": [{"port": 80, "targetPort": 8080}]
+    }
+  ],
+  "edges": [
+    {
+      "source": "service-default-api-server",
+      "target": "deployment-default-api-server",
+      "relationship": "selects"
+    }
+  ]
+}</code></pre>
+                </div>
+            </div>
+
+            <h2>Resources</h2>
+
+            <h3>List Namespaces</h3>
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="badge badge-get">GET</span>
+                    <code class="endpoint-path">/api/k8s/:clusterId/namespaces</code>
+                </div>
+                <div class="endpoint-body">
+                    <p>List all namespaces in a cluster.</p>
+
+                    <h4>Response</h4>
+                    <pre><code>[
+  {
+    "name": "default",
+    "status": "Active",
+    "labels": {},
+    "created_at": "2026-01-01T00:00:00Z"
+  },
+  {
+    "name": "production",
+    "status": "Active",
+    "labels": {"env": "production"},
+    "created_at": "2026-01-02T00:00:00Z"
+  }
+]</code></pre>
+                </div>
+            </div>
+
+            <h3>List Deployments</h3>
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="badge badge-get">GET</span>
+                    <code class="endpoint-path">/api/k8s/:clusterId/namespaces/:namespace/deployments</code>
+                </div>
+                <div class="endpoint-body">
+                    <p>List all deployments in a namespace.</p>
+                </div>
+            </div>
+
+            <h3>Get Deployment</h3>
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="badge badge-get">GET</span>
+                    <code class="endpoint-path">/api/k8s/:clusterId/namespaces/:namespace/deployments/:name</code>
+                </div>
+                <div class="endpoint-body">
+                    <p>Get details for a specific deployment.</p>
+                </div>
+            </div>
+
+            <h3>List Services</h3>
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="badge badge-get">GET</span>
+                    <code class="endpoint-path">/api/k8s/:clusterId/namespaces/:namespace/services</code>
+                </div>
+            </div>
+
+            <h3>List Pods</h3>
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="badge badge-get">GET</span>
+                    <code class="endpoint-path">/api/k8s/:clusterId/namespaces/:namespace/pods</code>
+                </div>
+            </div>
+
+            <h2>Helm Releases</h2>
+
+            <h3>List Helm Releases</h3>
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="badge badge-get">GET</span>
+                    <code class="endpoint-path">/api/k8s/:clusterId/helm/releases</code>
+                </div>
+                <div class="endpoint-body">
+                    <p>List all Helm releases in the cluster.</p>
+
+                    <h4>Query Parameters</h4>
+                    <table>
+                        <tr>
+                            <td><code>namespace</code></td>
+                            <td><span class="badge badge-optional">Optional</span></td>
+                            <td>Filter by namespace (default: all)</td>
+                        </tr>
+                    </table>
+
+                    <h4>Response</h4>
+                    <pre><code>[
+  {
+    "name": "nginx-ingress",
+    "namespace": "ingress-nginx",
+    "chart": "ingress-nginx-4.5.2",
+    "app_version": "1.6.4",
+    "status": "deployed",
+    "revision": 3,
+    "updated": "2026-01-10T12:00:00Z"
+  }
+]</code></pre>
+                </div>
+            </div>
+
+            <h3>Get Helm Release</h3>
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="badge badge-get">GET</span>
+                    <code class="endpoint-path">/api/k8s/:clusterId/helm/releases/:namespace/:name</code>
+                </div>
+                <div class="endpoint-body">
+                    <p>Get details for a specific Helm release, including values and manifest.</p>
+                </div>
+            </div>
+
+            <h3>Upgrade Helm Release</h3>
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="badge badge-post">POST</span>
+                    <code class="endpoint-path">/api/k8s/:clusterId/helm/releases/:namespace/:name/upgrade</code>
+                </div>
+                <div class="endpoint-body">
+                    <p>Upgrade a Helm release with new values.</p>
+
+                    <h4>Request Body</h4>
+                    <pre><code>{
+  "chart": "ingress-nginx/ingress-nginx",
+  "version": "4.6.0",
+  "values": {
+    "controller.replicaCount": 3
+  }
+}</code></pre>
+                </div>
+            </div>
+
+            <h3>Rollback Helm Release</h3>
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="badge badge-post">POST</span>
+                    <code class="endpoint-path">/api/k8s/:clusterId/helm/releases/:namespace/:name/rollback</code>
+                </div>
+                <div class="endpoint-body">
+                    <p>Rollback a Helm release to a previous revision.</p>
+
+                    <h4>Request Body</h4>
+                    <pre><code>{
+  "revision": 2
+}</code></pre>
+                </div>
+            </div>
+
+            <h2>Logs</h2>
+
+            <h3>Get Pod Logs</h3>
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="badge badge-get">GET</span>
+                    <code class="endpoint-path">/api/k8s/:clusterId/namespaces/:namespace/pods/:name/logs</code>
+                </div>
+                <div class="endpoint-body">
+                    <p>Stream or fetch logs from a pod.</p>
+
+                    <h4>Query Parameters</h4>
+                    <table>
+                        <tr>
+                            <td><code>container</code></td>
+                            <td><span class="badge badge-optional">Optional</span></td>
+                            <td>Container name (required if multi-container)</td>
+                        </tr>
+                        <tr>
+                            <td><code>tail</code></td>
+                            <td><span class="badge badge-optional">Optional</span></td>
+                            <td>Number of lines from end (default: 100)</td>
+                        </tr>
+                        <tr>
+                            <td><code>follow</code></td>
+                            <td><span class="badge badge-optional">Optional</span></td>
+                            <td>Stream logs (true/false)</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="docs-footer">
+                <p>Netpin Documentation — Built with ❤️ for the DevOps community</p>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>

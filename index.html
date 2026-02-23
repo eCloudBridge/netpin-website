@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netpin - Infrastructure Intelligence Platform | Quantify & Eliminate Technical Debt</title>
+    <meta name="description"
+        content="Netpin is the AI-powered infrastructure intelligence platform that helps DevOps teams quantify technical debt, visualize Kubernetes topology, and make data-driven deployment decisions.">
+    <meta name="keywords"
+        content="kubernetes, infrastructure, devops, technical debt, IDI, cloud native, observability">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Netpin - Infrastructure Intelligence Platform">
+    <meta property="og:description"
+        content="Quantify and eliminate infrastructure debt with real-time insights, predictive analytics, and intelligent deployment gating.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://netpin.io">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/logo-icon.png">
+</head>
+
+<body>
+    <!-- Background Effects -->
+    <div class="bg-grid"></div>
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+    <div class="bg-glow bg-glow-3"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="#" class="logo">
+                <span style="font-size: 1.5rem; font-weight: 800; background: linear-gradient(to right, #818cf8, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -0.025em;">netpin.io</span>
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#idi">IDI Score</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="docs/">Docs</a></li>
+            </ul>
+
+            <div class="nav-cta">
+                <a href="#" class="btn btn-ghost">Sign In</a>
+                <a href="#" class="btn btn-primary">Get Started Free</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="badge-dot"></span>
+                    <span>Now with AI-Powered Forecasting</span>
+                </div>
+
+                <h1>
+                    Know Your Infrastructure<br>
+                    <span class="text-gradient">Before It Breaks</span>
+                </h1>
+
+                <p>
+                    Netpin quantifies infrastructure debt, predicts failures, and gates risky deployments —
+                    giving your team the visibility to ship faster with confidence.
+                </p>
+
+                <div class="hero-cta">
+                    <a href="#" class="btn btn-primary btn-large">
+                        Start Free Trial
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
+                    </a>
+                    <a href="#" class="btn btn-secondary btn-large">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <polygon points="5 3 19 12 5 21 5 3" />
+                        </svg>
+                        Watch Demo
+                    </a>
+                </div>
+
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">40%</div>
+                        <div class="stat-label">Faster Incident Response</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">3x</div>
+                        <div class="stat-label">More Deployments</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">99.9%</div>
+                        <div class="stat-label">Uptime Achieved</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-visual">
+                <div class="hero-mockup">
+                    <div class="hero-screen" style="padding: 0; overflow: hidden; border-radius: 16px;">
+                        <img src="images/dashboard-mockup.png"
+                            alt="Netpin Dashboard - Infrastructure Intelligence Platform"
+                            style="width: 100%; height: auto; display: block; border-radius: 16px;">
+                    </div>
+
+                    <!-- Floating Badges -->
+                    <div class="floating-element float-badge float-1">
+                        <div class="float-badge-icon green">✓</div>
+                        <div class="float-badge-text">Deploy Approved</div>
+                    </div>
+                    <div class="floating-element float-badge float-2">
+                        <div class="float-badge-icon purple">📊</div>
+                        <div class="float-badge-text">IDI: Excellent</div>
+                    </div>
+                    <div class="floating-element float-badge float-3">
+                        <div class="float-badge-icon cyan">🔍</div>
+                        <div class="float-badge-text">0 Critical Issues</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">
+                    <span>✦</span> Features
+                </div>
+                <h2>Everything You Need to <span class="text-gradient">Master Infrastructure</span></h2>
+                <p>
+                    From real-time topology visualization to predictive analytics,
+                    Netpin gives you complete visibility into your Kubernetes infrastructure.
+                </p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon purple">📊</div>
+                    <h3>Infrastructure Debt Index</h3>
+                    <p>
+                        Our proprietary IDI score quantifies technical debt across security,
+                        compliance, efficiency, and reliability — giving you a single number
+                        to track infrastructure health.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon green">🔮</div>
+                    <h3>Predictive Forecasting</h3>
+                    <p>
+                        AI-powered forecasting predicts where your IDI will be in 7, 14,
+                        and 30 days — so you can address issues before they become critical.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon cyan">🗺️</div>
+                    <h3>Topology Visualization</h3>
+                    <p>
+                        Interactive maps show all your Kubernetes resources and their
+                        relationships. Understand dependencies at a glance.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon pink">🚦</div>
+                    <h3>Deployment Gating</h3>
+                    <p>
+                        Automatically block risky deployments based on IDI thresholds.
+                        Integrate with your CI/CD pipeline for intelligent release control.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon orange">☁️</div>
+                    <h3>Multi-Cloud Support</h3>
+                    <p>
+                        Connect clusters from AWS EKS, Google GKE, Azure AKS, or any
+                        on-premises Kubernetes environment. One platform for everything.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon blue">🤖</div>
+                    <h3>Lightweight Agent</h3>
+                    <p>
+                        Our read-only agent collects data without impacting performance.
+                        Deploy in seconds with a single kubectl command.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feature Showcase: Topology Visualization -->
+    <section class="feature-showcase" id="showcase-topology">
+        <div class="container">
+            <div class="showcase-grid">
+                <div class="showcase-content">
+                    <div class="section-label">
+                        <span>✦</span> Topology Visualization
+                    </div>
+                    <h2>See Your <span class="text-gradient">Entire Infrastructure</span> at a Glance</h2>
+                    <p>
+                        Understand the complete picture of your Kubernetes environment with interactive
+                        topology maps. Instantly identify dependencies, bottlenecks, and single points of failure.
+                    </p>
+                    <ul class="feature-benefits">
+                        <li>
+                            <span class="benefit-icon">🔗</span>
+                            <div>
+                                <strong>Dependency Mapping</strong>
+                                <p>Automatically discover and visualize relationships between pods, services, and
+                                    deployments</p>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="benefit-icon">🎯</span>
+                            <div>
+                                <strong>Health Status at a Glance</strong>
+                                <p>Color-coded nodes show healthy (green), warning (yellow), and critical (red)
+                                    resources</p>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="benefit-icon">⚡</span>
+                            <div>
+                                <strong>Impact Analysis</strong>
+                                <p>Understand blast radius before making changes — know what depends on what</p>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="showcase-stats">
+                        <div class="stat">
+                            <span class="stat-value">75%</span>
+                            <span class="stat-label">Faster Root Cause Analysis</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">50%</span>
+                            <span class="stat-label">Reduction in MTTR</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="showcase-image">
+                    <img src="images/topology-mockup.png"
+                        alt="Topology Visualization - Interactive Kubernetes resource map">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feature Showcase: IDI Analytics -->
+    <section class="feature-showcase reverse" id="showcase-idi">
+        <div class="container">
+            <div class="showcase-grid">
+                <div class="showcase-content">
+                    <div class="section-label">
+                        <span>✦</span> IDI Analytics
+                    </div>
+                    <h2>Quantify Technical Debt with <span class="text-gradient">Precision</span></h2>
+                    <p>
+                        Stop guessing about infrastructure health. The IDI score gives you a single,
+                        actionable metric that quantifies technical debt across four critical dimensions.
+                    </p>
+                    <ul class="feature-benefits">
+                        <li>
+                            <span class="benefit-icon">🔒</span>
+                            <div>
+                                <strong>Security Score</strong>
+                                <p>Vulnerabilities, exposed secrets, RBAC issues, and security best practices</p>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="benefit-icon">📋</span>
+                            <div>
+                                <strong>Compliance Score</strong>
+                                <p>CIS benchmarks, pod security policies, and regulatory requirements</p>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="benefit-icon">📈</span>
+                            <div>
+                                <strong>Efficiency Score</strong>
+                                <p>Resource utilization, right-sizing recommendations, and cost optimization</p>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="benefit-icon">🛡️</span>
+                            <div>
+                                <strong>Reliability Score</strong>
+                                <p>High availability, disaster recovery, and resilience patterns</p>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="showcase-stats">
+                        <div class="stat">
+                            <span class="stat-value">60%</span>
+                            <span class="stat-label">Fewer Production Incidents</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">30%</span>
+                            <span class="stat-label">Cost Savings</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="showcase-image">
+                    <img src="images/idi-analytics-mockup.png"
+                        alt="IDI Analytics Dashboard - Technical debt quantification">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feature Showcase: Deployment Gating -->
+    <section class="feature-showcase" id="showcase-gating">
+        <div class="container">
+            <div class="showcase-grid">
+                <div class="showcase-content">
+                    <div class="section-label">
+                        <span>✦</span> Deployment Gating
+                    </div>
+                    <h2>Block Risky Deployments <span class="text-gradient">Automatically</span></h2>
+                    <p>
+                        Integrate intelligent deployment gates into your CI/CD pipeline. Automatically
+                        block releases when infrastructure conditions indicate high risk.
+                    </p>
+                    <ul class="feature-benefits">
+                        <li>
+                            <span class="benefit-icon">🚦</span>
+                            <div>
+                                <strong>IDI-Based Gates</strong>
+                                <p>Set thresholds for Security, Compliance, Efficiency, and Reliability scores</p>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="benefit-icon">🔌</span>
+                            <div>
+                                <strong>CI/CD Integrations</strong>
+                                <p>Native integrations with GitHub Actions, GitLab CI, Jenkins, and ArgoCD</p>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="benefit-icon">📊</span>
+                            <div>
+                                <strong>Policy Controls</strong>
+                                <p>Define custom policies with code coverage, vulnerability thresholds, and more</p>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="showcase-stats">
+                        <div class="stat">
+                            <span class="stat-value">85%</span>
+                            <span class="stat-label">Fewer Failed Deployments</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">3x</span>
+                            <span class="stat-label">Faster Release Cycles</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="showcase-image">
+                    <img src="images/deployment-gating-mockup.png"
+                        alt="Deployment Gating - CI/CD integration and policy controls">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feature Showcase: Multi-Cloud -->
+    <section class="feature-showcase reverse" id="showcase-multicloud">
+        <div class="container">
+            <div class="showcase-grid">
+                <div class="showcase-content">
+                    <div class="section-label">
+                        <span>✦</span> Multi-Cloud Management
+                    </div>
+                    <h2>One Platform for <span class="text-gradient">All Your Clusters</span></h2>
+                    <p>
+                        Whether you're running AWS EKS, Google GKE, Azure AKS, or on-premise Kubernetes,
+                        Netpin gives you unified visibility across your entire infrastructure.
+                    </p>
+                    <ul class="feature-benefits">
+                        <li>
+                            <span class="benefit-icon">☁️</span>
+                            <div>
+                                <strong>Cloud Provider Agnostic</strong>
+                                <p>Connect AWS, GCP, Azure, and on-premise clusters in a single pane of glass</p>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="benefit-icon">🌍</span>
+                            <div>
+                                <strong>Global Overview</strong>
+                                <p>See all your clusters on a world map with regional performance insights</p>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="benefit-icon">💰</span>
+                            <div>
+                                <strong>Cost Optimization</strong>
+                                <p>Cross-cloud cost analysis with right-sizing and savings recommendations</p>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="showcase-stats">
+                        <div class="stat">
+                            <span class="stat-value">15min</span>
+                            <span class="stat-label">Average Onboarding Time</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">100+</span>
+                            <span class="stat-label">Clusters Supported</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="showcase-image">
+                    <img src="images/multicloud-mockup.png"
+                        alt="Multi-Cloud Management - Unified Kubernetes visibility">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feature Showcase: Predictive Analytics -->
+    <section class="feature-showcase" id="showcase-predictive">
+        <div class="container">
+            <div class="showcase-grid">
+                <div class="showcase-content">
+                    <div class="section-label">
+                        <span>✦</span> AI-Powered Predictions
+                    </div>
+                    <h2>Know Problems <span class="text-gradient">Before They Happen</span></h2>
+                    <p>
+                        Our machine learning models analyze trends and patterns to predict where your
+                        IDI score will be in 7, 14, and 30 days — so you can fix issues proactively.
+                    </p>
+                    <ul class="feature-benefits">
+                        <li>
+                            <span class="benefit-icon">🔮</span>
+                            <div>
+                                <strong>IDI Forecasting</strong>
+                                <p>Predict future infrastructure health with 94%+ accuracy ML models</p>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="benefit-icon">⚠️</span>
+                            <div>
+                                <strong>Proactive Alerts</strong>
+                                <p>Get notified about predicted issues before they impact production</p>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="benefit-icon">📱</span>
+                            <div>
+                                <strong>Smart Notifications</strong>
+                                <p>Integrate with Slack, PagerDuty, and email for contextual alerts</p>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="showcase-stats">
+                        <div class="stat">
+                            <span class="stat-value">94%</span>
+                            <span class="stat-label">Prediction Accuracy</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">7 days</span>
+                            <span class="stat-label">Average Early Warning</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="showcase-image">
+                    <img src="images/predictive-alerts-mockup.png"
+                        alt="Predictive Analytics - AI-powered forecasting and alerts">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">
+                    <span>✦</span> How It Works
+                </div>
+                <h2>Up and Running in <span class="text-gradient">Minutes</span></h2>
+                <p>
+                    Get started with Netpin in four simple steps. No complex configurations required.
+                </p>
+            </div>
+
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Connect Your Cloud</h3>
+                    <p>Add your AWS, GCP, or Azure credentials. We'll automatically discover all your clusters.</p>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Deploy the Agent</h3>
+                    <p>One kubectl command deploys our lightweight, read-only agent to your clusters.</p>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Get Your IDI</h3>
+                    <p>Within minutes, see your Infrastructure Debt Index and actionable findings.</p>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Ship with Confidence</h3>
+                    <p>Use insights to prioritize fixes and gate deployments based on risk.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- IDI Score Section -->
+    <section class="idi-section" id="idi">
+        <div class="container">
+            <div class="idi-content">
+                <div class="idi-visual">
+                    <div class="idi-gauge">
+                        <div class="gauge-ring"></div>
+                        <div class="gauge-progress"></div>
+                        <div class="gauge-inner">
+                            <div class="gauge-value">28</div>
+                            <div class="gauge-label">IDI Score</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="idi-info">
+                    <div class="section-label">
+                        <span>✦</span> IDI Score
+                    </div>
+                    <h2>One Number to Rule <span class="text-gradient">Your Infrastructure</span></h2>
+                    <p>
+                        The Infrastructure Debt Index (IDI) is our proprietary scoring system that
+                        quantifies technical debt across four critical dimensions. Track it daily
+                        to ensure your infrastructure stays healthy.
+                    </p>
+
+                    <div class="idi-breakdown">
+                        <div class="breakdown-item">
+                            <span class="breakdown-label">Security</span>
+                            <div class="breakdown-bar">
+                                <div class="breakdown-fill security"></div>
+                            </div>
+                            <span class="breakdown-value">85%</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span class="breakdown-label">Compliance</span>
+                            <div class="breakdown-bar">
+                                <div class="breakdown-fill compliance"></div>
+                            </div>
+                            <span class="breakdown-value">72%</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span class="breakdown-label">Efficiency</span>
+                            <div class="breakdown-bar">
+                                <div class="breakdown-fill efficiency"></div>
+                            </div>
+                            <span class="breakdown-value">90%</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span class="breakdown-label">Reliability</span>
+                            <div class="breakdown-bar">
+                                <div class="breakdown-fill reliability"></div>
+                            </div>
+                            <span class="breakdown-value">78%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">
+                    <span>✦</span> Testimonials
+                </div>
+                <h2>Loved by <span class="text-gradient">DevOps Teams</span></h2>
+                <p>
+                    See what engineering leaders are saying about Netpin.
+                </p>
+            </div>
+
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">
+                        "Netpin's IDI score gave our team a common language for infrastructure health.
+                        We reduced incidents by 60% in the first quarter."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">JC</div>
+                        <div class="author-info">
+                            <h4>James Chen</h4>
+                            <p>VP of Engineering, TechCorp</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">
+                        "The deployment gating feature alone is worth it. We stopped three potentially
+                        catastrophic releases before they hit production."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SP</div>
+                        <div class="author-info">
+                            <h4>Sarah Parker</h4>
+                            <p>SRE Lead, CloudScale</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">
+                        "Finally, a tool that gives us visibility across all our clusters. The topology
+                        visualization saved us hours of debugging time."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MR</div>
+                        <div class="author-info">
+                            <h4>Mike Rodriguez</h4>
+                            <p>Platform Architect, Finova</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">
+                    <span>✦</span> Pricing
+                </div>
+                <h2>Simple, <span class="text-gradient">Transparent Pricing</span></h2>
+                <p>
+                    Start free, scale as you grow. No hidden fees.
+                </p>
+            </div>
+
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Starter</h3>
+                    <p style="color: var(--text-muted);">For small teams getting started</p>
+                    <div class="price">$0<span>/month</span></div>
+                    <ul class="pricing-features">
+                        <li>Up to 3 clusters</li>
+                        <li>Basic IDI scoring</li>
+                        <li>Topology visualization</li>
+                        <li>7-day data retention</li>
+                        <li>Community support</li>
+                    </ul>
+                    <a href="#" class="btn btn-secondary" style="width: 100%;">Get Started</a>
+                </div>
+
+                <div class="pricing-card featured">
+                    <h3>Pro</h3>
+                    <p style="color: var(--text-muted);">For growing teams</p>
+                    <div class="price">$99<span>/month</span></div>
+                    <ul class="pricing-features">
+                        <li>Up to 20 clusters</li>
+                        <li>Advanced IDI + Forecasting</li>
+                        <li>Deployment gating</li>
+                        <li>CI/CD integrations</li>
+                        <li>30-day data retention</li>
+                        <li>Priority support</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary" style="width: 100%;">Start Free Trial</a>
+                </div>
+
+                <div class="pricing-card">
+                    <h3>Enterprise</h3>
+                    <p style="color: var(--text-muted);">For large organizations</p>
+                    <div class="price">Custom</div>
+                    <ul class="pricing-features">
+                        <li>Unlimited clusters</li>
+                        <li>Custom IDI weights</li>
+                        <li>SSO & RBAC</li>
+                        <li>On-premise deployment</li>
+                        <li>Unlimited retention</li>
+                        <li>Dedicated support</li>
+                    </ul>
+                    <a href="#" class="btn btn-secondary" style="width: 100%;">Contact Sales</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-box">
+                <h2>Ready to Take Control of Your Infrastructure?</h2>
+                <p>
+                    Join thousands of DevOps teams who trust Netpin to keep their
+                    infrastructure healthy and their deployments safe.
+                </p>
+                <div class="cta-buttons">
+                    <a href="#" class="btn btn-primary btn-large">Start Your Free Trial</a>
+                    <a href="#" class="btn btn-secondary btn-large">Schedule a Demo</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="logo">
+                        <img src="images/logo-full.png" style="mix-blend-mode: screen;" alt="Netpin Logo" style="height: 42px; width: auto; mix-blend-mode: screen;">
+                    </a>
+                    <p>
+                        The infrastructure intelligence platform that helps DevOps teams
+                        quantify technical debt and ship with confidence.
+                    </p>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#">Integrations</a></li>
+                        <li><a href="#">Changelog</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="docs/">Documentation</a></li>
+                        <li><a href="#">API Reference</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Case Studies</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Press</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Security</a></li>
+                        <li><a href="#">GDPR</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2026 Netpin. All rights reserved.</p>
+                <div class="footer-social">
+                    <a href="#" aria-label="Twitter">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="GitHub">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="LinkedIn">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="Discord">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.feature-card, .step, .testimonial-card, .pricing-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+
+</html>

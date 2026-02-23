@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" type="image/png" href="/docs/assets/images/logo-icon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topology Visualization - Netpin Documentation</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="docs-container">
+
+        <main class="main-content">
+            <h1>Topology Visualization</h1>
+            <p class="lead">
+                Interactive visualization of your Kubernetes cluster resources, their relationships,
+                and dependencies.
+            </p>
+
+            <h2>Overview</h2>
+            <p>
+                The Topology view provides a real-time visual map of all resources in your Kubernetes cluster.
+                Resources are displayed as nodes connected by edges representing their relationships.
+            </p>
+
+            <div class="diagram">
+                <svg viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="600" height="300" fill="#0f172a" />
+
+                    <!-- Namespace box -->
+                    <rect x="50" y="30" width="500" height="240" rx="8" fill="none" stroke="#475569"
+                        stroke-dasharray="4" />
+                    <text x="70" y="55" fill="#94a3b8" font-size="12">namespace: production</text>
+
+                    <!-- Ingress -->
+                    <rect x="250" y="70" width="100" height="40" rx="6" fill="#6366f1" />
+                    <text x="300" y="95" text-anchor="middle" fill="white" font-size="11">Ingress</text>
+
+                    <!-- Service -->
+                    <rect x="250" y="140" width="100" height="40" rx="6" fill="#22c55e" />
+                    <text x="300" y="165" text-anchor="middle" fill="white" font-size="11">Service</text>
+
+                    <!-- Deployments -->
+                    <rect x="100" y="210" width="100" height="40" rx="6" fill="#3b82f6" />
+                    <text x="150" y="235" text-anchor="middle" fill="white" font-size="11">Deployment</text>
+
+                    <rect x="250" y="210" width="100" height="40" rx="6" fill="#3b82f6" />
+                    <text x="300" y="235" text-anchor="middle" fill="white" font-size="11">Deployment</text>
+
+                    <rect x="400" y="210" width="100" height="40" rx="6" fill="#3b82f6" />
+                    <text x="450" y="235" text-anchor="middle" fill="white" font-size="11">Deployment</text>
+
+                    <!-- Connections -->
+                    <line x1="300" y1="110" x2="300" y2="140" stroke="#64748b" stroke-width="2" />
+                    <line x1="300" y1="180" x2="150" y2="210" stroke="#64748b" stroke-width="2" />
+                    <line x1="300" y1="180" x2="300" y2="210" stroke="#64748b" stroke-width="2" />
+                    <line x1="300" y1="180" x2="450" y2="210" stroke="#64748b" stroke-width="2" />
+                </svg>
+            </div>
+
+            <h2>Resource Types</h2>
+            <p>The topology visualizes these Kubernetes resources:</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Resource</th>
+                        <th>Color</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Namespace</td>
+                        <td style="color: #8b5cf6;">Purple border</td>
+                        <td>Groups resources within the same namespace</td>
+                    </tr>
+                    <tr>
+                        <td>Deployment</td>
+                        <td style="color: #3b82f6;">Blue</td>
+                        <td>Application workloads with replicas</td>
+                    </tr>
+                    <tr>
+                        <td>StatefulSet</td>
+                        <td style="color: #06b6d4;">Cyan</td>
+                        <td>Stateful application workloads</td>
+                    </tr>
+                    <tr>
+                        <td>DaemonSet</td>
+                        <td style="color: #f59e0b;">Amber</td>
+                        <td>Node-level workloads</td>
+                    </tr>
+                    <tr>
+                        <td>Service</td>
+                        <td style="color: #22c55e;">Green</td>
+                        <td>Network endpoints for workloads</td>
+                    </tr>
+                    <tr>
+                        <td>Ingress</td>
+                        <td style="color: #6366f1;">Indigo</td>
+                        <td>External traffic routing</td>
+                    </tr>
+                    <tr>
+                        <td>ConfigMap</td>
+                        <td style="color: #94a3b8;">Gray</td>
+                        <td>Configuration data</td>
+                    </tr>
+                    <tr>
+                        <td>Secret</td>
+                        <td style="color: #ef4444;">Red</td>
+                        <td>Sensitive configuration</td>
+                    </tr>
+                    <tr>
+                        <td>PVC</td>
+                        <td style="color: #ec4899;">Pink</td>
+                        <td>Persistent storage claims</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Interactions</h2>
+
+            <h3>Navigation</h3>
+            <ul style="margin-left: 20px; color: var(--text-secondary);">
+                <li><strong>Pan:</strong> Click and drag the background</li>
+                <li><strong>Zoom:</strong> Scroll wheel or pinch gesture</li>
+                <li><strong>Fit:</strong> Double-click background to fit all nodes</li>
+            </ul>
+
+            <h3>Node Actions</h3>
+            <ul style="margin-left: 20px; color: var(--text-secondary);">
+                <li><strong>Click:</strong> Select node and view details panel</li>
+                <li><strong>Double-click:</strong> Expand/collapse connected nodes</li>
+                <li><strong>Drag:</strong> Reposition node</li>
+            </ul>
+
+            <h3>Details Panel</h3>
+            <p>When a node is selected, the side panel shows:</p>
+            <ul style="margin-left: 20px; color: var(--text-secondary);">
+                <li>Resource name and type</li>
+                <li>Namespace</li>
+                <li>Labels and annotations</li>
+                <li>Status and health</li>
+                <li>Related findings (if any)</li>
+                <li>YAML manifest preview</li>
+            </ul>
+
+            <h2>Filters</h2>
+            <p>Filter the topology view using the control panel:</p>
+
+            <h3>By Namespace</h3>
+            <p>Select specific namespaces to display or hide system namespaces like <code>kube-system</code>.</p>
+
+            <h3>By Resource Type</h3>
+            <p>Toggle visibility of specific resource types (Deployments, Services, etc.).</p>
+
+            <h3>By Status</h3>
+            <p>Filter by health status: Healthy, Warning, Error.</p>
+
+            <h2>Layout Options</h2>
+            <div class="card-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔀</div>
+                    <div class="feature-title">Hierarchical</div>
+                    <div class="feature-desc">
+                        Top-down layout showing traffic flow from Ingress to Pods.
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌐</div>
+                    <div class="feature-title">Force-Directed</div>
+                    <div class="feature-desc">
+                        Organic layout with related resources clustered together.
+                    </div>
+                </div>
+            </div>
+
+            <h2>Common Use Cases</h2>
+
+            <h3>Troubleshooting</h3>
+            <p>Quickly identify which services are affected when a deployment has issues.</p>
+
+            <h3>Impact Analysis</h3>
+            <p>Before making changes, see what depends on a resource.</p>
+
+            <h3>Onboarding</h3>
+            <p>Help new team members understand the application architecture visually.</p>
+
+        </main>
+    </div>
+<script src="/docs/assets/js/layout.js"></script></body>
+
+</html>

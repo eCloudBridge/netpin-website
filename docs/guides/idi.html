@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" type="image/png" href="/docs/assets/images/logo-icon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infrastructure Debt Index (IDI) - Netpin Documentation</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="docs-container">
+        <!-- Sidebar Navigation -->
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <h1>Infrastructure Debt Index (IDI)</h1>
+            <p class="lead">
+                The Infrastructure Debt Index is Netpin's proprietary scoring system that quantifies
+                technical debt across your infrastructure, helping you make data-driven decisions
+                about maintenance, upgrades, and deployments.
+            </p>
+
+            <h2>What is Infrastructure Debt?</h2>
+            <p>
+                Infrastructure debt is the accumulated cost of deferred maintenance, outdated configurations,
+                security vulnerabilities, and operational inefficiencies in your infrastructure. Like financial
+                debt, it accrues "interest" over time — small issues become larger problems that are more
+                expensive to fix.
+            </p>
+
+            <div class="card-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <div class="feature-title">Security Debt</div>
+                    <div class="feature-desc">
+                        Unpatched vulnerabilities, exposed secrets, missing security policies,
+                        overly permissive RBAC rules.
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📋</div>
+                    <div class="feature-title">Compliance Debt</div>
+                    <div class="feature-desc">
+                        Policy violations, missing labels, resource limit gaps,
+                        best practice deviations.
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <div class="feature-title">Efficiency Debt</div>
+                    <div class="feature-desc">
+                        Over-provisioned resources, unused deployments,
+                        suboptimal configurations.
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <div class="feature-title">Reliability Debt</div>
+                    <div class="feature-desc">
+                        Single points of failure, missing health checks,
+                        inadequate replica counts.
+                    </div>
+                </div>
+            </div>
+
+            <h2>IDI Score Breakdown</h2>
+            <p>
+                The IDI is calculated on a scale of <strong>0-100</strong>, where:
+            </p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Score Range</th>
+                        <th>Rating</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="color: #22c55e; font-weight: 600;">0-25</td>
+                        <td style="color: #22c55e;">🟢 Excellent</td>
+                        <td>Minimal technical debt. Infrastructure is well-maintained.</td>
+                    </tr>
+                    <tr>
+                        <td style="color: #84cc16; font-weight: 600;">26-50</td>
+                        <td style="color: #84cc16;">🟡 Good</td>
+                        <td>Some debt present but manageable. Schedule maintenance.</td>
+                    </tr>
+                    <tr>
+                        <td style="color: #eab308; font-weight: 600;">51-70</td>
+                        <td style="color: #eab308;">🟠 Warning</td>
+                        <td>Significant debt accumulating. Prioritize remediation.</td>
+                    </tr>
+                    <tr>
+                        <td style="color: #f97316; font-weight: 600;">71-85</td>
+                        <td style="color: #f97316;">🔴 High</td>
+                        <td>Critical issues present. Immediate action required.</td>
+                    </tr>
+                    <tr>
+                        <td style="color: #ef4444; font-weight: 600;">86-100</td>
+                        <td style="color: #ef4444;">🔴 Critical</td>
+                        <td>Severe debt. Risk of outages or security incidents.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Scoring Algorithm</h2>
+            <p>The IDI score is calculated using weighted categories:</p>
+
+            <div class="card">
+                <pre><code>IDI = (Security × 0.40) + (Compliance × 0.25) + (Efficiency × 0.20) + (Reliability × 0.15)
+
+Where each category score (0-100) is calculated from:
+- Number of findings
+- Severity of findings (Critical: 10, High: 5, Medium: 3, Low: 1)
+- Age of findings (older issues weight more heavily)</code></pre>
+            </div>
+
+            <h3>Category Weights</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Weight</th>
+                        <th>Rationale</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Security</td>
+                        <td>40%</td>
+                        <td>Security vulnerabilities pose the highest risk to the organization</td>
+                    </tr>
+                    <tr>
+                        <td>Compliance</td>
+                        <td>25%</td>
+                        <td>Policy adherence ensures consistency and auditability</td>
+                    </tr>
+                    <tr>
+                        <td>Efficiency</td>
+                        <td>20%</td>
+                        <td>Resource optimization impacts costs and performance</td>
+                    </tr>
+                    <tr>
+                        <td>Reliability</td>
+                        <td>15%</td>
+                        <td>Reliability issues affect uptime and user experience</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Finding Categories</h2>
+
+            <h3>Security Findings</h3>
+            <ul style="margin-left: 20px; color: var(--text-secondary); margin-bottom: 16px;">
+                <li>Container images with known CVEs</li>
+                <li>Pods running as root</li>
+                <li>Missing network policies</li>
+                <li>Exposed secrets in environment variables</li>
+                <li>Privileged containers</li>
+                <li>Missing pod security policies</li>
+                <li>Overly permissive ServiceAccount permissions</li>
+            </ul>
+
+            <h3>Compliance Findings</h3>
+            <ul style="margin-left: 20px; color: var(--text-secondary); margin-bottom: 16px;">
+                <li>Missing required labels (app, version, owner)</li>
+                <li>Resources without limits defined</li>
+                <li>Deprecated API versions in use</li>
+                <li>Non-compliant naming conventions</li>
+                <li>Missing annotations for tooling integration</li>
+            </ul>
+
+            <h3>Efficiency Findings</h3>
+            <ul style="margin-left: 20px; color: var(--text-secondary); margin-bottom: 16px;">
+                <li>Over-provisioned CPU/memory requests</li>
+                <li>Unused ConfigMaps and Secrets</li>
+                <li>Orphaned PersistentVolumeClaims</li>
+                <li>Idle deployments (no traffic)</li>
+                <li>Duplicate container images</li>
+            </ul>
+
+            <h3>Reliability Findings</h3>
+            <ul style="margin-left: 20px; color: var(--text-secondary); margin-bottom: 16px;">
+                <li>Single replica deployments</li>
+                <li>Missing liveness/readiness probes</li>
+                <li>No PodDisruptionBudgets</li>
+                <li>Missing anti-affinity rules</li>
+                <li>No horizontal pod autoscaling</li>
+            </ul>
+
+            <h2>IDI Forecasting</h2>
+            <p>
+                Netpin uses historical data and trend analysis to forecast your IDI score:
+            </p>
+
+            <div class="card">
+                <h4>Forecast Periods</h4>
+                <ul style="margin-left: 20px; color: var(--text-secondary);">
+                    <li><strong>7-day forecast:</strong> Short-term trend with high confidence</li>
+                    <li><strong>14-day forecast:</strong> Medium-term projection</li>
+                    <li><strong>30-day forecast:</strong> Long-term trend if no action taken</li>
+                </ul>
+
+                <h4 style="margin-top: 16px;">Key Metrics</h4>
+                <ul style="margin-left: 20px; color: var(--text-secondary);">
+                    <li><strong>Days to Critical:</strong> Estimated days until IDI reaches critical threshold (85)</li>
+                    <li><strong>Days to High:</strong> Estimated days until IDI reaches high threshold (70)</li>
+                    <li><strong>Trend Direction:</strong> Improving, stable, or deteriorating</li>
+                    <li><strong>Average Daily Change:</strong> How much the IDI changes per day on average</li>
+                </ul>
+            </div>
+
+            <h2>Deployment Gating</h2>
+            <p>
+                Netpin can integrate with your CI/CD pipeline to automatically gate deployments
+                based on IDI scores.
+            </p>
+
+            <h3>Gate Decision Matrix</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Current IDI</th>
+                        <th>Projected Impact</th>
+                        <th>Decision</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>0-50</td>
+                        <td>Any</td>
+                        <td style="color: #22c55e;">✅ Allow</td>
+                    </tr>
+                    <tr>
+                        <td>51-70</td>
+                        <td>&lt; +5 points</td>
+                        <td style="color: #eab308;">⚠️ Warn (Allow)</td>
+                    </tr>
+                    <tr>
+                        <td>51-70</td>
+                        <td>≥ +5 points</td>
+                        <td style="color: #f97316;">🚫 Block</td>
+                    </tr>
+                    <tr>
+                        <td>71-85</td>
+                        <td>Any increase</td>
+                        <td style="color: #ef4444;">🚫 Block</td>
+                    </tr>
+                    <tr>
+                        <td>&gt;85</td>
+                        <td>Any</td>
+                        <td style="color: #ef4444;">🚫 Block (Critical)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>CI/CD Integration Example</h3>
+            <pre><code># GitHub Actions example
+- name: Check Deployment Gate
+  run: |
+    RESPONSE=$(curl -s -X POST \
+      -H "Authorization: Bearer $NETPIN_API_KEY" \
+      -H "Content-Type: application/json" \
+      -d '{"project_id": "$PROJECT_ID", "stack_id": "$STACK_ID"}' \
+      https://netpin.example.com/api/v2/deploy/gate)
+    
+    DECISION=$(echo $RESPONSE | jq -r '.decision')
+    
+    if [ "$DECISION" = "blocked" ]; then
+      echo "Deployment blocked due to high IDI score"
+      exit 1
+    fi</code></pre>
+
+            <h2>API Endpoints</h2>
+            <p>See the <a href="../api/idi.html">IDI API Reference</a> for complete documentation.</p>
+
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="badge badge-get">GET</span>
+                    <code class="endpoint-path">/api/idi/summary/:projectId</code>
+                </div>
+                <div class="endpoint-body">
+                    <p>Get the current IDI summary for a project.</p>
+                </div>
+            </div>
+
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="badge badge-get">GET</span>
+                    <code class="endpoint-path">/api/v2/forecast/:projectId</code>
+                </div>
+                <div class="endpoint-body">
+                    <p>Get IDI forecasts and trend analysis.</p>
+                </div>
+            </div>
+
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="badge badge-post">POST</span>
+                    <code class="endpoint-path">/api/v2/deploy/gate</code>
+                </div>
+                <div class="endpoint-body">
+                    <p>Evaluate deployment gate decision.</p>
+                </div>
+            </div>
+
+        </main>
+    </div>
+<script src="/docs/assets/js/layout.js"></script></body>
+
+</html>

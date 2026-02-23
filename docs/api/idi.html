@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" type="image/png" href="/docs/assets/images/logo-icon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IDI API Reference - Netpin Documentation</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="docs-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo" style="display: flex; align-items: center; gap: 8px;">
+                     <span style="font-size: 1.25rem; font-weight: 800; color: #818cf8; letter-spacing: -0.025em;">netpin.io</span>
+                    
+                </div>
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">Getting Started</div>
+                    <ul class="nav-links">
+                        <li><a href="../index.html" class="nav-link">Overview</a></li>
+                        <li><a href="../guides/quick-start.html" class="nav-link">Quick Start</a></li>
+                        <li><a href="../guides/installation.html" class="nav-link">Installation</a></li>
+                    </ul>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-section-title">Architecture</div>
+                    <ul class="nav-links">
+                        <li><a href="../architecture/overview.html" class="nav-link">System Overview</a></li>
+                        <li><a href="../architecture/services.html" class="nav-link">Microservices</a></li>
+                        <li><a href="../architecture/database.html" class="nav-link">Database Schema</a></li>
+                    </ul>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-section-title">Features</div>
+                    <ul class="nav-links">
+                        <li><a href="../guides/clusters.html" class="nav-link">Cluster Management</a></li>
+                        <li><a href="../guides/topology.html" class="nav-link">Topology Visualization</a></li>
+                        <li><a href="../guides/idi.html" class="nav-link">Infrastructure Debt Index</a></li>
+                        <li><a href="../guides/agent.html" class="nav-link">Netpin Agent</a></li>
+                        <li><a href="../guides/stacks.html" class="nav-link">Application Stacks</a></li>
+                    </ul>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-section-title">API Reference</div>
+                    <ul class="nav-links">
+                        <li><a href="authentication.html" class="nav-link">Authentication</a></li>
+                        <li><a href="clusters.html" class="nav-link">Clusters API</a></li>
+                        <li><a href="idi.html" class="nav-link active">IDI API</a></li>
+                        <li><a href="kubernetes.html" class="nav-link">Kubernetes API</a></li>
+                    </ul>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-section-title">Operations</div>
+                    <ul class="nav-links">
+                        <li><a href="../guides/configuration.html" class="nav-link">Configuration</a></li>
+                        <li><a href="../guides/troubleshooting.html" class="nav-link">Troubleshooting</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <h1>IDI API Reference</h1>
+            <p class="lead">
+                API endpoints for Infrastructure Debt Index scoring, forecasting, and deployment gating.
+            </p>
+
+            <h2>IDI Summary</h2>
+
+            <h3>Get IDI Summary</h3>
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="badge badge-get">GET</span>
+                    <code class="endpoint-path">/api/idi/summary/:projectId</code>
+                </div>
+                <div class="endpoint-body">
+                    <p>Get the current IDI summary for a project, including score breakdown by category.</p>
+
+                    <h4>Path Parameters</h4>
+                    <table>
+                        <tr>
+                            <td><code>projectId</code></td>
+                            <td><span class="badge badge-required">Required</span></td>
+                            <td>Project UUID</td>
+                        </tr>
+                    </table>
+
+                    <h4>Response</h4>
+                    <pre><code>{
+  "project_id": "db96682d-7cc8-4642-8170-c2d94b01258b",
+  "overall_score": 42.5,
+  "rating": "Good",
+  "trend": "improving",
+  "breakdown": {
+    "security": {
+      "score": 35,
+      "weight": 0.40,
+      "findings_count": 12,
+      "critical": 0,
+      "high": 2,
+      "medium": 5,
+      "low": 5
+    },
+    "compliance": {
+      "score": 48,
+      "weight": 0.25,
+      "findings_count": 8,
+      "critical": 0,
+      "high": 1,
+      "medium": 4,
+      "low": 3
+    },
+    "efficiency": {
+      "score": 52,
+      "weight": 0.20,
+      "findings_count": 15,
+      "critical": 0,
+      "high": 0,
+      "medium": 10,
+      "low": 5
+    },
+    "reliability": {
+      "score": 40,
+      "weight": 0.15,
+      "findings_count": 6,
+      "critical": 0,
+      "high": 1,
+      "medium": 3,
+      "low": 2
+    }
+  },
+  "calculated_at": "2026-01-10T12:00:00Z"
+}</code></pre>
+
+                    <h4>Example</h4>
+                    <pre><code>curl -X GET https://netpin.example.com/api/idi/summary/db96682d-7cc8-4642-8170-c2d94b01258b \
+  -H "Authorization: Bearer &lt;token&gt;"</code></pre>
+                </div>
+            </div>
+
+            <h2>Forecasting</h2>
+
+            <h3>Get IDI Forecast</h3>
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="badge badge-get">GET</span>
+                    <code class="endpoint-path">/api/v2/forecast/:projectId</code>
+                </div>
+                <div class="endpoint-body">
+                    <p>Get IDI forecasts and trend analysis for a project.</p>
+
+                    <h4>Query Parameters</h4>
+                    <table>
+                        <tr>
+                            <td><code>stack_id</code></td>
+                            <td><span class="badge badge-optional">Optional</span></td>
+                            <td>Filter by specific stack</td>
+                        </tr>
+                    </table>
+
+                    <h4>Response</h4>
+                    <pre><code>{
+  "project_id": "db96682d-7cc8-4642-8170-c2d94b01258b",
+  "current_idi": 42.5,
+  "forecasts": {
+    "7_day": 45.2,
+    "14_day": 48.8,
+    "30_day": 55.1
+  },
+  "days_to_critical": 45,
+  "days_to_high": 28,
+  "trend": {
+    "direction": "deteriorating",
+    "avg_daily_change": 0.42,
+    "confidence": 0.85
+  },
+  "data_points_used": 14,
+  "calculated_at": "2026-01-10T12:00:00Z"
+}</code></pre>
+                </div>
+            </div>
+
+            <h2>Deployment Gating</h2>
+
+            <h3>Evaluate Deployment Gate</h3>
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="badge badge-post">POST</span>
+                    <code class="endpoint-path">/api/v2/deploy/gate</code>
+                </div>
+                <div class="endpoint-body">
+                    <p>Evaluate whether a deployment should be allowed based on IDI analysis.</p>
+
+                    <h4>Request Body</h4>
+                    <pre><code>{
+  "project_id": "db96682d-7cc8-4642-8170-c2d94b01258b",
+  "stack_id": "optional-stack-uuid",
+  "deployment_name": "my-service",
+  "environment": "production"
+}</code></pre>
+
+                    <h4>Response (Allowed)</h4>
+                    <pre><code>{
+  "decision": "allowed",
+  "current_idi": 42.5,
+  "projected_idi": 44.0,
+  "threshold": 70,
+  "reasons": [],
+  "recommendations": [
+    "Consider addressing 2 high-severity security findings before deployment"
+  ],
+  "evaluated_at": "2026-01-10T12:00:00Z"
+}</code></pre>
+
+                    <h4>Response (Blocked)</h4>
+                    <pre><code>{
+  "decision": "blocked",
+  "current_idi": 78.5,
+  "projected_idi": 82.0,
+  "threshold": 70,
+  "reasons": [
+    "Current IDI (78.5) exceeds threshold (70)",
+    "3 critical security findings detected",
+    "Stack has high fan-out (5 dependents)"
+  ],
+  "recommendations": [
+    "Resolve critical security findings before deploying",
+    "Address CVE-2026-1234 in container image",
+    "Review and fix privilege escalation risk"
+  ],
+  "blocking_findings": [
+    {
+      "id": "finding-uuid-1",
+      "title": "Container running as root",
+      "severity": "critical",
+      "category": "security"
+    }
+  ],
+  "evaluated_at": "2026-01-10T12:00:00Z"
+}</code></pre>
+
+                    <h4>CI/CD Integration Example</h4>
+                    <pre><code># GitHub Actions
+- name: Netpin Deployment Gate
+  run: |
+    RESPONSE=$(curl -s -X POST \
+      -H "Authorization: Bearer ${{ secrets.NETPIN_API_KEY }}" \
+      -H "Content-Type: application/json" \
+      -d '{
+        "project_id": "${{ vars.PROJECT_ID }}",
+        "deployment_name": "${{ github.event.repository.name }}",
+        "environment": "${{ github.ref_name == 'main' && 'production' || 'staging' }}"
+      }' \
+      https://netpin.example.com/api/v2/deploy/gate)
+    
+    DECISION=$(echo $RESPONSE | jq -r '.decision')
+    
+    if [ "$DECISION" = "blocked" ]; then
+      echo "::error::Deployment blocked by Netpin"
+      echo $RESPONSE | jq '.reasons[]'
+      exit 1
+    fi
+    
+    echo "Deployment approved by Netpin"</code></pre>
+                </div>
+            </div>
+
+            <h2>Stacks</h2>
+
+            <h3>List Stacks</h3>
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="badge badge-get">GET</span>
+                    <code class="endpoint-path">/api/v2/stacks</code>
+                </div>
+                <div class="endpoint-body">
+                    <p>List all application stacks in a project.</p>
+
+                    <h4>Query Parameters</h4>
+                    <table>
+                        <tr>
+                            <td><code>project_id</code></td>
+                            <td><span class="badge badge-required">Required</span></td>
+                            <td>Project UUID</td>
+                        </tr>
+                    </table>
+
+                    <h4>Response</h4>
+                    <pre><code>[
+  {
+    "id": "stack-uuid-1",
+    "name": "frontend-app",
+    "type": "auto-detected",
+    "idi_score": 35.2,
+    "findings_count": 8,
+    "last_scan": "2026-01-10T12:00:00Z"
+  },
+  {
+    "id": "stack-uuid-2",
+    "name": "api-service",
+    "type": "manual",
+    "idi_score": 48.7,
+    "findings_count": 15,
+    "last_scan": "2026-01-10T11:30:00Z"
+  }
+]</code></pre>
+                </div>
+            </div>
+
+            <h3>Get Stack Details</h3>
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="badge badge-get">GET</span>
+                    <code class="endpoint-path">/api/v2/stacks/:stackId</code>
+                </div>
+                <div class="endpoint-body">
+                    <p>Get detailed information about a specific stack.</p>
+                </div>
+            </div>
+
+            <h2>Findings</h2>
+
+            <h3>List Findings</h3>
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="badge badge-get">GET</span>
+                    <code class="endpoint-path">/api/idi/findings</code>
+                </div>
+                <div class="endpoint-body">
+                    <p>List all findings for a project with filtering options.</p>
+
+                    <h4>Query Parameters</h4>
+                    <table>
+                        <tr>
+                            <td><code>project_id</code></td>
+                            <td><span class="badge badge-required">Required</span></td>
+                            <td>Project UUID</td>
+                        </tr>
+                        <tr>
+                            <td><code>severity</code></td>
+                            <td><span class="badge badge-optional">Optional</span></td>
+                            <td>Filter by severity (critical, high, medium, low)</td>
+                        </tr>
+                        <tr>
+                            <td><code>category</code></td>
+                            <td><span class="badge badge-optional">Optional</span></td>
+                            <td>Filter by category (security, compliance, efficiency, reliability)</td>
+                        </tr>
+                        <tr>
+                            <td><code>status</code></td>
+                            <td><span class="badge badge-optional">Optional</span></td>
+                            <td>Filter by status (open, resolved, ignored)</td>
+                        </tr>
+                        <tr>
+                            <td><code>limit</code></td>
+                            <td><span class="badge badge-optional">Optional</span></td>
+                            <td>Number of results (default: 50)</td>
+                        </tr>
+                        <tr>
+                            <td><code>offset</code></td>
+                            <td><span class="badge badge-optional">Optional</span></td>
+                            <td>Pagination offset</td>
+                        </tr>
+                    </table>
+
+                    <h4>Response</h4>
+                    <pre><code>{
+  "total": 41,
+  "findings": [
+    {
+      "id": "finding-uuid-1",
+      "title": "Container running as root",
+      "description": "Pod 'api-server' in namespace 'production' runs containers as root user",
+      "severity": "high",
+      "category": "security",
+      "resource_type": "Pod",
+      "resource_name": "api-server-7d5f6b7f8-abc12",
+      "namespace": "production",
+      "remediation": "Set securityContext.runAsNonRoot: true",
+      "status": "open",
+      "created_at": "2026-01-09T10:00:00Z"
+    }
+  ]
+}</code></pre>
+                </div>
+            </div>
+
+            <h3>Submit Findings (Agent)</h3>
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="badge badge-post">POST</span>
+                    <code class="endpoint-path">/api/agent/findings</code>
+                </div>
+                <div class="endpoint-body">
+                    <p>Submit findings from the Netpin Agent. Requires API key authentication.</p>
+
+                    <h4>Request Body</h4>
+                    <pre><code>{
+  "cluster_id": "cluster-uuid",
+  "findings": [
+    {
+      "title": "Missing resource limits",
+      "description": "Deployment 'web-app' does not have CPU/memory limits defined",
+      "severity": "medium",
+      "category": "efficiency",
+      "resource_type": "Deployment",
+      "resource_name": "web-app",
+      "namespace": "default",
+      "remediation": "Add resources.limits to container spec"
+    }
+  ],
+  "collected_at": "2026-01-10T12:00:00Z"
+}</code></pre>
+                </div>
+            </div>
+
+            <div class="docs-footer">
+                <p>Netpin Documentation — Built with ❤️ for the DevOps community</p>
+                <p>© 2026 Netpin. All rights reserved.</p>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>

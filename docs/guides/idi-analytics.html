@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" type="image/png" href="/docs/assets/images/logo-icon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IDI Analytics - Netpin Documentation</title>
+    <link rel="stylesheet" href="/docs/assets/css/style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="docs-container">
+        <!-- Sidebar will be injected by layout.js -->
+
+        <main class="main-content">
+            <h1>IDI Analytics</h1>
+            <p class="lead">
+                Dive deep into your infrastructure debt with advanced analytics, historical trends, and actionable
+                remediation paths.
+            </p>
+
+            <div class="alert alert-info">
+                <span class="alert-icon">💡</span>
+                <div>
+                    <strong>Pro Tip</strong>: Use the Analytics dashboard to forecast future debt based on current
+                    deployment velocity.
+                </div>
+            </div>
+
+            <h2>IDI Composition</h2>
+            <p>The IDI score is a composite metric derived from multiple data sources. Here is how it is calculated:</p>
+
+            <pre class="mermaid">
+pie title IDI Score Weighting
+    "Security Vulnerabilities" : 40
+    "Compliance Violations" : 25
+    "Resource Inefficiency" : 20
+    "Reliability Risks" : 15
+            </pre>
+
+            <h2>Data Pipeline</h2>
+            <pre class="mermaid">
+flowchart LR
+    Scan[Compliance Scan] -->|Raw Findings| Ingest[Ingestion Service]
+    Logs[Audit Logs] -->|Activity Data| Ingest
+    Metrics[Prometheus] -->|Usage Data| Ingest
+    
+    Ingest --> Analyzer[Debt Analyzer]
+    
+    Analyzer -->|Calculate| Score[IDI Score]
+    Analyzer -->|Identify| TopOffenders[Top Offenders]
+    
+    Score --> Dashboard
+    TopOffenders --> Dashboard
+    
+    style Analyzer fill:#ef4444,color:#fff
+    style Score fill:#22c55e,color:#fff
+            </pre>
+
+            <h2>Risk Assessment Matrix</h2>
+            <p>Visualizing findings based on their potential impact and probability of exploitation.</p>
+            <pre class="mermaid">
+quadrantChart
+    title Findings Risk Matrix
+    x-axis Low Impact --> High Impact
+    y-axis Low Probability --> High Probability
+    quadrant-1 Monitor
+    quadrant-2 Critical Action Required
+    quadrant-3 Acceptable Risk
+    quadrant-4 Plan Mitigation
+    "Leaked API Key": [0.9, 0.9]
+    "Old Image Version": [0.4, 0.3]
+    "Root Privileges": [0.8, 0.7]
+    "Missing Limits": [0.3, 0.6]
+    "No Liveness Probe": [0.5, 0.2]
+    "Open SSH Port": [0.95, 0.8]
+            </pre>
+
+            <h2>Debt Trend Analysis</h2>
+            <p>Tracking the accumulation or reduction of technical debt over sprints.</p>
+            <pre class="mermaid">
+xychart-beta
+    title "Technical Debt Score Over Time (Last 6 Months)"
+    x-axis [Jan, Feb, Mar, Apr, May, Jun]
+    y-axis "IDI Score" 0 --> 100
+    bar [65, 70, 75, 72, 60, 55]
+    line [65, 70, 75, 72, 60, 55]
+            </pre>
+
+            <h2>Key Metrics</h2>
+
+            <div class="card-grid">
+                <div class="feature-card">
+                    <div class="feature-title">Debt Velocity</div>
+                    <div class="feature-desc">The rate at which technical debt is increasing or decreasing over time.
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-title">Time to Remediate</div>
+                    <div class="feature-desc">Average time taken to fix critical findings once detected.</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-title">Cost Impact</div>
+                    <div class="feature-desc">Estimated financial impact of resource inefficiencies.</div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Layout Script -->
+    <script src="/docs/assets/js/layout.js"></script>
+
+    <!-- External Libs -->
+    <script src="/docs/assets/js/mermaid.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            mermaid.initialize({
+                startOnLoad: true,
+                theme: 'dark',
+                securityLevel: 'loose',
+            });
+        });
+    </script>
+</body>
+
+</html>

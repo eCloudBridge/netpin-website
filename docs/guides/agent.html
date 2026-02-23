@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" type="image/png" href="/docs/assets/images/logo-icon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netpin Agent - Netpin Documentation</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="docs-container">
+        <!-- Sidebar Navigation -->
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <h1>Netpin Agent</h1>
+            <p class="lead">
+                The Netpin Agent is a lightweight collector that runs inside your Kubernetes clusters
+                to gather real-time metrics, security findings, and resource inventory data.
+            </p>
+
+            <h2>Overview</h2>
+            <p>The Netpin Agent performs three primary functions:</p>
+
+            <div class="card-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <div class="feature-title">Resource Collection</div>
+                    <div class="feature-desc">
+                        Inventories all Kubernetes resources: Deployments, Services, ConfigMaps, Secrets, and more.
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <div class="feature-title">Finding Detection</div>
+                    <div class="feature-desc">
+                        Analyzes resources for security issues, compliance gaps, and efficiency problems.
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📡</div>
+                    <div class="feature-title">Data Reporting</div>
+                    <div class="feature-desc">
+                        Sends collected data to Netpin server for IDI calculation and dashboards.
+                    </div>
+                </div>
+            </div>
+
+            <h2>Installation</h2>
+
+            <h3>Prerequisites</h3>
+            <ul style="margin-left: 20px; color: var(--text-secondary); margin-bottom: 16px;">
+                <li>Kubernetes cluster v1.20+</li>
+                <li><code>kubectl</code> configured with cluster access</li>
+                <li>Netpin server accessible from the cluster</li>
+                <li>API key from Netpin (Settings → API Keys)</li>
+            </ul>
+
+            <h3>Quick Install</h3>
+            <pre><code># Create namespace
+kubectl create namespace netpin-system
+
+# Apply the agent manifest
+kubectl apply -f https://raw.githubusercontent.com/netpin/kubeapps/main/agent/deploy/agent.yaml</code></pre>
+
+            <h3>Configuration</h3>
+            <p>Create a ConfigMap with your Netpin server details:</p>
+
+            <pre><code>apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: netpin-agent-config
+  namespace: netpin-system
+data:
+  # URL of your Netpin server
+  NETPIN_SERVER_URL: "https://netpin.example.com"
+  
+  # Cluster ID from Netpin dashboard
+  CLUSTER_ID: "your-cluster-uuid"
+  
+  # Collection interval in seconds
+  COLLECTION_INTERVAL: "300"
+  
+  # Enable debug logging
+  DEBUG: "false"</code></pre>
+
+            <p>Create a Secret for the API key:</p>
+            <pre><code>apiVersion: v1
+kind: Secret
+metadata:
+  name: netpin-agent-secret
+  namespace: netpin-system
+type: Opaque
+stringData:
+  # Your Netpin API key
+  NETPIN_API_KEY: "your-api-key-here"</code></pre>
+
+            <h2>Agent Deployment Manifest</h2>
+            <pre><code>apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: netpin-agent
+  namespace: netpin-system
+  labels:
+    app: netpin-agent
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: netpin-agent
+  template:
+    metadata:
+      labels:
+        app: netpin-agent
+    spec:
+      serviceAccountName: netpin-agent
+      containers:
+        - name: agent
+          image: netpin/agent:latest
+          imagePullPolicy: Always
+          envFrom:
+            - configMapRef:
+                name: netpin-agent-config
+            - secretRef:
+                name: netpin-agent-secret
+          resources:
+            requests:
+              cpu: 50m
+              memory: 128Mi
+            limits:
+              cpu: 200m
+              memory: 256Mi
+          securityContext:
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            runAsUser: 1000
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: netpin-agent
+  namespace: netpin-system
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: netpin-agent
+rules:
+  - apiGroups: [""]
+    resources: ["*"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: ["apps"]
+    resources: ["*"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: ["batch"]
+    resources: ["*"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: ["networking.k8s.io"]
+    resources: ["*"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: ["policy"]
+    resources: ["*"]
+    verbs: ["get", "list", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: netpin-agent
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: netpin-agent
+subjects:
+  - kind: ServiceAccount
+    name: netpin-agent
+    namespace: netpin-system</code></pre>
+
+            <h2>Data Collected</h2>
+            <p>The agent collects the following data from your cluster:</p>
+
+            <h3>Resource Inventory</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Resource Type</th>
+                        <th>Data Collected</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Deployments</td>
+                        <td>Name, namespace, replicas, images, labels, resource requests/limits</td>
+                    </tr>
+                    <tr>
+                        <td>Pods</td>
+                        <td>Status, containers, restart count, node placement</td>
+                    </tr>
+                    <tr>
+                        <td>Services</td>
+                        <td>Type, ports, selectors, endpoints</td>
+                    </tr>
+                    <tr>
+                        <td>ConfigMaps</td>
+                        <td>Name, namespace, key names (not values)</td>
+                    </tr>
+                    <tr>
+                        <td>Secrets</td>
+                        <td>Name, namespace, type (not values)</td>
+                    </tr>
+                    <tr>
+                        <td>Ingresses</td>
+                        <td>Hosts, paths, TLS configuration</td>
+                    </tr>
+                    <tr>
+                        <td>NetworkPolicies</td>
+                        <td>Pod selectors, ingress/egress rules</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Security Findings</h3>
+            <p>The agent detects and reports the following security issues:</p>
+            <ul style="margin-left: 20px; color: var(--text-secondary); margin-bottom: 16px;">
+                <li>Containers running as root</li>
+                <li>Privileged containers</li>
+                <li>Missing security contexts</li>
+                <li>Host network/PID/IPC access</li>
+                <li>Exposed secrets in environment variables</li>
+                <li>Missing network policies</li>
+                <li>Overly permissive service accounts</li>
+            </ul>
+
+            <div class="alert alert-info">
+                <span class="alert-icon">🔒</span>
+                <div>
+                    <strong>Privacy Note:</strong> The agent never collects sensitive data like Secret values,
+                    ConfigMap contents, or environment variable values. Only metadata and structure are collected.
+                </div>
+            </div>
+
+            <h2>Configuration Options</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Variable</th>
+                        <th>Required</th>
+                        <th>Default</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>NETPIN_SERVER_URL</code></td>
+                        <td><span class="badge badge-required">Required</span></td>
+                        <td>-</td>
+                        <td>URL of your Netpin server</td>
+                    </tr>
+                    <tr>
+                        <td><code>NETPIN_API_KEY</code></td>
+                        <td><span class="badge badge-required">Required</span></td>
+                        <td>-</td>
+                        <td>API key for authentication</td>
+                    </tr>
+                    <tr>
+                        <td><code>CLUSTER_ID</code></td>
+                        <td><span class="badge badge-required">Required</span></td>
+                        <td>-</td>
+                        <td>UUID of the cluster in Netpin</td>
+                    </tr>
+                    <tr>
+                        <td><code>COLLECTION_INTERVAL</code></td>
+                        <td><span class="badge badge-optional">Optional</span></td>
+                        <td>300</td>
+                        <td>Seconds between collection cycles</td>
+                    </tr>
+                    <tr>
+                        <td><code>DEBUG</code></td>
+                        <td><span class="badge badge-optional">Optional</span></td>
+                        <td>false</td>
+                        <td>Enable debug logging</td>
+                    </tr>
+                    <tr>
+                        <td><code>EXCLUDE_NAMESPACES</code></td>
+                        <td><span class="badge badge-optional">Optional</span></td>
+                        <td>kube-system</td>
+                        <td>Comma-separated namespaces to skip</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Troubleshooting</h2>
+
+            <h3>Check Agent Status</h3>
+            <pre><code># Check pod status
+kubectl get pods -n netpin-system
+
+# View agent logs
+kubectl logs -f deployment/netpin-agent -n netpin-system</code></pre>
+
+            <h3>Common Issues</h3>
+
+            <div class="card">
+                <h4>Agent can't connect to Netpin server</h4>
+                <p>Verify the server URL is correct and accessible from within the cluster:</p>
+                <pre><code>kubectl run test-curl --rm -it --image=curlimages/curl -- \
+  curl -v https://netpin.example.com/health</code></pre>
+            </div>
+
+            <div class="card">
+                <h4>Authentication failures</h4>
+                <p>Verify your API key is correct:</p>
+                <pre><code>kubectl get secret netpin-agent-secret -n netpin-system -o yaml</code></pre>
+            </div>
+
+            <div class="card">
+                <h4>RBAC permission errors</h4>
+                <p>Check the ClusterRoleBinding is correctly applied:</p>
+                <pre><code>kubectl auth can-i list deployments --as system:serviceaccount:netpin-system:netpin-agent</code></pre>
+            </div>
+
+            <h2>Upgrading the Agent</h2>
+            <pre><code># Pull latest manifest
+kubectl apply -f https://raw.githubusercontent.com/netpin/kubeapps/main/agent/deploy/agent.yaml
+
+# Or update the image manually
+kubectl set image deployment/netpin-agent \
+  agent=netpin/agent:latest \
+  -n netpin-system
+
+# Restart to pick up new image
+kubectl rollout restart deployment/netpin-agent -n netpin-system</code></pre>
+
+            <h2>Uninstalling</h2>
+            <pre><code># Remove all agent resources
+kubectl delete namespace netpin-system
+
+# Remove cluster-wide RBAC
+kubectl delete clusterrole netpin-agent
+kubectl delete clusterrolebinding netpin-agent</code></pre>
+
+        </main>
+    </div>
+<script src="/docs/assets/js/layout.js"></script></body>
+
+</html>

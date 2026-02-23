@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" type="image/png" href="/docs/assets/images/logo-icon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Installation Guide - Netpin Documentation</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="docs-container">
+        <!-- Sidebar Navigation -->
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <h1>Installation Guide</h1>
+            <p class="lead">
+                Complete installation instructions for deploying Netpin in various environments.
+            </p>
+
+            <h2>Prerequisites</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Requirement</th>
+                        <th>Version</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Docker</td>
+                        <td>20.10+</td>
+                        <td>Docker Desktop or Docker Engine</td>
+                    </tr>
+                    <tr>
+                        <td>Docker Compose</td>
+                        <td>2.0+</td>
+                        <td>Included with Docker Desktop</td>
+                    </tr>
+                    <tr>
+                        <td>Git</td>
+                        <td>2.0+</td>
+                        <td>For cloning the repository</td>
+                    </tr>
+                    <tr>
+                        <td>Memory</td>
+                        <td>4GB+</td>
+                        <td>8GB recommended for development</td>
+                    </tr>
+                    <tr>
+                        <td>Disk Space</td>
+                        <td>10GB+</td>
+                        <td>For Docker images and database</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Installation Methods</h2>
+
+            <h3>Method 1: Docker Compose (Recommended)</h3>
+            <p>The fastest way to get Netpin running for development or small deployments.</p>
+
+            <div class="steps">
+                <div class="step">
+                    <div class="step-title">Clone the Repository</div>
+                    <div class="step-content">
+                        <pre><code>git clone https://github.com/netpin/kubeapps.git
+cd kubeapps</code></pre>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-title">Create Environment File</div>
+                    <div class="step-content">
+                        <pre><code># Copy the example environment file
+cp .env.example .env
+
+# Edit with your settings
+nano .env</code></pre>
+                        <p>Key variables to configure:</p>
+                        <pre><code># Database
+POSTGRES_USER=netpin
+POSTGRES_PASSWORD=your-secure-password
+POSTGRES_DB=netpin
+
+# JWT Secret (generate a random 32+ character string)
+JWT_SECRET=your-super-secret-jwt-key-here
+
+# Encryption Key (32 bytes, base64 encoded)
+ENCRYPTION_KEY=your-32-byte-encryption-key-base64
+
+# External URL (where users access Netpin)
+EXTERNAL_URL=http://localhost:3000</code></pre>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-title">Start All Services</div>
+                    <div class="step-content">
+                        <pre><code># Build and start all services
+docker compose up -d
+
+# View startup logs
+docker compose logs -f</code></pre>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-title">Initialize Database</div>
+                    <div class="step-content">
+                        <p>The database schema is automatically applied on first startup. Verify:</p>
+                        <pre><code>docker compose exec postgres psql -U netpin -d netpin -c "\dt"</code></pre>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-title">Access the Application</div>
+                    <div class="step-content">
+                        <p>Open your browser to <code>http://localhost:3000</code></p>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Method 2: Kubernetes Deployment</h3>
+            <p>For production deployments on Kubernetes.</p>
+
+            <div class="alert alert-info">
+                <span class="alert-icon">📦</span>
+                <div>
+                    <strong>Helm Chart:</strong> A Helm chart for Kubernetes deployment is coming soon.
+                </div>
+            </div>
+
+            <pre><code># Apply Kubernetes manifests
+kubectl create namespace netpin
+kubectl apply -f deploy/kubernetes/ -n netpin
+
+# Wait for pods to be ready
+kubectl get pods -n netpin -w</code></pre>
+
+            <h2>Service Ports</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Service</th>
+                        <th>Internal Port</th>
+                        <th>External Port</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Frontend</td>
+                        <td>5173</td>
+                        <td>-</td>
+                        <td>React development server</td>
+                    </tr>
+                    <tr>
+                        <td>API Gateway</td>
+                        <td>3000</td>
+                        <td>3000</td>
+                        <td>Main entry point</td>
+                    </tr>
+                    <tr>
+                        <td>Auth Service</td>
+                        <td>8001</td>
+                        <td>-</td>
+                        <td>Internal only</td>
+                    </tr>
+                    <tr>
+                        <td>Cluster Manager</td>
+                        <td>8002</td>
+                        <td>-</td>
+                        <td>Internal only</td>
+                    </tr>
+                    <tr>
+                        <td>Kubernetes API</td>
+                        <td>8000</td>
+                        <td>-</td>
+                        <td>Internal only</td>
+                    </tr>
+                    <tr>
+                        <td>IDI Service</td>
+                        <td>8003</td>
+                        <td>-</td>
+                        <td>Internal only</td>
+                    </tr>
+                    <tr>
+                        <td>PostgreSQL</td>
+                        <td>5432</td>
+                        <td>5432</td>
+                        <td>Database</td>
+                    </tr>
+                    <tr>
+                        <td>Redis</td>
+                        <td>6379</td>
+                        <td>-</td>
+                        <td>Cache</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Configuration</h2>
+
+            <h3>Environment Variables</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Variable</th>
+                        <th>Required</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>JWT_SECRET</code></td>
+                        <td><span class="badge badge-required">Required</span></td>
+                        <td>Secret key for JWT signing (min 32 chars)</td>
+                    </tr>
+                    <tr>
+                        <td><code>ENCRYPTION_KEY</code></td>
+                        <td><span class="badge badge-required">Required</span></td>
+                        <td>AES encryption key for credentials (32 bytes, base64)</td>
+                    </tr>
+                    <tr>
+                        <td><code>DATABASE_URL</code></td>
+                        <td><span class="badge badge-required">Required</span></td>
+                        <td>PostgreSQL connection string</td>
+                    </tr>
+                    <tr>
+                        <td><code>REDIS_URL</code></td>
+                        <td><span class="badge badge-optional">Optional</span></td>
+                        <td>Redis connection string</td>
+                    </tr>
+                    <tr>
+                        <td><code>LOG_LEVEL</code></td>
+                        <td><span class="badge badge-optional">Optional</span></td>
+                        <td>Logging level (debug, info, warn, error)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Generate Encryption Key</h3>
+            <pre><code># Generate a secure 32-byte key
+openssl rand -base64 32
+
+# Example output: K7gNU3sdo+OL0wNhqoVWhr3g6s1xYv72ol/pe/Unols=</code></pre>
+
+            <h2>Production Considerations</h2>
+
+            <div class="alert alert-warning">
+                <span class="alert-icon">⚠️</span>
+                <div>
+                    <strong>Security Checklist:</strong>
+                    <ul style="margin-top: 8px; margin-left: 20px;">
+                        <li>Use strong, unique passwords for all services</li>
+                        <li>Enable TLS/HTTPS for external access</li>
+                        <li>Restrict database access to internal network</li>
+                        <li>Regularly rotate JWT and encryption keys</li>
+                        <li>Set up proper backup for PostgreSQL</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>TLS/HTTPS Setup</h3>
+            <p>For production, use a reverse proxy like Nginx or Traefik:</p>
+            <pre><code># Example Nginx config
+server {
+    listen 443 ssl http2;
+    server_name netpin.example.com;
+
+    ssl_certificate /etc/ssl/certs/netpin.crt;
+    ssl_certificate_key /etc/ssl/private/netpin.key;
+
+    location / {
+        proxy_pass http://localhost:3000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}</code></pre>
+
+            <h3>Database Backup</h3>
+            <pre><code># Create backup
+docker compose exec postgres pg_dump -U netpin netpin > backup.sql
+
+# Restore backup
+docker compose exec -T postgres psql -U netpin netpin < backup.sql</code></pre>
+
+            <h2>Upgrading</h2>
+            <pre><code># Pull latest changes
+git pull origin main
+
+# Rebuild and restart
+docker compose build
+docker compose up -d
+
+# Apply any database migrations
+docker compose exec api npm run migrate</code></pre>
+
+            <h2>Uninstalling</h2>
+            <pre><code># Stop and remove containers
+docker compose down
+
+# Remove volumes (WARNING: deletes all data!)
+docker compose down -v
+
+# Remove images
+docker compose down --rmi all</code></pre>
+
+        </main>
+    </div>
+<script src="/docs/assets/js/layout.js"></script></body>
+
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" type="image/png" href="/docs/assets/images/logo-icon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discovery Service - Netpin Documentation</title>
+    <link rel="stylesheet" href="/docs/assets/css/style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="docs-container">
+        <!-- Sidebar will be injected by layout.js -->
+
+        <main class="main-content">
+            <h1>Discovery Service</h1>
+            <p class="lead">
+                The Discovery Service is the reconnaissance engine of Netpin, responsible for identifying assets,
+                clusters,
+                and resources across multi-cloud environments.
+            </p>
+
+            <div class="card">
+                <h3>Core Capabilities</h3>
+                <ul style="margin-left: 20px; color: var(--text-secondary);">
+                    <li><strong>Multi-Cloud Scanning</strong>: Automatically detects EKS, AKS, and GKE clusters.</li>
+                    <li><strong>Resource Inventory</strong>: Catalogs Nodes, Pods, Services, and Ingresses.</li>
+                    <li><strong>Compliance Checks</strong>: Runs CIS benchmarks against discovered assets.</li>
+                    <li><strong>Drift Detection</strong>: Identifies unmanaged resources.</li>
+                </ul>
+            </div>
+
+            <h2>Architecture Workflow</h2>
+            <p>The following diagram illustrates how the Discovery Service interacts with cloud providers and updates
+                the
+                internal graph.</p>
+
+            <pre class="mermaid">
+graph TD
+    subgraph Cloud Providers
+        AWS[AWS Cloud]
+        GCP[Google Cloud]
+        Azure[Azure Cloud]
+    end
+
+    subgraph Netpin Platform
+        DS[Discovery Service]
+        Q[Task Queue (Redis)]
+        DB[(PostgreSQL)]
+        Graph[Graph Service]
+    end
+
+    AWS -->|Credentials| DS
+    GCP -->|Credentials| DS
+    Azure -->|Credentials| DS
+    
+    DS -->|Poll Assets| AWS
+    DS -->|Poll Assets| GCP
+    DS -->|Poll Assets| Azure
+    
+    DS -->|Normalize Data| Q
+    Q -->|Process Resource| Graph
+    Graph -->|Update Relations| DB
+    
+    style DS fill:#6366f1,stroke:#4f46e5,stroke-width:2px
+    style Graph fill:#8b5cf6,stroke:#7c3aed,stroke-width:2px
+            </pre>
+
+            <h2>Configuration</h2>
+            <p>The service is configured via environment variables and provider secrets.</p>
+
+            <div class="card">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Variable</th>
+                            <th>Description</th>
+                            <th>Default</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>SCAN_INTERVAL</code></td>
+                            <td>Frequency of discovery scans</td>
+                            <td><code>300s</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>ENABLE_COMPLIANCE</code></td>
+                            <td>Run compliance checks during scan</td>
+                            <td><code>true</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>MAX_CONCURRENT_SCANS</code></td>
+                            <td>Parallel scanning limit</td>
+                            <td><code>5</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Layout Script -->
+    <script src="/docs/assets/js/layout.js"></script>
+
+    <!-- External Libs -->
+    <script src="/docs/assets/js/mermaid.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            mermaid.initialize({
+                startOnLoad: true,
+                theme: 'dark',
+                securityLevel: 'loose',
+            });
+        });
+    </script>
+</body>
+
+</html>

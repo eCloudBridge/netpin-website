@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" type="image/png" href="/docs/assets/images/logo-icon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microservices Architecture - Netpin Documentation</title>
+    <link rel="stylesheet" href="/docs/assets/css/style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="docs-container">
+
+        <main class="main-content">
+            <h1>Microservices Architecture</h1>
+            <p class="lead">
+                Detailed documentation of each microservice in the Netpin platform.
+            </p>
+
+            <h2>Auth Service</h2>
+            <div class="card">
+                <table>
+                    <tr>
+                        <td><strong>Language</strong></td>
+                        <td>Go (Gin framework)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Port</strong></td>
+                        <td>8001</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Repository</strong></td>
+                        <td><code>services/auth-service</code></td>
+                    </tr>
+                </table>
+
+                <h4>Responsibilities</h4>
+                <ul style="margin-left: 20px; color: var(--text-secondary);">
+                    <li>User registration and authentication</li>
+                    <li>JWT token generation and validation</li>
+                    <li>Password hashing (bcrypt)</li>
+                    <li>User profile management</li>
+                    <li>API key management</li>
+                </ul>
+            </div>
+
+            <h2>Discovery Service</h2>
+            <div class="card">
+                <table>
+                    <tr>
+                        <td><strong>Language</strong></td>
+                        <td>Go (Gin framework)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Port</strong></td>
+                        <td>8000</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Repository</strong></td>
+                        <td><code>services/discovery-service</code></td>
+                    </tr>
+                </table>
+
+                <h4>Responsibilities</h4>
+                <ul style="margin-left: 20px; color: var(--text-secondary);">
+                    <li>Multi-cloud asset discovery (AWS, Azure, GCP)</li>
+                    <li>Kubernetes resource inventory</li>
+                    <li>Compliance scanning integration</li>
+                    <li>Issue and remediation tracking</li>
+                </ul>
+            </div>
+
+            <h2>Gate Service</h2>
+            <div class="card">
+                <table>
+                    <tr>
+                        <td><strong>Language</strong></td>
+                        <td>Go (Gin framework)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Port</strong></td>
+                        <td>8000</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Repository</strong></td>
+                        <td><code>services/gate-service</code></td>
+                    </tr>
+                </table>
+
+                <h4>Responsibilities</h4>
+                <ul style="margin-left: 20px; color: var(--text-secondary);">
+                    <li>Deployment quality gating</li>
+                    <li>Policy evaluation against IDI scores</li>
+                    <li>Webhooks for CI/CD integration</li>
+                    <li>Vulnerability and code coverage checks</li>
+                </ul>
+            </div>
+
+            <h2>Audit Service</h2>
+            <div class="card">
+                <table>
+                    <tr>
+                        <td><strong>Language</strong></td>
+                        <td>Go (Gin framework)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Port</strong></td>
+                        <td>8000</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Repository</strong></td>
+                        <td><code>services/audit</code></td>
+                    </tr>
+                </table>
+
+                <h4>Responsibilities</h4>
+                <ul style="margin-left: 20px; color: var(--text-secondary);">
+                    <li>Centralized event logging</li>
+                    <li>Audit trail recording</li>
+                    <li>Deployment history tracking</li>
+                    <li>Activity monitoring</li>
+                </ul>
+            </div>
+
+            <h2>Cluster Manager</h2>
+            <div class="card">
+                <table>
+                    <tr>
+                        <td><strong>Language</strong></td>
+                        <td>Go (Gin framework)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Port</strong></td>
+                        <td>8002</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Repository</strong></td>
+                        <td><code>services/cluster-manager</code></td>
+                    </tr>
+                </table>
+
+                <h4>Responsibilities</h4>
+                <ul style="margin-left: 20px; color: var(--text-secondary);">
+                    <li>Cloud provider credential management (encrypted)</li>
+                    <li>Cluster discovery (AWS EKS, GCP GKE, Azure AKS)</li>
+                    <li>Cluster registration and status tracking</li>
+                    <li>Project management</li>
+                </ul>
+            </div>
+
+            <h2>Kubernetes API</h2>
+            <div class="card">
+                <table>
+                    <tr>
+                        <td><strong>Language</strong></td>
+                        <td>Go (Gin framework)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Port</strong></td>
+                        <td>8000</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Repository</strong></td>
+                        <td><code>services/kubernetes-api</code></td>
+                    </tr>
+                </table>
+
+                <h4>Responsibilities</h4>
+                <ul style="margin-left: 20px; color: var(--text-secondary);">
+                    <li>Kubernetes API proxy with authentication</li>
+                    <li>EKS token generation (aws-iam-authenticator)</li>
+                    <li>Topology data generation</li>
+                    <li>Helm release management</li>
+                    <li>Resource CRUD operations</li>
+                </ul>
+            </div>
+
+            <h2>Stack Deployment</h2>
+            <div class="card">
+                <table>
+                    <tr>
+                        <td><strong>Language</strong></td>
+                        <td>Go (Gin framework)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Port</strong></td>
+                        <td>8000</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Repository</strong></td>
+                        <td><code>services/stack-deployment</code></td>
+                    </tr>
+                </table>
+
+                <h4>Responsibilities</h4>
+                <ul style="margin-left: 20px; color: var(--text-secondary);">
+                    <li>Helm chart management</li>
+                    <li>Application stack definition and deployment</li>
+                    <li>Release history and versioning</li>
+                </ul>
+            </div>
+
+            <h2>Graph Service</h2>
+            <div class="card">
+                <table>
+                    <tr>
+                        <td><strong>Language</strong></td>
+                        <td>Go (Gin framework)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Port</strong></td>
+                        <td>8000</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Repository</strong></td>
+                        <td><code>services/graph</code></td>
+                    </tr>
+                </table>
+
+                <h4>Responsibilities</h4>
+                <ul style="margin-left: 20px; color: var(--text-secondary);">
+                    <li>Resource relationship mapping</li>
+                    <li>Graph-based queries</li>
+                    <li>Topology data enhancement</li>
+                </ul>
+            </div>
+
+            <h2>IDI Service</h2>
+            <div class="card">
+                <table>
+                    <tr>
+                        <td><strong>Language</strong></td>
+                        <td>Go (Gin framework)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Port</strong></td>
+                        <td>8003</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Repository</strong></td>
+                        <td><code>services/idi-service</code></td>
+                    </tr>
+                </table>
+
+                <h4>Responsibilities</h4>
+                <ul style="margin-left: 20px; color: var(--text-secondary);">
+                    <li>IDI score calculation</li>
+                    <li>Findings management</li>
+                    <li>Trend analysis and forecasting</li>
+                    <li>Deployment gate evaluation</li>
+                </ul>
+            </div>
+
+            <h2>Control Panel</h2>
+            <div class="card">
+                <table>
+                    <tr>
+                        <td><strong>Language</strong></td>
+                        <td>Go (Gin framework)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Port</strong></td>
+                        <td>8000</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Repository</strong></td>
+                        <td><code>services/control-panel</code></td>
+                    </tr>
+                </table>
+
+                <h4>Responsibilities</h4>
+                <ul style="margin-left: 20px; color: var(--text-secondary);">
+                    <li>Admin dashboard functionality</li>
+                    <li>System configuration management</li>
+                    <li>User and role metrics</li>
+                </ul>
+            </div>
+
+            <h2>API Gateway</h2>
+            <div class="card">
+                <table>
+                    <tr>
+                        <td><strong>Language</strong></td>
+                        <td>Traefik</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Port</strong></td>
+                        <td>80</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Repository</strong></td>
+                        <td><code>docker-compose.yml</code></td>
+                    </tr>
+                </table>
+
+                <h4>Responsibilities</h4>
+                <ul style="margin-left: 20px; color: var(--text-secondary);">
+                    <li>Request routing to backend services</li>
+                    <li>Load balancing</li>
+                    <li>SSL termination (prod)</li>
+                    <li>Entrypoint management</li>
+                </ul>
+            </div>
+
+            <h2>Frontend</h2>
+            <div class="card">
+                <table>
+                    <tr>
+                        <td><strong>Framework</strong></td>
+                        <td>React + Vite</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Port</strong></td>
+                        <td>5173 (dev)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Repository</strong></td>
+                        <td><code>frontend</code></td>
+                    </tr>
+                </table>
+
+                <h4>Key Libraries</h4>
+                <ul style="margin-left: 20px; color: var(--text-secondary);">
+                    <li><strong>React Query</strong> — Server state management</li>
+                    <li><strong>Zustand</strong> — Client state with persistence</li>
+                    <li><strong>React Flow</strong> — Topology visualization</li>
+                    <li><strong>Recharts</strong> — Charts and graphs</li>
+                    <li><strong>TailwindCSS</strong> — Styling</li>
+                </ul>
+            </div>
+        </main>
+    </div>
+<script src="/docs/assets/js/layout.js"></script></body>
+
+</html>

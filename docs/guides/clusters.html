@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" type="image/png" href="/docs/assets/images/logo-icon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cluster Management - Netpin Documentation</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="docs-container">
+
+        <main class="main-content">
+            <h1>Cluster Management</h1>
+            <p class="lead">
+                Connect, discover, and manage Kubernetes clusters from multiple cloud providers or on-premises
+                environments.
+            </p>
+
+            <h2>Connecting Clusters</h2>
+            <p>Netpin supports multiple methods for connecting Kubernetes clusters:</p>
+
+            <div class="card-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">☁️</div>
+                    <div class="feature-title">Cloud Provider Discovery</div>
+                    <div class="feature-desc">
+                        Automatically discover and connect clusters from AWS EKS, Google GKE, or Azure AKS.
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📄</div>
+                    <div class="feature-title">Kubeconfig Import</div>
+                    <div class="feature-desc">
+                        Manually add clusters using a kubeconfig file for any Kubernetes environment.
+                    </div>
+                </div>
+            </div>
+
+            <h2>AWS EKS Clusters</h2>
+            <p>To connect AWS EKS clusters:</p>
+
+            <div class="steps">
+                <div class="step">
+                    <div class="step-title">Add AWS Cloud Provider</div>
+                    <div class="step-content">
+                        <p>Navigate to Clusters → Cloud Providers → Add Provider → AWS</p>
+                        <p>Enter your AWS Access Key ID and Secret Access Key.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-title">Discover Clusters</div>
+                    <div class="step-content">
+                        <p>Select regions to scan and click "Discover Clusters".</p>
+                        <p>All EKS clusters will be automatically detected.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-title">Connect</div>
+                    <div class="step-content">
+                        <p>Select clusters to connect and assign them to a project.</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Required IAM Permissions</h3>
+            <pre><code>{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "eks:ListClusters",
+                "eks:DescribeCluster",
+                "eks:ListNodegroups",
+                "eks:DescribeNodegroup"
+            ],
+            "Resource": "*"
+        }
+    ]
+}</code></pre>
+
+            <div class="alert alert-info">
+                <span class="alert-icon">💡</span>
+                <div>
+                    <strong>EKS Access:</strong> Your IAM user/role must also have access to the EKS cluster's
+                    <code>aws-auth</code> ConfigMap for Kubernetes API access.
+                </div>
+            </div>
+
+            <h2>Manual Cluster Addition</h2>
+            <p>For on-premises or unsupported cloud clusters:</p>
+
+            <pre><code># Get your kubeconfig
+cat ~/.kube/config
+
+# Or export from kubectl
+kubectl config view --raw > cluster-config.yaml</code></pre>
+
+            <p>Then in Netpin UI: Clusters → Add Cluster → Manual → Paste kubeconfig</p>
+
+            <h2>Cluster Status</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Status</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="color: #22c55e;">🟢 Connected</td>
+                        <td>Cluster is healthy and accessible</td>
+                    </tr>
+                    <tr>
+                        <td style="color: #eab308;">🟡 Degraded</td>
+                        <td>Cluster accessible but with warnings</td>
+                    </tr>
+                    <tr>
+                        <td style="color: #ef4444;">🔴 Disconnected</td>
+                        <td>Cannot reach cluster - check credentials/network</td>
+                    </tr>
+                    <tr>
+                        <td style="color: #64748b;">⚫ Unknown</td>
+                        <td>Status not yet determined</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Managing Clusters</h2>
+
+            <h3>View Cluster Details</h3>
+            <p>Click on a cluster to view:</p>
+            <ul style="margin-left: 20px; color: var(--text-secondary);">
+                <li>Kubernetes version</li>
+                <li>Node count and status</li>
+                <li>Namespace list</li>
+                <li>IDI score and findings</li>
+            </ul>
+
+            <h3>Edit Cluster</h3>
+            <p>Update display name, project assignment, or refresh credentials.</p>
+
+            <h3>Delete Cluster</h3>
+            <p>Remove a cluster from Netpin. This does not affect the actual Kubernetes cluster.</p>
+
+        </main>
+    </div>
+<script src="/docs/assets/js/layout.js"></script></body>
+
+</html>

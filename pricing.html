@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing - Netpin | Simple, Transparent Pricing</title>
+    <meta name="description" content="Netpin pricing plans for teams of all sizes. Start free, scale as you grow.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/svg+xml"
+        href="images/logo-icon.png">
+
+    <style>
+        .pricing-hero {
+            padding: 180px 0 80px;
+            text-align: center;
+        }
+
+        .pricing-toggle {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 16px;
+            margin-top: 40px;
+        }
+
+        .toggle-label {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        .toggle-label.active {
+            color: var(--text-primary);
+        }
+
+        .toggle-switch {
+            width: 56px;
+            height: 42px;
+            background: var(--color-bg-tertiary);
+            border-radius: 14px;
+            position: relative;
+            cursor: pointer;
+            border: 1px solid var(--border-subtle);
+        }
+
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            top: 2px;
+            left: 3px;
+            transition: var(--transition-base);
+        }
+
+        .toggle-switch.annual::after {
+            left: 29px;
+        }
+
+        .savings-badge {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--color-accent-green);
+            padding: 4px 12px;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .pricing-section {
+            padding: 80px 0 var(--section-padding);
+        }
+
+        .feature-comparison {
+            padding: var(--section-padding) 0;
+            background: var(--color-bg-secondary);
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 60px;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 20px 24px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .comparison-table th {
+            background: var(--color-bg-tertiary);
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-secondary);
+        }
+
+        .comparison-table th:first-child {
+            border-radius: 12px 0 0 0;
+        }
+
+        .comparison-table th:last-child {
+            border-radius: 0 12px 0 0;
+        }
+
+        .comparison-table td {
+            color: var(--text-secondary);
+        }
+
+        .comparison-table td:first-child {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .comparison-table .check {
+            color: var(--color-accent-green);
+        }
+
+        .comparison-table .x {
+            color: var(--text-muted);
+        }
+
+        .faq-section {
+            padding: var(--section-padding) 0;
+        }
+
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin-top: 60px;
+        }
+
+        .faq-item {
+            background: var(--color-bg-glass);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 28px;
+        }
+
+        .faq-item h4 {
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        .faq-item p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        @media (max-width: 768px) {
+            .faq-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .comparison-table {
+                font-size: 0.875rem;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                padding: 12px 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-grid"></div>
+    <div class="bg-glow bg-glow-1"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">⚡</div>
+                <span class="logo-text">Netpin</span>
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="features.html">Features</a></li>
+                <li><a href="index.html#how-it-works">How It Works</a></li>
+                <li><a href="index.html#idi">IDI Score</a></li>
+                <li><a href="pricing.html">Pricing</a></li>
+                <li><a href="docs/">Docs</a></li>
+            </ul>
+
+            <div class="nav-cta">
+                <a href="#" class="btn btn-ghost">Sign In</a>
+                <a href="#" class="btn btn-primary">Get Started Free</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Pricing Hero -->
+    <section class="pricing-hero">
+        <div class="container">
+            <div class="section-label">
+                <span>✦</span> Pricing
+            </div>
+            <h1>Simple, <span class="text-gradient">Transparent Pricing</span></h1>
+            <p>
+                Start free, scale as you grow. No hidden fees, no surprises.
+            </p>
+
+            <div class="pricing-toggle">
+                <span class="toggle-label active" id="monthly-label">Monthly</span>
+                <div class="toggle-switch" id="billing-toggle"></div>
+                <span class="toggle-label" id="annual-label">Annual</span>
+                <span class="savings-badge">Save 20%</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Cards -->
+    <section class="pricing-section">
+        <div class="container">
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Starter</h3>
+                    <p style="color: var(--text-muted);">For small teams getting started</p>
+                    <div class="price" id="price-starter">$0<span>/month</span></div>
+                    <ul class="pricing-features">
+                        <li>Up to 3 clusters</li>
+                        <li>Basic IDI scoring</li>
+                        <li>Topology visualization</li>
+                        <li>7-day data retention</li>
+                        <li>Community support</li>
+                    </ul>
+                    <a href="#" class="btn btn-secondary" style="width: 100%;">Get Started</a>
+                </div>
+
+                <div class="pricing-card featured">
+                    <h3>Pro</h3>
+                    <p style="color: var(--text-muted);">For growing teams</p>
+                    <div class="price" id="price-pro">$99<span>/month</span></div>
+                    <ul class="pricing-features">
+                        <li>Up to 20 clusters</li>
+                        <li>Advanced IDI + Forecasting</li>
+                        <li>Deployment gating</li>
+                        <li>CI/CD integrations</li>
+                        <li>30-day data retention</li>
+                        <li>Priority support</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary" style="width: 100%;">Start Free Trial</a>
+                </div>
+
+                <div class="pricing-card">
+                    <h3>Enterprise</h3>
+                    <p style="color: var(--text-muted);">For large organizations</p>
+                    <div class="price">Custom</div>
+                    <ul class="pricing-features">
+                        <li>Unlimited clusters</li>
+                        <li>Custom IDI weights</li>
+                        <li>SSO & RBAC</li>
+                        <li>On-premise deployment</li>
+                        <li>Unlimited retention</li>
+                        <li>Dedicated support</li>
+                    </ul>
+                    <a href="#" class="btn btn-secondary" style="width: 100%;">Contact Sales</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feature Comparison -->
+    <section class="feature-comparison">
+        <div class="container">
+            <div class="section-header">
+                <h2>Compare <span class="text-gradient">All Features</span></h2>
+            </div>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Starter</th>
+                        <th>Pro</th>
+                        <th>Enterprise</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Clusters</td>
+                        <td>3</td>
+                        <td>20</td>
+                        <td>Unlimited</td>
+                    </tr>
+                    <tr>
+                        <td>IDI Scoring</td>
+                        <td class="check">✓ Basic</td>
+                        <td class="check">✓ Advanced</td>
+                        <td class="check">✓ Custom Weights</td>
+                    </tr>
+                    <tr>
+                        <td>Topology Visualization</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                    </tr>
+                    <tr>
+                        <td>Forecasting</td>
+                        <td class="x">—</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                    </tr>
+                    <tr>
+                        <td>Deployment Gating</td>
+                        <td class="x">—</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                    </tr>
+                    <tr>
+                        <td>CI/CD Integrations</td>
+                        <td class="x">—</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                    </tr>
+                    <tr>
+                        <td>Application Stacks</td>
+                        <td class="x">—</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                    </tr>
+                    <tr>
+                        <td>Data Retention</td>
+                        <td>7 days</td>
+                        <td>30 days</td>
+                        <td>Unlimited</td>
+                    </tr>
+                    <tr>
+                        <td>SSO / SAML</td>
+                        <td class="x">—</td>
+                        <td class="x">—</td>
+                        <td class="check">✓</td>
+                    </tr>
+                    <tr>
+                        <td>Role-Based Access</td>
+                        <td class="x">—</td>
+                        <td class="check">✓ Basic</td>
+                        <td class="check">✓ Advanced</td>
+                    </tr>
+                    <tr>
+                        <td>On-Premise Deployment</td>
+                        <td class="x">—</td>
+                        <td class="x">—</td>
+                        <td class="check">✓</td>
+                    </tr>
+                    <tr>
+                        <td>Support</td>
+                        <td>Community</td>
+                        <td>Priority Email</td>
+                        <td>Dedicated CSM</td>
+                    </tr>
+                    <tr>
+                        <td>SLA</td>
+                        <td class="x">—</td>
+                        <td>99.9%</td>
+                        <td>99.99%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Frequently Asked <span class="text-gradient">Questions</span></h2>
+            </div>
+
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h4>Can I try Netpin before committing?</h4>
+                    <p>
+                        Absolutely! Our Starter plan is free forever, and Pro comes with a 14-day
+                        free trial. No credit card required.
+                    </p>
+                </div>
+                <div class="faq-item">
+                    <h4>What counts as a "cluster"?</h4>
+                    <p>
+                        A cluster is any Kubernetes cluster connected to Netpin, regardless of
+                        size. Whether it has 1 node or 1,000, it counts as one cluster.
+                    </p>
+                </div>
+                <div class="faq-item">
+                    <h4>Can I upgrade or downgrade at any time?</h4>
+                    <p>
+                        Yes! You can change your plan at any time. When upgrading, you'll be
+                        prorated for the remainder of the billing cycle.
+                    </p>
+                </div>
+                <div class="faq-item">
+                    <h4>Is my data secure?</h4>
+                    <p>
+                        Security is our top priority. All data is encrypted at rest and in transit.
+                        We're SOC 2 Type II certified and GDPR compliant.
+                    </p>
+                </div>
+                <div class="faq-item">
+                    <h4>Do you offer discounts for startups?</h4>
+                    <p>
+                        Yes! We have special pricing for early-stage startups. Contact our
+                        sales team to learn more about our startup program.
+                    </p>
+                </div>
+                <div class="faq-item">
+                    <h4>What happens if I exceed my cluster limit?</h4>
+                    <p>
+                        We'll notify you before you hit the limit. You can either upgrade your
+                        plan or disconnect some clusters to stay within your quota.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-box">
+                <h2>Start Managing Your Infrastructure Today</h2>
+                <p>
+                    Join thousands of DevOps teams who trust Netpin.
+                </p>
+                <div class="cta-buttons">
+                    <a href="#" class="btn btn-primary btn-large">Start Free Trial</a>
+                    <a href="#" class="btn btn-secondary btn-large">Talk to Sales</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-bottom" style="border-top: none; padding-top: 0;">
+                <p>© 2026 Netpin. All rights reserved.</p>
+                <div class="footer-social">
+                    <a href="#">𝕏</a>
+                    <a href="#">GH</a>
+                    <a href="#">in</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Billing toggle
+        const toggle = document.getElementById('billing-toggle');
+        const monthlyLabel = document.getElementById('monthly-label');
+        const annualLabel = document.getElementById('annual-label');
+        const pricePro = document.getElementById('price-pro');
+
+        toggle.addEventListener('click', () => {
+            toggle.classList.toggle('annual');
+            monthlyLabel.classList.toggle('active');
+            annualLabel.classList.toggle('active');
+
+            if (toggle.classList.contains('annual')) {
+                pricePro.innerHTML = '$79<span>/month</span>';
+            } else {
+                pricePro.innerHTML = '$99<span>/month</span>';
+            }
+        });
+    </script>
+</body>
+
+</html>

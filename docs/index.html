@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" type="image/png" href="/docs/assets/images/logo-icon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netpin Documentation - Infrastructure Intelligence Platform</title>
+    <link rel="stylesheet" href="/docs/assets/css/style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="docs-container">
+        <!-- Sidebar Navigation -->
+
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <h1>Netpin Documentation</h1>
+            <p class="lead">
+                Welcome to Netpin — the comprehensive infrastructure intelligence platform for modern cloud-native
+                environments.
+                Netpin provides deep visibility into your Kubernetes clusters, tracks infrastructure debt, and helps you
+                make
+                data-driven decisions about your deployments.
+            </p>
+
+            <div class="card-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <div class="feature-title">Infrastructure Debt Index (IDI)</div>
+                    <div class="feature-desc">
+                        Quantify and track technical debt across your infrastructure with our proprietary scoring
+                        algorithm.
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🗺️</div>
+                    <div class="feature-title">Topology Visualization</div>
+                    <div class="feature-desc">
+                        Interactive visualization of your Kubernetes resources, dependencies, and relationships.
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">☁️</div>
+                    <div class="feature-title">Multi-Cloud Support</div>
+                    <div class="feature-desc">
+                        Connect clusters from AWS EKS, Google GKE, Azure AKS, or any Kubernetes environment.
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <div class="feature-title">Executive Dashboard</div>
+                    <div class="feature-desc">
+                        High-level insights and trends for leadership with actionable recommendations.
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔐</div>
+                    <div class="feature-title">Deployment Gating</div>
+                    <div class="feature-desc">
+                        Automated deployment gates based on IDI scores, preventing risky deployments.
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <div class="feature-title">Lightweight Agent</div>
+                    <div class="feature-desc">
+                        Deploy our agent to collect real-time metrics and findings from your clusters.
+                    </div>
+                </div>
+            </div>
+
+            <h2>Quick Start</h2>
+            <p>Get up and running with Netpin in minutes:</p>
+
+            <div class="steps">
+                <div class="step">
+                    <div class="step-title">Clone the Repository</div>
+                    <div class="step-content">
+                        <pre><code>git clone https://github.com/netpin/kubeapps.git
+cd kubeapps</code></pre>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-title">Start the Platform</div>
+                    <div class="step-content">
+                        <pre><code>docker compose up -d</code></pre>
+                        <p>This starts all services: API Gateway, Auth, Cluster Manager, IDI Service, Kubernetes API,
+                            and Frontend.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-title">Access the Dashboard</div>
+                    <div class="step-content">
+                        <p>Open your browser and navigate to <code>http://localhost:3000</code></p>
+                        <p>Create an account or log in with the default credentials.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-title">Connect Your First Cluster</div>
+                    <div class="step-content">
+                        <p>Go to <strong>Clusters</strong> → <strong>Add Cluster</strong> and either:</p>
+                        <ul style="margin-left: 20px; color: var(--text-secondary);">
+                            <li>Connect a cloud provider (AWS, GCP, Azure) to auto-discover clusters</li>
+                            <li>Manually add a cluster with kubeconfig</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <h2>Platform Architecture</h2>
+            <p>Netpin is built as a microservices architecture with the following core components:</p>
+
+            <div class="card">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Service</th>
+                            <th>Port</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>api-gateway</code></td>
+                            <td>3000</td>
+                            <td>Main entry point, routes requests to backend services</td>
+                        </tr>
+                        <tr>
+                            <td><code>auth-service</code></td>
+                            <td>8001</td>
+                            <td>JWT authentication, user management, RBAC</td>
+                        </tr>
+                        <tr>
+                            <td><code>cluster-manager</code></td>
+                            <td>8002</td>
+                            <td>Cloud provider integration, cluster discovery</td>
+                        </tr>
+                        <tr>
+                            <td><code>kubernetes-api</code></td>
+                            <td>8000</td>
+                            <td>Kubernetes operations, Helm releases, topology</td>
+                        </tr>
+                        <tr>
+                            <td><code>idi-service</code></td>
+                            <td>8003</td>
+                            <td>Infrastructure Debt Index calculation and forecasting</td>
+                        </tr>
+                        <tr>
+                            <td><code>frontend</code></td>
+                            <td>5173</td>
+                            <td>React-based web UI with Vite</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2>Key Concepts</h2>
+
+            <h3>Infrastructure Debt Index (IDI)</h3>
+            <p>
+                The IDI is a comprehensive score (0-100) that quantifies the technical debt in your infrastructure.
+                A lower score indicates a healthier infrastructure. The IDI considers:
+            </p>
+            <ul style="margin-left: 20px; color: var(--text-secondary); margin-bottom: 16px;">
+                <li><strong>Security findings</strong> — Vulnerabilities, misconfigurations, exposed secrets</li>
+                <li><strong>Compliance gaps</strong> — Policy violations, best practice deviations</li>
+                <li><strong>Resource efficiency</strong> — Over-provisioning, unused resources</li>
+                <li><strong>Operational risks</strong> — Single points of failure, missing redundancy</li>
+            </ul>
+
+            <h3>Application Stacks</h3>
+            <p>
+                Stacks represent logical groupings of Kubernetes resources that make up an application.
+                Netpin can auto-detect stacks or you can define them manually.
+            </p>
+
+            <h3>Deployment Gating</h3>
+            <p>
+                Integrate Netpin with your CI/CD pipeline to automatically block deployments when:
+            </p>
+            <ul style="margin-left: 20px; color: var(--text-secondary); margin-bottom: 16px;">
+                <li>IDI score exceeds a threshold</li>
+                <li>Critical security findings are detected</li>
+                <li>Dependencies have known vulnerabilities</li>
+            </ul>
+
+            <h2>Need Help?</h2>
+            <div class="alert alert-info">
+                <span class="alert-icon">💡</span>
+                <div>
+                    <strong>Documentation</strong>: Browse the sidebar for detailed guides on each feature.<br>
+                    <strong>API Reference</strong>: Complete API documentation with examples.<br>
+                    <strong>Support</strong>: Open an issue on GitHub or contact support@netpin.io
+                </div>
+            </div>
+
+            <div class="docs-footer">
+                <p>Netpin Documentation — Built with ❤️ for the DevOps community</p>
+                <p>© 2026 Netpin. All rights reserved.</p>
+            </div>
+        </main>
+    </div>
+    <script src="/docs/assets/js/layout.js"></script>
+</body>
+
+</html>

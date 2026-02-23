@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" type="image/png" href="/docs/assets/images/logo-icon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quick Start - Netpin Documentation</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="docs-container">
+        <!-- Sidebar Navigation -->
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <h1>Quick Start Guide</h1>
+            <p class="lead">
+                Get Netpin up and running in under 5 minutes. This guide walks you through the essential steps
+                to start monitoring your Kubernetes infrastructure.
+            </p>
+
+            <div class="alert alert-info">
+                <span class="alert-icon">📋</span>
+                <div>
+                    <strong>Prerequisites:</strong> Docker and Docker Compose installed on your system.
+                </div>
+            </div>
+
+            <h2>Step 1: Clone and Start</h2>
+            <p>Clone the Netpin repository and start all services with Docker Compose:</p>
+
+            <pre><code># Clone the repository
+git clone https://github.com/netpin/kubeapps.git
+cd kubeapps
+
+# Start all services
+docker compose up -d
+
+# Check services are running
+docker compose ps</code></pre>
+
+            <p>You should see all services running:</p>
+            <pre><code>NAME                     STATUS
+netpin-postgres          healthy
+netpin-redis             healthy
+netpin-auth              running
+netpin-cluster-manager   running
+netpin-k8s-api           running
+netpin-idi-service       running
+netpin-api-gateway       running
+netpin-frontend          running</code></pre>
+
+            <h2>Step 2: Access the Dashboard</h2>
+            <p>Open your browser and navigate to:</p>
+            <pre><code>http://localhost:3000</code></pre>
+
+            <h3>Create Your Account</h3>
+            <p>Click <strong>"Sign Up"</strong> to create a new account:</p>
+            <ul style="margin-left: 20px; color: var(--text-secondary); margin-bottom: 16px;">
+                <li>Enter your email address</li>
+                <li>Choose a strong password (min 8 characters)</li>
+                <li>Enter your full name</li>
+                <li>Click "Create Account"</li>
+            </ul>
+
+            <h2>Step 3: Create a Project</h2>
+            <p>Projects organize your clusters and resources. Create your first project:</p>
+
+            <div class="steps">
+                <div class="step">
+                    <div class="step-title">Navigate to Dashboard</div>
+                    <div class="step-content">
+                        <p>After login, you'll land on the main Dashboard.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-title">Click "+ New Project"</div>
+                    <div class="step-content">
+                        <p>In the project selector dropdown, click "Create New Project".</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-title">Enter Project Details</div>
+                    <div class="step-content">
+                        <p>Give your project a name (e.g., "Production", "Staging") and optional description.</p>
+                    </div>
+                </div>
+            </div>
+
+            <h2>Step 4: Connect a Cloud Provider</h2>
+            <p>Netpin can automatically discover your Kubernetes clusters from cloud providers.</p>
+
+            <h3>AWS (EKS)</h3>
+            <pre><code># In the Netpin UI:
+1. Go to Clusters → Cloud Providers
+2. Click "Add Provider"
+3. Select "AWS"
+4. Enter your AWS credentials:
+   - Access Key ID
+   - Secret Access Key
+   - Region (e.g., ap-south-1)
+5. Click "Connect"
+
+# Netpin will automatically discover all EKS clusters in that region</code></pre>
+
+            <div class="alert alert-warning">
+                <span class="alert-icon">⚠️</span>
+                <div>
+                    <strong>IAM Permissions Required:</strong> Your AWS credentials need the following permissions:
+                    <ul style="margin-top: 8px; margin-left: 20px;">
+                        <li><code>eks:ListClusters</code></li>
+                        <li><code>eks:DescribeCluster</code></li>
+                        <li>Kubernetes RBAC access to the cluster</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>Manual Cluster (Kubeconfig)</h3>
+            <p>For clusters not in a supported cloud provider, add them manually:</p>
+
+            <pre><code># In the Netpin UI:
+1. Go to Clusters → Add Cluster
+2. Select "Manual (Kubeconfig)"
+3. Paste your kubeconfig content
+4. Click "Add Cluster"</code></pre>
+
+            <h2>Step 5: Deploy the Netpin Agent</h2>
+            <p>The Netpin Agent runs inside your cluster and collects metrics, findings, and inventory data.</p>
+
+            <pre><code># Apply the agent deployment
+kubectl apply -f https://raw.githubusercontent.com/netpin/kubeapps/main/agent/deploy/agent.yaml
+
+# Or from the local repo
+kubectl apply -f agent/deploy/agent.yaml</code></pre>
+
+            <p>Configure the agent with your Netpin server details:</p>
+            <pre><code>apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: netpin-agent-config
+  namespace: netpin-system
+data:
+  NETPIN_SERVER_URL: "http://your-netpin-server:3000"
+  NETPIN_API_KEY: "your-api-key"
+  CLUSTER_ID: "your-cluster-id"</code></pre>
+
+            <h2>Step 6: View Your Infrastructure</h2>
+            <p>Once connected, explore your infrastructure:</p>
+
+            <div class="card-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🗺️</div>
+                    <div class="feature-title">Topology</div>
+                    <div class="feature-desc">
+                        Visual map of all Kubernetes resources and their relationships.
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <div class="feature-title">IDI Dashboard</div>
+                    <div class="feature-desc">
+                        View your Infrastructure Debt Index score and breakdown.
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <div class="feature-title">InfraDebt</div>
+                    <div class="feature-desc">
+                        Detailed findings and recommendations to reduce tech debt.
+                    </div>
+                </div>
+            </div>
+
+            <h2>Next Steps</h2>
+            <ul style="margin-left: 20px; color: var(--text-secondary);">
+                <li><a href="clusters.html">Learn more about Cluster Management</a></li>
+                <li><a href="idi.html">Understanding the Infrastructure Debt Index</a></li>
+                <li><a href="agent.html">Configure the Netpin Agent</a></li>
+                <li><a href="../api/authentication.html">API Reference for integrations</a></li>
+            </ul>
+
+        </main>
+    </div>
+<script src="/docs/assets/js/layout.js"></script></body>
+
+</html>

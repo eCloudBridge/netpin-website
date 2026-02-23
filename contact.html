@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Netpin | Get in Touch</title>
+    <meta name="description" content="Contact the Netpin team for sales, support, or partnership inquiries.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/svg+xml"
+        href="images/logo-icon.png">
+
+    <style>
+        .contact-hero {
+            padding: 180px 0 80px;
+            text-align: center;
+        }
+
+        .contact-section {
+            padding: 0 0 var(--section-padding);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+        }
+
+        .contact-info h2 {
+            font-size: 2rem;
+            margin-bottom: 24px;
+        }
+
+        .contact-info p {
+            margin-bottom: 40px;
+        }
+
+        .contact-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .contact-method {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            padding: 24px;
+            background: var(--color-bg-glass);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            transition: var(--transition-base);
+        }
+
+        .contact-method:hover {
+            border-color: var(--border-glass);
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .method-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: rgba(99, 102, 241, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .method-content h4 {
+            font-size: 1.1rem;
+            margin-bottom: 4px;
+        }
+
+        .method-content p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .method-content a {
+            color: var(--color-primary-light);
+            text-decoration: none;
+        }
+
+        .method-content a:hover {
+            text-decoration: underline;
+        }
+
+        .contact-form-container {
+            background: var(--color-bg-glass);
+            border: 1px solid var(--border-subtle);
+            border-radius: 24px;
+            padding: 48px;
+        }
+
+        .contact-form h3 {
+            font-size: 1.5rem;
+            margin-bottom: 32px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px 16px;
+            background: var(--color-bg-primary);
+            border: 1px solid var(--border-subtle);
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            font-family: inherit;
+            transition: var(--transition-base);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: var(--text-muted);
+        }
+
+        .form-group textarea {
+            min-height: 140px;
+            resize: vertical;
+        }
+
+        .form-group select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%2394a3b8' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-submit {
+            margin-top: 32px;
+        }
+
+        .form-submit .btn {
+            width: 100%;
+        }
+
+        .offices-section {
+            padding: var(--section-padding) 0;
+            background: var(--color-bg-secondary);
+        }
+
+        .offices-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            margin-top: 60px;
+        }
+
+        .office-card {
+            background: var(--color-bg-glass);
+            border: 1px solid var(--border-subtle);
+            border-radius: 20px;
+            padding: 32px;
+        }
+
+        .office-card h4 {
+            font-size: 1.25rem;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .office-card p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        @media (max-width: 1024px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .offices-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-grid"></div>
+    <div class="bg-glow bg-glow-1"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">⚡</div>
+                <span class="logo-text">Netpin</span>
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="features.html">Features</a></li>
+                <li><a href="index.html#how-it-works">How It Works</a></li>
+                <li><a href="index.html#idi">IDI Score</a></li>
+                <li><a href="pricing.html">Pricing</a></li>
+                <li><a href="docs/">Docs</a></li>
+            </ul>
+
+            <div class="nav-cta">
+                <a href="#" class="btn btn-ghost">Sign In</a>
+                <a href="#" class="btn btn-primary">Get Started Free</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="contact-hero">
+        <div class="container">
+            <div class="section-label">
+                <span>✦</span> Contact
+            </div>
+            <h1>Get in <span class="text-gradient">Touch</span></h1>
+            <p>
+                Have questions? We'd love to hear from you. Our team is here to help.
+            </p>
+        </div>
+    </section>
+
+    <!-- Contact Form & Info -->
+    <section class="contact-section">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h2>Let's <span class="text-gradient">Connect</span></h2>
+                    <p>
+                        Whether you're exploring Netpin for your team, have technical questions,
+                        or want to discuss partnership opportunities — we're all ears.
+                    </p>
+
+                    <div class="contact-methods">
+                        <div class="contact-method">
+                            <div class="method-icon">💬</div>
+                            <div class="method-content">
+                                <h4>Sales</h4>
+                                <p>Interested in Netpin for your organization?</p>
+                                <a href="mailto:sales@netpin.io">sales@netpin.io</a>
+                            </div>
+                        </div>
+
+                        <div class="contact-method">
+                            <div class="method-icon">🛠️</div>
+                            <div class="method-content">
+                                <h4>Support</h4>
+                                <p>Need help with an existing account?</p>
+                                <a href="mailto:support@netpin.io">support@netpin.io</a>
+                            </div>
+                        </div>
+
+                        <div class="contact-method">
+                            <div class="method-icon">🤝</div>
+                            <div class="method-content">
+                                <h4>Partnerships</h4>
+                                <p>Interested in partnering with us?</p>
+                                <a href="mailto:partners@netpin.io">partners@netpin.io</a>
+                            </div>
+                        </div>
+
+                        <div class="contact-method">
+                            <div class="method-icon">📰</div>
+                            <div class="method-content">
+                                <h4>Press</h4>
+                                <p>Media and press inquiries</p>
+                                <a href="mailto:press@netpin.io">press@netpin.io</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-form-container">
+                    <form class="contact-form">
+                        <h3>Send us a Message</h3>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name</label>
+                                <input type="text" id="firstName" placeholder="John">
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name</label>
+                                <input type="text" id="lastName" placeholder="Doe">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Work Email</label>
+                            <input type="email" id="email" placeholder="john@company.com">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="company">Company</label>
+                            <input type="text" id="company" placeholder="Acme Inc">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="topic">Topic</label>
+                            <select id="topic">
+                                <option value="">Select a topic...</option>
+                                <option value="demo">Request a Demo</option>
+                                <option value="sales">Sales Inquiry</option>
+                                <option value="support">Technical Support</option>
+                                <option value="partnership">Partnership</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message"
+                                placeholder="Tell us about your infrastructure challenges..."></textarea>
+                        </div>
+
+                        <div class="form-submit">
+                            <button type="submit" class="btn btn-primary btn-large">Send Message</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Offices -->
+    <section class="offices-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our <span class="text-gradient">Offices</span></h2>
+            </div>
+
+            <div class="offices-grid">
+                <div class="office-card">
+                    <h4>🇺🇸 San Francisco</h4>
+                    <p>
+                        535 Mission St, 14th Floor<br>
+                        San Francisco, CA 94105<br>
+                        United States
+                    </p>
+                </div>
+
+                <div class="office-card">
+                    <h4>🇬🇧 London</h4>
+                    <p>
+                        123 Old Street<br>
+                        London EC1V 9BD<br>
+                        United Kingdom
+                    </p>
+                </div>
+
+                <div class="office-card">
+                    <h4>🇮🇳 Bangalore</h4>
+                    <p>
+                        WeWork Embassy Golf Links<br>
+                        Bangalore, Karnataka 560071<br>
+                        India
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-bottom" style="border-top: none; padding-top: 0;">
+                <p>© 2026 Netpin. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Form submission (demo)
+        document.querySelector('.contact-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for your message! We\'ll be in touch soon.');
+        });
+    </script>
+</body>
+
+</html>
