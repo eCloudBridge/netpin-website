@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" type="image/png" href="/docs/assets/images/logo-icon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Architecture - Netpin Documentation</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="docs-container">
+        <!-- Sidebar Navigation -->
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <h1>System Architecture</h1>
+            <p class="lead">
+                Netpin is built on a modern microservices architecture designed for scalability,
+                maintainability, and high availability.
+            </p>
+
+            <h2>High-Level Architecture</h2>
+
+            <div class="diagram">
+                <svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Background -->
+                    <rect width="800" height="600" fill="#0f172a" />
+
+                    <!-- Title -->
+                    <text x="400" y="30" text-anchor="middle" fill="#f8fafc" font-size="18" font-weight="bold">Netpin
+                        Platform Architecture</text>
+
+                    <!-- User/Browser -->
+                    <rect x="330" y="50" width="140" height="50" rx="8" fill="#6366f1" />
+                    <text x="400" y="80" text-anchor="middle" fill="white" font-size="12" font-weight="bold">User
+                        Browser</text>
+
+                    <!-- Frontend -->
+                    <rect x="330" y="120" width="140" height="50" rx="8" fill="#3b82f6" />
+                    <text x="400" y="145" text-anchor="middle" fill="white" font-size="11" font-weight="bold">Frontend
+                        (React)</text>
+                    <text x="400" y="160" text-anchor="middle" fill="white" font-size="9">:5173</text>
+
+                    <!-- Arrow down -->
+                    <line x1="400" y1="100" x2="400" y2="120" stroke="#64748b" stroke-width="2"
+                        marker-end="url(#arrowhead)" />
+
+                    <!-- API Gateway -->
+                    <rect x="330" y="190" width="140" height="50" rx="8" fill="#8b5cf6" />
+                    <text x="400" y="215" text-anchor="middle" fill="white" font-size="11" font-weight="bold">API
+                        Gateway</text>
+                    <text x="400" y="230" text-anchor="middle" fill="white" font-size="9">:3000</text>
+
+                    <line x1="400" y1="170" x2="400" y2="190" stroke="#64748b" stroke-width="2"
+                        marker-end="url(#arrowhead)" />
+
+                    <!-- Microservices Row -->
+                    <rect x="50" y="280" width="120" height="60" rx="8" fill="#10b981" />
+                    <text x="110" y="305" text-anchor="middle" fill="white" font-size="10" font-weight="bold">Auth
+                        Service</text>
+                    <text x="110" y="320" text-anchor="middle" fill="white" font-size="9">:8001</text>
+                    <text x="110" y="332" text-anchor="middle" fill="white" font-size="8">JWT, Users, RBAC</text>
+
+                    <rect x="190" y="280" width="120" height="60" rx="8" fill="#f59e0b" />
+                    <text x="250" y="305" text-anchor="middle" fill="white" font-size="10" font-weight="bold">Cluster
+                        Manager</text>
+                    <text x="250" y="320" text-anchor="middle" fill="white" font-size="9">:8002</text>
+                    <text x="250" y="332" text-anchor="middle" fill="white" font-size="8">Cloud, Discovery</text>
+
+                    <rect x="330" y="280" width="120" height="60" rx="8" fill="#ec4899" />
+                    <text x="390" y="305" text-anchor="middle" fill="white" font-size="10" font-weight="bold">K8s
+                        API</text>
+                    <text x="390" y="320" text-anchor="middle" fill="white" font-size="9">:8000</text>
+                    <text x="390" y="332" text-anchor="middle" fill="white" font-size="8">Topology, Helm</text>
+
+                    <rect x="470" y="280" width="120" height="60" rx="8" fill="#06b6d4" />
+                    <text x="530" y="305" text-anchor="middle" fill="white" font-size="10" font-weight="bold">IDI
+                        Service</text>
+                    <text x="530" y="320" text-anchor="middle" fill="white" font-size="9">:8003</text>
+                    <text x="530" y="332" text-anchor="middle" fill="white" font-size="8">Scoring, Forecasts</text>
+
+                    <rect x="610" y="280" width="120" height="60" rx="8" fill="#ef4444" />
+                    <text x="670" y="305" text-anchor="middle" fill="white" font-size="10" font-weight="bold">Audit
+                        Service</text>
+                    <text x="670" y="320" text-anchor="middle" fill="white" font-size="9">:8004</text>
+                    <text x="670" y="332" text-anchor="middle" fill="white" font-size="8">Logs, Events</text>
+
+                    <!-- Lines from gateway to services -->
+                    <line x1="400" y1="240" x2="110" y2="280" stroke="#64748b" stroke-width="1" />
+                    <line x1="400" y1="240" x2="250" y2="280" stroke="#64748b" stroke-width="1" />
+                    <line x1="400" y1="240" x2="390" y2="280" stroke="#64748b" stroke-width="1" />
+                    <line x1="400" y1="240" x2="530" y2="280" stroke="#64748b" stroke-width="1" />
+                    <line x1="400" y1="240" x2="670" y2="280" stroke="#64748b" stroke-width="1" />
+
+                    <!-- Data Layer -->
+                    <rect x="200" y="400" width="140" height="50" rx="8" fill="#1e293b" stroke="#475569"
+                        stroke-width="2" />
+                    <text x="270" y="425" text-anchor="middle" fill="#f8fafc" font-size="11"
+                        font-weight="bold">PostgreSQL</text>
+                    <text x="270" y="440" text-anchor="middle" fill="#94a3b8" font-size="9">Primary Database</text>
+
+                    <rect x="360" y="400" width="140" height="50" rx="8" fill="#1e293b" stroke="#475569"
+                        stroke-width="2" />
+                    <text x="430" y="425" text-anchor="middle" fill="#f8fafc" font-size="11"
+                        font-weight="bold">Redis</text>
+                    <text x="430" y="440" text-anchor="middle" fill="#94a3b8" font-size="9">Cache & Sessions</text>
+
+                    <!-- Lines to data layer -->
+                    <line x1="110" y1="340" x2="270" y2="400" stroke="#64748b" stroke-width="1" stroke-dasharray="4" />
+                    <line x1="250" y1="340" x2="270" y2="400" stroke="#64748b" stroke-width="1" stroke-dasharray="4" />
+                    <line x1="390" y1="340" x2="340" y2="400" stroke="#64748b" stroke-width="1" stroke-dasharray="4" />
+                    <line x1="530" y1="340" x2="430" y2="400" stroke="#64748b" stroke-width="1" stroke-dasharray="4" />
+
+                    <!-- External: Kubernetes Clusters -->
+                    <rect x="50" y="500" width="200" height="70" rx="8" fill="#1e293b" stroke="#22c55e"
+                        stroke-width="2" />
+                    <text x="150" y="525" text-anchor="middle" fill="#22c55e" font-size="11"
+                        font-weight="bold">Kubernetes Clusters</text>
+                    <text x="150" y="545" text-anchor="middle" fill="#94a3b8" font-size="9">EKS / GKE / AKS /
+                        On-prem</text>
+                    <text x="150" y="560" text-anchor="middle" fill="#94a3b8" font-size="9">Netpin Agent deployed</text>
+
+                    <!-- External: Cloud Providers -->
+                    <rect x="280" y="500" width="200" height="70" rx="8" fill="#1e293b" stroke="#f59e0b"
+                        stroke-width="2" />
+                    <text x="380" y="525" text-anchor="middle" fill="#f59e0b" font-size="11" font-weight="bold">Cloud
+                        Providers</text>
+                    <text x="380" y="545" text-anchor="middle" fill="#94a3b8" font-size="9">AWS / GCP / Azure
+                        APIs</text>
+                    <text x="380" y="560" text-anchor="middle" fill="#94a3b8" font-size="9">Cluster Discovery</text>
+
+                    <!-- External: CI/CD -->
+                    <rect x="510" y="500" width="200" height="70" rx="8" fill="#1e293b" stroke="#6366f1"
+                        stroke-width="2" />
+                    <text x="610" y="525" text-anchor="middle" fill="#6366f1" font-size="11" font-weight="bold">CI/CD
+                        Pipelines</text>
+                    <text x="610" y="545" text-anchor="middle" fill="#94a3b8" font-size="9">GitHub Actions / GitLab
+                        CI</text>
+                    <text x="610" y="560" text-anchor="middle" fill="#94a3b8" font-size="9">Deployment Gating</text>
+
+                    <!-- Connections to external -->
+                    <line x1="390" y1="340" x2="150" y2="500" stroke="#22c55e" stroke-width="1" />
+                    <line x1="250" y1="340" x2="380" y2="500" stroke="#f59e0b" stroke-width="1" />
+                    <line x1="530" y1="340" x2="610" y2="500" stroke="#6366f1" stroke-width="1" />
+
+                    <!-- Arrow marker definition -->
+                    <defs>
+                        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+                            <polygon points="0 0, 10 3.5, 0 7" fill="#64748b" />
+                        </marker>
+                    </defs>
+                </svg>
+            </div>
+
+            <h2>Core Components</h2>
+
+            <h3>Frontend Layer</h3>
+            <div class="card">
+                <h4>React Frontend</h4>
+                <p>Modern React application built with Vite, featuring:</p>
+                <ul style="margin-left: 20px; color: var(--text-secondary);">
+                    <li><strong>React Query</strong> for server state management</li>
+                    <li><strong>Zustand</strong> for client state (with persistence)</li>
+                    <li><strong>React Flow</strong> for topology visualization</li>
+                    <li><strong>Recharts</strong> for data visualization</li>
+                    <li><strong>TailwindCSS</strong> for styling</li>
+                </ul>
+            </div>
+
+            <h3>API Gateway</h3>
+            <div class="card">
+                <p>
+                    The API Gateway (Node.js/Express) serves as the single entry point for all client requests.
+                    It handles:
+                </p>
+                <ul style="margin-left: 20px; color: var(--text-secondary);">
+                    <li>Request routing to backend microservices</li>
+                    <li>JWT token validation</li>
+                    <li>Rate limiting</li>
+                    <li>Request/Response logging</li>
+                    <li>CORS handling</li>
+                </ul>
+            </div>
+
+            <h3>Microservices</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Service</th>
+                        <th>Technology</th>
+                        <th>Responsibilities</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>auth-service</code></td>
+                        <td>Go + Gin</td>
+                        <td>User authentication, JWT tokens, password management, RBAC</td>
+                    </tr>
+                    <tr>
+                        <td><code>cluster-manager</code></td>
+                        <td>Go + Gin</td>
+                        <td>Cloud provider integration (AWS/GCP/Azure), cluster discovery, credential management</td>
+                    </tr>
+                    <tr>
+                        <td><code>kubernetes-api</code></td>
+                        <td>Go + Gin</td>
+                        <td>Kubernetes API operations, topology generation, Helm release management</td>
+                    </tr>
+                    <tr>
+                        <td><code>idi-service</code></td>
+                        <td>Go + Gin</td>
+                        <td>IDI calculation, forecasting, deployment gating, stack management</td>
+                    </tr>
+                    <tr>
+                        <td><code>audit-service</code></td>
+                        <td>Go + Gin</td>
+                        <td>Audit logging, event tracking, compliance reporting</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Data Layer</h3>
+            <div class="card">
+                <h4>PostgreSQL</h4>
+                <p>Primary relational database storing:</p>
+                <ul style="margin-left: 20px; color: var(--text-secondary);">
+                    <li>Users, organizations, projects</li>
+                    <li>Clusters, cloud providers (encrypted credentials)</li>
+                    <li>Application stacks and findings</li>
+                    <li>IDI scores, forecasts, gate decisions</li>
+                    <li>Audit logs and events</li>
+                </ul>
+
+                <h4 style="margin-top: 24px;">Redis</h4>
+                <p>In-memory cache for:</p>
+                <ul style="margin-left: 20px; color: var(--text-secondary);">
+                    <li>Session management</li>
+                    <li>API response caching</li>
+                    <li>Rate limiting counters</li>
+                    <li>Real-time pub/sub for events</li>
+                </ul>
+            </div>
+
+            <h2>Data Flow</h2>
+
+            <h3>Authentication Flow</h3>
+            <pre><code>1. User submits credentials → Frontend
+2. Frontend → API Gateway → Auth Service
+3. Auth Service validates credentials against PostgreSQL
+4. Auth Service generates JWT token
+5. Token returned to Frontend
+6. Frontend stores token, includes in subsequent requests</code></pre>
+
+            <h3>Cluster Discovery Flow</h3>
+            <pre><code>1. User adds cloud provider credentials
+2. Cluster Manager encrypts and stores credentials
+3. Cluster Manager calls cloud API (e.g., AWS EKS ListClusters)
+4. Discovered clusters saved to database
+5. Kubernetes API generates EKS tokens for each cluster
+6. Topology data fetched and displayed</code></pre>
+
+            <h3>IDI Calculation Flow</h3>
+            <pre><code>1. Netpin Agent collects findings from cluster
+2. Agent POSTs findings to API Gateway
+3. Findings stored in PostgreSQL
+4. IDI Service calculates score:
+   - Security weight: 40%
+   - Compliance weight: 25%
+   - Efficiency weight: 20%
+   - Reliability weight: 15%
+5. Score saved and available via API</code></pre>
+
+            <h2>Security Architecture</h2>
+            <div class="card">
+                <h4>Encryption</h4>
+                <ul style="margin-left: 20px; color: var(--text-secondary);">
+                    <li><strong>At Rest:</strong> AES-256-GCM encryption for sensitive data (credentials, kubeconfigs)
+                    </li>
+                    <li><strong>In Transit:</strong> TLS 1.3 for all communications</li>
+                    <li><strong>Passwords:</strong> bcrypt hashing with configurable cost factor</li>
+                </ul>
+
+                <h4 style="margin-top: 16px;">Authentication</h4>
+                <ul style="margin-left: 20px; color: var(--text-secondary);">
+                    <li>JWT tokens with configurable expiry</li>
+                    <li>Refresh token rotation</li>
+                    <li>Session invalidation on password change</li>
+                </ul>
+
+                <h4 style="margin-top: 16px;">Authorization</h4>
+                <ul style="margin-left: 20px; color: var(--text-secondary);">
+                    <li>Role-based access control (RBAC)</li>
+                    <li>Project-level permissions</li>
+                    <li>API key authentication for agents</li>
+                </ul>
+            </div>
+
+        </main>
+    </div>
+<script src="/docs/assets/js/layout.js"></script></body>
+
+</html>

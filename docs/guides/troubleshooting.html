@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" type="image/png" href="/docs/assets/images/logo-icon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Troubleshooting - Netpin Documentation</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="docs-container">
+        <!-- Sidebar Navigation -->
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <h1>Troubleshooting Guide</h1>
+            <p class="lead">
+                Common issues and their solutions when working with Netpin.
+            </p>
+
+            <h2>Service Issues</h2>
+
+            <div class="card">
+                <h3>Services not starting</h3>
+                <p><strong>Symptoms:</strong> Docker containers exit immediately or show errors.</p>
+
+                <h4>Check container logs</h4>
+                <pre><code># View logs for all services
+docker compose logs
+
+# View logs for a specific service
+docker compose logs kubernetes-api
+docker compose logs idi-service</code></pre>
+
+                <h4>Common causes:</h4>
+                <ul style="margin-left: 20px; color: var(--text-secondary); margin-bottom: 16px;">
+                    <li><strong>Database not ready:</strong> Services depend on PostgreSQL. Check if it's healthy.</li>
+                    <li><strong>Port conflicts:</strong> Another service might be using the required ports.</li>
+                    <li><strong>Missing environment variables:</strong> Check <code>.env</code> file exists with
+                        required values.</li>
+                </ul>
+
+                <h4>Solution</h4>
+                <pre><code># Restart all services
+docker compose down
+docker compose up -d
+
+# Rebuild if code changed
+docker compose build --no-cache
+docker compose up -d</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>Database connection errors</h3>
+                <p><strong>Symptoms:</strong> Services show "connection refused" or "database not found" errors.</p>
+
+                <h4>Check PostgreSQL status</h4>
+                <pre><code># Check if PostgreSQL is running and healthy
+docker compose ps postgres
+
+# View PostgreSQL logs
+docker compose logs postgres
+
+# Connect to database directly
+docker compose exec postgres psql -U netpin -d netpin</code></pre>
+
+                <h4>Reset database</h4>
+                <pre><code># Stop services
+docker compose down
+
+# Remove database volume (WARNING: data loss!)
+docker volume rm kubeapps_postgres_data
+
+# Restart - database will be recreated
+docker compose up -d</code></pre>
+            </div>
+
+            <h2>Cluster Connection Issues</h2>
+
+            <div class="card">
+                <h3>"Unauthorized" error when viewing topology</h3>
+                <p><strong>Symptoms:</strong> Topology page shows 500 error with "Unauthorized" message.</p>
+
+                <h4>Common causes:</h4>
+                <ul style="margin-left: 20px; color: var(--text-secondary); margin-bottom: 16px;">
+                    <li><strong>Expired AWS credentials:</strong> EKS tokens expire. Check if credentials are still
+                        valid.</li>
+                    <li><strong>Wrong cluster name:</strong> EKS requires exact cluster name, not ARN.</li>
+                    <li><strong>IAM permissions:</strong> User/role may lack EKS access.</li>
+                </ul>
+
+                <h4>Debug steps</h4>
+                <pre><code># Check kubernetes-api logs
+docker compose logs kubernetes-api | grep -i "EKS-AUTH\|error"
+
+# Expected output shows:
+# [EKS-AUTH] Extracted cluster name 'my-cluster' from ARN
+# [EKS-AUTH] Token generated successfully</code></pre>
+
+                <h4>Verify AWS credentials</h4>
+                <pre><code># Test credentials manually
+aws sts get-caller-identity
+
+# List EKS clusters
+aws eks list-clusters --region your-region</code></pre>
+
+                <h4>Solution</h4>
+                <p>Update cloud provider credentials in Netpin UI: Clusters → Cloud Providers → Edit</p>
+            </div>
+
+            <div class="card">
+                <h3>"Cluster not reachable" error</h3>
+                <p><strong>Symptoms:</strong> Cannot connect to cluster, timeout errors.</p>
+
+                <h4>Check network connectivity</h4>
+                <pre><code># From Netpin container, test connectivity
+docker compose exec kubernetes-api sh -c \
+  "wget -O- --timeout=5 https://your-cluster-endpoint/healthz"</code></pre>
+
+                <h4>Common causes:</h4>
+                <ul style="margin-left: 20px; color: var(--text-secondary); margin-bottom: 16px;">
+                    <li><strong>VPN required:</strong> Cluster may be in private network.</li>
+                    <li><strong>Firewall rules:</strong> Security groups may block access.</li>
+                    <li><strong>Cluster down:</strong> The Kubernetes cluster itself may be unavailable.</li>
+                </ul>
+            </div>
+
+            <h2>Authentication Issues</h2>
+
+            <div class="card">
+                <h3>Cannot login / "Invalid credentials"</h3>
+                <p><strong>Symptoms:</strong> Login fails even with correct password.</p>
+
+                <h4>Check auth service</h4>
+                <pre><code># View auth service logs
+docker compose logs auth
+
+# Test auth endpoint directly
+curl -X POST http://localhost:3000/api/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"email":"user@example.com","password":"test"}'</code></pre>
+
+                <h4>Reset user password (database)</h4>
+                <pre><code># Connect to database
+docker compose exec postgres psql -U netpin -d netpin
+
+# Generate new bcrypt hash and update
+UPDATE users SET password_hash = '$2a$10$...' WHERE email = 'user@example.com';</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>JWT token expired</h3>
+                <p><strong>Symptoms:</strong> API returns 401 Unauthorized after some time.</p>
+
+                <h4>Solution</h4>
+                <p>JWT tokens expire after 24 hours by default. Log in again to get a new token.</p>
+
+                <p>For automated systems, implement token refresh logic:</p>
+                <pre><code>// Check token expiry before API calls
+const decoded = jwt_decode(token);
+if (decoded.exp * 1000 < Date.now()) {
+  // Token expired, re-authenticate
+  await login();
+}</code></pre>
+            </div>
+
+            <h2>IDI Issues</h2>
+
+            <div class="card">
+                <h3>IDI score not updating</h3>
+                <p><strong>Symptoms:</strong> IDI score remains at 0 or doesn't change.</p>
+
+                <h4>Check IDI service</h4>
+                <pre><code># View IDI service logs
+docker compose logs idi-service
+
+# Check if findings exist
+docker compose exec postgres psql -U netpin -d netpin -c \
+  "SELECT COUNT(*) FROM findings WHERE project_id = 'your-project-id';"</code></pre>
+
+                <h4>Common causes:</h4>
+                <ul style="margin-left: 20px; color: var(--text-secondary); margin-bottom: 16px;">
+                    <li><strong>No findings:</strong> Agent not sending data, or findings table empty.</li>
+                    <li><strong>Agent not running:</strong> Check agent deployment in cluster.</li>
+                    <li><strong>Wrong project ID:</strong> Findings linked to different project.</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>Forecast showing "N/A"</h3>
+                <p><strong>Symptoms:</strong> Forecast doesn't show projections.</p>
+
+                <h4>Common causes:</h4>
+                <ul style="margin-left: 20px; color: var(--text-secondary); margin-bottom: 16px;">
+                    <li><strong>Insufficient data:</strong> Forecasting needs at least 7 days of historical data.</li>
+                    <li><strong>No historical snapshots:</strong> Environment snapshots not being recorded.</li>
+                </ul>
+
+                <h4>Check snapshots</h4>
+                <pre><code>docker compose exec postgres psql -U netpin -d netpin -c \
+  "SELECT COUNT(*), MIN(captured_at), MAX(captured_at) 
+   FROM environment_snapshots 
+   WHERE project_id = 'your-project-id';"</code></pre>
+            </div>
+
+            <h2>Agent Issues</h2>
+
+            <div class="card">
+                <h3>Agent not sending data</h3>
+                <p><strong>Symptoms:</strong> Agent runs but Netpin shows no data.</p>
+
+                <h4>Check agent logs</h4>
+                <pre><code>kubectl logs -f deployment/netpin-agent -n netpin-system</code></pre>
+
+                <h4>Common causes:</h4>
+                <ul style="margin-left: 20px; color: var(--text-secondary); margin-bottom: 16px;">
+                    <li><strong>Wrong server URL:</strong> Check NETPIN_SERVER_URL configuration.</li>
+                    <li><strong>Invalid API key:</strong> Verify NETPIN_API_KEY is correct.</li>
+                    <li><strong>Network blocked:</strong> Agent can't reach Netpin server.</li>
+                </ul>
+
+                <h4>Test connectivity from agent</h4>
+                <pre><code>kubectl exec -it deployment/netpin-agent -n netpin-system -- \
+  wget -O- https://netpin.example.com/health</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>Agent permission errors</h3>
+                <p><strong>Symptoms:</strong> Agent logs show "forbidden" or RBAC errors.</p>
+
+                <h4>Check RBAC permissions</h4>
+                <pre><code># Verify ClusterRole exists
+kubectl get clusterrole netpin-agent -o yaml
+
+# Check ClusterRoleBinding
+kubectl get clusterrolebinding netpin-agent -o yaml
+
+# Test permissions
+kubectl auth can-i list pods \
+  --as system:serviceaccount:netpin-system:netpin-agent</code></pre>
+
+                <h4>Reapply RBAC</h4>
+                <pre><code>kubectl apply -f agent/deploy/agent.yaml</code></pre>
+            </div>
+
+            <h2>UI Issues</h2>
+
+            <div class="card">
+                <h3>Blank page or JavaScript errors</h3>
+                <p><strong>Symptoms:</strong> UI shows blank or console has errors.</p>
+
+                <h4>Clear browser cache</h4>
+                <pre><code># Hard refresh
+Ctrl+Shift+R (Cmd+Shift+R on Mac)
+
+# Or clear site data in browser DevTools</code></pre>
+
+                <h4>Check frontend build</h4>
+                <pre><code># Rebuild frontend
+docker compose build frontend
+docker compose up -d frontend</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>Settings not saving</h3>
+                <p><strong>Symptoms:</strong> Theme or preferences reset after refresh.</p>
+
+                <h4>Check localStorage</h4>
+                <p>Open browser DevTools → Application → Local Storage</p>
+                <p>Verify keys exist: <code>theme</code>, <code>density</code>, <code>notification-preferences</code>
+                </p>
+
+                <h4>Clear and reset</h4>
+                <pre><code>// In browser console
+localStorage.clear();
+location.reload();</code></pre>
+            </div>
+
+            <h2>Getting Help</h2>
+            <div class="alert alert-info">
+                <span class="alert-icon">💡</span>
+                <div>
+                    <strong>Still having issues?</strong><br>
+                    <ul style="margin-top: 8px; margin-left: 20px;">
+                        <li>Check <a href="https://github.com/netpin/kubeapps/issues">GitHub Issues</a> for known
+                            problems</li>
+                        <li>Open a new issue with logs and reproduction steps</li>
+                        <li>Contact support at support@netpin.io</li>
+                    </ul>
+                </div>
+            </div>
+
+        </main>
+    </div>
+<script src="/docs/assets/js/layout.js"></script></body>
+
+</html>

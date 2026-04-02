@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" type="image/png" href="/docs/assets/images/logo-icon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deployment Gating - Netpin Documentation</title>
+    <link rel="stylesheet" href="/docs/assets/css/style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="docs-container">
+        <!-- Sidebar will be injected by layout.js -->
+
+        <main class="main-content">
+            <h1>Deployment Gating</h1>
+            <p class="lead">
+                Ensure production stability by automatically blocking risky deployments based on your Infrastructure
+                Debt Index (IDI) score and custom policies.
+            </p>
+
+            <div class="alert alert-info">
+                <span class="alert-icon">🛡️</span>
+                <div>
+                    <strong>Safety First</strong>: Deployment gating moves security and compliance checks "left",
+                    catching issues before they reach your cluster.
+                </div>
+            </div>
+
+            <h2>How It Works</h2>
+            <pre class="mermaid">
+stateDiagram-v2
+    [*] --> Submitted
+    Submitted --> PolicyCheck : CI/CD Trigger
+
+    state PolicyCheck {
+        [*] --> CheckIDI
+        CheckIDI --> CheckCVE : IDI < Threshold
+        CheckCVE --> CheckCompliance : No Critical CVEs
+        CheckCompliance --> Approved : Passed All
+
+        CheckIDI --> Rejected : IDI Too High
+        CheckCVE --> Rejected : Vulnerabilities Found
+        CheckCompliance --> Rejected : Policy Violation
+    }
+
+    Approved --> Deploying : Gate Open
+    Rejected --> Blocked : Gate Closed
+
+    Deploying --> [*]
+    Blocked --> [*]
+            </pre>
+
+            <h2>Gate Policy Configuration</h2>
+            <p>Define policies that control the gate behavior. Policies can be strict (block everything) or advisory
+                (warn only).</p>
+
+            <div class="card">
+                <h3>Policy Parameters</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Description</th>
+                            <th>Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>max_idi_score</code></td>
+                            <td>Maximum allowed IDI score for the target namespace</td>
+                            <td><code>65</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>block_on_critical_cve</code></td>
+                            <td>Block if container images have critical vulnerabilities</td>
+                            <td><code>true</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>required_labels</code></td>
+                            <td>Ensure resources have specific labels (e.g., cost-center)</td>
+                            <td><code>["team", "cost-center"]</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2>Integration Example</h2>
+            <p>Integrate with GitHub Actions using the Netpin CLI or API:</p>
+
+            <pre><code class="language-yaml">jobs:
+  deploy:
+    steps:
+      - name: Netpin Gate Check
+        uses: netpin/gate-action@v1
+        with:
+          api-key: ${{ secrets.NETPIN_API_KEY }}
+          cluster: prod-cluster
+          namespace: default
+          manifest: ./k8s/deployment.yaml</code></pre>
+
+            <h2>Component Interaction</h2>
+            <p>The Gate Service orchestrates multiple checks before giving a verdict.</p>
+            <pre class="mermaid">
+graph TB
+    subgraph "Deployment Request"
+        CD[CI/CD Runner]
+        Req[Manifest JSON]
+    end
+
+    subgraph "Gate Service Core"
+        Policy[Policy Engine]
+        Cache[Redis Cache]
+    end
+
+    subgraph "External Validators"
+        IDI[IDI Service]
+        Vuln[Trivy Scanner]
+        Reg[OPA Policies]
+    end
+
+    CD -->|1. Submit Request| Policy
+    Policy -->|2. Check Cache| Cache
+    
+    Policy -->|3. Get IDI Score| IDI
+    Policy -->|4. Scan Images| Vuln
+    Policy -->|5. Evaluate Rego| Reg
+    
+    IDI -->|Score: 45| Policy
+    Vuln -->|CVEs: 0| Policy
+    Reg -->|Allowed: true| Policy
+    
+    Policy -->|6. Verdict: ALLOW| CD
+
+    style Policy fill:#6366f1,color:#fff
+    style CD fill:#10b981,color:#fff
+            </pre>
+
+            <h2>GitOps Integration Workflow</h2>
+            <p>Seamless integration with ArgoCD or Flux based workflows.</p>
+
+            <pre class="mermaid">
+sequenceDiagram
+    participant Dev as Developer
+    participant Git as Git Repo
+    participant CI as CI Action
+    participant Gate as Gate Service
+    participant Argo as ArgoCD
+    participant Cluster
+
+    Dev->>Git: Push Code
+    Git->>CI: Trigger Build
+    CI->>CI: Build Docker Image
+    
+    rect rgb(30, 41, 59)
+        Note right of CI: Gating Phase
+        CI->>Gate: Check Deployment Permission
+        Gate-->>CI: Approved (Token)
+    end
+    
+    CI->>Git: Update Manifest (Tag)
+    Git->>Argo: Webhook
+    Argo->>Cluster: Sync Resources
+    Cluster-->>Dev: Deployment Live 🚀
+            </pre>
+
+            <h2>Dashboard View</h2>
+            <p>Visualize the status of all your deployment gates in real-time:</p>
+
+            <pre class="mermaid">
+gantt
+    title Deployment Pipeline Timeline
+    dateFormat HH:mm
+    axisFormat %H:%M
+
+    section Payment Service
+    Build :done, des1, 10:00, 5m
+    Unit Tests :done, des2, after des1, 3m
+    Netpin Gate Check :active, des3, after des2, 2m
+    Deploy to Prod : des4, after des3, 5m
+
+    section User Service
+    Build :done, des5, 10:05, 5m
+    Netpin Gate Check :crit, des6, 10:10, 2m
+    Manual Approval : des7, after des6, 10m
+            </pre>
+
+        </main>
+    </div>
+
+    <!-- Layout Script -->
+    <script src="/docs/assets/js/layout.js"></script>
+
+    <!-- External Libs -->
+    <script src="/docs/assets/js/mermaid.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            mermaid.initialize({
+                startOnLoad: true,
+                theme: 'dark',
+                securityLevel: 'loose',
+            });
+        });
+    </script>
+</body>
+
+</html>

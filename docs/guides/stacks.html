@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" type="image/png" href="/docs/assets/images/logo-icon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Stacks - Netpin Documentation</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="docs-container">
+
+        <main class="main-content">
+            <h1>Application Stacks</h1>
+            <p class="lead">
+                Application Stacks represent logical groupings of Kubernetes resources that work together
+                to deliver a business capability.
+            </p>
+
+            <h2>What are Stacks?</h2>
+            <p>
+                A Stack is a collection of related Kubernetes resources (Deployments, Services, ConfigMaps, etc.)
+                that form a cohesive application or microservice. Stacks allow you to:
+            </p>
+            <ul style="margin-left: 20px; color: var(--text-secondary);">
+                <li>Track IDI scores at the application level</li>
+                <li>View findings grouped by application</li>
+                <li>Understand dependencies between applications</li>
+                <li>Gate deployments based on stack health</li>
+            </ul>
+
+            <h2>Auto-Detection</h2>
+            <p>
+                Netpin can automatically detect stacks based on common labeling patterns:
+            </p>
+            <pre><code># Resources with these labels are grouped into stacks
+app.kubernetes.io/name: my-app
+app.kubernetes.io/part-of: my-stack
+app: my-app</code></pre>
+
+            <h2>Manual Stack Definition</h2>
+            <p>
+                You can also manually define stacks by specifying a label selector:
+            </p>
+            <pre><code>{
+  "name": "Payment Service",
+  "selector": {
+    "app": "payment",
+    "tier": "backend"
+  },
+  "namespaces": ["production", "staging"]
+}</code></pre>
+
+            <h2>Stack Dependencies</h2>
+            <p>
+                Netpin tracks dependencies between stacks based on Service references,
+                helping you understand the impact of changes.
+            </p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Fan-out</td>
+                        <td>Number of other stacks this stack depends on</td>
+                    </tr>
+                    <tr>
+                        <td>Fan-in</td>
+                        <td>Number of stacks that depend on this stack</td>
+                    </tr>
+                    <tr>
+                        <td>Criticality</td>
+                        <td>Calculated importance based on dependencies</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="alert alert-info">
+                <span class="alert-icon">💡</span>
+                <div>
+                    <strong>Critical Stacks:</strong> Stacks with high fan-in (many dependents) are flagged
+                    as critical and receive stricter deployment gates.
+                </div>
+            </div>
+
+        </main>
+    </div>
+<script src="/docs/assets/js/layout.js"></script></body>
+
+</html>

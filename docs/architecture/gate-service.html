@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" type="image/png" href="/docs/assets/images/logo-icon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gate Service - Netpin Documentation</title>
+    <link rel="stylesheet" href="/docs/assets/css/style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="docs-container">
+        <!-- Sidebar will be injected by layout.js -->
+
+        <main class="main-content">
+            <h1>Gate Service</h1>
+            <p class="lead">
+                The Gate Service acts as a quality assurance firewall for your deployments, blocking risky changes based
+                on
+                IDI scores and policy definitions.
+            </p>
+
+            <div class="card">
+                <h3>Key Features</h3>
+                <ul style="margin-left: 20px; color: var(--text-secondary);">
+                    <li><strong>Policy Enforcement</strong>: Block deployments if IDI score > Threshold.</li>
+                    <li><strong>CI/CD Integration</strong>: Webhooks for Jenkins, GitHub Actions, and GitLab CI.</li>
+                    <li><strong>Vulnerability Gating</strong>: Prevent deployment of images with Critical CVEs.</li>
+                    <li><strong>Approval Workflow</strong>: Manual override capabilities for emergency fixes.</li>
+                </ul>
+            </div>
+
+            <h2>Deployment Flow</h2>
+            <p>How the Gate Service interacts with your CI/CD pipeline:</p>
+
+            <pre class="mermaid">
+sequenceDiagram
+    participant CI as CI/CD Pipeline
+    participant Gate as Gate Service
+    participant IDI as IDI Service
+    participant K8s as Kubernetes Cluster
+
+    CI->>Gate: POST /check-deployment (Manifest)
+    activate Gate
+    Gate->>IDI: Calculate Projected Score
+    IDI-->>Gate: IDI Score: 85 (High Risk)
+    
+    alt Score < Threshold
+        Gate-->>CI: 200 OK (Allowed)
+        CI->>K8s: Apply Manifest
+    else Score > Threshold
+        Gate-->>CI: 403 Forbidden (Blocked)
+        Note right of CI: Deployment Failed.\nRisk too high.
+    end
+    deactivate Gate
+            </pre>
+
+            <h2>API endpoints</h2>
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="badge badge-post">POST</span>
+                    <span class="endpoint-path">/api/gate/check</span>
+                </div>
+                <div class="endpoint-body">
+                    <p>Evaluates a deployment manifest against current policies.</p>
+                    <pre><code>{
+  "cluster_id": "c-123",
+  "manifest": "yaml_content...",
+  "namespace": "production"
+}</code></pre>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Layout Script -->
+    <script src="/docs/assets/js/layout.js"></script>
+
+    <!-- External Libs -->
+    <script src="/docs/assets/js/mermaid.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            mermaid.initialize({
+                startOnLoad: true,
+                theme: 'dark',
+                securityLevel: 'loose',
+            });
+        });
+    </script>
+</body>
+
+</html>

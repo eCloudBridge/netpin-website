@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" type="image/png" href="/docs/assets/images/logo-icon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clusters API - Netpin Documentation</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="docs-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo" style="display: flex; align-items: center; gap: 8px;">
+                     <span style="font-size: 1.25rem; font-weight: 800; color: #818cf8; letter-spacing: -0.025em;">netpin.io</span>
+                    
+                </div>
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">Getting Started</div>
+                    <ul class="nav-links">
+                        <li><a href="../index.html" class="nav-link">Overview</a></li>
+                        <li><a href="../guides/quick-start.html" class="nav-link">Quick Start</a></li>
+                        <li><a href="../guides/installation.html" class="nav-link">Installation</a></li>
+                    </ul>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-section-title">Architecture</div>
+                    <ul class="nav-links">
+                        <li><a href="../architecture/overview.html" class="nav-link">System Overview</a></li>
+                        <li><a href="../architecture/services.html" class="nav-link">Microservices</a></li>
+                        <li><a href="../architecture/database.html" class="nav-link">Database Schema</a></li>
+                    </ul>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-section-title">Features</div>
+                    <ul class="nav-links">
+                        <li><a href="../guides/clusters.html" class="nav-link">Cluster Management</a></li>
+                        <li><a href="../guides/topology.html" class="nav-link">Topology Visualization</a></li>
+                        <li><a href="../guides/idi.html" class="nav-link">Infrastructure Debt Index</a></li>
+                        <li><a href="../guides/agent.html" class="nav-link">Netpin Agent</a></li>
+                        <li><a href="../guides/stacks.html" class="nav-link">Application Stacks</a></li>
+                    </ul>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-section-title">API Reference</div>
+                    <ul class="nav-links">
+                        <li><a href="authentication.html" class="nav-link">Authentication</a></li>
+                        <li><a href="clusters.html" class="nav-link active">Clusters API</a></li>
+                        <li><a href="idi.html" class="nav-link">IDI API</a></li>
+                        <li><a href="kubernetes.html" class="nav-link">Kubernetes API</a></li>
+                    </ul>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-section-title">Operations</div>
+                    <ul class="nav-links">
+                        <li><a href="../guides/configuration.html" class="nav-link">Configuration</a></li>
+                        <li><a href="../guides/troubleshooting.html" class="nav-link">Troubleshooting</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <h1>Clusters API</h1>
+            <p class="lead">
+                Manage Kubernetes clusters, cloud providers, and cluster discovery through the Clusters API.
+            </p>
+
+            <h2>Clusters</h2>
+
+            <h3>List All Clusters</h3>
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="badge badge-get">GET</span>
+                    <code class="endpoint-path">/api/clusters</code>
+                </div>
+                <div class="endpoint-body">
+                    <p>Retrieve all clusters accessible to the current user.</p>
+
+                    <h4>Query Parameters</h4>
+                    <table>
+                        <tr>
+                            <td><code>project_id</code></td>
+                            <td><span class="badge badge-optional">Optional</span></td>
+                            <td>Filter by project ID</td>
+                        </tr>
+                    </table>
+
+                    <h4>Response</h4>
+                    <pre><code>[
+  {
+    "id": "9183037d-a06e-48da-8705-5eb290f71cb6",
+    "name": "production-cluster",
+    "display_name": "Production EKS",
+    "provider_id": "1e5a98e7-24e1-4ded-aaa4-bc2202969930",
+    "region": "us-east-1",
+    "status": "connected",
+    "endpoint": "https://ABC123.gr7.us-east-1.eks.amazonaws.com",
+    "version": "1.28",
+    "node_count": 5,
+    "created_at": "2026-01-01T00:00:00Z"
+  }
+]</code></pre>
+                </div>
+            </div>
+
+            <h3>Get Cluster by ID</h3>
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="badge badge-get">GET</span>
+                    <code class="endpoint-path">/api/clusters/:id</code>
+                </div>
+                <div class="endpoint-body">
+                    <p>Retrieve details for a specific cluster.</p>
+
+                    <h4>Path Parameters</h4>
+                    <table>
+                        <tr>
+                            <td><code>id</code></td>
+                            <td><span class="badge badge-required">Required</span></td>
+                            <td>Cluster UUID</td>
+                        </tr>
+                    </table>
+
+                    <h4>Response</h4>
+                    <pre><code>{
+  "id": "9183037d-a06e-48da-8705-5eb290f71cb6",
+  "name": "production-cluster",
+  "display_name": "Production EKS",
+  "provider_id": "1e5a98e7-24e1-4ded-aaa4-bc2202969930",
+  "region": "us-east-1",
+  "status": "connected",
+  "endpoint": "https://ABC123.gr7.us-east-1.eks.amazonaws.com",
+  "ca_certificate": "LS0tLS1CRUdJTi...",
+  "version": "1.28",
+  "node_count": 5,
+  "created_at": "2026-01-01T00:00:00Z",
+  "updated_at": "2026-01-10T00:00:00Z"
+}</code></pre>
+                </div>
+            </div>
+
+            <h3>Add Cluster (Manual)</h3>
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="badge badge-post">POST</span>
+                    <code class="endpoint-path">/api/clusters</code>
+                </div>
+                <div class="endpoint-body">
+                    <p>Add a cluster manually using a kubeconfig.</p>
+
+                    <h4>Request Body</h4>
+                    <pre><code>{
+  "name": "my-cluster",
+  "display_name": "My Development Cluster",
+  "project_id": "db96682d-7cc8-4642-8170-c2d94b01258b",
+  "kubeconfig": "apiVersion: v1\nkind: Config\n..."
+}</code></pre>
+
+                    <h4>Response</h4>
+                    <pre><code>{
+  "id": "new-cluster-uuid",
+  "name": "my-cluster",
+  "display_name": "My Development Cluster",
+  "status": "connected",
+  "message": "Cluster added successfully"
+}</code></pre>
+                </div>
+            </div>
+
+            <h3>Update Cluster</h3>
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="badge badge-put">PUT</span>
+                    <code class="endpoint-path">/api/clusters/:id</code>
+                </div>
+                <div class="endpoint-body">
+                    <p>Update cluster display name or configuration.</p>
+
+                    <h4>Request Body</h4>
+                    <pre><code>{
+  "display_name": "Updated Cluster Name",
+  "project_id": "new-project-uuid"
+}</code></pre>
+                </div>
+            </div>
+
+            <h3>Delete Cluster</h3>
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="badge badge-delete">DELETE</span>
+                    <code class="endpoint-path">/api/clusters/:id</code>
+                </div>
+                <div class="endpoint-body">
+                    <p>Remove a cluster from Netpin. This does not affect the actual Kubernetes cluster.</p>
+                </div>
+            </div>
+
+            <h2>Cloud Providers</h2>
+
+            <h3>List Cloud Providers</h3>
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="badge badge-get">GET</span>
+                    <code class="endpoint-path">/api/cloud-providers</code>
+                </div>
+                <div class="endpoint-body">
+                    <p>List all configured cloud providers.</p>
+
+                    <h4>Response</h4>
+                    <pre><code>[
+  {
+    "id": "1e5a98e7-24e1-4ded-aaa4-bc2202969930",
+    "name": "AWS Production",
+    "type": "aws",
+    "region": "us-east-1",
+    "status": "active",
+    "clusters_count": 3,
+    "created_at": "2026-01-01T00:00:00Z"
+  },
+  {
+    "id": "2f6b09f8-35f2-5efe-bbb5-cd3313080a41",
+    "name": "GCP Staging",
+    "type": "gcp",
+    "project": "my-gcp-project",
+    "status": "active",
+    "clusters_count": 1,
+    "created_at": "2026-01-02T00:00:00Z"
+  }
+]</code></pre>
+                </div>
+            </div>
+
+            <h3>Add Cloud Provider</h3>
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="badge badge-post">POST</span>
+                    <code class="endpoint-path">/api/cloud-providers</code>
+                </div>
+                <div class="endpoint-body">
+                    <p>Add a new cloud provider configuration.</p>
+
+                    <h4>AWS</h4>
+                    <pre><code>{
+  "name": "AWS Production",
+  "type": "aws",
+  "credentials": {
+    "access_key_id": "AKIAIOSFODNN7EXAMPLE",
+    "secret_access_key": "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+    "region": "us-east-1"
+  }
+}</code></pre>
+
+                    <h4>GCP</h4>
+                    <pre><code>{
+  "name": "GCP Staging",
+  "type": "gcp",
+  "credentials": {
+    "project_id": "my-gcp-project",
+    "service_account_json": "{...}"
+  }
+}</code></pre>
+
+                    <h4>Azure</h4>
+                    <pre><code>{
+  "name": "Azure Dev",
+  "type": "azure",
+  "credentials": {
+    "subscription_id": "...",
+    "tenant_id": "...",
+    "client_id": "...",
+    "client_secret": "..."
+  }
+}</code></pre>
+                </div>
+            </div>
+
+            <h3>Delete Cloud Provider</h3>
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="badge badge-delete">DELETE</span>
+                    <code class="endpoint-path">/api/cloud-providers/:id</code>
+                </div>
+                <div class="endpoint-body">
+                    <p>Remove a cloud provider. Clusters discovered from this provider will be orphaned.</p>
+                </div>
+            </div>
+
+            <h2>Cluster Discovery</h2>
+
+            <h3>Trigger Discovery</h3>
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="badge badge-post">POST</span>
+                    <code class="endpoint-path">/api/cloud-providers/:id/discover</code>
+                </div>
+                <div class="endpoint-body">
+                    <p>Trigger cluster discovery for a cloud provider.</p>
+
+                    <h4>Response</h4>
+                    <pre><code>{
+  "message": "Discovery started",
+  "discovered_clusters": [
+    {
+      "name": "prod-eks-cluster",
+      "region": "us-east-1",
+      "status": "new"
+    },
+    {
+      "name": "staging-eks-cluster",
+      "region": "us-west-2",
+      "status": "existing"
+    }
+  ]
+}</code></pre>
+                </div>
+            </div>
+
+            <h2>Projects</h2>
+
+            <h3>List Projects</h3>
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="badge badge-get">GET</span>
+                    <code class="endpoint-path">/api/projects</code>
+                </div>
+                <div class="endpoint-body">
+                    <p>List all projects accessible to the current user.</p>
+                </div>
+            </div>
+
+            <h3>Create Project</h3>
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="badge badge-post">POST</span>
+                    <code class="endpoint-path">/api/projects</code>
+                </div>
+                <div class="endpoint-body">
+                    <h4>Request Body</h4>
+                    <pre><code>{
+  "name": "Production Environment",
+  "description": "All production clusters and resources"
+}</code></pre>
+                </div>
+            </div>
+
+            <h3>Get Project</h3>
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="badge badge-get">GET</span>
+                    <code class="endpoint-path">/api/projects/:id</code>
+                </div>
+            </div>
+
+            <h3>Update Project</h3>
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="badge badge-put">PUT</span>
+                    <code class="endpoint-path">/api/projects/:id</code>
+                </div>
+            </div>
+
+            <h3>Delete Project</h3>
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="badge badge-delete">DELETE</span>
+                    <code class="endpoint-path">/api/projects/:id</code>
+                </div>
+            </div>
+
+            <div class="docs-footer">
+                <p>Netpin Documentation — Built with ❤️ for the DevOps community</p>
+                <p>© 2026 Netpin. All rights reserved.</p>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>
