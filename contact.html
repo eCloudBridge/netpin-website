@@ -540,19 +540,17 @@
             try {
                 const response = await fetch(SCRIPT_URL, {
                     method: 'POST',
+                    mode: 'no-cors', // Bypass CORS policy enforcement by the browser
                     body: formData
                 });
-
-                if (response.ok || response.status === 200) {
-                    formResponse.style.color = '#10b981'; // Green color
-                    formResponse.textContent = 'Thank you for your message! We\'ll be in touch soon.';
-                    form.reset();
-                } else {
-                    throw new Error('Network response was not ok');
-                }
+                
+                // With 'no-cors' mode, the response is opaque (status 0).
+                // If fetch didn't throw a network error, we assume the data reached Google's servers.
+                formResponse.style.color = '#10b981'; // Green color
+                formResponse.textContent = 'Thank you for your message! We\'ll be in touch soon.';
+                form.reset();
             } catch (error) {
-                // Sometime CORS errors trigger the catch block for Google Scripts despite succeeding. 
-                // However, with modern apps script config and no-cors mode, we structure it for standard JSON.
+                // This block will catch actual network connection errors
                 formResponse.style.color = '#ef4444'; // Red color
                 formResponse.textContent = 'Oops! Something went wrong while submitting the form. Please try again.';
             } finally {
