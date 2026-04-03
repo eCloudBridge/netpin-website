@@ -230,9 +230,11 @@
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="container">
-            <a href="index.html" class="logo" style="display: flex; align-items: center; gap: 8px; text-decoration: none;">
+            <a href="index.html" class="logo"
+                style="display: flex; align-items: center; gap: 8px; text-decoration: none;">
                 <img src="images/logo-icon.png" alt="Netpin Logo" style="height: 32px; width: auto; display: block;" />
-                <span style="font-size: 1.5rem; font-weight: 800; background: linear-gradient(to right, #818cf8, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -0.025em;">netpin.io</span>
+                <span
+                    style="font-size: 1.5rem; font-weight: 800; background: linear-gradient(to right, #818cf8, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -0.025em;">netpin.io</span>
             </a>
 
             <ul class="nav-links">
@@ -320,27 +322,27 @@
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="firstName">First Name</label>
-                                <input type="text" id="firstName" placeholder="John">
+                                <input type="text" id="firstName" name="firstName" placeholder="John" required>
                             </div>
                             <div class="form-group">
                                 <label for="lastName">Last Name</label>
-                                <input type="text" id="lastName" placeholder="Doe">
+                                <input type="text" id="lastName" name="lastName" placeholder="Doe" required>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="email">Work Email</label>
-                            <input type="email" id="email" placeholder="john@company.com">
+                            <input type="email" id="email" name="email" placeholder="john@company.com" required>
                         </div>
 
                         <div class="form-group">
                             <label for="company">Company</label>
-                            <input type="text" id="company" placeholder="Acme Inc">
+                            <input type="text" id="company" name="company" placeholder="Acme Inc" required>
                         </div>
 
                         <div class="form-group">
                             <label for="topic">Topic</label>
-                            <select id="topic">
+                            <select id="topic" name="topic" required>
                                 <option value="">Select a topic...</option>
                                 <option value="demo">Request a Demo</option>
                                 <option value="sales">Sales Inquiry</option>
@@ -352,13 +354,16 @@
 
                         <div class="form-group">
                             <label for="message">Message</label>
-                            <textarea id="message"
-                                placeholder="Tell us about your infrastructure challenges..."></textarea>
+                            <textarea id="message" name="message"
+                                placeholder="Tell us about your infrastructure challenges..." required></textarea>
                         </div>
 
                         <div class="form-submit">
-                            <button type="submit" class="btn btn-primary btn-large">Send Message</button>
+                            <button type="submit" id="submitBtn" class="btn btn-primary btn-large">Send Message</button>
                         </div>
+
+                        <div id="formResponse"
+                            style="margin-top: 15px; font-weight: 500; text-align: center; display: none;"></div>
                     </form>
                 </div>
             </div>
@@ -408,9 +413,12 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-brand">
-                    <a href="#" class="logo" style="display: flex; align-items: center; gap: 8px; text-decoration: none;">
-                        <img src="images/logo-icon.png" alt="Netpin Logo" style="height: 48px; width: auto; display: block;" />
-                        <span style="font-size: 1.8rem; font-weight: 800; background: linear-gradient(to right, #818cf8, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -0.025em;">netpin.io</span>
+                    <a href="#" class="logo"
+                        style="display: flex; align-items: center; gap: 8px; text-decoration: none;">
+                        <img src="images/logo-icon.png" alt="Netpin Logo"
+                            style="height: 48px; width: auto; display: block;" />
+                        <span
+                            style="font-size: 1.8rem; font-weight: 800; background: linear-gradient(to right, #818cf8, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -0.025em;">netpin.io</span>
                     </a>
                     <p>
                         The infrastructure intelligence platform that helps DevOps teams
@@ -501,10 +509,55 @@
             }
         });
 
-        // Form submission (demo)
-        document.querySelector('.contact-form').addEventListener('submit', (e) => {
+        // Form submission (Google Apps Script integration)
+        const SCRIPT_URL = 'https://docs.google.com/spreadsheets/d/1dzPHbayKSz0dk0hQEgxI54danRMcoYGRPV_6FgP1l6M/edit?usp=sharing'; // <-- Paste your Web App URL here!
+
+        document.querySelector('.contact-form').addEventListener('submit', async (e) => {
             e.preventDefault();
-            alert('Thank you for your message! We\'ll be in touch soon.');
+            const form = e.target;
+            const submitBtn = document.getElementById('submitBtn');
+            const formResponse = document.getElementById('formResponse');
+
+            // Reset response
+            formResponse.style.display = 'none';
+            formResponse.textContent = '';
+
+            if (SCRIPT_URL === 'https://docs.google.com/spreadsheets/d/1dzPHbayKSz0dk0hQEgxI54danRMcoYGRPV_6FgP1l6M/edit?usp=sharing') {
+                formResponse.style.color = '#ef4444'; // Red color
+                formResponse.textContent = 'Configuration Error: Please update the SCRIPT_URL in the code.';
+                formResponse.style.display = 'block';
+                return;
+            }
+
+            // Enter loading state
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+
+            const formData = new FormData(form);
+
+            try {
+                const response = await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (response.ok || response.status === 200) {
+                    formResponse.style.color = '#10b981'; // Green color
+                    formResponse.textContent = 'Thank you for your message! We\'ll be in touch soon.';
+                    form.reset();
+                } else {
+                    throw new Error('Network response was not ok');
+                }
+            } catch (error) {
+                // Sometime CORS errors trigger the catch block for Google Scripts despite succeeding. 
+                // However, with modern apps script config and no-cors mode, we structure it for standard JSON.
+                formResponse.style.color = '#ef4444'; // Red color
+                formResponse.textContent = 'Oops! Something went wrong while submitting the form. Please try again.';
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Send Message';
+                formResponse.style.display = 'block';
+            }
         });
     </script>
 </body>
