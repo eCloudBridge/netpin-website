@@ -242,12 +242,13 @@
                 <li><a href="index.html#how-it-works">How It Works</a></li>
                 <li><a href="index.html#idi">IDI Score</a></li>
                 <li><a href="pricing.html">Pricing</a></li>
+                <li><a href="contact.html">Contact</a></li>
                 <li><a href="docs/">Docs</a></li>
             </ul>
 
             <div class="nav-cta">
-                <a href="#" class="btn btn-ghost">Sign In</a>
-                <a href="#" class="btn btn-primary">Get Started Free</a>
+                <a href="https://dash.netpin.io/login" class="btn btn-ghost">Sign In</a>
+                <a href="https://dash.netpin.io/register" class="btn btn-primary">Get Started Free</a>
             </div>
         </div>
     </nav>
@@ -413,7 +414,7 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-brand">
-                    <a href="#" class="logo"
+                    <a href="index.html" class="logo"
                         style="display: flex; align-items: center; gap: 8px; text-decoration: none;">
                         <img src="images/logo-icon.png" alt="Netpin Logo"
                             style="height: 48px; width: auto; display: block;" />
@@ -429,8 +430,9 @@
                 <div class="footer-column">
                     <h4>Product</h4>
                     <ul>
-                        <li><a href="#features">Features</a></li>
-                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="index.html#features">Features</a></li>
+                        <li><a href="index.html#pricing">Pricing</a></li>
+                        <li><a href="contact.html">Contact</a></li>
                         <li><a href="#">Integrations</a></li>
                         <li><a href="#">Changelog</a></li>
                     </ul>
@@ -510,7 +512,7 @@
         });
 
         // Form submission (Google Apps Script integration)
-        const SCRIPT_URL = 'https://docs.google.com/spreadsheets/d/1dzPHbayKSz0dk0hQEgxI54danRMcoYGRPV_6FgP1l6M/edit?usp=sharing'; // <-- Paste your Web App URL here!
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwRCSyWCw3U7Qkt4EjBuUZdXDRBz7qbE5OLAIGXfPLmhQwkG8fyiwMfYsyM26zzM0_NeA/exec'; // <-- Paste your Web App URL here!
 
         document.querySelector('.contact-form').addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -522,7 +524,7 @@
             formResponse.style.display = 'none';
             formResponse.textContent = '';
 
-            if (SCRIPT_URL === 'https://docs.google.com/spreadsheets/d/1dzPHbayKSz0dk0hQEgxI54danRMcoYGRPV_6FgP1l6M/edit?usp=sharing') {
+            if (SCRIPT_URL === 'https://script.google.com/macros/s/AKfycbwRCSyWCw3U7Qkt4EjBuUZdXDRBz7qbE5OLAIGXfPLmhQwkG8fyiwMfYsyM26zzM0_NeA/exec') {
                 formResponse.style.color = '#ef4444'; // Red color
                 formResponse.textContent = 'Configuration Error: Please update the SCRIPT_URL in the code.';
                 formResponse.style.display = 'block';
