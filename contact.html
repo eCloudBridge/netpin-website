@@ -524,9 +524,9 @@
             formResponse.style.display = 'none';
             formResponse.textContent = '';
 
-            if (SCRIPT_URL === 'https://script.google.com/macros/s/AKfycbwRCSyWCw3U7Qkt4EjBuUZdXDRBz7qbE5OLAIGXfPLmhQwkG8fyiwMfYsyM26zzM0_NeA/exec') {
+            if (SCRIPT_URL === 'YOUR_GOOGLE_SCRIPT_URL_HERE' || SCRIPT_URL.includes('docs.google.com')) {
                 formResponse.style.color = '#ef4444'; // Red color
-                formResponse.textContent = 'Configuration Error: Please update the SCRIPT_URL in the code.';
+                formResponse.textContent = 'Configuration Error: Please update the SCRIPT_URL with your Web App URL.';
                 formResponse.style.display = 'block';
                 return;
             }
