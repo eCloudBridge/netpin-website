@@ -512,7 +512,7 @@
         });
 
         // Form submission (Google Apps Script integration)
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwRCSyWCw3U7Qkt4EjBuUZdXDRBz7qbE5OLAIGXfPLmhQwkG8fyiwMfYsyM26zzM0_NeA/exec'; // <-- Paste your Web App URL here!
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxGbdtLwANZhZzy7q2ib2eUU0VqPxvL5rASEPG2Gf51qZcIhe7N115cFt1Y3DojQ8hu7g/exec'; // <-- Paste your Web App URL here!
 
         document.querySelector('.contact-form').addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -543,7 +543,7 @@
                     mode: 'no-cors', // Bypass CORS policy enforcement by the browser
                     body: formData
                 });
-                
+
                 // With 'no-cors' mode, the response is opaque (status 0).
                 // If fetch didn't throw a network error, we assume the data reached Google's servers.
                 formResponse.style.color = '#10b981'; // Green color
