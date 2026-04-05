@@ -52,10 +52,10 @@ function renderSidebar() {
     const header = document.createElement('div');
     header.className = 'sidebar-header';
     header.innerHTML = `
-        <div class="logo" style="display: flex; align-items: center; gap: 8px;">
-            <img src="/docs/assets/images/logo-icon.png" alt="Netpin" style="height: 24px; width: auto;" />
-            <span style="font-size: 1.25rem; font-weight: 800; color: var(--primary); letter-spacing: -0.025em; margin: 0;">netpin.io</span>
-        </div>
+        <a href="/index.html" class="logo" style="display: flex; align-items: center; gap: 10px; text-decoration: none;">
+            <div class="logo-icon">N</div>
+            <span style="font-size: 1.15rem; font-weight: 800; color: var(--text-primary); letter-spacing: -0.025em;">netpin.io</span>
+        </a>
     `;
     sidebar.appendChild(header);
 

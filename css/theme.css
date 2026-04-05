@@ -1,0 +1,48 @@
+/* Netpin Unified Technical Design System (UTDS) Variables */
+:root {
+    /* Colors - Obsidian Obsidian Palette */
+    --color-obsidian-950: #020617;
+    --color-obsidian-900: #0f172a;
+    --color-obsidian-800: #1e293b;
+    --color-obsidian-700: #334155;
+    --color-obsidian-600: #475569;
+    
+    /* Brand Accent - Deep Indigo & Emerald */
+    --color-primary: #6366f1;
+    --color-primary-light: #818cf8;
+    --color-primary-dark: #4f46e5;
+    --color-secondary: #06b6d4; /* Keep for legacy, but refine */
+    --color-emerald: #10b981;
+    --color-emerald-light: #34d399;
+    --color-amber: #f59e0b;
+    --color-rose: #f43f5e;
+    
+    /* Functional Colors */
+    --color-bg-primary: var(--color-obsidian-950);
+    --color-bg-secondary: #0a0f1e;
+    --color-bg-card: rgba(15, 23, 42, 0.6);
+    --color-bg-glass: rgba(255, 255, 255, 0.02);
+    
+    /* Text - High Contrast */
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    --text-inverse: #ffffff;
+    
+    /* Borders & Accents - Sharp */
+    --border-subtle: rgba(255, 255, 255, 0.05);
+    --border-strong: rgba(255, 255, 255, 0.1);
+    --border-accent: rgba(99, 102, 241, 0.3);
+    
+    /* Typography - Professional & Technical */
+    --font-display: 'Inter', system-ui, -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+    
+    /* Effects - Low Blur, High Precision */
+    --glass-blur: 12px;
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --transition-fast: 0.1s ease;
+    --transition-base: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
