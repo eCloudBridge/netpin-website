@@ -86,7 +86,7 @@ app: my-app</code></pre>
             </table>
 
             <div class="alert alert-info">
-                <span class="alert-icon">💡</span>
+                <span class="alert-icon"><i data-lucide="lightbulb"></i></span>
                 <div>
                     <strong>Critical Stacks:</strong> Stacks with high fan-in (many dependents) are flagged
                     as critical and receive stricter deployment gates.
@@ -95,6 +95,41 @@ app: my-app</code></pre>
 
         </main>
     </div>
-<script src="/docs/assets/js/layout.js"></script></body>
+<script src="/docs/assets/js/layout.js"></script>
+    <!-- Lucide Icons Configuration -->
+    <style>
+        .lucide {
+            width: 1.25em;
+            height: 1.25em;
+            vertical-align: middle;
+            color: currentColor; /* Inherits the wrapper color */
+            stroke-width: 2.2;
+        }
+        .benefit-icon .lucide {
+            margin-right: 0; 
+        }
+        .float-badge-icon .lucide {
+            margin-bottom: 2px;
+        }
+        .method-icon .lucide {
+            width: 1.5em; 
+            height: 1.5em;
+        }
+        /* Docs specific tweaks */
+        .feature-icon .lucide {
+            width: 1.5em;
+            height: 1.5em;
+        }
+        .alert-icon .lucide {
+            margin-right: 8px;
+        }
+    </style>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            lucide.createIcons();
+        });
+    </script>
+</body>
 
 </html>

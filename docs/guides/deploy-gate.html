@@ -24,7 +24,7 @@
             </p>
 
             <div class="alert alert-info">
-                <span class="alert-icon">🛡️</span>
+                <span class="alert-icon"><i data-lucide="shield-check"></i></span>
                 <div>
                     <strong>Safety First</strong>: Deployment gating moves security and compliance checks "left",
                     catching issues before they reach your cluster.
@@ -165,7 +165,7 @@ sequenceDiagram
     CI->>Git: Update Manifest (Tag)
     Git->>Argo: Webhook
     Argo->>Cluster: Sync Resources
-    Cluster-->>Dev: Deployment Live 🚀
+    Cluster-->>Dev: Deployment Live <i data-lucide="rocket"></i>
             </pre>
 
             <h2>Dashboard View</h2>
@@ -204,6 +204,41 @@ gantt
                 theme: 'dark',
                 securityLevel: 'loose',
             });
+        });
+    </script>
+
+    <!-- Lucide Icons Configuration -->
+    <style>
+        .lucide {
+            width: 1.25em;
+            height: 1.25em;
+            vertical-align: middle;
+            color: currentColor; /* Inherits the wrapper color */
+            stroke-width: 2.2;
+        }
+        .benefit-icon .lucide {
+            margin-right: 0; 
+        }
+        .float-badge-icon .lucide {
+            margin-bottom: 2px;
+        }
+        .method-icon .lucide {
+            width: 1.5em; 
+            height: 1.5em;
+        }
+        /* Docs specific tweaks */
+        .feature-icon .lucide {
+            width: 1.5em;
+            height: 1.5em;
+        }
+        .alert-icon .lucide {
+            margin-right: 8px;
+        }
+    </style>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            lucide.createIcons();
         });
     </script>
 </body>

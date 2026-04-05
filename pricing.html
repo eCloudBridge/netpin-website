@@ -302,39 +302,39 @@
                     </tr>
                     <tr>
                         <td>IDI Scoring</td>
-                        <td class="check">✓ Basic</td>
-                        <td class="check">✓ Advanced</td>
-                        <td class="check">✓ Custom Weights</td>
+                        <td class="check"><i data-lucide="check"></i> Basic</td>
+                        <td class="check"><i data-lucide="check"></i> Advanced</td>
+                        <td class="check"><i data-lucide="check"></i> Custom Weights</td>
                     </tr>
                     <tr>
                         <td>Topology Visualization</td>
-                        <td class="check">✓</td>
-                        <td class="check">✓</td>
-                        <td class="check">✓</td>
+                        <td class="check"><i data-lucide="check"></i></td>
+                        <td class="check"><i data-lucide="check"></i></td>
+                        <td class="check"><i data-lucide="check"></i></td>
                     </tr>
                     <tr>
                         <td>Forecasting</td>
                         <td class="x">—</td>
-                        <td class="check">✓</td>
-                        <td class="check">✓</td>
+                        <td class="check"><i data-lucide="check"></i></td>
+                        <td class="check"><i data-lucide="check"></i></td>
                     </tr>
                     <tr>
                         <td>Deployment Gating</td>
                         <td class="x">—</td>
-                        <td class="check">✓</td>
-                        <td class="check">✓</td>
+                        <td class="check"><i data-lucide="check"></i></td>
+                        <td class="check"><i data-lucide="check"></i></td>
                     </tr>
                     <tr>
                         <td>CI/CD Integrations</td>
                         <td class="x">—</td>
-                        <td class="check">✓</td>
-                        <td class="check">✓</td>
+                        <td class="check"><i data-lucide="check"></i></td>
+                        <td class="check"><i data-lucide="check"></i></td>
                     </tr>
                     <tr>
                         <td>Application Stacks</td>
                         <td class="x">—</td>
-                        <td class="check">✓</td>
-                        <td class="check">✓</td>
+                        <td class="check"><i data-lucide="check"></i></td>
+                        <td class="check"><i data-lucide="check"></i></td>
                     </tr>
                     <tr>
                         <td>Data Retention</td>
@@ -346,19 +346,19 @@
                         <td>SSO / SAML</td>
                         <td class="x">—</td>
                         <td class="x">—</td>
-                        <td class="check">✓</td>
+                        <td class="check"><i data-lucide="check"></i></td>
                     </tr>
                     <tr>
                         <td>Role-Based Access</td>
                         <td class="x">—</td>
-                        <td class="check">✓ Basic</td>
-                        <td class="check">✓ Advanced</td>
+                        <td class="check"><i data-lucide="check"></i> Basic</td>
+                        <td class="check"><i data-lucide="check"></i> Advanced</td>
                     </tr>
                     <tr>
                         <td>On-Premise Deployment</td>
                         <td class="x">—</td>
                         <td class="x">—</td>
-                        <td class="check">✓</td>
+                        <td class="check"><i data-lucide="check"></i></td>
                     </tr>
                     <tr>
                         <td>Support</td>
@@ -487,6 +487,33 @@
             } else {
                 pricePro.innerHTML = '$99<span>/month</span>';
             }
+        });
+    </script>
+
+    <!-- Lucide Icons Configuration -->
+    <style>
+        .lucide {
+            width: 1.25em;
+            height: 1.25em;
+            vertical-align: middle;
+            color: currentColor; /* Inherits the wrapper color */
+            stroke-width: 2.2;
+        }
+        .benefit-icon .lucide {
+            margin-right: 0; /* Benefit icons are flex containers */
+        }
+        .float-badge-icon .lucide {
+            margin-bottom: 2px;
+        }
+        .method-icon .lucide {
+            width: 1.5em; /* slightly larger inside square box containers */
+            height: 1.5em;
+        }
+    </style>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            lucide.createIcons();
         });
     </script>
 </body>

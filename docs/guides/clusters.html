@@ -27,7 +27,7 @@
 
             <div class="card-grid">
                 <div class="feature-card">
-                    <div class="feature-icon">☁️</div>
+                    <div class="feature-icon"><i data-lucide="cloud"></i></div>
                     <div class="feature-title">Cloud Provider Discovery</div>
                     <div class="feature-desc">
                         Automatically discover and connect clusters from AWS EKS, Google GKE, or Azure AKS.
@@ -86,7 +86,7 @@
 }</code></pre>
 
             <div class="alert alert-info">
-                <span class="alert-icon">💡</span>
+                <span class="alert-icon"><i data-lucide="lightbulb"></i></span>
                 <div>
                     <strong>EKS Access:</strong> Your IAM user/role must also have access to the EKS cluster's
                     <code>aws-auth</code> ConfigMap for Kubernetes API access.
@@ -114,15 +114,15 @@ kubectl config view --raw > cluster-config.yaml</code></pre>
                 </thead>
                 <tbody>
                     <tr>
-                        <td style="color: #22c55e;">🟢 Connected</td>
+                        <td style="color: #22c55e;"><i data-lucide="circle" style="fill: currentColor; width: 0.8em; height: 0.8em;"></i> Connected</td>
                         <td>Cluster is healthy and accessible</td>
                     </tr>
                     <tr>
-                        <td style="color: #eab308;">🟡 Degraded</td>
+                        <td style="color: #eab308;"><i data-lucide="circle" style="fill: currentColor; width: 0.8em; height: 0.8em;"></i> Degraded</td>
                         <td>Cluster accessible but with warnings</td>
                     </tr>
                     <tr>
-                        <td style="color: #ef4444;">🔴 Disconnected</td>
+                        <td style="color: #ef4444;"><i data-lucide="circle" style="fill: currentColor; width: 0.8em; height: 0.8em;"></i> Disconnected</td>
                         <td>Cannot reach cluster - check credentials/network</td>
                     </tr>
                     <tr>
@@ -151,6 +151,41 @@ kubectl config view --raw > cluster-config.yaml</code></pre>
 
         </main>
     </div>
-<script src="/docs/assets/js/layout.js"></script></body>
+<script src="/docs/assets/js/layout.js"></script>
+    <!-- Lucide Icons Configuration -->
+    <style>
+        .lucide {
+            width: 1.25em;
+            height: 1.25em;
+            vertical-align: middle;
+            color: currentColor; /* Inherits the wrapper color */
+            stroke-width: 2.2;
+        }
+        .benefit-icon .lucide {
+            margin-right: 0; 
+        }
+        .float-badge-icon .lucide {
+            margin-bottom: 2px;
+        }
+        .method-icon .lucide {
+            width: 1.5em; 
+            height: 1.5em;
+        }
+        /* Docs specific tweaks */
+        .feature-icon .lucide {
+            width: 1.5em;
+            height: 1.5em;
+        }
+        .alert-icon .lucide {
+            margin-right: 8px;
+        }
+    </style>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            lucide.createIcons();
+        });
+    </script>
+</body>
 
 </html>

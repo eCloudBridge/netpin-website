@@ -259,5 +259,32 @@
             observer.observe(el);
         });
     </script>
+
+    <!-- Lucide Icons Configuration -->
+    <style>
+        .lucide {
+            width: 1.25em;
+            height: 1.25em;
+            vertical-align: middle;
+            color: currentColor; /* Inherits the wrapper color */
+            stroke-width: 2.2;
+        }
+        .benefit-icon .lucide {
+            margin-right: 0; /* Benefit icons are flex containers */
+        }
+        .float-badge-icon .lucide {
+            margin-bottom: 2px;
+        }
+        .method-icon .lucide {
+            width: 1.5em; /* slightly larger inside square box containers */
+            height: 1.5em;
+        }
+    </style>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            lucide.createIcons();
+        });
+    </script>
 </body>
 </html>

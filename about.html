@@ -302,7 +302,7 @@
                     </p>
                 </div>
                 <div class="mission-visual">
-                    <div class="big-icon">⚡</div>
+                    <div class="big-icon"><i data-lucide="zap"></i></div>
                     <h3>Know Your Infrastructure<br>Before It Breaks</h3>
                 </div>
             </div>
@@ -318,7 +318,7 @@
 
             <div class="values-grid">
                 <div class="value-card">
-                    <div class="value-icon">🔍</div>
+                    <div class="value-icon"><i data-lucide="search"></i></div>
                     <h3>Transparency</h3>
                     <p>
                         We believe in making the invisible visible. Clear metrics,
@@ -326,7 +326,7 @@
                     </p>
                 </div>
                 <div class="value-card">
-                    <div class="value-icon">🚀</div>
+                    <div class="value-icon"><i data-lucide="rocket"></i></div>
                     <h3>Speed</h3>
                     <p>
                         Ship fast, learn faster. We build tools that help teams
@@ -334,7 +334,7 @@
                     </p>
                 </div>
                 <div class="value-card">
-                    <div class="value-icon">🤝</div>
+                    <div class="value-icon"><i data-lucide="handshake"></i></div>
                     <h3>Empathy</h3>
                     <p>
                         We've been on-call. We've fought production fires.
@@ -535,6 +535,33 @@
             } else {
                 navbar.classList.remove('scrolled');
             }
+        });
+    </script>
+
+    <!-- Lucide Icons Configuration -->
+    <style>
+        .lucide {
+            width: 1.25em;
+            height: 1.25em;
+            vertical-align: middle;
+            color: currentColor; /* Inherits the wrapper color */
+            stroke-width: 2.2;
+        }
+        .benefit-icon .lucide {
+            margin-right: 0; /* Benefit icons are flex containers */
+        }
+        .float-badge-icon .lucide {
+            margin-bottom: 2px;
+        }
+        .method-icon .lucide {
+            width: 1.5em; /* slightly larger inside square box containers */
+            height: 1.5em;
+        }
+    </style>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            lucide.createIcons();
         });
     </script>
 </body>

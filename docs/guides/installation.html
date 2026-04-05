@@ -251,7 +251,7 @@ openssl rand -base64 32
             <h2>Production Considerations</h2>
 
             <div class="alert alert-warning">
-                <span class="alert-icon">⚠️</span>
+                <span class="alert-icon"><i data-lucide="alert-triangle"></i></span>
                 <div>
                     <strong>Security Checklist:</strong>
                     <ul style="margin-top: 8px; margin-left: 20px;">
@@ -313,6 +313,41 @@ docker compose down --rmi all</code></pre>
 
         </main>
     </div>
-<script src="/docs/assets/js/layout.js"></script></body>
+<script src="/docs/assets/js/layout.js"></script>
+    <!-- Lucide Icons Configuration -->
+    <style>
+        .lucide {
+            width: 1.25em;
+            height: 1.25em;
+            vertical-align: middle;
+            color: currentColor; /* Inherits the wrapper color */
+            stroke-width: 2.2;
+        }
+        .benefit-icon .lucide {
+            margin-right: 0; 
+        }
+        .float-badge-icon .lucide {
+            margin-bottom: 2px;
+        }
+        .method-icon .lucide {
+            width: 1.5em; 
+            height: 1.5em;
+        }
+        /* Docs specific tweaks */
+        .feature-icon .lucide {
+            width: 1.5em;
+            height: 1.5em;
+        }
+        .alert-icon .lucide {
+            margin-right: 8px;
+        }
+    </style>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            lucide.createIcons();
+        });
+    </script>
+</body>
 
 </html>

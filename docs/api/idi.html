@@ -430,6 +430,41 @@
             </div>
         </main>
     </div>
+
+    <!-- Lucide Icons Configuration -->
+    <style>
+        .lucide {
+            width: 1.25em;
+            height: 1.25em;
+            vertical-align: middle;
+            color: currentColor; /* Inherits the wrapper color */
+            stroke-width: 2.2;
+        }
+        .benefit-icon .lucide {
+            margin-right: 0; 
+        }
+        .float-badge-icon .lucide {
+            margin-bottom: 2px;
+        }
+        .method-icon .lucide {
+            width: 1.5em; 
+            height: 1.5em;
+        }
+        /* Docs specific tweaks */
+        .feature-icon .lucide {
+            width: 1.5em;
+            height: 1.5em;
+        }
+        .alert-icon .lucide {
+            margin-right: 8px;
+        }
+    </style>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            lucide.createIcons();
+        });
+    </script>
 </body>
 
 </html>

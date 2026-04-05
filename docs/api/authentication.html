@@ -88,7 +88,7 @@
                     </div>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">🤖</div>
+                    <div class="feature-icon"><i data-lucide="bot"></i></div>
                     <div class="feature-title">API Keys</div>
                     <div class="feature-desc">
                         For programmatic access. Used by agents, CI/CD pipelines, and integrations.
@@ -261,7 +261,7 @@ curl -X GET https://netpin.example.com/api/clusters \
   -d '{"findings": [...]}'</code></pre>
 
             <div class="alert alert-warning">
-                <span class="alert-icon">⚠️</span>
+                <span class="alert-icon"><i data-lucide="alert-triangle"></i></span>
                 <div>
                     <strong>Security Best Practice:</strong> Store API keys in secure secret management
                     systems (Kubernetes Secrets, AWS Secrets Manager, etc.). Never commit them to version control.
@@ -332,6 +332,41 @@ X-RateLimit-Reset: 1704067200</code></pre>
             </div>
         </main>
     </div>
+
+    <!-- Lucide Icons Configuration -->
+    <style>
+        .lucide {
+            width: 1.25em;
+            height: 1.25em;
+            vertical-align: middle;
+            color: currentColor; /* Inherits the wrapper color */
+            stroke-width: 2.2;
+        }
+        .benefit-icon .lucide {
+            margin-right: 0; 
+        }
+        .float-badge-icon .lucide {
+            margin-bottom: 2px;
+        }
+        .method-icon .lucide {
+            width: 1.5em; 
+            height: 1.5em;
+        }
+        /* Docs specific tweaks */
+        .feature-icon .lucide {
+            width: 1.5em;
+            height: 1.5em;
+        }
+        .alert-icon .lucide {
+            margin-right: 8px;
+        }
+    </style>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            lucide.createIcons();
+        });
+    </script>
 </body>
 
 </html>

@@ -30,7 +30,7 @@
 
             <div class="card-grid">
                 <div class="feature-card">
-                    <div class="feature-icon">🎯</div>
+                    <div class="feature-icon"><i data-lucide="target"></i></div>
                     <div class="feature-title">Infrastructure Debt Index (IDI)</div>
                     <div class="feature-desc">
                         Quantify and track technical debt across your infrastructure with our proprietary scoring
@@ -38,35 +38,35 @@
                     </div>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">🗺️</div>
+                    <div class="feature-icon"><i data-lucide="network"></i></div>
                     <div class="feature-title">Topology Visualization</div>
                     <div class="feature-desc">
                         Interactive visualization of your Kubernetes resources, dependencies, and relationships.
                     </div>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">☁️</div>
+                    <div class="feature-icon"><i data-lucide="cloud"></i></div>
                     <div class="feature-title">Multi-Cloud Support</div>
                     <div class="feature-desc">
                         Connect clusters from AWS EKS, Google GKE, Azure AKS, or any Kubernetes environment.
                     </div>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">📊</div>
+                    <div class="feature-icon"><i data-lucide="bar-chart-2"></i></div>
                     <div class="feature-title">Executive Dashboard</div>
                     <div class="feature-desc">
                         High-level insights and trends for leadership with actionable recommendations.
                     </div>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">🔐</div>
+                    <div class="feature-icon"><i data-lucide="lock"></i></div>
                     <div class="feature-title">Deployment Gating</div>
                     <div class="feature-desc">
                         Automated deployment gates based on IDI scores, preventing risky deployments.
                     </div>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">🤖</div>
+                    <div class="feature-icon"><i data-lucide="bot"></i></div>
                     <div class="feature-title">Lightweight Agent</div>
                     <div class="feature-desc">
                         Deploy our agent to collect real-time metrics and findings from your clusters.
@@ -191,7 +191,7 @@ cd kubeapps</code></pre>
 
             <h2>Need Help?</h2>
             <div class="alert alert-info">
-                <span class="alert-icon">💡</span>
+                <span class="alert-icon"><i data-lucide="lightbulb"></i></span>
                 <div>
                     <strong>Documentation</strong>: Browse the sidebar for detailed guides on each feature.<br>
                     <strong>API Reference</strong>: Complete API documentation with examples.<br>
@@ -206,6 +206,41 @@ cd kubeapps</code></pre>
         </main>
     </div>
     <script src="/docs/assets/js/layout.js"></script>
+
+    <!-- Lucide Icons Configuration -->
+    <style>
+        .lucide {
+            width: 1.25em;
+            height: 1.25em;
+            vertical-align: middle;
+            color: currentColor; /* Inherits the wrapper color */
+            stroke-width: 2.2;
+        }
+        .benefit-icon .lucide {
+            margin-right: 0; 
+        }
+        .float-badge-icon .lucide {
+            margin-bottom: 2px;
+        }
+        .method-icon .lucide {
+            width: 1.5em; 
+            height: 1.5em;
+        }
+        /* Docs specific tweaks */
+        .feature-icon .lucide {
+            width: 1.5em;
+            height: 1.5em;
+        }
+        .alert-icon .lucide {
+            margin-right: 8px;
+        }
+    </style>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            lucide.createIcons();
+        });
+    </script>
 </body>
 
 </html>

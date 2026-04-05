@@ -29,14 +29,14 @@
 
             <div class="card-grid">
                 <div class="feature-card">
-                    <div class="feature-icon">📊</div>
+                    <div class="feature-icon"><i data-lucide="bar-chart-2"></i></div>
                     <div class="feature-title">Resource Collection</div>
                     <div class="feature-desc">
                         Inventories all Kubernetes resources: Deployments, Services, ConfigMaps, Secrets, and more.
                     </div>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">🔍</div>
+                    <div class="feature-icon"><i data-lucide="search"></i></div>
                     <div class="feature-title">Finding Detection</div>
                     <div class="feature-desc">
                         Analyzes resources for security issues, compliance gaps, and efficiency problems.
@@ -236,7 +236,7 @@ subjects:
             </ul>
 
             <div class="alert alert-info">
-                <span class="alert-icon">🔒</span>
+                <span class="alert-icon"><i data-lucide="lock"></i></span>
                 <div>
                     <strong>Privacy Note:</strong> The agent never collects sensitive data like Secret values,
                     ConfigMap contents, or environment variable values. Only metadata and structure are collected.
@@ -345,6 +345,41 @@ kubectl delete clusterrolebinding netpin-agent</code></pre>
 
         </main>
     </div>
-<script src="/docs/assets/js/layout.js"></script></body>
+<script src="/docs/assets/js/layout.js"></script>
+    <!-- Lucide Icons Configuration -->
+    <style>
+        .lucide {
+            width: 1.25em;
+            height: 1.25em;
+            vertical-align: middle;
+            color: currentColor; /* Inherits the wrapper color */
+            stroke-width: 2.2;
+        }
+        .benefit-icon .lucide {
+            margin-right: 0; 
+        }
+        .float-badge-icon .lucide {
+            margin-bottom: 2px;
+        }
+        .method-icon .lucide {
+            width: 1.5em; 
+            height: 1.5em;
+        }
+        /* Docs specific tweaks */
+        .feature-icon .lucide {
+            width: 1.5em;
+            height: 1.5em;
+        }
+        .alert-icon .lucide {
+            margin-right: 8px;
+        }
+    </style>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            lucide.createIcons();
+        });
+    </script>
+</body>
 
 </html>

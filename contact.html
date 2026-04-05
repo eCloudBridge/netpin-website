@@ -279,7 +279,7 @@
 
                     <div class="contact-methods">
                         <div class="contact-method">
-                            <div class="method-icon">💬</div>
+                            <div class="method-icon"><i data-lucide="message-square"></i></div>
                             <div class="method-content">
                                 <h4>Sales</h4>
                                 <p>Interested in Netpin for your organization?</p>
@@ -288,7 +288,7 @@
                         </div>
 
                         <div class="contact-method">
-                            <div class="method-icon">🛠️</div>
+                            <div class="method-icon"><i data-lucide="life-buoy"></i></div>
                             <div class="method-content">
                                 <h4>Support</h4>
                                 <p>Need help with an existing account?</p>
@@ -297,7 +297,7 @@
                         </div>
 
                         <div class="contact-method">
-                            <div class="method-icon">🤝</div>
+                            <div class="method-icon"><i data-lucide="handshake"></i></div>
                             <div class="method-content">
                                 <h4>Partnerships</h4>
                                 <p>Interested in partnering with us?</p>
@@ -306,7 +306,7 @@
                         </div>
 
                         <div class="contact-method">
-                            <div class="method-icon">📰</div>
+                            <div class="method-icon"><i data-lucide="newspaper"></i></div>
                             <div class="method-content">
                                 <h4>Press</h4>
                                 <p>Media and press inquiries</p>
@@ -380,7 +380,7 @@
 
             <div class="offices-grid">
                 <div class="office-card">
-                    <h4>🇺🇸 San Francisco</h4>
+                    <h4><i data-lucide="map-pin"></i> San Francisco</h4>
                     <p>
                         535 Mission St, 14th Floor<br>
                         San Francisco, CA 94105<br>
@@ -389,7 +389,7 @@
                 </div>
 
                 <div class="office-card">
-                    <h4>🇬🇧 London</h4>
+                    <h4><i data-lucide="map-pin"></i> London</h4>
                     <p>
                         123 Old Street<br>
                         London EC1V 9BD<br>
@@ -398,7 +398,7 @@
                 </div>
 
                 <div class="office-card">
-                    <h4>🇮🇳 Bangalore</h4>
+                    <h4><i data-lucide="map-pin"></i> Bangalore</h4>
                     <p>
                         WeWork Embassy Golf Links<br>
                         Bangalore, Karnataka 560071<br>
@@ -558,6 +558,33 @@
                 submitBtn.textContent = 'Send Message';
                 formResponse.style.display = 'block';
             }
+        });
+    </script>
+
+    <!-- Lucide Icons Configuration -->
+    <style>
+        .lucide {
+            width: 1.25em;
+            height: 1.25em;
+            vertical-align: middle;
+            color: currentColor; /* Inherits the wrapper color */
+            stroke-width: 2.2;
+        }
+        .benefit-icon .lucide {
+            margin-right: 0; /* Benefit icons are flex containers */
+        }
+        .float-badge-icon .lucide {
+            margin-bottom: 2px;
+        }
+        .method-icon .lucide {
+            width: 1.5em; /* slightly larger inside square box containers */
+            height: 1.5em;
+        }
+    </style>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            lucide.createIcons();
         });
     </script>
 </body>

@@ -35,7 +35,7 @@
 
             <div class="card-grid">
                 <div class="feature-card">
-                    <div class="feature-icon">🔒</div>
+                    <div class="feature-icon"><i data-lucide="lock"></i></div>
                     <div class="feature-title">Security Debt</div>
                     <div class="feature-desc">
                         Unpatched vulnerabilities, exposed secrets, missing security policies,
@@ -43,7 +43,7 @@
                     </div>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">📋</div>
+                    <div class="feature-icon"><i data-lucide="clipboard-check"></i></div>
                     <div class="feature-title">Compliance Debt</div>
                     <div class="feature-desc">
                         Policy violations, missing labels, resource limit gaps,
@@ -51,7 +51,7 @@
                     </div>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">⚡</div>
+                    <div class="feature-icon"><i data-lucide="zap"></i></div>
                     <div class="feature-title">Efficiency Debt</div>
                     <div class="feature-desc">
                         Over-provisioned resources, unused deployments,
@@ -59,7 +59,7 @@
                     </div>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">🛡️</div>
+                    <div class="feature-icon"><i data-lucide="shield-check"></i></div>
                     <div class="feature-title">Reliability Debt</div>
                     <div class="feature-desc">
                         Single points of failure, missing health checks,
@@ -84,27 +84,27 @@
                 <tbody>
                     <tr>
                         <td style="color: #22c55e; font-weight: 600;">0-25</td>
-                        <td style="color: #22c55e;">🟢 Excellent</td>
+                        <td style="color: #22c55e;"><i data-lucide="circle" style="fill: currentColor; width: 0.8em; height: 0.8em;"></i> Excellent</td>
                         <td>Minimal technical debt. Infrastructure is well-maintained.</td>
                     </tr>
                     <tr>
                         <td style="color: #84cc16; font-weight: 600;">26-50</td>
-                        <td style="color: #84cc16;">🟡 Good</td>
+                        <td style="color: #84cc16;"><i data-lucide="circle" style="fill: currentColor; width: 0.8em; height: 0.8em;"></i> Good</td>
                         <td>Some debt present but manageable. Schedule maintenance.</td>
                     </tr>
                     <tr>
                         <td style="color: #eab308; font-weight: 600;">51-70</td>
-                        <td style="color: #eab308;">🟠 Warning</td>
+                        <td style="color: #eab308;"><i data-lucide="circle" style="fill: currentColor; width: 0.8em; height: 0.8em;"></i> Warning</td>
                         <td>Significant debt accumulating. Prioritize remediation.</td>
                     </tr>
                     <tr>
                         <td style="color: #f97316; font-weight: 600;">71-85</td>
-                        <td style="color: #f97316;">🔴 High</td>
+                        <td style="color: #f97316;"><i data-lucide="circle" style="fill: currentColor; width: 0.8em; height: 0.8em;"></i> High</td>
                         <td>Critical issues present. Immediate action required.</td>
                     </tr>
                     <tr>
                         <td style="color: #ef4444; font-weight: 600;">86-100</td>
-                        <td style="color: #ef4444;">🔴 Critical</td>
+                        <td style="color: #ef4444;"><i data-lucide="circle" style="fill: currentColor; width: 0.8em; height: 0.8em;"></i> Critical</td>
                         <td>Severe debt. Risk of outages or security incidents.</td>
                     </tr>
                 </tbody>
@@ -241,7 +241,7 @@ Where each category score (0-100) is calculated from:
                     <tr>
                         <td>51-70</td>
                         <td>&lt; +5 points</td>
-                        <td style="color: #eab308;">⚠️ Warn (Allow)</td>
+                        <td style="color: #eab308;"><i data-lucide="alert-triangle"></i> Warn (Allow)</td>
                     </tr>
                     <tr>
                         <td>51-70</td>
@@ -313,6 +313,41 @@ Where each category score (0-100) is calculated from:
 
         </main>
     </div>
-<script src="/docs/assets/js/layout.js"></script></body>
+<script src="/docs/assets/js/layout.js"></script>
+    <!-- Lucide Icons Configuration -->
+    <style>
+        .lucide {
+            width: 1.25em;
+            height: 1.25em;
+            vertical-align: middle;
+            color: currentColor; /* Inherits the wrapper color */
+            stroke-width: 2.2;
+        }
+        .benefit-icon .lucide {
+            margin-right: 0; 
+        }
+        .float-badge-icon .lucide {
+            margin-bottom: 2px;
+        }
+        .method-icon .lucide {
+            width: 1.5em; 
+            height: 1.5em;
+        }
+        /* Docs specific tweaks */
+        .feature-icon .lucide {
+            width: 1.5em;
+            height: 1.5em;
+        }
+        .alert-icon .lucide {
+            margin-right: 8px;
+        }
+    </style>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            lucide.createIcons();
+        });
+    </script>
+</body>
 
 </html>
