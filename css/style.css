@@ -5,6 +5,14 @@
     /* Spacing */
     --section-padding: 120px;
     --container-width: 1280px;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+    --gradient-secondary: linear-gradient(135deg, var(--color-secondary), var(--color-emerald));
+    --gradient-hero: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(99,102,241,0.15), transparent);
+    --color-bg-tertiary: #111827;
+    --color-accent-green: var(--color-emerald);
+    --color-accent-purple: #8b5cf6;
 }
 
 /* Reset & Base */
@@ -105,6 +113,18 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--text-primary);
 }
 
+h1 {
+    font-size: clamp(2.2rem, 6vw, 4.5rem);
+}
+
+h2 {
+    font-size: clamp(1.75rem, 4vw, 3rem);
+}
+
+h3 {
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+}
+
 .text-gradient {
     background: linear-gradient(to right, var(--color-primary-light), var(--color-emerald-light));
     -webkit-background-clip: text;
@@ -143,6 +163,58 @@ h1, h2, h3, h4, h5, h6 {
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+/* Hamburger Menu Button */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    background: transparent;
+    border: 1px solid var(--border-strong);
+    border-radius: 8px;
+    cursor: pointer;
+    padding: 8px;
+    transition: var(--transition-base);
+    flex-shrink: 0;
+}
+
+.hamburger:hover {
+    background: rgba(255,255,255,0.05);
+    border-color: var(--color-primary-light);
+}
+
+.hamburger span {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: var(--text-primary);
+    border-radius: 2px;
+    transition: var(--transition-base);
+    transform-origin: center;
+}
+
+/* Animated X state */
+.hamburger.open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.hamburger.open span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+}
+
+.hamburger.open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Nav close button — hidden by default, only shown inside mobile overlay */
+.nav-close {
+    display: none;
 }
 
 .logo {
@@ -209,6 +281,7 @@ h1, h2, h3, h4, h5, h6 {
     display: flex;
     align-items: center;
     gap: 16px;
+    flex-shrink: 0;
 }
 
 /* Buttons */
@@ -218,6 +291,7 @@ h1, h2, h3, h4, h5, h6 {
     justify-content: center;
     gap: 8px;
     padding: 10px 24px;
+    min-height: 44px; /* Minimum touch target */
     font-size: 0.85rem;
     font-weight: 700;
     text-decoration: none;
@@ -229,6 +303,7 @@ h1, h2, h3, h4, h5, h6 {
     text-transform: uppercase;
     letter-spacing: 0.05em;
     white-space: nowrap;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .btn:active {
@@ -360,11 +435,13 @@ h1, h2, h3, h4, h5, h6 {
     align-items: center;
     gap: 16px;
     margin-bottom: 48px;
+    flex-wrap: wrap;
 }
 
 .hero-stats {
     display: flex;
-    gap: 48px;
+    gap: 32px;
+    flex-wrap: wrap;
     padding-top: 32px;
     border-top: 1px solid var(--border-subtle);
 }
@@ -1513,51 +1590,146 @@ footer {
     }
 }
 
+/* ============================================
+   Tablet / Mobile Nav (768px)
+   ============================================ */
 @media (max-width: 768px) {
     :root {
         --section-padding: 80px;
     }
 
+    /* Hamburger becomes visible */
+    .hamburger {
+        display: flex;
+    }
+
+    /* Nav links hidden by default, shown when .nav-open is active */
     .nav-links {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(2, 6, 23, 0.97);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 32px;
+        z-index: 999;
+        padding: 40px 24px;
+    }
+
+    .nav-links.open {
+        display: flex;
+    }
+
+    .nav-links a {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        padding: 8px 0;
+    }
+
+    .nav-links a::after {
         display: none;
     }
 
-    .navbar .container {
-        justify-content: center;
-        flex-direction: column;
-        gap: 16px;
-        padding: 12px 20px;
+    /* Close button inside mobile nav */
+    .nav-close {
+        display: block;
+        position: absolute;
+        top: 24px;
+        right: 24px;
+        font-size: 1.5rem;
+        color: var(--text-secondary);
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 8px;
+        line-height: 1;
     }
 
+    /* Navbar layout on mobile */
+    .navbar .container {
+        justify-content: space-between;
+        flex-direction: row;
+        gap: 0;
+        padding: 0 20px;
+    }
+
+    /* CTA buttons stay compact in nav */
     .nav-cta {
+        gap: 8px;
+    }
+
+    .nav-cta .btn-ghost {
+        display: none;
+    }
+
+    .nav-cta .btn-primary {
+        padding: 8px 16px;
+        font-size: 0.78rem;
+        min-height: 40px;
+    }
+
+    /* Hero section */
+    .hero {
+        padding: 100px 0 60px;
+        min-height: auto;
+    }
+
+    .hero-badge {
+        font-size: 0.78rem;
+    }
+
+    .hero-cta {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .hero-cta .btn {
+        text-align: center;
         width: 100%;
         justify-content: center;
-        gap: 12px;
     }
 
-    .nav-cta .btn {
-        padding: 8px 16px;
-        font-size: 0.75rem;
-        flex: 1;
-        max-width: 160px;
+    .hero-stats {
+        gap: 24px;
+        justify-content: space-between;
     }
 
+    .stat-value {
+        font-size: 1.6rem;
+    }
+
+    /* Feature cards */
     .features-grid {
         grid-template-columns: 1fr;
     }
 
+    /* Steps */
     .steps-container {
         grid-template-columns: 1fr;
     }
 
+    /* CTA box */
     .cta-box {
-        padding: 60px 30px;
+        padding: 60px 24px;
     }
 
     .cta-buttons {
         flex-direction: column;
+        align-items: stretch;
     }
 
+    .cta-buttons .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* Footer */
     .footer-grid {
         grid-template-columns: 1fr;
         gap: 40px;
@@ -1567,5 +1739,98 @@ footer {
         flex-direction: column;
         gap: 20px;
         text-align: center;
+    }
+
+    /* Showcase/feature benefits hover */
+    .feature-benefits li:hover {
+        transform: none;
+    }
+
+    /* Pricing table — horizontal scroll on small screens */
+    .table-scroll-wrapper {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        margin: 0 -24px;
+        padding: 0 24px;
+    }
+
+    .comparison-table {
+        min-width: 540px;
+    }
+}
+
+/* ============================================
+   Small Phones (480px)
+   ============================================ */
+@media (max-width: 480px) {
+    :root {
+        --section-padding: 60px;
+    }
+
+    .container {
+        padding: 0 16px;
+    }
+
+    .hero {
+        padding: 90px 0 50px;
+    }
+
+    .hero-stats {
+        flex-direction: column;
+        gap: 16px;
+        align-items: flex-start;
+    }
+
+    /* Hide floating badges on very small screens */
+    .floating-element {
+        display: none;
+    }
+
+    .feature-card {
+        padding: 24px 20px;
+    }
+
+    .testimonial-card {
+        padding: 24px 20px;
+    }
+
+    .pricing-card {
+        padding: 28px 20px;
+    }
+
+    .cta-box {
+        padding: 40px 20px;
+        border-radius: 20px;
+    }
+
+    .cta-box p {
+        font-size: 1rem;
+    }
+
+    .feature-benefits li {
+        padding: 16px;
+        gap: 12px;
+    }
+
+    .benefit-icon {
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+    }
+
+    .showcase-stats {
+        gap: 24px;
+    }
+
+    .showcase-stats .stat-value {
+        font-size: 2rem;
+    }
+
+    .section-header {
+        margin-bottom: 48px;
+    }
+
+    footer {
+        padding: 60px 0 32px;
     }
 }

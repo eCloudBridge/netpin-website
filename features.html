@@ -6,7 +6,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Features - Netpin | Infrastructure Intelligence Platform</title>
     <meta name="description"
-        content="Explore Netpin's powerful features: IDI scoring, topology visualization, predictive forecasting, deployment gating, and multi-cloud support.">
+        content="Explore Netpin's powerful features: IDI scoring, topology visualization, predictive forecasting, deployment gating, and multi-cloud support for Kubernetes teams.">
+    <meta name="keywords" content="kubernetes monitoring features, IDI scoring, infrastructure topology visualization, deployment gating CI/CD, predictive infrastructure analytics, multi-cloud kubernetes management, DevOps observability platform">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Netpin">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://netpin.io/features.html">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Netpin Features - Infrastructure Intelligence Platform">
+    <meta property="og:description" content="IDI scoring, Kubernetes topology maps, AI-powered forecasting, deployment gating, and multi-cloud support. Everything for modern infrastructure teams.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://netpin.io/features.html">
+    <meta property="og:image" content="https://netpin.io/images/og-banner.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="Netpin">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Netpin Features - Kubernetes Infrastructure Intelligence">
+    <meta name="twitter:description" content="IDI scoring, topology maps, AI forecasting, deployment gating. Everything DevOps teams need to ship with confidence.">
+    <meta name="twitter:image" content="https://netpin.io/images/og-banner.png">
+
+    <!-- JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "url": "https://netpin.io/features.html",
+      "name": "Netpin Features",
+      "description": "Explore Netpin's powerful features for Kubernetes infrastructure intelligence including IDI scoring, topology visualization, predictive forecasting, deployment gating, and multi-cloud support.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Netpin",
+        "url": "https://netpin.io"
+      }
+    }
+    </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,6 +53,7 @@
         rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="apple-touch-icon" href="images/favicon.png">
 
     <style>
         .feature-hero {
@@ -205,7 +244,8 @@
                 <span style="font-size: 1.5rem; font-weight: 800; background: linear-gradient(to right, #818cf8, #a78bfa); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -0.025em;">netpin.io</span>
             </a>
 
-            <ul class="nav-links">
+            <ul class="nav-links" id="nav-links">
+                <button class="nav-close" id="nav-close" aria-label="Close menu">&times;</button>
                 <li><a href="features.html">Features</a></li>
                 <li><a href="index.html#how-it-works">How It Works</a></li>
                 <li><a href="index.html#idi">IDI Score</a></li>
@@ -218,6 +258,10 @@
                 <a href="https://dash.netpin.io/login" class="btn btn-ghost">Sign In</a>
                 <a href="https://dash.netpin.io/register" class="btn btn-primary">Get Started Free</a>
             </div>
+
+            <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+                <span></span><span></span><span></span>
+            </button>
         </div>
     </nav>
 
@@ -482,7 +526,6 @@
                     <p style="margin-top: 12px; color: var(--color-primary-light); font-weight: 500;">
                         <i data-lucide="mail"></i> <a href="mailto:hello@netpin.io" style="color: inherit; text-decoration: none;">hello@netpin.io</a>
                     </p>
-                    <p style="margin-top: 12px; color: var(--color-primary-light); font-weight: 500;"><i data-lucide="mail"></i> <a href="mailto:hello@netpin.io" style="color: inherit; text-decoration: none;">hello@netpin.io</a></p>
                 </div>
 
                 <div class="footer-column">
@@ -568,6 +611,15 @@
                 navbar.classList.remove('scrolled');
             }
         });
+
+        // Hamburger menu
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('nav-links');
+        const navClose = document.getElementById('nav-close');
+        hamburger.addEventListener('click', () => { hamburger.classList.add('open'); navLinks.classList.add('open'); hamburger.setAttribute('aria-expanded','true'); document.body.style.overflow='hidden'; });
+        function closeMenu() { hamburger.classList.remove('open'); navLinks.classList.remove('open'); hamburger.setAttribute('aria-expanded','false'); document.body.style.overflow=''; }
+        navClose.addEventListener('click', closeMenu);
+        navLinks.querySelectorAll('a').forEach(l => l.addEventListener('click', closeMenu));
     </script>
 
     <!-- Lucide Icons Configuration -->

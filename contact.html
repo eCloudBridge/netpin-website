@@ -5,7 +5,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact - Netpin | Get in Touch</title>
-    <meta name="description" content="Contact the Netpin team for sales, support, or partnership inquiries.">
+    <meta name="description" content="Contact the Netpin team for sales, support, or partnership inquiries. Reach our infrastructure intelligence experts via email or by scheduling a demo.">
+    <meta name="keywords" content="contact Netpin, Netpin support, Netpin sales, infrastructure platform demo, kubernetes monitoring support">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Netpin">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://netpin.io/contact.html">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Contact Netpin - Get in Touch">
+    <meta property="og:description" content="Have questions about Netpin? Contact our sales, support, or partnerships team. We'd love to help.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://netpin.io/contact.html">
+    <meta property="og:image" content="https://netpin.io/images/og-banner.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="Netpin">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Contact Netpin">
+    <meta name="twitter:description" content="Have questions? Contact our sales, support, or partnerships team.">
+    <meta name="twitter:image" content="https://netpin.io/images/og-banner.png">
+
+    <!-- JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ContactPage",
+      "url": "https://netpin.io/contact.html",
+      "name": "Contact Netpin",
+      "description": "Contact the Netpin team for sales, support, or partnership inquiries.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Netpin",
+        "url": "https://netpin.io",
+        "email": "hello@netpin.io"
+      }
+    }
+    </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,6 +53,7 @@
         rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="apple-touch-icon" href="images/favicon.png">
 
     <style>
         .contact-hero {
@@ -241,7 +281,8 @@
                 <span style="font-size: 1.5rem; font-weight: 800; background: linear-gradient(to right, #818cf8, #a78bfa); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -0.025em;">netpin.io</span>
             </a>
 
-            <ul class="nav-links">
+            <ul class="nav-links" id="nav-links">
+                <button class="nav-close" id="nav-close" aria-label="Close menu">&times;</button>
                 <li><a href="features.html">Features</a></li>
                 <li><a href="index.html#how-it-works">How It Works</a></li>
                 <li><a href="index.html#idi">IDI Score</a></li>
@@ -254,6 +295,10 @@
                 <a href="https://dash.netpin.io/login" class="btn btn-ghost">Sign In</a>
                 <a href="https://dash.netpin.io/register" class="btn btn-primary">Get Started Free</a>
             </div>
+
+            <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+                <span></span><span></span><span></span>
+            </button>
         </div>
     </nav>
 
@@ -429,7 +474,6 @@
                     <p style="margin-top: 12px; color: var(--color-primary-light); font-weight: 500;">
                         <i data-lucide="mail"></i> <a href="mailto:hello@netpin.io" style="color: inherit; text-decoration: none;">hello@netpin.io</a>
                     </p>
-                    <p style="margin-top: 12px; color: var(--color-primary-light); font-weight: 500;"><i data-lucide="mail"></i> <a href="mailto:hello@netpin.io" style="color: inherit; text-decoration: none;">hello@netpin.io</a></p>
                 </div>
 
                 <div class="footer-column">
@@ -516,7 +560,14 @@
             }
         });
 
-        // Form submission (Google Apps Script integration)
+        // Hamburger menu
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('nav-links');
+        const navClose = document.getElementById('nav-close');
+        hamburger.addEventListener('click', () => { hamburger.classList.add('open'); navLinks.classList.add('open'); hamburger.setAttribute('aria-expanded','true'); document.body.style.overflow='hidden'; });
+        function closeMenu() { hamburger.classList.remove('open'); navLinks.classList.remove('open'); hamburger.setAttribute('aria-expanded','false'); document.body.style.overflow=''; }
+        navClose.addEventListener('click', closeMenu);
+        navLinks.querySelectorAll('a').forEach(l => l.addEventListener('click', closeMenu));
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxGbdtLwANZhZzy7q2ib2eUU0VqPxvL5rASEPG2Gf51qZcIhe7N115cFt1Y3DojQ8hu7g/exec'; // <-- Paste your Web App URL here!
 
         document.querySelector('.contact-form').addEventListener('submit', async (e) => {

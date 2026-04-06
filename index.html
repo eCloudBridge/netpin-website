@@ -4,18 +4,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Netpin - Infrastructure Intelligence Platform | Quantify & Eliminate Technical Debt</title>
+    <title>Netpin - Infrastructure Intelligence Platform | Quantify &amp; Eliminate Technical Debt</title>
     <meta name="description"
         content="Netpin is the AI-powered infrastructure intelligence platform that helps DevOps teams quantify technical debt, visualize Kubernetes topology, and make data-driven deployment decisions.">
     <meta name="keywords"
-        content="kubernetes, infrastructure, devops, technical debt, IDI, cloud native, observability">
+        content="kubernetes infrastructure monitoring, devops platform, technical debt management, IDI score, Kubernetes topology visualization, deployment gating, CI/CD integration, cloud native observability, kubernetes security, infrastructure health, SRE tools, platform engineering, AWS EKS monitoring, GKE monitoring, Azure AKS">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Netpin">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://netpin.io/">
 
     <!-- Open Graph -->
     <meta property="og:title" content="Netpin - Infrastructure Intelligence Platform">
     <meta property="og:description"
         content="Quantify and eliminate infrastructure debt with real-time insights, predictive analytics, and intelligent deployment gating.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://netpin.io">
+    <meta property="og:url" content="https://netpin.io/">
+    <meta property="og:image" content="https://netpin.io/images/og-banner.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Netpin - Know Your Infrastructure Before It Breaks">
+    <meta property="og:site_name" content="Netpin">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@netpinio">
+    <meta name="twitter:title" content="Netpin - Infrastructure Intelligence Platform">
+    <meta name="twitter:description" content="Quantify infrastructure debt, predict failures, and gate risky deployments. AI-powered Kubernetes intelligence.">
+    <meta name="twitter:image" content="https://netpin.io/images/og-banner.png">
+    <meta name="twitter:image:alt" content="Netpin infrastructure intelligence dashboard">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,6 +48,60 @@
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="apple-touch-icon" href="images/favicon.png">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://netpin.io/#organization",
+          "name": "Netpin",
+          "url": "https://netpin.io",
+          "logo": "https://netpin.io/images/logo-icon.png",
+          "sameAs": [],
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "email": "hello@netpin.io",
+            "contactType": "customer support"
+          }
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://netpin.io/#website",
+          "url": "https://netpin.io",
+          "name": "Netpin",
+          "publisher": { "@id": "https://netpin.io/#organization" }
+        },
+        {
+          "@type": "SoftwareApplication",
+          "name": "Netpin",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Web",
+          "description": "AI-powered infrastructure intelligence platform that helps DevOps teams quantify technical debt, visualize Kubernetes topology, and make data-driven deployment decisions.",
+          "url": "https://netpin.io",
+          "offers": [
+            {
+              "@type": "Offer",
+              "name": "Starter",
+              "price": "0",
+              "priceCurrency": "USD",
+              "description": "Free plan for small teams. Up to 1 cluster, basic IDI scoring, topology visualization."
+            },
+            {
+              "@type": "Offer",
+              "name": "Pro",
+              "price": "99",
+              "priceCurrency": "USD",
+              "description": "Advanced plan for growing teams. Up to 10 clusters, forecasting, deployment gating, CI/CD integrations."
+            }
+          ]
+        }
+      ]
+    }
+    </script>
 </head>
 
 <body>
@@ -47,7 +120,8 @@
                 <span style="font-size: 1.5rem; font-weight: 800; background: linear-gradient(to right, #818cf8, #a78bfa); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -0.025em;">netpin.io</span>
             </a>
 
-            <ul class="nav-links">
+            <ul class="nav-links" id="nav-links">
+                <button class="nav-close" id="nav-close" aria-label="Close menu">&times;</button>
                 <li><a href="index.html#features">Features</a></li>
                 <li><a href="index.html#how-it-works">How It Works</a></li>
                 <li><a href="index.html#idi">IDI Score</a></li>
@@ -60,6 +134,10 @@
                 <a href="https://dash.netpin.io/login" class="btn btn-ghost">Sign In</a>
                 <a href="https://dash.netpin.io/register" class="btn btn-primary">Get Started Free</a>
             </div>
+
+            <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+                <span></span><span></span><span></span>
+            </button>
         </div>
     </nav>
 
@@ -120,7 +198,9 @@
                     <div class="hero-screen" style="padding: 0; overflow: hidden; border-radius: 16px;">
                         <img src="images/dashboard-mockup.png"
                             alt="Netpin Dashboard - Infrastructure Intelligence Platform"
-                            style="width: 100%; height: auto; display: block; border-radius: 16px;">
+                            width="800" height="500"
+                            style="width: 100%; height: auto; display: block; border-radius: 16px;"
+                            loading="eager">
                     </div>
 
                     <!-- Floating Badges -->
@@ -265,7 +345,9 @@
                 </div>
                 <div class="showcase-image">
                     <img src="images/topology-mockup.png"
-                        alt="Topology Visualization - Interactive Kubernetes resource map">
+                        alt="Topology Visualization - Interactive Kubernetes resource map"
+                        width="700" height="490"
+                        loading="lazy">
                 </div>
             </div>
         </div>
@@ -327,7 +409,9 @@
                 </div>
                 <div class="showcase-image">
                     <img src="images/idi-analytics-mockup.png"
-                        alt="IDI Analytics Dashboard - Technical debt quantification">
+                        alt="IDI Analytics Dashboard - Technical debt quantification"
+                        width="700" height="490"
+                        loading="lazy">
                 </div>
             </div>
         </div>
@@ -382,7 +466,9 @@
                 </div>
                 <div class="showcase-image">
                     <img src="images/deployment-gating-mockup.png"
-                        alt="Deployment Gating - CI/CD integration and policy controls">
+                        alt="Deployment Gating - CI/CD integration and policy controls"
+                        width="700" height="490"
+                        loading="lazy">
                 </div>
             </div>
         </div>
@@ -437,7 +523,9 @@
                 </div>
                 <div class="showcase-image">
                     <img src="images/multicloud-mockup.png"
-                        alt="Multi-Cloud Management - Unified Kubernetes visibility">
+                        alt="Multi-Cloud Management - Unified Kubernetes visibility"
+                        width="700" height="490"
+                        loading="lazy">
                 </div>
             </div>
         </div>
@@ -492,7 +580,9 @@
                 </div>
                 <div class="showcase-image">
                     <img src="images/predictive-alerts-mockup.png"
-                        alt="Predictive Analytics - AI-powered forecasting and alerts">
+                        alt="Predictive Analytics - AI-powered forecasting and alerts"
+                        width="700" height="490"
+                        loading="lazy">
                 </div>
             </div>
         </div>
@@ -839,6 +929,33 @@
             } else {
                 navbar.classList.remove('scrolled');
             }
+        });
+
+        // Hamburger menu
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('nav-links');
+        const navClose = document.getElementById('nav-close');
+
+        function openMenu() {
+            hamburger.classList.add('open');
+            navLinks.classList.add('open');
+            hamburger.setAttribute('aria-expanded', 'true');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMenu() {
+            hamburger.classList.remove('open');
+            navLinks.classList.remove('open');
+            hamburger.setAttribute('aria-expanded', 'false');
+            document.body.style.overflow = '';
+        }
+
+        hamburger.addEventListener('click', openMenu);
+        navClose.addEventListener('click', closeMenu);
+
+        // Close on nav link click
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', closeMenu);
         });
 
         // Smooth scroll for anchor links

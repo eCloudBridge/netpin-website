@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Disallow private/admin paths
+Disallow: /admin/
+Disallow: /api/
+
+# Sitemap location
+Sitemap: https://netpin.io/sitemap.xml

@@ -5,7 +5,79 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pricing - Netpin | Simple, Transparent Pricing</title>
-    <meta name="description" content="Netpin pricing plans for teams of all sizes. Start free, scale as you grow.">
+    <meta name="description" content="Netpin pricing plans for teams of all sizes. Start free with 1 cluster, scale to Pro at $99/month for teams, or Enterprise for large organizations. No hidden fees.">
+    <meta name="keywords" content="Netpin pricing, kubernetes monitoring cost, infrastructure platform pricing, DevOps tools pricing, free kubernetes monitoring, SRE platform plans">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Netpin">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://netpin.io/pricing.html">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Netpin Pricing - Simple, Transparent Plans">
+    <meta property="og:description" content="Start free with Netpin. Pro at $99/month for growing teams. Enterprise plans for large organizations. No hidden fees.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://netpin.io/pricing.html">
+    <meta property="og:image" content="https://netpin.io/images/og-banner.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="Netpin">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Netpin Pricing - Free to Start, Scale as You Grow">
+    <meta name="twitter:description" content="Free plan available. Pro at $99/month. Enterprise options. No hidden fees, no surprises.">
+    <meta name="twitter:image" content="https://netpin.io/images/og-banner.png">
+
+    <!-- JSON-LD FAQPage -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Can I try Netpin before committing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Absolutely! Our Starter plan is free forever, and Pro comes with a 14-day free trial. No credit card required."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What counts as a cluster in Netpin?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A cluster is any Kubernetes cluster connected to Netpin, regardless of size. Whether it has 1 node or 1,000, it counts as one cluster."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I upgrade or downgrade at any time?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes! You can change your plan at any time. When upgrading, you'll be prorated for the remainder of the billing cycle."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is my infrastructure data secure with Netpin?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Security is our top priority. All data is encrypted at rest and in transit. We're SOC 2 Type II certified and GDPR compliant."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you offer discounts for startups?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes! We have special pricing for early-stage startups. Contact our sales team to learn more about our startup program."
+          }
+        }
+      ]
+    }
+    </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,6 +86,7 @@
         rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="apple-touch-icon" href="images/favicon.png">
 
     <style>
         .pricing-hero {
@@ -194,7 +267,8 @@
                 <span style="font-size: 1.5rem; font-weight: 800; background: linear-gradient(to right, #818cf8, #a78bfa); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -0.025em;">netpin.io</span>
             </a>
 
-            <ul class="nav-links">
+            <ul class="nav-links" id="nav-links">
+                <button class="nav-close" id="nav-close" aria-label="Close menu">&times;</button>
                 <li><a href="features.html">Features</a></li>
                 <li><a href="index.html#how-it-works">How It Works</a></li>
                 <li><a href="index.html#idi">IDI Score</a></li>
@@ -207,6 +281,10 @@
                 <a href="https://dash.netpin.io/login" class="btn btn-ghost">Sign In</a>
                 <a href="https://dash.netpin.io/register" class="btn btn-primary">Get Started Free</a>
             </div>
+
+            <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+                <span></span><span></span><span></span>
+            </button>
         </div>
     </nav>
 
@@ -288,96 +366,98 @@
                 <h2>Compare <span class="text-gradient">All Features</span></h2>
             </div>
 
-            <table class="comparison-table">
-                <thead>
-                    <tr>
-                        <th>Feature</th>
-                        <th>Starter</th>
-                        <th>Pro</th>
-                        <th>Enterprise</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Clusters</td>
-                        <td>3</td>
-                        <td>20</td>
-                        <td>Unlimited</td>
-                    </tr>
-                    <tr>
-                        <td>IDI Scoring</td>
-                        <td class="check"><i data-lucide="check"></i> Basic</td>
-                        <td class="check"><i data-lucide="check"></i> Advanced</td>
-                        <td class="check"><i data-lucide="check"></i> Custom Weights</td>
-                    </tr>
-                    <tr>
-                        <td>Topology Visualization</td>
-                        <td class="check"><i data-lucide="check"></i></td>
-                        <td class="check"><i data-lucide="check"></i></td>
-                        <td class="check"><i data-lucide="check"></i></td>
-                    </tr>
-                    <tr>
-                        <td>Forecasting</td>
-                        <td class="x">—</td>
-                        <td class="check"><i data-lucide="check"></i></td>
-                        <td class="check"><i data-lucide="check"></i></td>
-                    </tr>
-                    <tr>
-                        <td>Deployment Gating</td>
-                        <td class="x">—</td>
-                        <td class="check"><i data-lucide="check"></i></td>
-                        <td class="check"><i data-lucide="check"></i></td>
-                    </tr>
-                    <tr>
-                        <td>CI/CD Integrations</td>
-                        <td class="x">—</td>
-                        <td class="check"><i data-lucide="check"></i></td>
-                        <td class="check"><i data-lucide="check"></i></td>
-                    </tr>
-                    <tr>
-                        <td>Application Stacks</td>
-                        <td class="x">—</td>
-                        <td class="check"><i data-lucide="check"></i></td>
-                        <td class="check"><i data-lucide="check"></i></td>
-                    </tr>
-                    <tr>
-                        <td>Data Retention</td>
-                        <td>7 days</td>
-                        <td>30 days</td>
-                        <td>Unlimited</td>
-                    </tr>
-                    <tr>
-                        <td>SSO / SAML</td>
-                        <td class="x">—</td>
-                        <td class="x">—</td>
-                        <td class="check"><i data-lucide="check"></i></td>
-                    </tr>
-                    <tr>
-                        <td>Role-Based Access</td>
-                        <td class="x">—</td>
-                        <td class="check"><i data-lucide="check"></i> Basic</td>
-                        <td class="check"><i data-lucide="check"></i> Advanced</td>
-                    </tr>
-                    <tr>
-                        <td>On-Premise Deployment</td>
-                        <td class="x">—</td>
-                        <td class="x">—</td>
-                        <td class="check"><i data-lucide="check"></i></td>
-                    </tr>
-                    <tr>
-                        <td>Support</td>
-                        <td>Community</td>
-                        <td>Priority Email</td>
-                        <td>Dedicated CSM</td>
-                    </tr>
-                    <tr>
-                        <td>SLA</td>
-                        <td class="x">—</td>
-                        <td>99.9%</td>
-                        <td>99.99%</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="table-scroll-wrapper">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Starter</th>
+                            <th>Pro</th>
+                            <th>Enterprise</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Clusters</td>
+                            <td>3</td>
+                            <td>20</td>
+                            <td>Unlimited</td>
+                        </tr>
+                        <tr>
+                            <td>IDI Scoring</td>
+                            <td class="check"><i data-lucide="check"></i> Basic</td>
+                            <td class="check"><i data-lucide="check"></i> Advanced</td>
+                            <td class="check"><i data-lucide="check"></i> Custom Weights</td>
+                        </tr>
+                        <tr>
+                            <td>Topology Visualization</td>
+                            <td class="check"><i data-lucide="check"></i></td>
+                            <td class="check"><i data-lucide="check"></i></td>
+                            <td class="check"><i data-lucide="check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Forecasting</td>
+                            <td class="x">—</td>
+                            <td class="check"><i data-lucide="check"></i></td>
+                            <td class="check"><i data-lucide="check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Deployment Gating</td>
+                            <td class="x">—</td>
+                            <td class="check"><i data-lucide="check"></i></td>
+                            <td class="check"><i data-lucide="check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>CI/CD Integrations</td>
+                            <td class="x">—</td>
+                            <td class="check"><i data-lucide="check"></i></td>
+                            <td class="check"><i data-lucide="check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Application Stacks</td>
+                            <td class="x">—</td>
+                            <td class="check"><i data-lucide="check"></i></td>
+                            <td class="check"><i data-lucide="check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Data Retention</td>
+                            <td>7 days</td>
+                            <td>30 days</td>
+                            <td>Unlimited</td>
+                        </tr>
+                        <tr>
+                            <td>SSO / SAML</td>
+                            <td class="x">—</td>
+                            <td class="x">—</td>
+                            <td class="check"><i data-lucide="check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Role-Based Access</td>
+                            <td class="x">—</td>
+                            <td class="check"><i data-lucide="check"></i> Basic</td>
+                            <td class="check"><i data-lucide="check"></i> Advanced</td>
+                        </tr>
+                        <tr>
+                            <td>On-Premise Deployment</td>
+                            <td class="x">—</td>
+                            <td class="x">—</td>
+                            <td class="check"><i data-lucide="check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Support</td>
+                            <td>Community</td>
+                            <td>Priority Email</td>
+                            <td>Dedicated CSM</td>
+                        </tr>
+                        <tr>
+                            <td>SLA</td>
+                            <td class="x">—</td>
+                            <td>99.9%</td>
+                            <td>99.99%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </section>
 
@@ -474,6 +554,15 @@
                 navbar.classList.remove('scrolled');
             }
         });
+
+        // Hamburger menu
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('nav-links');
+        const navClose = document.getElementById('nav-close');
+        hamburger.addEventListener('click', () => { hamburger.classList.add('open'); navLinks.classList.add('open'); hamburger.setAttribute('aria-expanded','true'); document.body.style.overflow='hidden'; });
+        function closeMenu() { hamburger.classList.remove('open'); navLinks.classList.remove('open'); hamburger.setAttribute('aria-expanded','false'); document.body.style.overflow=''; }
+        navClose.addEventListener('click', closeMenu);
+        navLinks.querySelectorAll('a').forEach(l => l.addEventListener('click', closeMenu));
 
         // Billing toggle
         const toggle = document.getElementById('billing-toggle');
