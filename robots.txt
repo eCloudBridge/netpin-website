@@ -7,3 +7,5 @@ Disallow: /api/
 
 # Sitemap location
 Sitemap: https://netpin.io/sitemap.xml
+
+Sitemap: https://netpin.io/sitemap_index.xml
