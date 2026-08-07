@@ -4,24 +4,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy - Netpin</title>
-    <meta name="description" content="Netpin's Privacy Policy. Learn how we collect, use, and protect your data when you use our infrastructure intelligence platform.">
+    <title>Security - Netpin</title>
+    <meta name="description" content="Learn about Netpin's enterprise-grade security, read-only agent architecture, and data protection practices.">
     <meta name="robots" content="index, follow">
 
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://netpin.io/privacy.html">
+    <link rel="canonical" href="https://netpin.io/security.html">
 
     <!-- Open Graph -->
-    <meta property="og:title" content="Privacy Policy - Netpin">
+    <meta property="og:title" content="Security - Netpin">
     <meta property="og:description" content="Learn how Netpin collects, uses, and protects your data.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://netpin.io/privacy.html">
+    <meta property="og:url" content="https://netpin.io/security.html">
     <meta property="og:image" content="https://netpin.io/images/og-banner.png">
     <meta property="og:site_name" content="Netpin">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Privacy Policy - Netpin">
+    <meta name="twitter:title" content="Security - Netpin">
     <meta name="twitter:image" content="https://netpin.io/images/og-banner.png">
 
     <!-- Fonts -->
@@ -106,89 +106,66 @@
         <div class="container" style="max-width: 900px; text-align: left;">
             
     
-    <h1>Privacy Policy</h1>
+    
+    <h1>Security at Netpin</h1>
     <p class="last-updated">Last Updated: August 07, 2026</p>
 
     <div class="section">
-        <h2>1. Introduction</h2>
-        <p>Netpin ("we", "our", or "us") respects your privacy and is committed to protecting the personal data of our users ("you" or "your"). This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website (netpin.io) and use our infrastructure intelligence platform, including all related applications and services (collectively, the "Services"). Please read this policy carefully to understand our practices regarding your data.</p>
+        <h2>Our Commitment to Security</h2>
+        <p>At Netpin, safeguarding your infrastructure intelligence and operational data is our highest priority. We understand that DevOps and Platform Engineering teams entrust us with visibility into their core systems. Our platform is built on a foundation of zero-trust architecture, robust encryption, and continuous compliance monitoring.</p>
     </div>
 
     <div class="section">
-        <h2>2. Information We Collect</h2>
-        <h3>A. Information You Provide to Us</h3>
-        <p>We may collect personal data that you voluntarily provide to us when you register for the Services, express interest in obtaining information about us, or otherwise contact us. This includes:</p>
-        <ul>
-            <li><strong>Account Information:</strong> Name, email address, company name, and password.</li>
-            <li><strong>Payment Information:</strong> Credit card numbers and billing addresses (processed securely via our payment partners like Stripe).</li>
-            <li><strong>Communication Data:</strong> Content of messages, support tickets, and feedback you send to us.</li>
-        </ul>
+        <h2>Data Encryption & Protection</h2>
+        <h3>Encryption in Transit</h3>
+        <p>All data transmitted between your infrastructure, our read-only agents, and the Netpin platform is encrypted in transit using industry-standard <strong>TLS 1.3</strong>. We mandate HTTPS for all API endpoints and strictly enforce HSTS.</p>
         
-        <h3>B. Information Collected Automatically</h3>
-        <p>When you access our Services, we automatically collect certain technical data, which may include:</p>
+        <h3>Encryption at Rest</h3>
+        <p>All persistent data, including your infrastructure metadata, telemetry, and account information, is encrypted at rest using <strong>AES-256</strong>. Our encryption keys are managed securely via AWS Key Management Service (KMS) with automatic rotation policies.</p>
+    </div>
+
+    <div class="section">
+        <h2>The Netpin Agent: Read-Only by Design</h2>
+        <p>Our Kubernetes agent is engineered specifically for minimal privilege and maximum security. It operates strictly in <strong>read-only mode</strong>. It cannot execute commands, mutate state, or access application payloads.</p>
         <ul>
-            <li><strong>Device and Usage Data:</strong> IP address, browser type, operating system, pages viewed, time spent, and referring URLs.</li>
-            <li><strong>Infrastructure Data:</strong> Telemetry, cluster metadata, and configuration metrics collected by our read-only agent to generate your Infrastructure Debt Index (IDI). We do not collect application payloads or sensitive secrets.</li>
-            <li><strong>Cookies and Tracking:</strong> We use cookies, web beacons, and similar tracking technologies to improve user experience, analyze traffic, and personalize content.</li>
+            <li><strong>No Secrets Access:</strong> The agent does not read or transmit Kubernetes Secrets, ConfigMaps (unless opted-in for specific debugging), or application environment variables.</li>
+            <li><strong>RBAC Confined:</strong> The agent is bound by highly restrictive Role-Based Access Control (RBAC) policies that only allow it to read cluster metadata, pod states, and node metrics.</li>
+            <li><strong>Outbound Only:</strong> The agent uses outbound-only connections. There is no requirement to open inbound ports on your firewall or expose your cluster to the public internet.</li>
         </ul>
     </div>
 
     <div class="section">
-        <h2>3. How We Use Your Information</h2>
-        <p>We use the collected information for various business and operational purposes, including:</p>
+        <h2>Infrastructure & Application Security</h2>
+        <h3>Cloud Security</h3>
+        <p>Netpin is hosted on highly secure, enterprise-grade cloud infrastructure (AWS). We employ strict network segregation, placing our databases and internal services within private subnets that are inaccessible from the public internet.</p>
+        
+        <h3>Vulnerability Management</h3>
+        <p>We run automated Static Application Security Testing (SAST) and Dynamic Application Security Testing (DAST) on every code commit. Third-party dependencies are scanned continuously for known CVEs. Any critical vulnerabilities are patched immediately according to our SLA.</p>
+    </div>
+
+    <div class="section">
+        <h2>Identity and Access Management (IAM)</h2>
+        <p>Access to your Netpin dashboard is secured by modern authentication protocols.</p>
         <ul>
-            <li>To provide, operate, and maintain our Services.</li>
-            <li>To process transactions and send related information (e.g., invoices).</li>
-            <li>To analyze infrastructure data and compute your IDI score and predictive alerts.</li>
-            <li>To improve, personalize, and expand our Services.</li>
-            <li>To communicate with you, either directly or through partners, for customer service, updates, and marketing.</li>
-            <li>To detect and prevent fraudulent or unauthorized activity.</li>
-            <li>To comply with legal obligations.</li>
+            <li><strong>SSO & SAML:</strong> We support Single Sign-On (SSO) integrations with major providers including Okta, Google Workspace, and Microsoft Entra ID.</li>
+            <li><strong>Role-Based Access:</strong> Netpin supports granular RBAC within your organization, ensuring users only have access to the dashboards and projects they require.</li>
+        </ul>
+        <p>Internally, Netpin employees operate on the principle of least privilege. Production access is restricted to authorized senior engineering personnel and requires VPN access, MFA, and audited jump hosts.</p>
+    </div>
+
+    <div class="section">
+        <h2>Compliance & Certifications</h2>
+        <p>Netpin is committed to upholding rigorous compliance standards. We have actively fortified our application and infrastructure with comprehensive security measures designed to meet global enterprise requirements.</p>
+        <ul>
+            <li><strong>SOC 2 Type II:</strong> Formal certification is currently in progress. We have already integrated the necessary security, availability, and confidentiality controls into our infrastructure and are actively undergoing the auditing process.</li>
+            <li><strong>GDPR & CCPA:</strong> Compliance certification is currently in progress. We have proactively designed our platform with strict data privacy principles in mind, including robust data minimization and complete data deletion capabilities.</li>
         </ul>
     </div>
 
     <div class="section">
-        <h2>4. Sharing and Disclosure</h2>
-        <p>We do not sell your personal data. We may share your information in the following situations:</p>
-        <ul>
-            <li><strong>Service Providers:</strong> We share data with trusted third-party vendors (e.g., AWS, Stripe, analytics providers) who assist us in operating our Services, bound by strict confidentiality obligations.</li>
-            <li><strong>Legal Requirements:</strong> We may disclose information if required to do so by law, court order, or governmental request.</li>
-            <li><strong>Business Transfers:</strong> In connection with any merger, sale of company assets, financing, or acquisition, user information may be transferred.</li>
-        </ul>
-    </div>
-
-    <div class="section">
-        <h2>5. Data Security</h2>
-        <p>We implement industry-standard technical, administrative, and physical security measures designed to protect your data (e.g., AES-256 encryption at rest, TLS 1.3 in transit). While we strive to use commercially acceptable means to protect your personal information, no method of transmission over the internet or electronic storage is 100% secure.</p>
-    </div>
-
-    <div class="section">
-        <h2>6. Your Data Protection Rights</h2>
-        <p>Depending on your location (e.g., GDPR, CCPA), you may have the following rights:</p>
-        <ul>
-            <li>The right to access, update, or delete the information we have on you.</li>
-            <li>The right of rectification (correcting inaccurate data).</li>
-            <li>The right to object to or restrict processing.</li>
-            <li>The right to data portability.</li>
-            <li>The right to withdraw consent at any time.</li>
-        </ul>
-        <p>To exercise these rights, please contact us at hello@netpin.io.</p>
-    </div>
-
-    <div class="section">
-        <h2>7. Children's Privacy</h2>
-        <p>Our Services are not intended for use by children under the age of 13 (or 16 in certain jurisdictions). We do not knowingly collect personal data from children. If we become aware that we have collected such data, we will take steps to delete it immediately.</p>
-    </div>
-
-    <div class="section">
-        <h2>8. Changes to This Policy</h2>
-        <p>We may update this Privacy Policy from time to time to reflect changes in our practices or legal obligations. We will notify you of any material changes by posting the new policy on this page and updating the "Last Updated" date. Your continued use of the Services after such changes constitutes your acceptance of the revised policy.</p>
-    </div>
-
-    <div class="section">
-        <h2>9. Contact Us</h2>
-        <p>If you have any questions, concerns, or requests regarding this Privacy Policy or our data practices, please contact us at:</p>
-        <p><strong>Email:</strong> <a href="mailto:hello@netpin.io">hello@netpin.io</a></p>
+        <h2>Vulnerability Disclosure Program</h2>
+        <p>We welcome collaboration with the security research community. If you believe you have found a security vulnerability in Netpin, please report it to our security team immediately. We request that you do not publicly disclose the issue until we have had a reasonable timeframe to address it.</p>
+        <p><strong>Report a vulnerability:</strong> <a href="mailto:security@netpin.io">security@netpin.io</a></p>
     </div>
 
         </div>
