@@ -1792,37 +1792,54 @@ footer {
    Google Translate Overrides
    ============================================ */
 
-/* Hide the Google Translate toolbar */
-.goog-te-banner-frame.skiptranslate,
-.goog-te-banner-frame {
+
+/* ============================================
+   Google Translate Overrides (Aggressive)
+   ============================================ */
+/* Hide the banner frame */
+.goog-te-banner-frame.skiptranslate, 
+.goog-te-banner-frame,
+#goog-te-banner-frame,
+.skiptranslate > iframe,
+iframe.goog-te-banner-frame,
+.VIpgJd-ZVi9od-aZ2wEe-wOHMyf {
     display: none !important;
+    visibility: hidden !important;
 }
 
-/* Prevent Google Translate from shifting the body down */
+/* Prevent Google Translate from shifting the body and html down */
 body {
     top: 0px !important;
+    position: static !important;
 }
 
-/* Hide the Google Translate tooltip when hovering over translated text */
+html {
+    top: 0px !important;
+    height: 100% !important;
+}
+
+/* Hide the tooltip on hover */
 .goog-text-highlight {
     background: transparent !important;
     box-shadow: none !important;
 }
 
-/* Hide the "Powered by Google Translate" branding */
-.goog-logo-link {
+/* Hide the branding */
+.goog-logo-link, .goog-te-gadget span, .goog-te-gadget img {
     display: none !important;
 }
 .goog-te-gadget {
     color: transparent !important;
+    font-size: 0px !important;
 }
+
 /* ============================================
    Premium Hero Redesign
    ============================================ */
 .premium-hero {
     position: relative;
-    min-height: auto !important;
     padding: 160px 0 0px !important;
+    min-height: auto !important;
     overflow: hidden;
     background: #ffffff; /* Clean white canvas */
 }
@@ -1855,7 +1872,7 @@ body {
 }
 
 .premium-hero .hero-content {
-    max-width: 900px !important;
+    max-width: 1200px !important;
     margin: 0 auto;
     display: flex !important;
     flex-direction: column !important;
