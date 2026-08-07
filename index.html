@@ -45,7 +45,7 @@
         rel="stylesheet">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="css/style.css?v=2.4">
+    <link rel="stylesheet" href="css/style.css?v=2.5">
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="images/favicon.png">
@@ -157,7 +157,7 @@
                 <button class="nav-close" id="nav-close" aria-label="Close menu">&times;</button>
                 <li><a href="features.html">Features</a></li>
                 <li><a href="https://docs.netpin.io" target="_blank" rel="noopener noreferrer">Docs</a></li>
-                
+
                 <li><a href="pricing.html">Pricing</a></li>
                 <li><a href="contact.html">Contact</a></li>
                 <li><a href="blog/index.html">Blog</a></li>
@@ -186,7 +186,7 @@
         </div>
     </nav>
 
-    
+
     <!-- Hero Section -->
     <section class="hero premium-hero" id="hero">
         <div class="hero-glow-1"></div>
@@ -198,20 +198,25 @@
                     <span>Now with AI-Powered Forecasting</span>
                 </div>
 
-                <h1 class="fade-in-up delay-1" style="font-size: 4.5rem; letter-spacing: -0.04em; line-height: 1.1; margin-bottom: 24px; width: 100%; max-width: 1200px;">
+                <h1 class="fade-in-up delay-1"
+                    style="font-size: 4.5rem; letter-spacing: -0.04em; line-height: 1.1; margin-bottom: 24px; width: 100%; max-width: 1200px;">
                     From Chaos to Clarity:<br>
                     <span class="text-gradient">Intelligence for Kubernetes</span>
                 </h1>
 
-                <p class="fade-in-up delay-2" style="font-size: 1.25rem; color: var(--text-secondary); max-width: 700px; margin: 0 auto 40px; line-height: 1.6;">
-                    Stop firefighting blind. Netpin brings structure to complex infrastructure, measuring your Technical Debt through IDI. Gain predictive alerts and enforce deployment gates.
+                <p class="fade-in-up delay-2"
+                    style="font-size: 1.25rem; color: var(--text-secondary); max-width: 700px; margin: 0 auto 40px; line-height: 1.6;">
+                    Stop firefighting blind. Netpin brings structure to complex infrastructure, measuring your Technical
+                    Debt through IDI. Gain predictive alerts and enforce deployment gates.
                 </p>
 
                 <div class="hero-cta fade-in-up delay-3" style="justify-content: center; margin-bottom: 80px;">
-                    <a href="https://dash.netpin.io/register" class="btn btn-primary btn-large" style="padding: 16px 32px; font-size: 1.1rem; border-radius: 100px;">
+                    <a href="https://dash.netpin.io/register" class="btn btn-primary btn-large"
+                        style="padding: 16px 32px; font-size: 1.1rem; border-radius: 100px;">
                         Start Free Trial
                     </a>
-                    <button onclick="openDemoModal()" class="btn btn-ghost btn-large" style="padding: 16px 32px; font-size: 1.1rem; border-radius: 100px; cursor: pointer; border: 1px solid var(--border-subtle); background: transparent;">
+                    <button onclick="openDemoModal()" class="btn btn-ghost btn-large"
+                        style="padding: 16px 32px; font-size: 1.1rem; border-radius: 100px; cursor: pointer; border: 1px solid var(--border-subtle); background: transparent;">
                         Watch Demo
                     </button>
                 </div>
@@ -219,7 +224,8 @@
 
             <div class="hero-visual-wrapper scale-in-up delay-4">
                 <div class="hero-mockup premium-glass">
-                    <img src="images/hero-dashboard.png" alt="Netpin Dashboard" style="width: 100%; height: auto; display: block; border-radius: 16px;">
+                    <img src="images/hero-dashboard.png" alt="Netpin Dashboard"
+                        style="width: 100%; height: auto; display: block; border-radius: 16px;">
                 </div>
             </div>
         </div>
@@ -821,7 +827,8 @@
                 <div class="cta-buttons">
                     <a href="https://dash.netpin.io/register" class="btn btn-primary btn-large">Start Your Free
                         Trial</a>
-                    <button onclick="openDemoModal()" class="btn btn-secondary btn-large" style="cursor: pointer; border: none;">
+                    <button onclick="openDemoModal()" class="btn btn-secondary btn-large"
+                        style="cursor: pointer; border: none;">
                         Watch Demo
                     </button>
                 </div>
@@ -852,17 +859,17 @@
                 </div>
 
                 <div class="footer-column">
-                                        <h4>Product</h4>
+                    <h4>Product</h4>
                     <ul>
                         <li><a href="features.html">Features</a></li>
                         <li><a href="pricing.html">Pricing</a></li>
                         <li><a href="contact.html">Contact</a></li>
-                        
+
                     </ul>
                 </div>
 
                 <div class="footer-column">
-                                        <h4>Resources</h4>
+                    <h4>Resources</h4>
                     <ul>
                         <li><a href="https://docs.netpin.io" target="_blank" rel="noopener noreferrer">Docs</a></li>
                         <li><a href="blog/index.html">Blog</a></li>
@@ -1221,14 +1228,17 @@
 
 
 
-    
+
 
     <!-- Custom Autoplay Demo Modal -->
     <style>
         .custom-demo-overlay {
             display: none;
             position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
             background: rgba(15, 23, 42, 0.8);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
@@ -1238,10 +1248,12 @@
             opacity: 0;
             transition: opacity 0.3s ease;
         }
+
         .custom-demo-overlay.active {
             display: flex;
             opacity: 1;
         }
+
         .custom-demo-container {
             width: 95%;
             max-width: 1200px;
@@ -1254,16 +1266,18 @@
             transform: scale(0.95);
             transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
+
         .custom-demo-overlay.active .custom-demo-container {
             transform: scale(1);
         }
+
         .custom-demo-close {
             position: absolute;
             top: 20px;
             right: 20px;
             width: 40px;
             height: 40px;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0, 0, 0, 0.5);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -1275,23 +1289,26 @@
             border: none;
             transition: background 0.2s ease;
         }
+
         .custom-demo-close:hover {
-            background: rgba(0,0,0,0.8);
+            background: rgba(0, 0, 0, 0.8);
         }
     </style>
-    
+
     <div class="custom-demo-overlay" id="customDemoOverlay" onclick="closeDemoModal(event)">
         <div class="custom-demo-container">
-            
+
             <button class="custom-demo-close" onclick="closeDemoModal(event)">&times;</button>
-            <div style="position: absolute; top: 15px; left: 50%; transform: translateX(-50%); background: rgba(0, 0, 0, 0.6); color: rgba(255, 255, 255, 0.9); padding: 6px 16px; border-radius: 100px; font-size: 0.85rem; z-index: 10; display: flex; align-items: center; pointer-events: none; backdrop-filter: blur(4px);">
+            <div
+                style="position: absolute; top: 15px; left: 50%; transform: translateX(-50%); background: rgba(0, 0, 0, 0.6); color: rgba(255, 255, 255, 0.9); padding: 6px 16px; border-radius: 100px; font-size: 0.85rem; z-index: 10; display: flex; align-items: center; pointer-events: none; backdrop-filter: blur(4px);">
                 Use arrow keys ( ← / → ) to navigate
             </div>
-            <iframe id="customDemoIframe" style="width: 100%; height: 100%; border: none;" allow="clipboard-write; autoplay; fullscreen" src=""></iframe>
+            <iframe id="customDemoIframe" style="width: 100%; height: 100%; border: none;"
+                allow="clipboard-write; autoplay; fullscreen" src=""></iframe>
 
         </div>
     </div>
-    
+
     <script>
         function openDemoModal() {
             const overlay = document.getElementById('customDemoOverlay');
@@ -1304,7 +1321,7 @@
             overlay.classList.add('active');
             document.body.style.overflow = 'hidden';
         }
-        
+
         function closeDemoModal(e) {
             if (e.target === document.getElementById('customDemoOverlay') || e.currentTarget.classList.contains('custom-demo-close')) {
                 const overlay = document.getElementById('customDemoOverlay');
