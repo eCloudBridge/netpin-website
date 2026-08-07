@@ -1821,6 +1821,7 @@ body {
    ============================================ */
 .premium-hero {
     position: relative;
+    min-height: auto !important;
     padding: 160px 0 0px !important;
     overflow: hidden;
     background: #ffffff; /* Clean white canvas */
@@ -1863,7 +1864,7 @@ body {
 
 .hero-visual-wrapper {
     position: relative;
-    width: 100%;
+    width: 95%;
     max-width: 1200px;
     margin: 0 auto;
     perspective: 2000px;
