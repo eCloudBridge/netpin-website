@@ -1,48 +1,49 @@
 /* Netpin Unified Technical Design System (UTDS) Variables */
 :root {
-    /* Colors - Obsidian Obsidian Palette */
-    --color-obsidian-950: #020617;
-    --color-obsidian-900: #0f172a;
-    --color-obsidian-800: #1e293b;
-    --color-obsidian-700: #334155;
-    --color-obsidian-600: #475569;
+    /* Colors - Corporate Slate & Blue Palette (Light Mode) */
+    --color-slate-50: #f8fafc;
+    --color-slate-100: #f1f5f9;
+    --color-slate-200: #e2e8f0;
+    --color-slate-700: #334155;
+    --color-slate-800: #1e293b;
+    --color-slate-900: #0f172a;
     
-    /* Brand Accent - Deep Indigo & Emerald */
-    --color-primary: #6366f1;
-    --color-primary-light: #818cf8;
-    --color-primary-dark: #4f46e5;
-    --color-secondary: #06b6d4; /* Keep for legacy, but refine */
+    /* Brand Accent - Corporate Blue (Zoom style) */
+    --color-primary: #0b5cff;
+    --color-primary-light: #4d8aff;
+    --color-primary-dark: #0043cc;
+    --color-secondary: #0ea5e9; 
     --color-emerald: #10b981;
     --color-emerald-light: #34d399;
     --color-amber: #f59e0b;
     --color-rose: #f43f5e;
     
     /* Functional Colors */
-    --color-bg-primary: var(--color-obsidian-950);
-    --color-bg-secondary: #0a0f1e;
-    --color-bg-card: rgba(15, 23, 42, 0.6);
-    --color-bg-glass: rgba(255, 255, 255, 0.02);
+    --color-bg-primary: #ffffff;
+    --color-bg-secondary: var(--color-slate-50);
+    --color-bg-card: #ffffff;
+    --color-bg-glass: rgba(255, 255, 255, 0.95);
     
     /* Text - High Contrast */
-    --text-primary: #f8fafc;
-    --text-secondary: #94a3b8;
+    --text-primary: var(--color-slate-900);
+    --text-secondary: var(--color-slate-700);
     --text-muted: #64748b;
     --text-inverse: #ffffff;
     
-    /* Borders & Accents - Sharp */
-    --border-subtle: rgba(255, 255, 255, 0.05);
-    --border-strong: rgba(255, 255, 255, 0.1);
-    --border-accent: rgba(99, 102, 241, 0.3);
+    /* Borders & Accents - Clean */
+    --border-subtle: var(--color-slate-200);
+    --border-strong: #cbd5e1;
+    --border-accent: rgba(11, 92, 255, 0.3);
     
-    /* Typography - Professional & Technical */
+    /* Typography - Professional */
     --font-display: 'Inter', system-ui, -apple-system, sans-serif;
     --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
     
-    /* Effects - Low Blur, High Precision */
-    --glass-blur: 12px;
+    /* Effects - Clean Shadows */
+    --glass-blur: 0px; /* Disabled for clean look */
     --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
     --transition-fast: 0.1s ease;
     --transition-base: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
