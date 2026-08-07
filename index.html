@@ -45,7 +45,7 @@
         rel="stylesheet">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css?v=2.2">
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="images/favicon.png">
@@ -185,67 +185,40 @@
         </div>
     </nav>
 
+    
     <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
+    <section class="hero premium-hero" id="hero">
+        <div class="hero-glow-1"></div>
+        <div class="hero-glow-2"></div>
+        <div class="container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
             <div class="hero-content">
-                <div class="hero-badge">
+                <div class="hero-badge fade-in-up">
                     <span class="badge-dot"></span>
                     <span>Now with AI-Powered Forecasting</span>
                 </div>
 
-                <h1>
+                <h1 class="fade-in-up delay-1" style="font-size: 4.5rem; letter-spacing: -0.04em; line-height: 1.1; margin-bottom: 24px;">
                     From Chaos to Clarity:<br>
-                    <span class="text-gradient">The Intelligence Layer for Kubernetes</span>
+                    <span class="text-gradient">Intelligence for Kubernetes</span>
                 </h1>
 
-                <p>
-                    Stop firefighting blind. Netpin brings structure to complex infrastructure, measuring your Technical
-                    Debt through IDI (Infrastructure Debt Index). Gain predictive alerts, enforce deployment gates, and
-                    transform your DevOps strategy from reactive to proactive.
+                <p class="fade-in-up delay-2" style="font-size: 1.25rem; color: var(--text-secondary); max-width: 700px; margin: 0 auto 40px; line-height: 1.6;">
+                    Stop firefighting blind. Netpin brings structure to complex infrastructure, measuring your Technical Debt through IDI. Gain predictive alerts and enforce deployment gates.
                 </p>
 
-                <div class="hero-cta">
-                    <a href="https://dash.netpin.io/register" class="btn btn-primary btn-large">
+                <div class="hero-cta fade-in-up delay-3" style="justify-content: center; margin-bottom: 80px;">
+                    <a href="https://dash.netpin.io/register" class="btn btn-primary btn-large" style="padding: 16px 32px; font-size: 1.1rem; border-radius: 100px;">
                         Start Free Trial
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <path d="M5 12h14M12 5l7 7-7 7" />
-                        </svg>
                     </a>
-                    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&add=hello@netpin.io&text=Netpin+Demo+Call"
-                        target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-large">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <polygon points="5 3 19 12 5 21 5 3" />
-                        </svg>
-                        Watch Demo
+                    <a href="https://dash.netpin.io/login" class="btn btn-ghost btn-large" style="padding: 16px 32px; font-size: 1.1rem; border-radius: 100px;">
+                        Book a Demo
                     </a>
-                </div>
-
-                <div class="hero-stats">
-                    <div class="stat-item">
-                        <div class="stat-value">40%</div>
-                        <div class="stat-label">Faster Incident Response</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value">3x</div>
-                        <div class="stat-label">More Deployments</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value">99.9%</div>
-                        <div class="stat-label">Uptime Achieved</div>
-                    </div>
                 </div>
             </div>
 
-            <div class="hero-visual">
-                <div class="hero-mockup">
-                    <div class="hero-screen" style="padding: 0; overflow: hidden; border-radius: 16px;">
-                        <img src="images/hero-dashboard.png"
-                            alt="Netpin Dashboard - Infrastructure Intelligence Platform" width="800" height="500"
-                            style="width: 100%; height: auto; display: block; border-radius: 16px;" loading="eager">
-                    </div>
+            <div class="hero-visual-wrapper scale-in-up delay-4">
+                <div class="hero-mockup premium-glass">
+                    <img src="images/hero-dashboard.png" alt="Netpin Dashboard" style="width: 100%; height: auto; display: block; border-radius: 16px;">
                 </div>
             </div>
         </div>
