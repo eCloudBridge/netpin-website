@@ -1981,3 +1981,56 @@ html {
         line-height: 1.2 !important;
     }
 }
+
+/* ============================================
+   Use Cases Responsive Classes
+   ============================================ */
+.use-case-hero-section {
+    padding-top: 150px;
+    min-height: 80vh;
+    padding-bottom: 100px;
+}
+.use-case-hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    margin-bottom: 80px;
+}
+.use-case-features-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+}
+.use-case-title {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+}
+.use-case-subtitle {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    margin-bottom: 30px;
+    line-height: 1.8;
+}
+
+@media (max-width: 768px) {
+    .use-case-hero-section {
+        padding-top: 100px;
+        padding-bottom: 60px;
+    }
+    .use-case-hero-grid, .use-case-features-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    .use-case-hero-grid {
+        margin-bottom: 60px;
+    }
+    .use-case-title {
+        font-size: 2.2rem;
+        line-height: 1.2;
+    }
+    .use-case-subtitle {
+        font-size: 1.05rem;
+        margin-bottom: 20px;
+    }
+}
