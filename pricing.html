@@ -530,23 +530,7 @@
     <script src="/components/footer.js"></script>
 
     <script>
-        const navbar = document.getElementById('navbar');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-
-        // Hamburger menu
-        const hamburger = document.getElementById('hamburger');
-        const navLinks = document.getElementById('nav-links');
-        const navClose = document.getElementById('nav-close');
-        hamburger.addEventListener('click', () => { hamburger.classList.add('open'); navLinks.classList.add('open'); hamburger.setAttribute('aria-expanded','true'); document.body.style.overflow='hidden'; });
-        function closeMenu() { hamburger.classList.remove('open'); navLinks.classList.remove('open'); hamburger.setAttribute('aria-expanded','false'); document.body.style.overflow=''; }
-        navClose.addEventListener('click', closeMenu);
-        navLinks.querySelectorAll('a').forEach(l => l.addEventListener('click', closeMenu));
+        
 
         // Billing toggle
         const toggle = document.getElementById('billing-toggle');

@@ -83,44 +83,7 @@
         document.addEventListener("DOMContentLoaded", function() {
             lucide.createIcons();
 
-        // Navbar scroll effect
-        const navbar = document.getElementById('navbar');
-        if (navbar) {
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 50) {
-                    navbar.classList.add('scrolled');
-                } else {
-                    navbar.classList.remove('scrolled');
-                }
-            });
-        }
-
-        // Hamburger menu
-        const hamburger = document.getElementById('hamburger');
-        const navLinks = document.getElementById('nav-links');
-        const navClose = document.getElementById('nav-close');
-
-        if (hamburger && navLinks && navClose) {
-            function openMenu() {
-                hamburger.classList.add('open');
-                navLinks.classList.add('open');
-                hamburger.setAttribute('aria-expanded', 'true');
-                document.body.style.overflow = 'hidden';
-            }
-
-            function closeMenu() {
-                hamburger.classList.remove('open');
-                navLinks.classList.remove('open');
-                hamburger.setAttribute('aria-expanded', 'false');
-                document.body.style.overflow = '';
-            }
-
-            hamburger.addEventListener('click', openMenu);
-            navClose.addEventListener('click', closeMenu);
-
-            navLinks.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', closeMenu);
-            });
+        // Navbar scroll effect});
         }
 
         });
