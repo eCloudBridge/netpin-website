@@ -57,6 +57,7 @@ class NetpinFooter extends HTMLElement {
                         <li><a href="/privacy.html">Privacy Policy</a></li>
                         <li><a href="/terms.html">Terms of Service</a></li>
                         <li><a href="/security.html">Security</a></li>
+                        <li><a href="/refund.html">Refund Policy</a></li>
                         <li><a href="#">GDPR</a></li>
                     </ul>
                 </div>
