@@ -264,8 +264,8 @@
 
         // ─── IntersectionObserver ───────────────────────────────
         const observerOptions = {
-            threshold: 0.15,
-            rootMargin: '0px 0px -60px 0px'
+            threshold: 0.05,
+            rootMargin: '0px 0px -40px 0px'
         };
 
         const observer = new IntersectionObserver((entries) => {
@@ -293,6 +293,18 @@
         allAnimated.forEach(el => {
             observer.observe(el);
         });
+
+        // ─── Fallback mechanism (failsafe if scroll gets stuck) ─
+        setTimeout(() => {
+            allAnimated.forEach(el => {
+                if (!el.classList.contains('is-visible')) {
+                    el.classList.add('is-visible');
+                    if (el.classList.contains('anim-counter')) {
+                        animateCounter(el);
+                    }
+                }
+            });
+        }, 2500);
 
         // ─── Hero elements: animate immediately (above fold) ────
         // Elements in the hero section should be visible on page load, not on scroll
