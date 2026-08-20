@@ -3,7 +3,7 @@
 /* CSS Variables - Design Tokens */
 :root {
     /* Spacing */
-    --section-padding: 120px;
+    --section-padding: clamp(60px, 10vh, 120px);
     --container-width: 1280px;
 
     /* Gradients */
@@ -99,6 +99,7 @@ h3 {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 24px;
 }
 
 /* Hamburger Menu Button */
@@ -181,7 +182,7 @@ h3 {
 .nav-links {
     display: flex;
     align-items: center;
-    gap: 40px;
+    gap: 32px;
     list-style: none;
 }
 
@@ -256,6 +257,7 @@ h3 {
 .btn-primary:hover {
     box-shadow: 0 8px 24px rgba(99, 102, 241, 0.4);
     filter: brightness(1.1);
+    transform: translateY(-2px);
 }
 
 .btn-secondary {
@@ -268,6 +270,7 @@ h3 {
 .btn-secondary:hover {
     background: rgba(0, 0, 0, 0.05);
     border-color: var(--color-primary-light);
+    transform: translateY(-2px);
 }
 
 .btn-ghost {
@@ -279,6 +282,7 @@ h3 {
 .btn-ghost:hover {
     color: var(--text-primary);
     background: rgba(255, 255, 255, 0.03);
+    transform: translateY(-2px);
 }
 
 .btn-large {
@@ -364,7 +368,7 @@ h3 {
 .hero p {
     font-size: 1.25rem;
     margin-bottom: 40px;
-    max-width: 540px;
+    max-width: 65ch;
 }
 
 .hero-cta {
@@ -618,6 +622,9 @@ h3 {
 
 .section-header p {
     font-size: 1.125rem;
+    max-width: 65ch;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .features-grid {
@@ -1635,6 +1642,10 @@ footer {
         min-height: auto;
     }
 
+    .features-grid, .steps-container {
+        grid-template-columns: 1fr;
+    }
+
     .hero-badge {
         font-size: 0.78rem;
     }
@@ -1842,7 +1853,7 @@ html {
    ============================================ */
 .premium-hero {
     position: relative;
-    padding: 160px 0 0px !important;
+    padding: clamp(120px, 15vh, 160px) 0 40px !important;
     min-height: auto !important;
     overflow: hidden;
     background: #ffffff; /* Clean white canvas */
