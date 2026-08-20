@@ -1129,7 +1129,7 @@ h3 {
     text-align: center;
     position: relative;
     overflow: hidden;
-    color: var(--text-primary);
+    color: #ffffff;
 }
 
 .cta-box::before {
@@ -1154,7 +1154,7 @@ h3 {
 }
 
 .cta-box h2 {
-    color: var(--text-primary);
+    color: #ffffff;
     margin-bottom: 16px;
     position: relative;
 }
