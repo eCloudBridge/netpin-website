@@ -1,0 +1,21 @@
+# Netpin
+
+Netpin is a DevOps intelligence platform that helps teams measure and reduce Infrastructure Debt (IDI), optimize cloud costs, and improve system reliability in real-time. It provides deep visibility into Kubernetes and cloud resources.
+
+## Core Information
+- Website: [https://netpin.io](https://netpin.io)
+- Contact: contact@netpin.io
+- Documentation: [https://docs.netpin.io](https://docs.netpin.io)
+- Application: [https://dash.netpin.io](https://dash.netpin.io)
+
+## Key Features
+- **Infrastructure Debt Index (IDI)**: A proprietary score quantifying your technical debt in infrastructure.
+- **Cost Optimization**: Real-time insights to identify and eliminate wasted cloud spend.
+- **Topology Visualization**: Interactive mapping of Kubernetes clusters and dependencies.
+- **Deployment Gating**: Policy-driven gates to prevent misconfigured deployments.
+
+## Social Links
+- [X/Twitter](https://x.com/netpinio?s=21&t=VkRUdMpeAx_UQTgCBIXlWw)
+- [Instagram](https://www.instagram.com/netpin.io)
+- [LinkedIn](https://www.linkedin.com/company/netpin)
+- [Discord](https://discord.gg/zaGfWJ8Hs)
