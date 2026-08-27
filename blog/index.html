@@ -40,28 +40,125 @@
 
     <netpin-header></netpin-header>
     <script src="/components/header.js"></script>
-    <section class="container" style="padding-top: 150px; min-height: 80vh; padding-bottom: 100px;">
-        <h1 style="font-size: 3rem; margin-bottom: 10px;">Netpin <span class="text-gradient">Blog</span></h1>
-        <p style="font-size: 1.2rem; color: var(--text-muted); margin-bottom: 40px;">Insights on Kubernetes, DevOps, and Infrastructure Debt.</p>
-        
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
-            <a href="what-is-infrastructure-debt.html" style="text-decoration: none; color: inherit; padding: 25px; border-radius: 12px; border: 1px solid var(--border-subtle); background: #ffffff; box-shadow: var(--shadow-md); transition: transform 0.2s ease, box-shadow 0.2s ease;" onmouseover="this.style.transform=\'translateY(-5px)\'; this.style.boxShadow=\'var(--shadow-lg)\'" onmouseout="this.style.transform=\'translateY(0)\'; this.style.boxShadow=\'var(--shadow-md)\'" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='var(--color-primary)'" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='var(--border)'">
-                <h3 style="margin-bottom: 15px; color: var(--color-primary-light);">What is Infrastructure Debt (IDI)?</h3>
-                <p style="color: var(--text-muted); font-size: 0.95rem;">Learn how to measure and improve your Kubernetes environments using the IDI score.</p>
-            </a>
-            <a href="topology.html" style="text-decoration: none; color: inherit; padding: 25px; border-radius: 12px; border: 1px solid var(--border-subtle); background: #ffffff; box-shadow: var(--shadow-md); transition: transform 0.2s ease, box-shadow 0.2s ease;" onmouseover="this.style.transform=\'translateY(-5px)\'; this.style.boxShadow=\'var(--shadow-lg)\'" onmouseout="this.style.transform=\'translateY(0)\'; this.style.boxShadow=\'var(--shadow-md)\'" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='var(--color-primary)'" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='var(--border)'">
-                <h3 style="margin-bottom: 15px; color: var(--color-primary-light);">Mastering Microservice Topology</h3>
-                <p style="color: var(--text-muted); font-size: 0.95rem;">Discover how to visualize and optimize your microservice topology for better performance.</p>
-            </a>
-            <a href="deploy-gate.html" style="text-decoration: none; color: inherit; padding: 25px; border-radius: 12px; border: 1px solid var(--border-subtle); background: #ffffff; box-shadow: var(--shadow-md); transition: transform 0.2s ease, box-shadow 0.2s ease;" onmouseover="this.style.transform=\'translateY(-5px)\'; this.style.boxShadow=\'var(--shadow-lg)\'" onmouseout="this.style.transform=\'translateY(0)\'; this.style.boxShadow=\'var(--shadow-md)\'" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='var(--color-primary)'" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='var(--border)'">
-                <h3 style="margin-bottom: 15px; color: var(--color-primary-light);">The Power of Deployment Gating</h3>
-                <p style="color: var(--text-muted); font-size: 0.95rem;">Stop bad code at the door. Prevent outages and enforce security in your CI/CD pipelines.</p>
-            </a>
-            <a href="kubernetes-cost-optimization.html" style="text-decoration: none; color: inherit; padding: 25px; border-radius: 12px; border: 1px solid var(--border-subtle); background: #ffffff; box-shadow: var(--shadow-md); transition: transform 0.2s ease, box-shadow 0.2s ease;" onmouseover="this.style.transform=\'translateY(-5px)\'; this.style.boxShadow=\'var(--shadow-lg)\'" onmouseout="this.style.transform=\'translateY(0)\'; this.style.boxShadow=\'var(--shadow-md)\'" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='var(--color-primary)'" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='var(--border)'">
-                <h3 style="margin-bottom: 15px; color: var(--color-primary-light);">Kubernetes Cost Optimization</h3>
-                <p style="color: var(--text-muted); font-size: 0.95rem;">A comprehensive guide to keeping your cluster costs under control.</p>
-            </a>
+    <section class="blog-hero">
+        <div class="blog-hero-content">
+            <h1>Netpin <span style="color: white;">Blog</span></h1>
+            <p>Technical deep-dives, tutorials, and best practices on Kubernetes, SRE, and Infrastructure Debt.</p>
         </div>
+    </section>
+        
+    <section class="blog-grid">
+        <!-- Card 1 -->
+        <a href="what-is-infrastructure-debt.html" class="blog-card">
+            <div class="blog-card-image-wrap">
+                <span class="blog-badge">Infrastructure</span>
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" alt="What is Infrastructure Debt" loading="lazy">
+            </div>
+            <div class="blog-card-content">
+                <div class="blog-card-meta">
+                    <span>
+                        <i data-lucide="calendar" style="width: 16px; height: 16px; color: var(--color-primary);"></i>
+                        Aug 20, 2026
+                    </span>
+                    <span>
+                        <i data-lucide="clock" style="width: 16px; height: 16px; color: var(--color-primary);"></i>
+                        5 min read
+                    </span>
+                </div>
+                <h3>What is Infrastructure Debt (IDI)?</h3>
+                <p>Learn how to measure and improve your Kubernetes environments using the IDI score.</p>
+                <div class="blog-card-author">
+                    <img src="https://images.unsplash.com/photo-1550525811-e5869dd03032?auto=format&fit=crop&w=100&q=80" alt="Netpin Engineering" loading="lazy">
+                    <div class="blog-card-author-info">
+                        <strong>Netpin Engineering</strong>
+                    </div>
+                </div>
+            </div>
+        </a>
+
+        <!-- Card 2 -->
+        <a href="topology.html" class="blog-card">
+            <div class="blog-card-image-wrap">
+                <span class="blog-badge">Kubernetes</span>
+                <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80" alt="Mastering Microservice Topology" loading="lazy">
+            </div>
+            <div class="blog-card-content">
+                <div class="blog-card-meta">
+                    <span>
+                        <i data-lucide="calendar" style="width: 16px; height: 16px; color: var(--color-primary);"></i>
+                        Aug 15, 2026
+                    </span>
+                    <span>
+                        <i data-lucide="clock" style="width: 16px; height: 16px; color: var(--color-primary);"></i>
+                        8 min read
+                    </span>
+                </div>
+                <h3>Mastering Microservice Topology</h3>
+                <p>Discover how to visualize and optimize your microservice topology for better performance.</p>
+                <div class="blog-card-author">
+                    <img src="https://images.unsplash.com/photo-1550525811-e5869dd03032?auto=format&fit=crop&w=100&q=80" alt="Netpin Engineering" loading="lazy">
+                    <div class="blog-card-author-info">
+                        <strong>Netpin Engineering</strong>
+                    </div>
+                </div>
+            </div>
+        </a>
+
+        <!-- Card 3 -->
+        <a href="deploy-gate.html" class="blog-card">
+            <div class="blog-card-image-wrap">
+                <span class="blog-badge">CI/CD</span>
+                <img src="https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?auto=format&fit=crop&w=800&q=80" alt="The Power of Deployment Gating" loading="lazy">
+            </div>
+            <div class="blog-card-content">
+                <div class="blog-card-meta">
+                    <span>
+                        <i data-lucide="calendar" style="width: 16px; height: 16px; color: var(--color-primary);"></i>
+                        Aug 10, 2026
+                    </span>
+                    <span>
+                        <i data-lucide="clock" style="width: 16px; height: 16px; color: var(--color-primary);"></i>
+                        6 min read
+                    </span>
+                </div>
+                <h3>The Power of Deployment Gating</h3>
+                <p>Stop bad code at the door. Prevent outages and enforce security in your CI/CD pipelines.</p>
+                <div class="blog-card-author">
+                    <img src="https://images.unsplash.com/photo-1550525811-e5869dd03032?auto=format&fit=crop&w=100&q=80" alt="Netpin Engineering" loading="lazy">
+                    <div class="blog-card-author-info">
+                        <strong>Netpin Engineering</strong>
+                    </div>
+                </div>
+            </div>
+        </a>
+
+        <!-- Card 4 -->
+        <a href="kubernetes-cost-optimization.html" class="blog-card">
+            <div class="blog-card-image-wrap">
+                <span class="blog-badge">FinOps</span>
+                <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=800&q=80" alt="Kubernetes Cost Optimization" loading="lazy">
+            </div>
+            <div class="blog-card-content">
+                <div class="blog-card-meta">
+                    <span>
+                        <i data-lucide="calendar" style="width: 16px; height: 16px; color: var(--color-primary);"></i>
+                        Aug 05, 2026
+                    </span>
+                    <span>
+                        <i data-lucide="clock" style="width: 16px; height: 16px; color: var(--color-primary);"></i>
+                        10 min read
+                    </span>
+                </div>
+                <h3>Kubernetes Cost Optimization</h3>
+                <p>A comprehensive guide to keeping your cluster costs under control.</p>
+                <div class="blog-card-author">
+                    <img src="https://images.unsplash.com/photo-1550525811-e5869dd03032?auto=format&fit=crop&w=100&q=80" alt="Netpin Engineering" loading="lazy">
+                    <div class="blog-card-author-info">
+                        <strong>Netpin Engineering</strong>
+                    </div>
+                </div>
+            </div>
+        </a>
     </section>
 <!-- Footer -->
     <netpin-footer></netpin-footer>
