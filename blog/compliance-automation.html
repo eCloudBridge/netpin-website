@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Automating Compliance: SOC 2 & CIS for Kubernetes – Netpin Blog</title>
     <meta name="description" content="Learn how Netpin automates SOC 2 and CIS benchmarking for Kubernetes environments.">
-    <link rel="stylesheet" href="../css/style.css?v=3.1">
+    <link rel="stylesheet" href="../css/style.css?v=3.2">
 
     <!-- Force Solid Navbar on Blog Pages -->
     <style>
@@ -34,16 +34,35 @@
     </section>
     
     <section class="container" style="min-height: 60vh; padding-bottom: 100px;">
-        <div style="max-width: 800px; margin: 0 auto;">
+        <div style="max-width: 800px; margin: 0 auto; padding: 0 20px;">
             <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" alt="Compliance Automation" style="width: 100%; border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); border: 1px solid var(--border); margin-bottom: 50px;">
             
-            <h2 style="margin-bottom: 15px;">The Audit Scramble</h2>
-            <p style="color: var(--text-muted); margin-bottom: 25px; line-height: 1.8;">For years, compliance meant a frantic two-week scramble of taking screenshots of AWS consoles and Kubernetes terminal outputs. With Netpin's Compliance Engine, this is entirely automated. By mapping CIS, SOC 2, PCI DSS, and NIST controls directly against your real-time cluster inventory, Netpin ensures your infrastructure is always audit-ready.</p>
+            <h2 style="margin-bottom: 20px; font-size: 2rem; color: var(--text-primary);">The Audit Scramble</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 25px; line-height: 1.8; font-size: 1.1rem;">For years, compliance meant a frantic two-week scramble. Engineering teams would halt feature development to manually take screenshots of AWS consoles, export IAM lists, and run ad-hoc scripts to prove to auditors that their Kubernetes environments were secure.</p>
             
-            <h2 style="margin-bottom: 15px;">Continuous Control Monitoring</h2>
-            <p style="color: var(--text-muted); margin-bottom: 25px; line-height: 1.8;">Once you connect your cloud providers, Netpin continuously evaluates your environment against standard frameworks. Any deviation generates a finding with a detailed "Explain & Fix" packet, complete with Terraform or kubectl remediation commands. No more guesswork, no more audit anxiety.</p>
+            <p style="color: var(--text-secondary); margin-bottom: 35px; line-height: 1.8; font-size: 1.1rem;">This manual evidence collection is not only exhausting and expensive—it's highly inaccurate. By the time the auditor reviews the screenshot, the infrastructure has already mutated through CI/CD pipelines.</p>
+
+            <blockquote style="border-left: 4px solid var(--color-primary); padding-left: 20px; margin: 30px 0; font-style: italic; color: var(--text-primary); font-size: 1.2rem; background: #f8fafc; padding: 20px; border-radius: 0 8px 8px 0;">
+                "Compliance should be an automated byproduct of good engineering, not a manual tax paid every quarter."
+            </blockquote>
+
+            <h2 style="margin-bottom: 20px; font-size: 2rem; color: var(--text-primary);">Continuous Control Monitoring</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 25px; line-height: 1.8; font-size: 1.1rem;">With Netpin's Compliance Engine, this archaic process is entirely automated. By mapping industry standards directly against your real-time cluster and cloud inventory, Netpin ensures your infrastructure is always audit-ready.</p>
+            
+            <div style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: 12px; padding: 30px; margin-bottom: 40px; box-shadow: var(--shadow-sm);">
+                <h4 style="margin-bottom: 15px; font-size: 1.2rem;">Supported Frameworks:</h4>
+                <ul style="color: var(--text-secondary); margin-bottom: 0; line-height: 1.8; list-style-type: none; padding: 0;">
+                    <li style="margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">✅ <strong>SOC 2 Type II:</strong> Access controls, encryption at rest/transit, and logical separation.</li>
+                    <li style="margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">✅ <strong>CIS Benchmarks:</strong> Hardening for Kubernetes, Docker, AWS, and GCP.</li>
+                    <li style="margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">✅ <strong>PCI DSS:</strong> Network segmentation and data protection for payment workloads.</li>
+                    <li style="display: flex; align-items: center; gap: 10px;">✅ <strong>NIST CSF:</strong> Risk management and operational security posture.</li>
+                </ul>
+            </div>
+
+            <h2 style="margin-bottom: 20px; font-size: 2rem; color: var(--text-primary);">Remediation, Not Just Reporting</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 25px; line-height: 1.8; font-size: 1.1rem;">Once you connect your cloud providers, Netpin continuously evaluates your environment. Any deviation (e.g., an S3 bucket becoming public, or a pod running as root) generates a finding. Crucially, Netpin provides a detailed "Explain & Fix" packet, complete with Terraform or kubectl remediation commands. No more guesswork, no more audit anxiety.</p>
         </div>
-    </section>
+</section>
     
     <netpin-footer></netpin-footer>
     <script src="/components/footer.js"></script>

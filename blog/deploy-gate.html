@@ -6,7 +6,7 @@
     <title>The Power of Deployment Gating – Netpin Blog</title>
     <meta name="description" content="Learn what Infrastructure Debt Index (IDI) is and how DevOps teams can use it to measure and improve their Kubernetes environments.">
     <meta name="keywords" content="Infrastructure Debt Index, IDI, Kubernetes debt, technical debt, DevOps monitoring">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/style.css?v=3.2">
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-JQZBD8MC00"></script>
@@ -63,24 +63,33 @@
     </section>
     
     <section class="container" style="min-height: 60vh; padding-bottom: 100px;">
-        <div style="max-width: 800px; margin: 0 auto;">
+        <div style="max-width: 800px; margin: 0 auto; padding: 0 20px;">
             <img src="../images/deploy_gate_blog_1777268684972.png" alt="The Power of Deployment Gating" style="width: 100%; border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); border: 1px solid var(--border); margin-bottom: 50px;">
             
-            <h2 style="margin-bottom: 15px;">The Death of Manual Approvals</h2>
-            <p style="color: var(--text-muted); margin-bottom: 25px; line-height: 1.8;">In a high-velocity DevOps environment, relying on manual Change Advisory Board (CAB) approvals is a bottleneck. As teams move toward deploying multiple times a day, human reviewers simply cannot catch every misconfigured YAML file, missing resource limit, or unintended network exposure. Deployment gates automate this process, acting as a tireless sentinel.</p>
+            <h2 style="margin-bottom: 20px; font-size: 2rem; color: var(--text-primary);">Stop Bad Code at the Door</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 25px; line-height: 1.8; font-size: 1.1rem;">Your CI/CD pipeline might be fast, but is it safe? Modern pipelines are heavily optimized for speed—building, testing, and deploying containers in minutes. However, if the target infrastructure is currently degraded, or if the new container introduces a severe misconfiguration, a rapid deployment simply means a rapid outage.</p>
+            
+            <p style="color: var(--text-secondary); margin-bottom: 35px; line-height: 1.8; font-size: 1.1rem;">This is where <strong>Deployment Gating</strong> becomes critical. A gate acts as an automated traffic cop, verifying that conditions are safe before allowing a release to hit production.</p>
 
-            <h2 style="margin-bottom: 15px;">Shift-Left Security and Quality</h2>
-            <p style="color: var(--text-muted); margin-bottom: 25px; line-height: 1.8;">A "Deployment Gate" is a programmable checkpoint in your GitOps or CI/CD workflow (like GitHub Actions, ArgoCD, or Jenkins). Before a new container image or configuration change is rolled out to the cluster, the gate evaluates it against a strict set of policies.</p>
-            <ul style="color: var(--text-muted); margin-bottom: 30px; line-height: 1.8; margin-left: 20px;">
-                <li style="margin-bottom: 10px;"><strong>Cost Controls:</strong> Does this new deployment request an absurd amount of CPU/Memory? If so, block it.</li>
-                <li style="margin-bottom: 10px;"><strong>Security Best Practices:</strong> Is the container trying to run as root? Does it have excessive network permissions? Block it.</li>
-                <li style="margin-bottom: 10px;"><strong>Reliability:</strong> Are readiness and liveness probes properly configured? If not, block it.</li>
-            </ul>
+            <blockquote style="border-left: 4px solid #ef4444; padding-left: 20px; margin: 30px 0; font-style: italic; color: var(--text-primary); font-size: 1.2rem; background: #fef2f2; padding: 20px; border-radius: 0 8px 8px 0;">
+                "Rolling out a new feature to a cluster that is already experiencing a 30% error rate is reckless. The pipeline must have situational awareness."
+            </blockquote>
 
-            <h2 style="margin-bottom: 15px;">Integrating Netpin's IDI</h2>
-            <p style="color: var(--text-muted); margin-bottom: 25px; line-height: 1.8;">By integrating Netpin's Infrastructure Debt Index (IDI) directly into your pipelines, you can automatically fail builds that degrade your cluster's overall health score. Instead of reacting to production incidents, you empower developers with immediate, actionable feedback right in their pull requests.</p>
+            <h2 style="margin-bottom: 20px; font-size: 2rem; color: var(--text-primary);">How Netpin Deploy Gate Works</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 25px; line-height: 1.8; font-size: 1.1rem;">Netpin integrates directly via webhooks into GitHub Actions, GitLab CI, Jenkins, and ArgoCD. Before the final <code>kubectl apply</code> or Helm upgrade, the pipeline queries Netpin's Deploy Gate.</p>
+            
+            <div style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: 12px; padding: 30px; margin-bottom: 40px; box-shadow: var(--shadow-sm);">
+                <h4 style="margin-bottom: 15px; font-size: 1.2rem;">The Evaluation Criteria:</h4>
+                <ul style="color: var(--text-secondary); margin-bottom: 0; line-height: 1.8; list-style-type: disc; padding-left: 20px;">
+                    <li style="margin-bottom: 10px;"><strong>IDI Score Threshold:</strong> If the cluster's Infrastructure Debt Index is below the required baseline (e.g., < 75), the deployment is halted.</li>
+                    <li style="margin-bottom: 10px;"><strong>Active Alerts:</strong> The gate checks for any active critical alerts (like CPU throttling or OOMKills) on the target namespace.</li>
+                    <li style="margin-bottom: 10px;"><strong>Security Posture:</strong> Ensures the incoming image passes vulnerability scans and complies with organizational RBAC policies.</li>
+                </ul>
+            </div>
+
+            <p style="color: var(--text-secondary); margin-bottom: 25px; line-height: 1.8; font-size: 1.1rem;">If the gate fails, developers receive immediate feedback in their PR comments explaining <em>why</em> the rollout was blocked, along with remediation steps. SREs can define custom overrides for emergency hotfixes, ensuring that safety never completely blocks critical agility.</p>
         </div>
-    </section>
+</section>
 <!-- Footer -->
     <netpin-footer></netpin-footer>
     <script src="/components/footer.js"></script>

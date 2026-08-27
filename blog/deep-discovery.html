@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Uncovering Hidden Debt with Deep Discovery – Netpin Blog</title>
     <meta name="description" content="Discover how Netpin's Deep Discovery maps your entire infrastructure topography to find hidden risks.">
-    <link rel="stylesheet" href="../css/style.css?v=3.1">
+    <link rel="stylesheet" href="../css/style.css?v=3.2">
 
     <!-- Force Solid Navbar on Blog Pages -->
     <style>
@@ -34,16 +34,29 @@
     </section>
     
     <section class="container" style="min-height: 60vh; padding-bottom: 100px;">
-        <div style="max-width: 800px; margin: 0 auto;">
+        <div style="max-width: 800px; margin: 0 auto; padding: 0 20px;">
             <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80" alt="Deep Discovery" style="width: 100%; border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); border: 1px solid var(--border); margin-bottom: 50px;">
             
-            <h2 style="margin-bottom: 15px;">You Can't Secure What You Can't See</h2>
-            <p style="color: var(--text-muted); margin-bottom: 25px; line-height: 1.8;">Shadow IT and unmanaged resources are the plague of modern multi-cloud environments. The first step to reducing your Infrastructure Debt Index (IDI) is mapping out exactly what you have. This is where Netpin's Deep Discovery comes in.</p>
+            <h2 style="margin-bottom: 20px; font-size: 2rem; color: var(--text-primary);">You Can't Secure What You Can't See</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 25px; line-height: 1.8; font-size: 1.1rem;">Shadow IT, unmanaged resources, and rogue namespaces are the plague of modern multi-cloud environments. As teams adopt GitOps and Infrastructure as Code, the delta between what is declared in Git and what is actually running in production inevitably drifts.</p>
             
-            <h2 style="margin-bottom: 15px;">Blast Radius Analysis</h2>
-            <p style="color: var(--text-muted); margin-bottom: 25px; line-height: 1.8;">By visualizing your infrastructure topology down to the node level, Deep Discovery calculates the Blast Radius of potential changes. Before you deploy, you can see the impact neighborhood graph, enabling SREs and Platform Engineers to make safe, confident rollout decisions.</p>
+            <p style="color: var(--text-secondary); margin-bottom: 35px; line-height: 1.8; font-size: 1.1rem;">The first step to reducing your Infrastructure Debt Index (IDI) is mapping out exactly what you have. This is where Netpin's <strong>Deep Discovery</strong> comes in.</p>
+
+            <h2 style="margin-bottom: 20px; font-size: 2rem; color: var(--text-primary);">How Deep Discovery Works</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 25px; line-height: 1.8; font-size: 1.1rem;">Unlike traditional CMDBs that rely on manual updates, Deep Discovery uses read-only API access to traverse your cloud providers (AWS, GCP, Azure) and Kubernetes clusters simultaneously. It builds a multi-layered graph linking cloud resources to cluster components.</p>
+            
+            <ul style="color: var(--text-secondary); margin-bottom: 30px; line-height: 1.8; margin-left: 20px;">
+                <li style="margin-bottom: 15px;"><strong>Cross-Cloud Linking:</strong> Automatically links an AWS RDS instance to the specific Kubernetes Pods that are opening connections to it.</li>
+                <li style="margin-bottom: 15px;"><strong>Drift Detection:</strong> Identifies manual changes made via the AWS console that conflict with your Terraform state.</li>
+                <li style="margin-bottom: 15px;"><strong>Orphan Identification:</strong> Highlights resources that exist in the cloud but are no longer referenced by any active application, driving immediate cost savings.</li>
+            </ul>
+
+            <h2 style="margin-bottom: 20px; font-size: 2rem; color: var(--text-primary);">Blast Radius Analysis</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 25px; line-height: 1.8; font-size: 1.1rem;">By visualizing your infrastructure topology down to the node level, Deep Discovery calculates the <strong>Blast Radius</strong> of potential changes. Before you deploy, you can see the impact neighborhood graph. If taking down a specific Redis cache will cascade failure to three other microservices, Netpin flags it.</p>
+            
+            <p style="color: var(--text-secondary); line-height: 1.8; font-size: 1.1rem;">This level of contextual awareness enables SREs and Platform Engineers to make safe, confident rollout decisions, dramatically reducing the mean time to recovery (MTTR) during incidents.</p>
         </div>
-    </section>
+</section>
     
     <netpin-footer></netpin-footer>
     <script src="/components/footer.js"></script>

@@ -6,7 +6,7 @@
     <title>What is Infrastructure Debt (IDI)? – Netpin Blog</title>
     <meta name="description" content="Learn what Infrastructure Debt Index (IDI) is and how DevOps teams can use it to measure and improve their Kubernetes environments.">
     <meta name="keywords" content="Infrastructure Debt Index, IDI, Kubernetes debt, technical debt, DevOps monitoring">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/style.css?v=3.2">
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-JQZBD8MC00"></script>
@@ -63,25 +63,47 @@
     </section>
     
     <section class="container" style="min-height: 60vh; padding-bottom: 100px;">
-        <div style="max-width: 800px; margin: 0 auto;">
+        <div style="max-width: 800px; margin: 0 auto; padding: 0 20px;">
             <img src="../images/idi_blog_1777268652283.png" alt="What is Infrastructure Debt (IDI)?" style="width: 100%; border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); border: 1px solid var(--border); margin-bottom: 50px;">
             
-            <h2 style="margin-bottom: 15px;">The Silent Killer of Velocity</h2>
-            <p style="color: var(--text-muted); margin-bottom: 25px; line-height: 1.8;">Infrastructure debt occurs when engineering teams take shortcuts in setting up or managing their environments. This often happens in Kubernetes clusters, where the rush to push features overrides best practices. The symptoms are subtle at first—a slight increase in the AWS bill, an occasional random pod failure—but eventually, it cripples your ability to scale.</p>
+            <h2 style="margin-bottom: 20px; font-size: 2rem; color: var(--text-primary);">The Silent Killer of Velocity</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 25px; line-height: 1.8; font-size: 1.1rem;">Infrastructure debt occurs when engineering teams take shortcuts in setting up or managing their environments. This often happens in Kubernetes clusters, where the rush to push features overrides best practices. The symptoms are subtle at first—a slight increase in the AWS bill, an occasional random pod failure—but eventually, it cripples your ability to scale.</p>
             
-            <h2 style="margin-bottom: 15px;">The 4 Pillars of IDI</h2>
-            <p style="color: var(--text-muted); margin-bottom: 25px; line-height: 1.8;">At Netpin, we have developed the <strong>Infrastructure Debt Index (IDI)</strong> to help you quantify this debt into a single, understandable score out of 100. The IDI evaluates your clusters across four key pillars:</p>
-            <ul style="color: var(--text-muted); margin-bottom: 30px; line-height: 1.8; margin-left: 20px;">
-                <li style="margin-bottom: 10px;"><strong>Security:</strong> Outdated base images, excessive RBAC permissions, and missing network policies.</li>
-                <li style="margin-bottom: 10px;"><strong>Efficiency:</strong> Wasted CPU/Memory, over-provisioned nodes, and lack of autoscaling.</li>
-                <li style="margin-bottom: 10px;"><strong>Reliability:</strong> Missing liveness/readiness probes, single points of failure, and anti-affinity violations.</li>
-                <li style="margin-bottom: 10px;"><strong>Compliance:</strong> Deviations from CIS benchmarks and internal organizational policies.</li>
-            </ul>
+            <p style="color: var(--text-secondary); margin-bottom: 35px; line-height: 1.8; font-size: 1.1rem;">According to recent industry surveys, teams with high infrastructure debt spend up to 40% of their time on unplanned maintenance and firefighting, directly reducing the time available for new feature development.</p>
 
-            <h2 style="margin-bottom: 15px;">Actionable Intelligence</h2>
-            <p style="color: var(--text-muted); margin-bottom: 25px; line-height: 1.8;">By measuring IDI, you get a single actionable score. Instead of drowning in thousands of raw Prometheus metrics or noisy Datadog alerts, engineering managers can instantly see <em>why</em> their infrastructure is unhealthy and exactly <em>what</em> to fix first to lower their debt.</p>
+            <blockquote style="border-left: 4px solid var(--color-primary); padding-left: 20px; margin: 30px 0; font-style: italic; color: var(--text-primary); font-size: 1.2rem; background: #f8fafc; padding: 20px; border-radius: 0 8px 8px 0;">
+                "You can't fix what you can't measure. Infrastructure debt is the shadow tax on every deployment."
+            </blockquote>
+
+            <h2 style="margin-bottom: 20px; font-size: 2rem; color: var(--text-primary);">The 4 Pillars of IDI</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 25px; line-height: 1.8; font-size: 1.1rem;">At Netpin, we have developed the <strong>Infrastructure Debt Index (IDI)</strong> to help you quantify this debt into a single, understandable score out of 100. The IDI evaluates your clusters across four key pillars:</p>
+            
+            <div style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: 12px; padding: 30px; margin-bottom: 40px; box-shadow: var(--shadow-sm);">
+                <ul style="color: var(--text-secondary); margin-bottom: 0; line-height: 1.8; list-style-type: none; padding: 0;">
+                    <li style="margin-bottom: 15px; display: flex; align-items: flex-start; gap: 12px;">
+                        <span style="color: var(--color-primary); font-size: 1.2rem;">🔒</span>
+                        <div><strong>Security:</strong> Outdated base images, excessive RBAC permissions, and missing network policies. Netpin checks against CIS benchmarks to ensure compliance.</div>
+                    </li>
+                    <li style="margin-bottom: 15px; display: flex; align-items: flex-start; gap: 12px;">
+                        <span style="color: var(--color-primary); font-size: 1.2rem;">⚡</span>
+                        <div><strong>Efficiency:</strong> Wasted CPU/Memory, over-provisioned nodes, and lack of autoscaling. Identify resources that are running but not actively used.</div>
+                    </li>
+                    <li style="margin-bottom: 15px; display: flex; align-items: flex-start; gap: 12px;">
+                        <span style="color: var(--color-primary); font-size: 1.2rem;">🛡️</span>
+                        <div><strong>Reliability:</strong> Missing liveness/readiness probes, single points of failure, and anti-affinity violations that could cause an outage during node failures.</div>
+                    </li>
+                    <li style="display: flex; align-items: flex-start; gap: 12px;">
+                        <span style="color: var(--color-primary); font-size: 1.2rem;">📋</span>
+                        <div><strong>Compliance:</strong> Deviations from SOC 2, PCI DSS, and internal organizational policies mapped directly to your live infrastructure state.</div>
+                    </li>
+                </ul>
+            </div>
+
+            <h2 style="margin-bottom: 20px; font-size: 2rem; color: var(--text-primary);">Actionable Intelligence</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 25px; line-height: 1.8; font-size: 1.1rem;">By measuring IDI, you get a single actionable score. Instead of drowning in thousands of raw Prometheus metrics or noisy Datadog alerts, engineering managers can instantly see <em>why</em> their infrastructure is unhealthy and exactly <em>what</em> to fix first to lower their debt.</p>
+            <p style="color: var(--text-secondary); margin-bottom: 25px; line-height: 1.8; font-size: 1.1rem;">Netpin provides automated 'Explain & Fix' packets that generate the exact Terraform or kubectl commands needed to remediate these issues, turning weeks of triage into minutes of action.</p>
         </div>
-    </section>
+</section>
 <!-- Footer -->
     <netpin-footer></netpin-footer>
     <script src="/components/footer.js"></script>

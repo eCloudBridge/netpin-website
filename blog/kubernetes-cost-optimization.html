@@ -6,7 +6,7 @@
     <title>Kubernetes Cost Optimization Guide – Netpin</title>
     <meta name="description" content="A comprehensive guide to Kubernetes cost optimization. Discover how to right-size your clusters and save on your cloud bill.">
     <meta name="keywords" content="Kubernetes cost optimization, AWS EKS cost, GKE pricing, cloud optimization, right-sizing pods, DevOps costs">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/style.css?v=3.2">
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-JQZBD8MC00"></script>
@@ -63,33 +63,30 @@
     </section>
     
     <section class="container" style="min-height: 60vh; padding-bottom: 100px;">
-        <div style="max-width: 800px; margin: 0 auto;">
+        <div style="max-width: 800px; margin: 0 auto; padding: 0 20px;">
             <img src="../images/hero-dashboard.png" alt="Kubernetes Cost Optimization" style="width: 100%; border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); border: 1px solid var(--border); margin-bottom: 50px;">
-
-            <h2 style="margin-bottom: 15px;">The "Cloud Shock" Phenomenon</h2>
-            <p style="color: var(--text-muted); margin-bottom: 25px; line-height: 1.8;">Kubernetes is incredibly powerful for orchestrating containerized applications, but its ease of scaling often hides the underlying financial impact. Engineering teams routinely over-provision resources to ensure high availability, leading to massive amounts of idle CPU and memory.</p>
             
-            <h2 style="margin-bottom: 15px;">Right-Sizing Resources</h2>
-            <p style="color: var(--text-muted); margin-bottom: 25px; line-height: 1.8;">The first step in Kubernetes cost optimization is right-sizing. This involves continuously monitoring your pods' actual usage versus their requested resources. If a pod requests 2GB of RAM but consistently uses only 500MB, you are paying a premium for wasted capacity.</p>
-            <ul style="color: var(--text-muted); margin-bottom: 30px; line-height: 1.8; margin-left: 20px;">
-                <li style="margin-bottom: 10px;"><strong>Analyze Historical Usage:</strong> Look at CPU and memory metrics over a 7-day to 30-day period.</li>
-                <li style="margin-bottom: 10px;"><strong>Adjust Requests and Limits:</strong> Tighten the gap between resource requests (what K8s reserves) and limits (the maximum allowed).</li>
-                <li style="margin-bottom: 10px;"><strong>Implement Autoscaling:</strong> Use the Horizontal Pod Autoscaler (HPA) to scale out based on traffic, rather than keeping idle replicas running.</li>
+            <h2 style="margin-bottom: 20px; font-size: 2rem; color: var(--text-primary);">The Cloud Bill Shock</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 25px; line-height: 1.8; font-size: 1.1rem;">Kubernetes is a fantastic orchestrator, but it is notoriously bad at communicating costs. Developers often request excessive CPU and Memory limits "just to be safe," resulting in heavily underutilized nodes. At the end of the month, finance is shocked by an AWS bill that has grown by 40%, with no clear explanation of where the money went.</p>
+            
+            <div style="background: #f8fafc; border-left: 4px solid var(--color-primary); padding: 24px; border-radius: 0 8px 8px 0; margin-bottom: 40px;">
+                <h3 style="margin-bottom: 10px; font-size: 1.3rem;">The FinOps Reality</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 0; line-height: 1.6;">Gartner estimates that organizations waste an average of 32% of their cloud spend. In Kubernetes environments, that waste is often hidden inside over-provisioned replica sets and abandoned namespaces.</p>
+            </div>
+
+            <h2 style="margin-bottom: 20px; font-size: 2rem; color: var(--text-primary);">Netpin Cost Intelligence</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 25px; line-height: 1.8; font-size: 1.1rem;">Netpin integrates with your cloud provider billing APIs and overlays that data directly onto your Kubernetes topology. This allows for granular, actionable cost insights.</p>
+            
+            <ul style="color: var(--text-secondary); margin-bottom: 30px; line-height: 1.8; margin-left: 20px;">
+                <li style="margin-bottom: 15px;"><strong>Right-sizing Recommendations:</strong> Netpin analyzes historical usage and suggests the exact CPU/Memory limits your pods actually need, often reducing resource requests by 50%.</li>
+                <li style="margin-bottom: 15px;"><strong>Zombie Resource Detection:</strong> Automatically flags unattached persistent volumes, idle load balancers, and namespaces with zero traffic over the last 30 days.</li>
+                <li style="margin-bottom: 15px;"><strong>Namespace Attribution:</strong> Break down the AWS/GCP bill by team or namespace, enabling true chargeback and accountability models.</li>
             </ul>
 
-            <h2 style="margin-bottom: 15px;">Spot Instances and Node Optimization</h2>
-            <p style="color: var(--text-muted); margin-bottom: 25px; line-height: 1.8;">Another massive cost-saver is leveraging Spot Instances (AWS) or Preemptible VMs (GCP). For stateless, fault-tolerant workloads, running on spot instances can reduce your compute costs by up to 80%.</p>
-            
-            <h2 style="margin-bottom: 15px;">How Netpin Helps</h2>
-            <p style="color: var(--text-muted); margin-bottom: 25px; line-height: 1.8;">Manual cost optimization is tedious and error-prone. Netpin provides clear, automated visibility into your cluster efficiency. Our platform gives you actionable, precise recommendations to lower your Kubernetes costs instantly—telling you exactly which deployments need right-sizing and how much you will save.</p>
-            
-            <div style="text-decoration: none; color: inherit; padding: 25px; border-radius: 12px; border: 1px solid var(--border-subtle); background: #ffffff; box-shadow: var(--shadow-md); transition: transform 0.2s ease, box-shadow 0.2s ease;" onmouseover="this.style.transform=\'translateY(-5px)\'; this.style.boxShadow=\'var(--shadow-lg)\'" onmouseout="this.style.transform=\'translateY(0)\'; this.style.boxShadow=\'var(--shadow-md)\'">
-                <h3 style="margin-bottom: 15px;">Ready to cut your cloud bill?</h3>
-                <p style="color: var(--text-muted); margin-bottom: 20px;">Connect your cluster in 2 minutes and instantly view your cost-saving opportunities.</p>
-                <a href="https://dash.netpin.io/register" class="btn btn-primary">Start Optimizing for Free</a>
-            </div>
+            <h2 style="margin-bottom: 20px; font-size: 2rem; color: var(--text-primary);">Automated Savings</h2>
+            <p style="color: var(--text-secondary); line-height: 1.8; font-size: 1.1rem;">With Netpin's 'Explain & Fix' feature, optimizing costs isn't a manual chore. The platform generates the necessary YAML diffs or Terraform code to downscale resources instantly, allowing your team to realize savings with a single click.</p>
         </div>
-    </section>
+</section>
 <!-- Footer -->
     <netpin-footer></netpin-footer>
     <script src="/components/footer.js"></script>
