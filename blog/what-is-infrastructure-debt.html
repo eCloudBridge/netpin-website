@@ -34,18 +34,37 @@
         }
     </style>
 
+
+    <!-- Force Solid Navbar on Blog Pages -->
+    <style>
+        .navbar { 
+            background: #ffffff !important; 
+            padding: 12px 0 !important; 
+            border-bottom: 1px solid var(--border-subtle) !important; 
+            box-shadow: var(--shadow-sm) !important; 
+        }
+    </style>
 </head>
 <body>
     
 
     <netpin-header></netpin-header>
     <script src="/components/header.js"></script>
-    <section class="container" style="padding-top: 150px; min-height: 80vh; padding-bottom: 100px;">
+        <section class="blog-hero" style="padding-top: 150px; padding-bottom: 80px; margin-bottom: 60px;">
+        <div class="blog-hero-content">
+            <span class="blog-badge" style="position: relative; display: inline-block; top: 0; left: 0; margin-bottom: 24px; font-size: 0.9rem;">Infrastructure</span>
+            <h1 style="color: white; font-size: clamp(2rem, 4vw, 3.5rem); margin-bottom: 24px; line-height: 1.2;">What is Infrastructure Debt (IDI)?</h1>
+            <div class="blog-card-meta" style="justify-content: center; color: rgba(255,255,255,0.85); font-size: 1rem;">
+                <span><i data-lucide="calendar" style="width: 18px; height: 18px;"></i> Aug 20, 2026</span>
+                <span><i data-lucide="clock" style="width: 18px; height: 18px;"></i> 5 min read</span>
+                <span><i data-lucide="user" style="width: 18px; height: 18px;"></i> Netpin Engineering</span>
+            </div>
+        </div>
+    </section>
+    
+    <section class="container" style="min-height: 60vh; padding-bottom: 100px;">
         <div style="max-width: 800px; margin: 0 auto;">
-            <h1 style="font-size: 3rem; margin-bottom: 20px;">What is <span class="text-gradient">Infrastructure Debt</span> (IDI)?</h1>
-            <p style="font-size: 1.2rem; color: var(--text-muted); margin-bottom: 40px;">Technical debt is well-understood by software engineers, but what happens when the very foundation your applications run on is deeply flawed? Enter Infrastructure Debt.</p>
-            
-            <img src="../images/idi_blog_1777268652283.png" alt="Infrastructure Debt Index Dashboard" style="width: 100%; border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); border: 1px solid var(--border); margin-bottom: 40px;">
+            <img src="../images/idi_blog_1777268652283.png" alt="What is Infrastructure Debt (IDI)?" style="width: 100%; border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); border: 1px solid var(--border); margin-bottom: 50px;">
             
             <h2 style="margin-bottom: 15px;">The Silent Killer of Velocity</h2>
             <p style="color: var(--text-muted); margin-bottom: 25px; line-height: 1.8;">Infrastructure debt occurs when engineering teams take shortcuts in setting up or managing their environments. This often happens in Kubernetes clusters, where the rush to push features overrides best practices. The symptoms are subtle at first—a slight increase in the AWS bill, an occasional random pod failure—but eventually, it cripples your ability to scale.</p>

@@ -34,18 +34,37 @@
         }
     </style>
 
+
+    <!-- Force Solid Navbar on Blog Pages -->
+    <style>
+        .navbar { 
+            background: #ffffff !important; 
+            padding: 12px 0 !important; 
+            border-bottom: 1px solid var(--border-subtle) !important; 
+            box-shadow: var(--shadow-sm) !important; 
+        }
+    </style>
 </head>
 <body>
     
 
     <netpin-header></netpin-header>
     <script src="/components/header.js"></script>
-    <section class="container" style="padding-top: 150px; min-height: 80vh; padding-bottom: 100px;">
+        <section class="blog-hero" style="padding-top: 150px; padding-bottom: 80px; margin-bottom: 60px;">
+        <div class="blog-hero-content">
+            <span class="blog-badge" style="position: relative; display: inline-block; top: 0; left: 0; margin-bottom: 24px; font-size: 0.9rem;">CI/CD</span>
+            <h1 style="color: white; font-size: clamp(2rem, 4vw, 3.5rem); margin-bottom: 24px; line-height: 1.2;">The Power of Deployment Gating</h1>
+            <div class="blog-card-meta" style="justify-content: center; color: rgba(255,255,255,0.85); font-size: 1rem;">
+                <span><i data-lucide="calendar" style="width: 18px; height: 18px;"></i> Aug 10, 2026</span>
+                <span><i data-lucide="clock" style="width: 18px; height: 18px;"></i> 6 min read</span>
+                <span><i data-lucide="user" style="width: 18px; height: 18px;"></i> Netpin Engineering</span>
+            </div>
+        </div>
+    </section>
+    
+    <section class="container" style="min-height: 60vh; padding-bottom: 100px;">
         <div style="max-width: 800px; margin: 0 auto;">
-            <h1 style="font-size: 3rem; margin-bottom: 20px;">The Power of <span class="text-gradient">Deployment Gating</span></h1>
-            <p style="font-size: 1.2rem; color: var(--text-muted); margin-bottom: 40px;">Stop bad code at the door. How automated deployment gating prevents outages and enforces security in your CI/CD pipelines without slowing down developers.</p>
-            
-            <img src="../images/deploy_gate_blog_1777268684972.png" alt="Deployment Gating CI/CD Pipeline" style="width: 100%; border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); border: 1px solid var(--border); margin-bottom: 40px;">
+            <img src="../images/deploy_gate_blog_1777268684972.png" alt="The Power of Deployment Gating" style="width: 100%; border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); border: 1px solid var(--border); margin-bottom: 50px;">
             
             <h2 style="margin-bottom: 15px;">The Death of Manual Approvals</h2>
             <p style="color: var(--text-muted); margin-bottom: 25px; line-height: 1.8;">In a high-velocity DevOps environment, relying on manual Change Advisory Board (CAB) approvals is a bottleneck. As teams move toward deploying multiple times a day, human reviewers simply cannot catch every misconfigured YAML file, missing resource limit, or unintended network exposure. Deployment gates automate this process, acting as a tireless sentinel.</p>

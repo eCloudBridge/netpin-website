@@ -34,18 +34,37 @@
         }
     </style>
 
+
+    <!-- Force Solid Navbar on Blog Pages -->
+    <style>
+        .navbar { 
+            background: #ffffff !important; 
+            padding: 12px 0 !important; 
+            border-bottom: 1px solid var(--border-subtle) !important; 
+            box-shadow: var(--shadow-sm) !important; 
+        }
+    </style>
 </head>
 <body>
     
 
     <netpin-header></netpin-header>
     <script src="/components/header.js"></script>
-    <section class="container" style="padding-top: 150px; min-height: 80vh; padding-bottom: 100px;">
+        <section class="blog-hero" style="padding-top: 150px; padding-bottom: 80px; margin-bottom: 60px;">
+        <div class="blog-hero-content">
+            <span class="blog-badge" style="position: relative; display: inline-block; top: 0; left: 0; margin-bottom: 24px; font-size: 0.9rem;">FinOps</span>
+            <h1 style="color: white; font-size: clamp(2rem, 4vw, 3.5rem); margin-bottom: 24px; line-height: 1.2;">Kubernetes Cost Optimization</h1>
+            <div class="blog-card-meta" style="justify-content: center; color: rgba(255,255,255,0.85); font-size: 1rem;">
+                <span><i data-lucide="calendar" style="width: 18px; height: 18px;"></i> Aug 05, 2026</span>
+                <span><i data-lucide="clock" style="width: 18px; height: 18px;"></i> 10 min read</span>
+                <span><i data-lucide="user" style="width: 18px; height: 18px;"></i> Netpin Engineering</span>
+            </div>
+        </div>
+    </section>
+    
+    <section class="container" style="min-height: 60vh; padding-bottom: 100px;">
         <div style="max-width: 800px; margin: 0 auto;">
-            <h1 style="font-size: 3rem; margin-bottom: 20px;">The Ultimate Guide to <span class="text-gradient">Kubernetes Cost Optimization</span></h1>
-            <p style="font-size: 1.2rem; color: var(--text-muted); margin-bottom: 40px;">Managing Kubernetes clusters often leads to a spike in cloud costs if resources are not properly allocated. Discover how to regain control of your cloud bill without sacrificing performance.</p>
-
-            <img src="../images/hero-dashboard.png" alt="Kubernetes Cost Optimization Dashboard" style="width: 100%; border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); border: 1px solid var(--border); margin-bottom: 40px;">
+            <img src="../images/hero-dashboard.png" alt="Kubernetes Cost Optimization" style="width: 100%; border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); border: 1px solid var(--border); margin-bottom: 50px;">
 
             <h2 style="margin-bottom: 15px;">The "Cloud Shock" Phenomenon</h2>
             <p style="color: var(--text-muted); margin-bottom: 25px; line-height: 1.8;">Kubernetes is incredibly powerful for orchestrating containerized applications, but its ease of scaling often hides the underlying financial impact. Engineering teams routinely over-provision resources to ensure high availability, leading to massive amounts of idle CPU and memory.</p>
