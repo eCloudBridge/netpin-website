@@ -3,10 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Netpin for Startups – Scalable DevOps Infrastructure</title>
-    <meta name="description" content="Learn how fast-growing startups use Netpin to establish robust DevOps practices, monitor Kubernetes, and keep costs low while scaling.">
-    <meta name="keywords" content="DevOps for startups, scalable infrastructure, Kubernetes startups, cost optimization for startups, Netpin">
-    <link rel="stylesheet" href="../css/style.css">
+    <title>Netpin for Startups – Drift, Compliance &amp; Cost Guardrails Without a Platform Team</title>
+    <meta name="description" content="Real startup scenarios: the hotfix that came back, the first enterprise security questionnaire, and the runaway cloud bill — and how Netpin handles each.">
+    <meta name="keywords" content="DevOps for startups, Kubernetes drift, SOC 2 for startups, cloud cost startup, Netpin use case">
+    <link rel="stylesheet" href="../css/style.css?v=3.4">
+    <link rel="canonical" href="https://netpin.io/use-cases/startups.html">
+    <meta property="og:title" content="Netpin for Startups – Drift, Compliance &amp; Cost Guardrails Without a Platform Team">
+    <meta property="og:description" content="Real startup scenarios: the hotfix that came back, the first enterprise security questionnaire, and the runaway cloud bill — and how Netpin handles each.">
+    <meta property="og:url" content="https://netpin.io/use-cases/startups.html">
+    <meta property="og:image" content="https://netpin.io/images/og-banner.png">
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-JQZBD8MC00"></script>
@@ -40,53 +45,126 @@
 
     <netpin-header></netpin-header>
     <script src="/components/header.js"></script>
-    <section class="container use-case-hero-section">
-        <div class="use-case-hero-grid">
-            <div>
-                <h1 class="use-case-title">Netpin for <span class="text-gradient">Startups</span></h1>
-                <p class="use-case-subtitle">For startups, engineering velocity is the only metric that matters. But deploying quickly often leads to sprawling, expensive, and fragile Kubernetes environments. Netpin acts as your virtual DevOps team, providing the guardrails you need to scale from Seed to Series C without fear.</p>
-                
-                <a href="https://dash.netpin.io/register" class="btn btn-primary btn-large">Start Free Trial</a>
-            </div>
-            <div>
-                <img src="../images/idi-analytics-mockup.png" alt="Netpin Startup Dashboard Mockup" style="width: 100%; border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); border: 1px solid var(--border);">
-            </div>
+
+    <section class="container use-case-hero-section uc-hero">
+        <a href="index.html" class="uc-back">← All use cases</a>
+        <div class="section-label"><span>✦</span> Use case</div>
+        <h1 class="use-case-title">Netpin for <span class="text-gradient">Startups</span></h1>
+        <p class="use-case-subtitle">You ship daily with three engineers and no platform team. Netpin is the senior SRE looking over your shoulder — it catches the hand-made change, the open port and the forgotten node before they turn into an outage, a failed audit or a surprise bill.</p>
+        <div class="uc-hero-cta">
+            <a href="https://dash.netpin.io/register" class="btn btn-primary btn-large">Start Free Trial</a>
+            <a href="/contact.html" class="btn btn-ghost btn-large" style="border: 1px solid var(--border-subtle);">Talk to an Engineer</a>
         </div>
-        
-        <div class="use-case-features-grid">
-            <div style="text-decoration: none; color: inherit; padding: 25px; border-radius: 12px; border: 1px solid var(--border-subtle); background: #ffffff; box-shadow: var(--shadow-md); transition: transform 0.2s ease, box-shadow 0.2s ease;" onmouseover="this.style.transform=\'translateY(-5px)\'; this.style.boxShadow=\'var(--shadow-lg)\'" onmouseout="this.style.transform=\'translateY(0)\'; this.style.boxShadow=\'var(--shadow-md)\'">
-                <div style="width: 40px; height: 40px; border-radius: 8px; background: rgba(129, 140, 248, 0.2); display: flex; align-items: center; justify-content: center; margin-bottom: 20px; color: var(--color-primary-light);">
-                    <i data-lucide="dollar-sign"></i>
-                </div>
-                <h3 style="margin-bottom: 15px;">Cost Optimization from Day One</h3>
-                <p style="color: var(--text-muted); line-height: 1.7;">Cloud shock can destroy runway. We analyze every pod's requested vs actual CPU and memory usage, identifying exactly where you are over-provisioned. By implementing our right-sizing recommendations, startups frequently cut their AWS/GCP bills by 40% immediately.</p>
+        <div class="uc-pains">
+            <h2>Sound familiar?</h2>
+            <ul><li><i data-lucide="x-circle"></i><span>Production was fixed by hand during an incident and nobody remembers exactly what was changed.</span></li><li><i data-lucide="x-circle"></i><span>Your first enterprise customer sent a security questionnaire and you do not know how many answers are "yes".</span></li><li><i data-lucide="x-circle"></i><span>The AWS bill doubled and the only explanation is "we grew".</span></li><li><i data-lucide="x-circle"></i><span>Everyone has cluster-admin because nobody had time to set up RBAC.</span></li><li><i data-lucide="x-circle"></i><span>A release on Friday took down checkout because a dependency changed underneath it.</span></li></ul>
+        </div>
+        <nav class="uc-toc" aria-label="Scenarios on this page"><span>Real scenarios on this page:</span><a href="#s1">The 2am hotfix that broke checkout three days later</a><a href="#s2">Answering the first enterprise security questionnaire</a><a href="#s3">Runway is shrinking and the cloud bill keeps growing</a></nav>
+        <p class="uc-note"><i data-lucide="info"></i> Each scenario is a composite of problems engineering teams commonly run into. Company details are illustrative; every Netpin capability described is real.</p>
+    </section>
+
+    <section class="container uc-scenarios">
+        <article class="uc-scenario" id="s1">
+            <div class="uc-scenario-head">
+                <span class="uc-num">Scenario 1</span>
+                <span class="uc-tag">Drift · Deploy Gate</span>
             </div>
-            
-            <div style="text-decoration: none; color: inherit; padding: 25px; border-radius: 12px; border: 1px solid var(--border-subtle); background: #ffffff; box-shadow: var(--shadow-md); transition: transform 0.2s ease, box-shadow 0.2s ease;" onmouseover="this.style.transform=\'translateY(-5px)\'; this.style.boxShadow=\'var(--shadow-lg)\'" onmouseout="this.style.transform=\'translateY(0)\'; this.style.boxShadow=\'var(--shadow-md)\'">
-                <div style="width: 40px; height: 40px; border-radius: 8px; background: rgba(129, 140, 248, 0.2); display: flex; align-items: center; justify-content: center; margin-bottom: 20px; color: var(--color-primary-light);">
-                    <i data-lucide="shield"></i>
+            <h2>The 2am hotfix that broke checkout three days later</h2>
+            <p class="uc-profile"><i data-lucide="building"></i> Seed-stage marketplace · 6 engineers · one EKS cluster · Helm + GitHub Actions</p>
+            <div class="uc-cols">
+                <div>
+                    <h3><i data-lucide="alert-triangle"></i> The situation</h3>
+                    <p>Checkout started failing at 2am. The on-call engineer ran <code>kubectl set image</code> to roll out a hotfix build and raised the memory limit with <code>kubectl edit</code>. It worked, everyone went back to bed, and nobody updated the Helm chart. Three days later a routine release deployed the old image and the old memory limit — and checkout failed again, at lunchtime, in front of customers.</p>
+                    <h3><i data-lucide="flame"></i> Why it hurts</h3>
+                    <ul class="uc-hurts"><li>The second outage was entirely self-inflicted and avoidable.</li><li>Nobody could say exactly what had been changed by hand, so the post-mortem took a day.</li><li>Confidence in releases dropped; the team started avoiding Friday deploys altogether.</li></ul>
                 </div>
-                <h3 style="margin-bottom: 15px;">Built-in Compliance for Audits</h3>
-                <p style="color: var(--text-muted); line-height: 1.7;">Preparing for SOC2 or ISO27001? Netpin's Infrastructure Debt Index automatically scans your clusters for security vulnerabilities and compliance deviations, giving you a printable report to hand directly to your auditors.</p>
+                <div>
+                    <h3><i data-lucide="wand-2"></i> How Netpin handles it</h3>
+                    <ol class="uc-steps"><li><strong>Detected within 15 minutes</strong><span>Netpin's runtime drift sweep compares the live Deployment with the Helm release manifest and flags two <em>runtime overrides</em>: the image and the memory limit.</span></li><li><strong>Attributed</strong><span>Kubernetes field managers show the changes came from <code>kubectl-set</code> and <code>kubectl-edit</code>, so they are counted as manual changes with the time they happened.</span></li><li><strong>Explained</strong><span>The finding shows desired vs live values, the services behind the Deployment and that it is internet-facing.</span></li><li><strong>Fixed properly</strong><span>Netpin offers two paths: revert (<code>helm rollback</code>) or adopt — a values snippet with the live image tag and limit to commit to the chart.</span></li><li><strong>Protected next time</strong><span>If a release is about to overwrite open drift, Deploy Gate flags a <em>drift overwrite</em> and never shows it as a plain approval.</span></li></ol>
+                </div>
             </div>
-            
-            <div style="text-decoration: none; color: inherit; padding: 25px; border-radius: 12px; border: 1px solid var(--border-subtle); background: #ffffff; box-shadow: var(--shadow-md); transition: transform 0.2s ease, box-shadow 0.2s ease;" onmouseover="this.style.transform=\'translateY(-5px)\'; this.style.boxShadow=\'var(--shadow-lg)\'" onmouseout="this.style.transform=\'translateY(0)\'; this.style.boxShadow=\'var(--shadow-md)\'">
-                <div style="width: 40px; height: 40px; border-radius: 8px; background: rgba(129, 140, 248, 0.2); display: flex; align-items: center; justify-content: center; margin-bottom: 20px; color: var(--color-primary-light);">
-                    <i data-lucide="zap"></i>
-                </div>
-                <h3 style="margin-bottom: 15px;">Zero-Config Setup</h3>
-                <p style="color: var(--text-muted); line-height: 1.7;">Startups don't have time to write thousands of lines of Prometheus queries or Grafana dashboards. Netpin deploys via a single Helm chart and populates highly actionable, executive-ready insights in under 3 minutes.</p>
+            <h3 class="uc-outcomes-title"><i data-lucide="target"></i> What changes — and what to measure</h3>
+            <div class="uc-outcomes"><div class="uc-outcome"><strong>≤ 15 min</strong><span>From hand-made change to a visible finding</span></div><div class="uc-outcome"><strong>0</strong><span>Releases that silently overwrite a live hotfix</span></div><div class="uc-outcome"><strong>Manual changes / week</strong><span>Track this on the Drift page — it should trend down</span></div></div>
+            <div class="uc-modules"><span>Used here:</span><span class="uc-chip">Drift Intelligence</span><span class="uc-chip">Deploy Gate</span><span class="uc-chip">Pre-flight risk</span><span class="uc-chip">Explain &amp; Fix</span></div>
+        </article>
+        <article class="uc-scenario" id="s2">
+            <div class="uc-scenario-head">
+                <span class="uc-num">Scenario 2</span>
+                <span class="uc-tag">Compliance · Executive</span>
             </div>
-            
-            <div style="text-decoration: none; color: inherit; padding: 25px; border-radius: 12px; border: 1px solid var(--border-subtle); background: #ffffff; box-shadow: var(--shadow-md); transition: transform 0.2s ease, box-shadow 0.2s ease;" onmouseover="this.style.transform=\'translateY(-5px)\'; this.style.boxShadow=\'var(--shadow-lg)\'" onmouseout="this.style.transform=\'translateY(0)\'; this.style.boxShadow=\'var(--shadow-md)\'">
-                <div style="width: 40px; height: 40px; border-radius: 8px; background: rgba(129, 140, 248, 0.2); display: flex; align-items: center; justify-content: center; margin-bottom: 20px; color: var(--color-primary-light);">
-                    <i data-lucide="activity"></i>
+            <h2>Answering the first enterprise security questionnaire</h2>
+            <p class="uc-profile"><i data-lucide="building"></i> Series A B2B SaaS · 15 engineers · AWS + EKS · first enterprise deal in legal review</p>
+            <div class="uc-cols">
+                <div>
+                    <h3><i data-lucide="alert-triangle"></i> The situation</h3>
+                    <p>The deal was nearly signed when the customer's security team sent a 180-question questionnaire and asked for a SOC 2 roadmap. Questions like "Is MFA enforced for all privileged users?", "Are production changes reviewed?" and "Is data encrypted at rest?" had no confident answers. The CTO spent two weeks clicking through the AWS console and still was not sure.</p>
+                    <h3><i data-lucide="flame"></i> Why it hurts</h3>
+                    <ul class="uc-hurts"><li>Sales cycle stalled; the deal slipped a quarter.</li><li>Answers were based on memory, not evidence — a risk if the customer ever audits them.</li><li>Real gaps (an S3 bucket without a public-access block, no CloudTrail in one region) were found by accident.</li></ul>
                 </div>
-                <h3 style="margin-bottom: 15px;">Lightweight Kubernetes Monitoring</h3>
-                <p style="color: var(--text-muted); line-height: 1.7;">You don't need a dedicated 10-person SRE team. We act as your safety net, automatically surfacing only the most critical infrastructure alerts so your small team can stay focused on building product features.</p>
+                <div>
+                    <h3><i data-lucide="wand-2"></i> How Netpin handles it</h3>
+                    <ol class="uc-steps"><li><strong>Connect read-only</strong><span>Add the AWS account with the <code>SecurityAudit</code> managed policy, the EKS cluster and GitHub.</span></li><li><strong>One scan, ten frameworks</strong><span>Netpin evaluates every control and maps results to SOC 2, ISO 27001, CIS AWS, CIS Kubernetes and more. Missing data is shown as missing, never as a pass.</span></li><li><strong>Fix these first</strong><span>Controls are ranked by weighted failures: root MFA, CloudTrail multi-region, S3 public access, privileged containers, branch protection.</span></li><li><strong>Evidence on demand</strong><span>Each result includes the resource, the evidence and every requirement it satisfies — answers backed by data, not memory.</span></li><li><strong>Tell the story</strong><span>The Executive Brief summarises audit readiness per framework in plain language for the customer and the board.</span></li></ol>
+                </div>
+            </div>
+            <h3 class="uc-outcomes-title"><i data-lucide="target"></i> What changes — and what to measure</h3>
+            <div class="uc-outcomes"><div class="uc-outcome"><strong>Weeks → hours</strong><span>Time to produce an evidence-backed security posture</span></div><div class="uc-outcome"><strong>Weighted score</strong><span>SOC 2 readiness you can track weekly</span></div><div class="uc-outcome"><strong>Critical failures</strong><span>Should reach zero before the auditor arrives</span></div></div>
+            <div class="uc-modules"><span>Used here:</span><span class="uc-chip">Continuous Compliance</span><span class="uc-chip">Executive Brief</span><span class="uc-chip">Explain &amp; Fix</span></div>
+        </article>
+        <article class="uc-scenario" id="s3">
+            <div class="uc-scenario-head">
+                <span class="uc-num">Scenario 3</span>
+                <span class="uc-tag">Cost · Kubernetes</span>
+            </div>
+            <h2>Runway is shrinking and the cloud bill keeps growing</h2>
+            <p class="uc-profile"><i data-lucide="building"></i> Seed-stage AI startup · 8 engineers · GKE + AWS · $14k/month cloud spend and rising</p>
+            <div class="uc-cols">
+                <div>
+                    <h3><i data-lucide="alert-triangle"></i> The situation</h3>
+                    <p>The cloud bill grew 70% in two quarters while traffic grew 20%. Node pools had been scaled up during a load test and never scaled down, three staging clusters ran all weekend, workloads requested four times the CPU they used, and a handful of unattached disks from old experiments were still billing every month.</p>
+                    <h3><i data-lucide="flame"></i> Why it hurts</h3>
+                    <ul class="uc-hurts"><li>Every extra $5k a month is roughly a month of runway per year.</li><li>Nobody could say which team, service or environment owned the growth.</li><li>Earlier attempts to "just rightsize" broke a service and were rolled back.</li></ul>
+                </div>
+                <div>
+                    <h3><i data-lucide="wand-2"></i> How Netpin handles it</h3>
+                    <ol class="uc-steps"><li><strong>Priced resource by resource</strong><span>Every instance, volume, IP, load balancer, database and node is priced; when billing access is granted, numbers are calibrated to the actual bill.</span></li><li><strong>Kubernetes allocation</strong><span>Node cost is split across workloads by request or p95 usage, so idle capacity and over-requested workloads are obvious.</span></li><li><strong>Savings that add up</strong><span>Remove waste first (unattached disks, idle IPs), then modernise (gp2 → gp3), schedule non-production to office hours, and only then commit — each applied to the remaining cost so nothing is double counted.</span></li><li><strong>Safe rightsizing</strong><span>Recommendations use p95 usage plus headroom; capacity freed only counts as savings when a node can actually be removed.</span></li><li><strong>Forecast</strong><span>A month-end forecast with a 95% range and anomaly detection, so the next surprise is caught in days, not at month end.</span></li></ol>
+                </div>
+            </div>
+            <h3 class="uc-outcomes-title"><i data-lucide="target"></i> What changes — and what to measure</h3>
+            <div class="uc-outcomes"><div class="uc-outcome"><strong>Idle capacity %</strong><span>Node cost no workload requests or uses</span></div><div class="uc-outcome"><strong>$ / month saved</strong><span>Achievable savings, no double counting</span></div><div class="uc-outcome"><strong>Forecast accuracy</strong><span>Month-end forecast range vs actual bill</span></div></div>
+            <div class="uc-modules"><span>Used here:</span><span class="uc-chip">Cost Intelligence</span><span class="uc-chip">Topology</span><span class="uc-chip">Executive Brief</span></div>
+        </article>
+    </section>
+
+    <section class="uc-week">
+        <div class="container">
+            <div class="section-header"><div class="section-label"><span>✦</span> Getting started</div><h2>Your first week with <span class="text-gradient">Netpin</span></h2></div>
+            <div class="uc-days"><div class="uc-day"><span>Day 1</span><strong>Connect</strong><p>Add your cloud account; clusters are discovered and connected automatically. Add GitHub.</p></div><div class="uc-day"><span>Day 1</span><strong>Baseline</strong><p>See your IDI, open drift, compliance posture and spend for the first time.</p></div><div class="uc-day"><span>Day 2–3</span><strong>Quick wins</strong><p>Fix the top items in "Fastest ways to raise the score" and the cost quick wins.</p></div><div class="uc-day"><span>Day 4</span><strong>Guardrails</strong><p>Turn on Deploy Gate in GitHub Actions and Slack alerts for critical drift.</p></div><div class="uc-day"><span>Day 5</span><strong>Share</strong><p>Send the Executive Brief to your co-founders.</p></div></div>
+        </div>
+    </section>
+
+    <section class="container uc-faqs">
+        <h2>Questions teams like yours ask</h2>
+        <details class="uc-faq"><summary>We don't have a platform engineer. Is Netpin too much?</summary><p>No — that is who it is built for. Netpin connects read-only in minutes, needs no agents or dashboards to build, and tells you the few things worth fixing first.</p></details><details class="uc-faq"><summary>Will it slow down our deploys?</summary><p>Deploy Gate evaluates a run in seconds and only blocks what is genuinely risky. In non-production environments, thresholds warn instead of block.</p></details><details class="uc-faq"><summary>Is there a free plan?</summary><p>Yes. The Starter plan is free for one cluster, and Pro has a 14-day free trial. See <a href="/pricing.html">pricing</a>.</p></details>
+    </section>
+
+    <section class="container uc-others-wrap">
+        <h2>Explore other use cases</h2>
+        <div class="uc-others"><a class="uc-other" href="enterprise.html"><i data-lucide="building-2"></i><strong>Enterprise</strong><span>Many teams, many clusters, many clouds — one standard for safe change.</span></a><a class="uc-other" href="platform-sre.html"><i data-lucide="server-cog"></i><strong>Platform &amp; SRE Teams</strong><span>On-call engineers who need to know what changed before the pager goes off.</span></a><a class="uc-other" href="security-compliance.html"><i data-lucide="shield-check"></i><strong>Security &amp; Compliance</strong><span>Teams who have to prove controls work every day, not once a year.</span></a><a class="uc-other" href="regulated-industries.html"><i data-lucide="landmark"></i><strong>Fintech &amp; Healthtech</strong><span>PCI DSS, HIPAA and SOC 2 environments where drift is an audit finding.</span></a><a class="uc-other" href="engineering-leaders.html"><i data-lucide="briefcase"></i><strong>Engineering Leaders &amp; FinOps</strong><span>CTOs, VPs and finance partners who need decisions, not dashboards.</span></a><a class="uc-other" href="devops-consultants.html"><i data-lucide="users"></i><strong>DevOps Consultants &amp; MSPs</strong><span>Agencies running many client environments who must show progress.</span></a></div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-box">
+                <h2 style="color: #ffffff !important;">See it on your own infrastructure</h2>
+                <p style="color: rgba(255, 255, 255, 0.9) !important;">Connect a cloud account or cluster read-only and get your drift, IDI, compliance posture and spend in minutes. No credit card required.</p>
+                <div class="cta-buttons">
+                    <a href="https://dash.netpin.io/register" class="btn btn-primary btn-large">Start Free Trial</a>
+                    <a href="/contact.html" class="btn btn-secondary btn-large">Book a Walkthrough</a>
+                </div>
             </div>
         </div>
     </section>
+
 <!-- Footer -->
     <netpin-footer></netpin-footer>
     <script src="/components/footer.js"></script>
@@ -108,10 +186,6 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             lucide.createIcons();
-
-        // Navbar scroll effect});
-        }
-
         });
     </script>
 

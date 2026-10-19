@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netpin for Platform &amp; SRE Teams – Know What Changed Before the Pager Goes Off</title>
+    <meta name="description" content="SRE scenarios: the shared ConfigMap that broke two services, taming alert storms, and knowing every dependant before a database migration.">
+    <meta name="keywords" content="SRE tools, what changed incident, Kubernetes drift, blast radius, alert fatigue, Netpin">
+    <link rel="stylesheet" href="../css/style.css?v=3.4">
+    <link rel="canonical" href="https://netpin.io/use-cases/platform-sre.html">
+    <meta property="og:title" content="Netpin for Platform &amp; SRE Teams – Know What Changed Before the Pager Goes Off">
+    <meta property="og:description" content="SRE scenarios: the shared ConfigMap that broke two services, taming alert storms, and knowing every dependant before a database migration.">
+    <meta property="og:url" content="https://netpin.io/use-cases/platform-sre.html">
+    <meta property="og:image" content="https://netpin.io/images/og-banner.png">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JQZBD8MC00"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-JQZBD8MC00');
+    </script>
+
+    <!-- Zoom Transition CSS -->
+    <style>
+        .hero-mockup, .showcase-image, .hero-screen {
+            overflow: hidden !important;
+            border-radius: 16px !important;
+            transform: none !important;
+        }
+        .hero-mockup img, .showcase-image img, .hero-screen img {
+            transition: transform 0.5s ease-in-out !important;
+            will-change: transform;
+        }
+        .hero-mockup:hover img, .showcase-image:hover img, .hero-screen:hover img {
+            transform: scale(1.08) !important;
+        }
+    </style>
+
+</head>
+<body>
+    
+
+    <netpin-header></netpin-header>
+    <script src="/components/header.js"></script>
+
+    <section class="container use-case-hero-section uc-hero">
+        <a href="index.html" class="uc-back">← All use cases</a>
+        <div class="section-label"><span>✦</span> Use case</div>
+        <h1 class="use-case-title">Netpin for <span class="text-gradient">Platform &amp; SRE Teams</span></h1>
+        <p class="use-case-subtitle">The first question in every incident is "what changed?" Netpin answers it before you ask — every drifted field, who changed it, what depends on it and how to put it back — so on-call is about fixing, not archaeology.</p>
+        <div class="uc-hero-cta">
+            <a href="https://dash.netpin.io/register" class="btn btn-primary btn-large">Start Free Trial</a>
+            <a href="/contact.html" class="btn btn-ghost btn-large" style="border: 1px solid var(--border-subtle);">Talk to an Engineer</a>
+        </div>
+        <div class="uc-pains">
+            <h2>Sound familiar?</h2>
+            <ul><li><i data-lucide="x-circle"></i><span>Half of every incident is spent finding out what changed.</span></li><li><i data-lucide="x-circle"></i><span>A ConfigMap edit for one service quietly broke two others.</span></li><li><i data-lucide="x-circle"></i><span>Alerts fire in storms and the real one is buried.</span></li><li><i data-lucide="x-circle"></i><span>Nobody knows which services sit behind the shared Redis until it goes down.</span></li><li><i data-lucide="x-circle"></i><span>Post-mortems end with "we should track manual changes" — every time.</span></li></ul>
+        </div>
+        <nav class="uc-toc" aria-label="Scenarios on this page"><span>Real scenarios on this page:</span><a href="#s1">The shared ConfigMap that took down two services</a><a href="#s2">From alert storms to one alert per real problem</a><a href="#s3">Knowing what depends on the database before the migration</a></nav>
+        <p class="uc-note"><i data-lucide="info"></i> Each scenario is a composite of problems engineering teams commonly run into. Company details are illustrative; every Netpin capability described is real.</p>
+    </section>
+
+    <section class="container uc-scenarios">
+        <article class="uc-scenario" id="s1">
+            <div class="uc-scenario-head">
+                <span class="uc-num">Scenario 1</span>
+                <span class="uc-tag">Drift · Relational impact</span>
+            </div>
+            <h2>The shared ConfigMap that took down two services</h2>
+            <p class="uc-profile"><i data-lucide="building"></i> Mid-size SaaS · 3 SRE engineers · 4 clusters · 120 workloads · Argo CD for some apps, Helm for others</p>
+            <div class="uc-cols">
+                <div>
+                    <h3><i data-lucide="alert-triangle"></i> The situation</h3>
+                    <p>A developer edited a ConfigMap to change a feature flag for the search service. The same ConfigMap was mounted by the recommendations and notifications services, which read a connection string from it — the edit had accidentally reformatted that line. Twenty minutes later both services were failing health checks. The on-call engineer spent forty minutes looking at the wrong services.</p>
+                    <h3><i data-lucide="flame"></i> Why it hurts</h3>
+                    <ul class="uc-hurts"><li>The blast radius of a "small" change was invisible.</li><li>Time to identify the cause was longer than time to fix.</li><li>The change was made with <code>kubectl edit</code>, so nothing in Git explained it.</li></ul>
+                </div>
+                <div>
+                    <h3><i data-lucide="wand-2"></i> How Netpin handles it</h3>
+                    <ol class="uc-steps"><li><strong>Change detected</strong><span>The ConfigMap is compared with its kubectl or Helm declaration and the edited keys are flagged as drift.</span></li><li><strong>Shared configuration</strong><span>The Impact tab lists every workload that mounts it — <em>Shares configuration with</em> — so the link to the failing services is immediate.</span></li><li><strong>Internet-facing paths</strong><span>Netpin shows which public endpoints route to the affected services.</span></li><li><strong>Who and when</strong><span>The field manager and timestamp identify the edit and its author.</span></li><li><strong>Revert in one step</strong><span>A generated <code>kubectl patch</code> restores the declared value; or commit the new value with the adopt snippet.</span></li></ol>
+                </div>
+            </div>
+            <h3 class="uc-outcomes-title"><i data-lucide="target"></i> What changes — and what to measure</h3>
+            <div class="uc-outcomes"><div class="uc-outcome"><strong>Time to identify cause</strong><span>From "what changed?" to the exact field</span></div><div class="uc-outcome"><strong>Impact score</strong><span>0–100 reach of the change, shown on the finding</span></div><div class="uc-outcome"><strong>Repeat drift</strong><span>Recurrence is tracked and weighted</span></div></div>
+            <div class="uc-modules"><span>Used here:</span><span class="uc-chip">Drift Intelligence</span><span class="uc-chip">Relational impact</span><span class="uc-chip">Topology</span><span class="uc-chip">Alerts</span></div>
+        </article>
+        <article class="uc-scenario" id="s2">
+            <div class="uc-scenario-head">
+                <span class="uc-num">Scenario 2</span>
+                <span class="uc-tag">Alerts · Escalation</span>
+            </div>
+            <h2>From alert storms to one alert per real problem</h2>
+            <p class="uc-profile"><i data-lucide="building"></i> E-commerce platform · 24/7 on-call rotation of 6 · 400 alerts a week, 30 actionable</p>
+            <div class="uc-cols">
+                <div>
+                    <h3><i data-lucide="alert-triangle"></i> The situation</h3>
+                    <p>A flapping condition on one node pool generated hundreds of notifications overnight. The on-call engineer muted the channel to sleep and missed a genuine critical alert about a security group change two hours later. The next morning the team discovered the change had exposed an admin port.</p>
+                    <h3><i data-lucide="flame"></i> Why it hurts</h3>
+                    <ul class="uc-hurts"><li>Alert fatigue made the important alert invisible.</li><li>Duplicate notifications for the same condition flooded every channel.</li><li>Nothing escalated when an alert was ignored.</li></ul>
+                </div>
+                <div>
+                    <h3><i data-lucide="wand-2"></i> How Netpin handles it</h3>
+                    <ol class="uc-steps"><li><strong>One alert per fingerprint</strong><span>Alerts are fingerprinted by tenant, environment, type, resource and field — repeats increment an occurrence count instead of paging again.</span></li><li><strong>Cooldown and hysteresis</strong><span>A condition that recurs within the cooldown (5 minutes by default) is treated as flapping; numeric conditions must clear the threshold by a margin before recovering.</span></li><li><strong>Maintenance windows</strong><span>Planned work is recorded as suppressed and not notified.</span></li><li><strong>Escalation</strong><span>Alerts not acknowledged within the rule's timeout (30 minutes by default) escalate to critical and P1 and re-notify Slack, PagerDuty or email.</span></li><li><strong>Context</strong><span>Every alert links to its source — the drift finding, compliance control or Deploy Gate decision — with redacted evidence.</span></li></ol>
+                </div>
+            </div>
+            <h3 class="uc-outcomes-title"><i data-lucide="target"></i> What changes — and what to measure</h3>
+            <div class="uc-outcomes"><div class="uc-outcome"><strong>Notifications / real problem</strong><span>Should approach 1</span></div><div class="uc-outcome"><strong>Unacknowledged critical alerts</strong><span>Escalated automatically</span></div><div class="uc-outcome"><strong>Alert rules</strong><span>Tuned per team, with on/off switches</span></div></div>
+            <div class="uc-modules"><span>Used here:</span><span class="uc-chip">Predictive Alerts</span><span class="uc-chip">Drift Intelligence</span><span class="uc-chip">Compliance</span></div>
+        </article>
+        <article class="uc-scenario" id="s3">
+            <div class="uc-scenario-head">
+                <span class="uc-num">Scenario 3</span>
+                <span class="uc-tag">Blast radius · Pre-flight</span>
+            </div>
+            <h2>Knowing what depends on the database before the migration</h2>
+            <p class="uc-profile"><i data-lucide="building"></i> Payments startup turned scale-up · Postgres on RDS · 14 services · quarterly engine upgrade</p>
+            <div class="uc-cols">
+                <div>
+                    <h3><i data-lucide="alert-triangle"></i> The situation</h3>
+                    <p>A planned RDS engine upgrade was scheduled for a low-traffic window. The team listed the services they believed used the database — nine. In fact fourteen did, including a reconciliation job that ran once a night. It failed silently for three days after the upgrade because its driver was incompatible.</p>
+                    <h3><i data-lucide="flame"></i> Why it hurts</h3>
+                    <ul class="uc-hurts"><li>Dependency knowledge lived in people's heads and was out of date.</li><li>Silent failures in batch jobs were discovered late.</li><li>Risk reviews relied on spreadsheets.</li></ul>
+                </div>
+                <div>
+                    <h3><i data-lucide="wand-2"></i> How Netpin handles it</h3>
+                    <ol class="uc-steps"><li><strong>Discovered dependencies</strong><span>Topology maps which workloads connect to which services and resources, refreshed with every discovery.</span></li><li><strong>Blast radius score</strong><span>The database's score combines reach, dependency centrality, shared-infrastructure and criticality factors, ×1.25 in production — here, critical.</span></li><li><strong>Full list</strong><span>Affected workloads, services, namespaces, clusters and accounts, with the dependency paths.</span></li><li><strong>Pre-flight risk</strong><span>Before the change, pre-flight shows the risk score, contributing factors and confidence.</span></li><li><strong>Explain &amp; Fix</strong><span>Verification steps for each affected service after the change.</span></li></ol>
+                </div>
+            </div>
+            <h3 class="uc-outcomes-title"><i data-lucide="target"></i> What changes — and what to measure</h3>
+            <div class="uc-outcomes"><div class="uc-outcome"><strong>Unknown dependants</strong><span>Zero before a high-risk change</span></div><div class="uc-outcome"><strong>Blast radius level</strong><span>Low / medium / high / critical, shown before you act</span></div><div class="uc-outcome"><strong>Post-change failures</strong><span>Caught by verification, not by customers</span></div></div>
+            <div class="uc-modules"><span>Used here:</span><span class="uc-chip">Topology</span><span class="uc-chip">Blast radius</span><span class="uc-chip">Pre-flight risk</span><span class="uc-chip">Explain &amp; Fix</span></div>
+        </article>
+    </section>
+
+    <section class="uc-week">
+        <div class="container">
+            <div class="section-header"><div class="section-label"><span>✦</span> Getting started</div><h2>Your first week with <span class="text-gradient">Netpin</span></h2></div>
+            <div class="uc-days"><div class="uc-day"><span>Day 1</span><strong>Connect clusters</strong><p>Clusters from your cloud accounts connect automatically; add others with a kubeconfig.</p></div><div class="uc-day"><span>Day 1</span><strong>See drift</strong><p>Run drift detection with live refresh; read the first findings.</p></div><div class="uc-day"><span>Day 2</span><strong>Route alerts</strong><p>Connect Slack and PagerDuty; set escalation timeouts.</p></div><div class="uc-day"><span>Day 3</span><strong>Map dependencies</strong><p>Sync the graph and check blast radius for your most critical services.</p></div><div class="uc-day"><span>Day 5</span><strong>Close the loop</strong><p>Review manual changes from the week with the team.</p></div></div>
+        </div>
+    </section>
+
+    <section class="container uc-faqs">
+        <h2>Questions teams like yours ask</h2>
+        <details class="uc-faq"><summary>Does drift detection need an agent?</summary><p>No. Netpin reads through the Kubernetes and cloud APIs with read-only permissions. An optional lightweight agent exists for environments that prefer push-based collection.</p></details><details class="uc-faq"><summary>Will autoscalers create noise?</summary><p>No. Replica counts managed by an HPA, server-populated fields and defaults are excluded; only fields you declared are compared.</p></details><details class="uc-faq"><summary>Can we see pod logs?</summary><p>Yes — open a pod in Topology to see its recent log lines next to its health, findings and dependants.</p></details>
+    </section>
+
+    <section class="container uc-others-wrap">
+        <h2>Explore other use cases</h2>
+        <div class="uc-others"><a class="uc-other" href="startups.html"><i data-lucide="rocket"></i><strong>Startups</strong><span>Seed to Series C teams moving fast without a dedicated platform team.</span></a><a class="uc-other" href="enterprise.html"><i data-lucide="building-2"></i><strong>Enterprise</strong><span>Many teams, many clusters, many clouds — one standard for safe change.</span></a><a class="uc-other" href="security-compliance.html"><i data-lucide="shield-check"></i><strong>Security &amp; Compliance</strong><span>Teams who have to prove controls work every day, not once a year.</span></a><a class="uc-other" href="regulated-industries.html"><i data-lucide="landmark"></i><strong>Fintech &amp; Healthtech</strong><span>PCI DSS, HIPAA and SOC 2 environments where drift is an audit finding.</span></a><a class="uc-other" href="engineering-leaders.html"><i data-lucide="briefcase"></i><strong>Engineering Leaders &amp; FinOps</strong><span>CTOs, VPs and finance partners who need decisions, not dashboards.</span></a><a class="uc-other" href="devops-consultants.html"><i data-lucide="users"></i><strong>DevOps Consultants &amp; MSPs</strong><span>Agencies running many client environments who must show progress.</span></a></div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-box">
+                <h2 style="color: #ffffff !important;">See it on your own infrastructure</h2>
+                <p style="color: rgba(255, 255, 255, 0.9) !important;">Connect a cloud account or cluster read-only and get your drift, IDI, compliance posture and spend in minutes. No credit card required.</p>
+                <div class="cta-buttons">
+                    <a href="https://dash.netpin.io/register" class="btn btn-primary btn-large">Start Free Trial</a>
+                    <a href="/contact.html" class="btn btn-secondary btn-large">Book a Walkthrough</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- Footer -->
+    <netpin-footer></netpin-footer>
+    <script src="/components/footer.js"></script>
+
+    <!-- Scroll Animations Engine -->
+    <script src="/js/scroll-animations.js"></script>
+
+    <!-- Lucide Icons Configuration -->
+    <style>
+        .lucide {
+            width: 1.25em;
+            height: 1.25em;
+            vertical-align: middle;
+            color: currentColor; /* Inherits the wrapper color */
+            stroke-width: 2.2;
+        }
+    </style>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            lucide.createIcons();
+        });
+    </script>
+
+    
+
+
+    
+    <!-- Custom Language Modal -->
+    <style>
+    .lang-modal-overlay {
+        display: none;
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(15, 23, 42, 0.4);
+        z-index: 9999;
+        align-items: center;
+        justify-content: center;
+        backdrop-filter: blur(4px);
+    }
+    .lang-modal {
+        background: #ffffff;
+        border-radius: 12px;
+        padding: 24px;
+        width: 90%;
+        max-width: 500px;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        position: relative;
+    }
+    .lang-modal-close {
+        position: absolute;
+        top: 16px; right: 16px;
+        background: none; border: none;
+        font-size: 1.5rem; cursor: pointer;
+        color: #64748b;
+    }
+    .lang-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin: 20px 0;
+    }
+    .lang-btn {
+        display: flex; align-items: center; gap: 10px;
+        padding: 12px 16px;
+        border: 1px solid #cbd5e1;
+        border-radius: 8px;
+        background: transparent;
+        cursor: pointer;
+        font-size: 1rem;
+        color: #0f172a;
+        transition: all 0.2s ease;
+    }
+    .lang-btn:hover {
+        border-color: #0b5cff;
+        background: #f8fafc;
+    }
+    .lang-select-wrapper select {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #cbd5e1;
+        border-radius: 8px;
+        font-size: 1rem;
+        background: white;
+        color: #0f172a;
+        cursor: pointer;
+    }
+    </style>
+
+    <div class="lang-modal-overlay notranslate" id="langModal" onclick="if(event.target===this) closeLangModal()">
+        <div class="lang-modal">
+            <button class="lang-modal-close" aria-label="Close language selector" onclick="closeLangModal()">&times;</button>
+            <h3 style="margin-bottom: 8px; color: #0f172a;">Select Language</h3>
+            <p style="color: #64748b; font-size: 0.95rem;">Choose your preferred language for the website.</p>
+            
+            <div class="lang-grid">
+                <button class="lang-btn" onclick="changeLanguage('en')"><span style="font-size: 1.2rem;">🇺🇸</span> English</button>
+                <button class="lang-btn" onclick="changeLanguage('es')"><span style="font-size: 1.2rem;">🇪🇸</span> Español</button>
+                <button class="lang-btn" onclick="changeLanguage('fr')"><span style="font-size: 1.2rem;">🇫🇷</span> Français</button>
+                <button class="lang-btn" onclick="changeLanguage('de')"><span style="font-size: 1.2rem;">🇩🇪</span> Deutsch</button>
+                <button class="lang-btn" onclick="changeLanguage('zh-CN')"><span style="font-size: 1.2rem;">🇨🇳</span> 中文</button>
+                <button class="lang-btn" onclick="changeLanguage('ja')"><span style="font-size: 1.2rem;">🇯🇵</span> 日本語</button>
+            </div>
+
+            <div class="lang-select-wrapper">
+                <select onchange="if(this.value) changeLanguage(this.value)">
+                    <option value="">More languages...</option>
+                    <option value="ar">Arabic (العربية)</option>
+                    <option value="hi">Hindi (हिन्दी)</option>
+                    <option value="pt">Portuguese (Português)</option>
+                    <option value="ru">Russian (Русский)</option>
+                    <option value="ko">Korean (한국어)</option>
+                    <option value="it">Italian (Italiano)</option>
+                    <option value="nl">Dutch (Nederlands)</option>
+                    <option value="pl">Polish (Polski)</option>
+                    <option value="tr">Turkish (Türkçe)</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        function openLangModal() {
+            document.getElementById('langModal').style.display = 'flex';
+        }
+        function closeLangModal() {
+            document.getElementById('langModal').style.display = 'none';
+        }
+                function changeLanguage(langCode) {
+            closeLangModal();
+            
+            // Try the instant native combo box trigger first
+            var selectField = document.querySelector('.goog-te-combo');
+            if (selectField) {
+                selectField.value = langCode;
+                selectField.dispatchEvent(new Event('change', { bubbles: true }));
+            } else {
+                // Fallback to cookie if script hasn't loaded yet
+                var domain = window.location.hostname;
+                if (langCode === 'en') {
+                    document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                    document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; domain=" + domain + "; path=/;";
+                    if (domain.includes('.')) document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; domain=." + domain + "; path=/;";
+                } else {
+                    document.cookie = "googtrans=/en/" + langCode + "; path=/";
+                    document.cookie = "googtrans=/en/" + langCode + "; domain=" + domain + "; path=/";
+                    if (domain.includes('.')) document.cookie = "googtrans=/en/" + langCode + "; domain=." + domain + "; path=/";
+                }
+                window.location.reload();
+            }
+        }
+    </script>
+
+<div id="google_translate_element" style="position: absolute; left: -9999px; opacity: 0; pointer-events: none;"></div>
+    <!-- Google Translate Script -->
+    <script type="text/javascript">
+        function resetToEnglish() {
+            document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; domain=" + window.location.hostname + "; path=/;";
+            window.location.reload();
+        }
+
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en'
+            }, 'google_translate_element');
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var userLang = navigator.language || navigator.userLanguage; 
+            var langCode = userLang.split('-')[0];
+            
+            // Auto-translate based on browser language if not English
+            if (langCode !== 'en' && document.cookie.indexOf('googtrans') === -1) {
+                document.cookie = "googtrans=/en/" + langCode + "; path=/";
+                // Also set for specific domain
+                document.cookie = "googtrans=/en/" + langCode + "; domain=" + window.location.hostname + "; path=/";
+                window.location.reload();
+            }
+        });
+    </script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+
+    
+
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/6a76e091224bc71d4a538d43/1jvg5qf74';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+</body>
+</html>

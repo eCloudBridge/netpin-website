@@ -3,10 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Netpin Use Case: DevOps Consultants & Agencies</title>
-    <meta name="description" content="Discover how DevOps consultants and agencies use Netpin to manage multi-client Kubernetes infrastructure, visualize topology, and debug runtime logs from a single dashboard.">
-    <meta name="keywords" content="DevOps consulting, Kubernetes monitoring, multi-tenant dashboard, Kubernetes logs, cluster topology, infrastructure mapping">
-    <link rel="stylesheet" href="../css/style.css">
+    <title>Netpin for DevOps Consultants &amp; MSPs – Assess Faster, Guard Your Fixes, Prove Your Value</title>
+    <meta name="description" content="Consultant scenarios: day one with an undocumented estate, twelve clients without twelve kubeconfigs, and proving value to a client CFO.">
+    <meta name="keywords" content="DevOps consultants, MSP Kubernetes, client infrastructure assessment, multi-tenant DevOps, Netpin">
+    <link rel="stylesheet" href="../css/style.css?v=3.4">
+    <link rel="canonical" href="https://netpin.io/use-cases/devops-consultants.html">
+    <meta property="og:title" content="Netpin for DevOps Consultants &amp; MSPs – Assess Faster, Guard Your Fixes, Prove Your Value">
+    <meta property="og:description" content="Consultant scenarios: day one with an undocumented estate, twelve clients without twelve kubeconfigs, and proving value to a client CFO.">
+    <meta property="og:url" content="https://netpin.io/use-cases/devops-consultants.html">
+    <meta property="og:image" content="https://netpin.io/images/og-banner.png">
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-JQZBD8MC00"></script>
@@ -41,55 +46,126 @@
     <netpin-header></netpin-header>
     <script src="/components/header.js"></script>
 
-    <section class="container use-case-hero-section">
-        <div class="use-case-hero-grid">
-            <div>
-                <h1 class="use-case-title">Netpin for <span class="text-gradient">Consultants</span></h1>
-                <p class="use-case-subtitle">As a DevOps consultant or agency, jumping between dozens of client environments, VPNs, and raw terminal screens is exhausting. Netpin gives you a multi-tenant, single pane of glass to visualize client infrastructure, debug runtime issues instantly, and prove your ROI.</p>
-                
-                <a href="https://dash.netpin.io/register" class="btn btn-primary btn-large">Start Free Trial</a>
-            </div>
-            <div>
-                <img src="../images/dashboard-mockup.png" alt="Multi-Client DevOps Topology Dashboard" style="width: 100%; border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); border: 1px solid var(--border);">
-            </div>
+    <section class="container use-case-hero-section uc-hero">
+        <a href="index.html" class="uc-back">← All use cases</a>
+        <div class="section-label"><span>✦</span> Use case</div>
+        <h1 class="use-case-title">Netpin for <span class="text-gradient">DevOps Consultants &amp; MSPs</span></h1>
+        <p class="use-case-subtitle">Every new client is an undocumented estate, and every month you need to prove your work made it better. Netpin maps a client's infrastructure on day one, shows what to fix first, and turns your improvements into a report the client's leadership understands.</p>
+        <div class="uc-hero-cta">
+            <a href="https://dash.netpin.io/register" class="btn btn-primary btn-large">Start Free Trial</a>
+            <a href="/contact.html" class="btn btn-ghost btn-large" style="border: 1px solid var(--border-subtle);">Talk to an Engineer</a>
         </div>
-        
-        <div class="use-case-features-grid">
-            <div style="text-decoration: none; color: inherit; padding: 25px; border-radius: 12px; border: 1px solid var(--border-subtle); background: #ffffff; box-shadow: var(--shadow-md); transition: transform 0.2s ease, box-shadow 0.2s ease;" onmouseover="this.style.transform=\'translateY(-5px)\'; this.style.boxShadow=\'var(--shadow-lg)\'" onmouseout="this.style.transform=\'translateY(0)\'; this.style.boxShadow=\'var(--shadow-md)\'">
-                <div style="width: 40px; height: 40px; border-radius: 8px; background: rgba(129, 140, 248, 0.2); display: flex; align-items: center; justify-content: center; margin-bottom: 20px; color: var(--color-primary-light);">
-                    <i data-lucide="layers"></i>
-                </div>
-                <h3 style="margin-bottom: 15px;">Multi-Tenant Client Management</h3>
-                <p style="color: var(--text-muted); line-height: 1.7;">Manage all your clients from a single, unified dashboard. Whether Client A uses AWS EKS and Client B uses on-premise OpenShift, Netpin securely aggregates their data. Switch context instantly without juggling multiple kubeconfig files or bastion hosts.</p>
+        <div class="uc-pains">
+            <h2>Sound familiar?</h2>
+            <ul><li><i data-lucide="x-circle"></i><span>Week one of every engagement is spent discovering what the client actually runs.</span></li><li><i data-lucide="x-circle"></i><span>You juggle kubeconfigs, VPNs and bastion hosts for a dozen clients.</span></li><li><i data-lucide="x-circle"></i><span>Clients ask what they got for the retainer.</span></li><li><i data-lucide="x-circle"></i><span>Your fixes are undone by the client's team a month later.</span></li><li><i data-lucide="x-circle"></i><span>Every assessment report is built by hand.</span></li></ul>
+        </div>
+        <nav class="uc-toc" aria-label="Scenarios on this page"><span>Real scenarios on this page:</span><a href="#s1">Day one with an undocumented client estate</a><a href="#s2">Twelve clients without twelve kubeconfigs</a><a href="#s3">Proving value — and keeping fixes fixed</a></nav>
+        <p class="uc-note"><i data-lucide="info"></i> Each scenario is a composite of problems engineering teams commonly run into. Company details are illustrative; every Netpin capability described is real.</p>
+    </section>
+
+    <section class="container uc-scenarios">
+        <article class="uc-scenario" id="s1">
+            <div class="uc-scenario-head">
+                <span class="uc-num">Scenario 1</span>
+                <span class="uc-tag">Discovery · Topology · IDI</span>
             </div>
-            
-            <div style="text-decoration: none; color: inherit; padding: 25px; border-radius: 12px; border: 1px solid var(--border-subtle); background: #ffffff; box-shadow: var(--shadow-md); transition: transform 0.2s ease, box-shadow 0.2s ease;" onmouseover="this.style.transform=\'translateY(-5px)\'; this.style.boxShadow=\'var(--shadow-lg)\'" onmouseout="this.style.transform=\'translateY(0)\'; this.style.boxShadow=\'var(--shadow-md)\'">
-                <div style="width: 40px; height: 40px; border-radius: 8px; background: rgba(129, 140, 248, 0.2); display: flex; align-items: center; justify-content: center; margin-bottom: 20px; color: var(--color-primary-light);">
-                    <i data-lucide="share-2"></i>
+            <h2>Day one with an undocumented client estate</h2>
+            <p class="uc-profile"><i data-lucide="building"></i> Boutique DevOps consultancy · new client: 2 EKS clusters, 40 microservices, no documentation</p>
+            <div class="uc-cols">
+                <div>
+                    <h3><i data-lucide="alert-triangle"></i> The situation</h3>
+                    <p>A new client's original platform engineer had left. There were no diagrams, Helm charts covered half the services, the rest had been applied by hand, and nobody knew which services were internet-facing. The client wanted an assessment and a plan within two weeks.</p>
+                    <h3><i data-lucide="flame"></i> Why it hurts</h3>
+                    <ul class="uc-hurts"><li>Manual discovery consumed most of the assessment budget.</li><li>Findings were opinion-based without a baseline.</li><li>Risky areas (public services, privileged pods) were found late.</li></ul>
                 </div>
-                <h3 style="margin-bottom: 15px;">Deep Architecture Visualization</h3>
-                <p style="color: var(--text-muted); line-height: 1.7;">Inheriting a messy, undocumented cluster from a new client? Netpin automatically maps the entire topology. Instantly visualize how Ingress controllers route to Services, and how Services map to underlying Pods and StatefulSets, giving you a deep understanding of their architecture on Day 1.</p>
+                <div>
+                    <h3><i data-lucide="wand-2"></i> How Netpin handles it</h3>
+                    <ol class="uc-steps"><li><strong>Connect read-only</strong><span>Add the client's AWS account; EKS clusters are discovered and connected automatically.</span></li><li><strong>Map everything</strong><span>Topology shows every workload, Service, Ingress and dependency; drift shows what was applied by hand vs Helm.</span></li><li><strong>Baseline</strong><span>IDI, compliance posture, drift and spend in one place on day one.</span></li><li><strong>Prioritised plan</strong><span>Fastest ways to raise the score and Fix these first become the engagement roadmap.</span></li><li><strong>Explain &amp; Fix</strong><span>Each recommendation comes with steps the client's team can follow.</span></li></ol>
+                </div>
             </div>
-            
-            <div style="text-decoration: none; color: inherit; padding: 25px; border-radius: 12px; border: 1px solid var(--border-subtle); background: #ffffff; box-shadow: var(--shadow-md); transition: transform 0.2s ease, box-shadow 0.2s ease;" onmouseover="this.style.transform=\'translateY(-5px)\'; this.style.boxShadow=\'var(--shadow-lg)\'" onmouseout="this.style.transform=\'translateY(0)\'; this.style.boxShadow=\'var(--shadow-md)\'">
-                <div style="width: 40px; height: 40px; border-radius: 8px; background: rgba(129, 140, 248, 0.2); display: flex; align-items: center; justify-content: center; margin-bottom: 20px; color: var(--color-primary-light);">
-                    <i data-lucide="terminal"></i>
-                </div>
-                <h3 style="margin-bottom: 15px;">Live Runtime Logs & Debugging</h3>
-                <p style="color: var(--text-muted); line-height: 1.7;">When a client's application goes down, speed is everything. Netpin provides an integrated, real-time log viewer directly alongside the topology map. Click on a failing pod and instantly stream its runtime logs without ever touching the CLI or logging into external systems.</p>
+            <h3 class="uc-outcomes-title"><i data-lucide="target"></i> What changes — and what to measure</h3>
+            <div class="uc-outcomes"><div class="uc-outcome"><strong>Assessment time</strong><span>Days instead of weeks</span></div><div class="uc-outcome"><strong>Baseline IDI</strong><span>Recorded on day one</span></div><div class="uc-outcome"><strong>Public and privileged workloads</strong><span>Known on day one</span></div></div>
+            <div class="uc-modules"><span>Used here:</span><span class="uc-chip">Discovery &amp; Topology</span><span class="uc-chip">IDI</span><span class="uc-chip">Compliance</span><span class="uc-chip">Drift Intelligence</span></div>
+        </article>
+        <article class="uc-scenario" id="s2">
+            <div class="uc-scenario-head">
+                <span class="uc-num">Scenario 2</span>
+                <span class="uc-tag">Multi-company · Switching</span>
             </div>
-            
-            <div style="text-decoration: none; color: inherit; padding: 25px; border-radius: 12px; border: 1px solid var(--border-subtle); background: #ffffff; box-shadow: var(--shadow-md); transition: transform 0.2s ease, box-shadow 0.2s ease;" onmouseover="this.style.transform=\'translateY(-5px)\'; this.style.boxShadow=\'var(--shadow-lg)\'" onmouseout="this.style.transform=\'translateY(0)\'; this.style.boxShadow=\'var(--shadow-md)\'">
-                <div style="width: 40px; height: 40px; border-radius: 8px; background: rgba(129, 140, 248, 0.2); display: flex; align-items: center; justify-content: center; margin-bottom: 20px; color: var(--color-primary-light);">
-                    <i data-lucide="file-text"></i>
+            <h2>Twelve clients without twelve kubeconfigs</h2>
+            <p class="uc-profile"><i data-lucide="building"></i> Managed service provider · 12 client companies · mix of EKS, AKS and on-prem clusters</p>
+            <div class="uc-cols">
+                <div>
+                    <h3><i data-lucide="alert-triangle"></i> The situation</h3>
+                    <p>Engineers kept a folder of kubeconfigs, VPN profiles and notes per client. Switching context during an incident took ten minutes, credentials expired at the worst moment, and an engineer once ran a command against the wrong client's cluster.</p>
+                    <h3><i data-lucide="flame"></i> Why it hurts</h3>
+                    <ul class="uc-hurts"><li>Slow context switching during incidents.</li><li>Credential sprawl was a security risk for the MSP and its clients.</li><li>Mistakes across clients are reputation-ending.</li></ul>
                 </div>
-                <h3 style="margin-bottom: 15px;">Automated Client Reporting</h3>
-                <p style="color: var(--text-muted); line-height: 1.7;">Prove your value at the end of every month. Generate beautiful, executive-ready PDF reports that highlight the Infrastructure Debt Index (IDI) improvements you've made, the vulnerabilities you've patched, and the cloud costs you've optimized for your clients.</p>
+                <div>
+                    <h3><i data-lucide="wand-2"></i> How Netpin handles it</h3>
+                    <ol class="uc-steps"><li><strong>A company per client</strong><span>Each client is its own company in Netpin with its own projects, members and connections.</span></li><li><strong>Instant switching</strong><span>Switch company and project from the top bar; every page follows.</span></li><li><strong>Short-lived cloud credentials</strong><span>Managed clusters are reached with tokens minted on demand from each client's read-only cloud identity.</span></li><li><strong>Role-based access</strong><span>Give client staff access to their own company only.</span></li><li><strong>Read-only by design</strong><span>Netpin never writes to client infrastructure, so it cannot run the wrong command.</span></li></ol>
+                </div>
+            </div>
+            <h3 class="uc-outcomes-title"><i data-lucide="target"></i> What changes — and what to measure</h3>
+            <div class="uc-outcomes"><div class="uc-outcome"><strong>Context switch time</strong><span>Seconds</span></div><div class="uc-outcome"><strong>Long-lived kubeconfigs stored by engineers</strong><span>Zero for managed clusters</span></div><div class="uc-outcome"><strong>Cross-client mistakes</strong><span>Impossible from Netpin</span></div></div>
+            <div class="uc-modules"><span>Used here:</span><span class="uc-chip">Multi-company</span><span class="uc-chip">Multi-cloud</span><span class="uc-chip">RBAC</span></div>
+        </article>
+        <article class="uc-scenario" id="s3">
+            <div class="uc-scenario-head">
+                <span class="uc-num">Scenario 3</span>
+                <span class="uc-tag">Drift · Executive Brief</span>
+            </div>
+            <h2>Proving value — and keeping fixes fixed</h2>
+            <p class="uc-profile"><i data-lucide="building"></i> DevOps agency on a monthly retainer · client CFO questioning renewal</p>
+            <div class="uc-cols">
+                <div>
+                    <h3><i data-lucide="alert-triangle"></i> The situation</h3>
+                    <p>Over three months the agency fixed resource limits, locked down RBAC and set up Helm for the remaining services. In month four the client's developers started editing deployments by hand again, undoing part of the work, and the CFO asked what the retainer was delivering.</p>
+                    <h3><i data-lucide="flame"></i> Why it hurts</h3>
+                    <ul class="uc-hurts"><li>Work done was invisible to client leadership.</li><li>Regressions by the client's team erased progress.</li><li>Renewal conversations relied on anecdotes.</li></ul>
+                </div>
+                <div>
+                    <h3><i data-lucide="wand-2"></i> How Netpin handles it</h3>
+                    <ol class="uc-steps"><li><strong>Drift guards your work</strong><span>Hand edits that undo your changes appear as drift, attributed to who made them, within 15 minutes.</span></li><li><strong>Alerts to both teams</strong><span>Critical drift notifies the agency and client channels.</span></li><li><strong>Score history</strong><span>The IDI trend shows improvement since the engagement started.</span></li><li><strong>Executive Brief</strong><span>Grades, trends and decisions in plain language for the CFO — printed straight into the monthly report.</span></li><li><strong>Deploy Gate</strong><span>Keep regressions out of production with the client's own CI.</span></li></ol>
+                </div>
+            </div>
+            <h3 class="uc-outcomes-title"><i data-lucide="target"></i> What changes — and what to measure</h3>
+            <div class="uc-outcomes"><div class="uc-outcome"><strong>IDI since engagement start</strong><span>The headline of every monthly report</span></div><div class="uc-outcome"><strong>Regressions undone by client teams</strong><span>Detected and attributed</span></div><div class="uc-outcome"><strong>Report preparation time</strong><span>Minutes</span></div></div>
+            <div class="uc-modules"><span>Used here:</span><span class="uc-chip">Drift Intelligence</span><span class="uc-chip">Executive Brief</span><span class="uc-chip">IDI</span><span class="uc-chip">Deploy Gate</span></div>
+        </article>
+    </section>
+
+    <section class="uc-week">
+        <div class="container">
+            <div class="section-header"><div class="section-label"><span>✦</span> Getting started</div><h2>Your first week with <span class="text-gradient">Netpin</span></h2></div>
+            <div class="uc-days"><div class="uc-day"><span>Day 1</span><strong>Onboard client</strong><p>Create the client company; connect their cloud account read-only.</p></div><div class="uc-day"><span>Day 1</span><strong>Assess</strong><p>Topology, IDI, drift, compliance and cost baseline.</p></div><div class="uc-day"><span>Day 2</span><strong>Plan</strong><p>Turn Fix these first and the fix plan into the engagement roadmap.</p></div><div class="uc-day"><span>Week 2+</span><strong>Guard</strong><p>Drift alerts and Deploy Gate keep your fixes in place.</p></div><div class="uc-day"><span>Month end</span><strong>Report</strong><p>Executive Brief plus the IDI trend for the client's leadership.</p></div></div>
+        </div>
+    </section>
+
+    <section class="container uc-faqs">
+        <h2>Questions teams like yours ask</h2>
+        <details class="uc-faq"><summary>Can each client see only their own data?</summary><p>Yes. Each client is a separate company with its own members, roles and connections.</p></details><details class="uc-faq"><summary>Do clients need to install anything?</summary><p>No. Connections are read-only API credentials; clusters from the client's cloud account connect automatically.</p></details><details class="uc-faq"><summary>Is there partner pricing?</summary><p><a href="/contact.html">Contact us</a> about consultancy and MSP plans.</p></details>
+    </section>
+
+    <section class="container uc-others-wrap">
+        <h2>Explore other use cases</h2>
+        <div class="uc-others"><a class="uc-other" href="startups.html"><i data-lucide="rocket"></i><strong>Startups</strong><span>Seed to Series C teams moving fast without a dedicated platform team.</span></a><a class="uc-other" href="enterprise.html"><i data-lucide="building-2"></i><strong>Enterprise</strong><span>Many teams, many clusters, many clouds — one standard for safe change.</span></a><a class="uc-other" href="platform-sre.html"><i data-lucide="server-cog"></i><strong>Platform &amp; SRE Teams</strong><span>On-call engineers who need to know what changed before the pager goes off.</span></a><a class="uc-other" href="security-compliance.html"><i data-lucide="shield-check"></i><strong>Security &amp; Compliance</strong><span>Teams who have to prove controls work every day, not once a year.</span></a><a class="uc-other" href="regulated-industries.html"><i data-lucide="landmark"></i><strong>Fintech &amp; Healthtech</strong><span>PCI DSS, HIPAA and SOC 2 environments where drift is an audit finding.</span></a><a class="uc-other" href="engineering-leaders.html"><i data-lucide="briefcase"></i><strong>Engineering Leaders &amp; FinOps</strong><span>CTOs, VPs and finance partners who need decisions, not dashboards.</span></a></div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-box">
+                <h2 style="color: #ffffff !important;">See it on your own infrastructure</h2>
+                <p style="color: rgba(255, 255, 255, 0.9) !important;">Connect a cloud account or cluster read-only and get your drift, IDI, compliance posture and spend in minutes. No credit card required.</p>
+                <div class="cta-buttons">
+                    <a href="https://dash.netpin.io/register" class="btn btn-primary btn-large">Start Free Trial</a>
+                    <a href="/contact.html" class="btn btn-secondary btn-large">Book a Walkthrough</a>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
+<!-- Footer -->
     <netpin-footer></netpin-footer>
     <script src="/components/footer.js"></script>
 
@@ -110,10 +186,6 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             lucide.createIcons();
-
-        // Navbar scroll effect});
-        }
-
         });
     </script>
 

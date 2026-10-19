@@ -3,10 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Netpin for Enterprise – Secure Multi-Cloud Kubernetes</title>
-    <meta name="description" content="Discover how large enterprises use Netpin for multi-cloud Kubernetes management, deployment gating, and infrastructure debt quantification.">
-    <meta name="keywords" content="Enterprise DevOps, multi-cloud Kubernetes, deployment gating, enterprise infrastructure debt, SRE platform">
-    <link rel="stylesheet" href="../css/style.css">
+    <title>Netpin for Enterprise – One Standard for Safe Change Across Every Team and Cloud</title>
+    <meta name="description" content="Enterprise scenarios: one health standard across forty teams, replacing a rubber-stamp CAB with risk-based Deploy Gate, and finding the console change Terraform never saw.">
+    <meta name="keywords" content="enterprise Kubernetes governance, change advisory board automation, Terraform drift enterprise, multi-cloud compliance, Netpin">
+    <link rel="stylesheet" href="../css/style.css?v=3.4">
+    <link rel="canonical" href="https://netpin.io/use-cases/enterprise.html">
+    <meta property="og:title" content="Netpin for Enterprise – One Standard for Safe Change Across Every Team and Cloud">
+    <meta property="og:description" content="Enterprise scenarios: one health standard across forty teams, replacing a rubber-stamp CAB with risk-based Deploy Gate, and finding the console change Terraform never saw.">
+    <meta property="og:url" content="https://netpin.io/use-cases/enterprise.html">
+    <meta property="og:image" content="https://netpin.io/images/og-banner.png">
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-JQZBD8MC00"></script>
@@ -40,53 +45,126 @@
 
     <netpin-header></netpin-header>
     <script src="/components/header.js"></script>
-    <section class="container use-case-hero-section">
-        <div class="use-case-hero-grid">
-            <div>
-                <img src="../images/multicloud-mockup.png" alt="Netpin Enterprise Topology Dashboard Mockup" style="width: 100%; border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); border: 1px solid var(--border);">
-            </div>
-            <div>
-                <h1 class="use-case-title">Netpin for <span class="text-gradient">Enterprise</span></h1>
-                <p class="use-case-subtitle">Large organizations with complex, multi-cloud Kubernetes environments rely on Netpin to provide a single pane of glass into their infrastructure. We empower your Platform Engineering and SRE teams to enforce compliance, optimize multi-million dollar cloud spends, and ensure global performance at scale.</p>
-                
-                <a href="../contact.html" class="btn btn-primary btn-large">Contact Sales</a>
-            </div>
+
+    <section class="container use-case-hero-section uc-hero">
+        <a href="index.html" class="uc-back">← All use cases</a>
+        <div class="section-label"><span>✦</span> Use case</div>
+        <h1 class="use-case-title">Netpin for <span class="text-gradient">Enterprise</span></h1>
+        <p class="use-case-subtitle">Forty teams, two hundred services, four clouds and a change advisory board that meets on Tuesdays. Netpin gives platform engineering one standard for what "safe change" means — measured continuously, enforced in CI and explained in language leadership understands.</p>
+        <div class="uc-hero-cta">
+            <a href="https://dash.netpin.io/register" class="btn btn-primary btn-large">Start Free Trial</a>
+            <a href="/contact.html" class="btn btn-ghost btn-large" style="border: 1px solid var(--border-subtle);">Talk to an Engineer</a>
         </div>
-        
-        <div class="use-case-features-grid">
-            <div style="text-decoration: none; color: inherit; padding: 25px; border-radius: 12px; border: 1px solid var(--border-subtle); background: #ffffff; box-shadow: var(--shadow-md); transition: transform 0.2s ease, box-shadow 0.2s ease;" onmouseover="this.style.transform=\'translateY(-5px)\'; this.style.boxShadow=\'var(--shadow-lg)\'" onmouseout="this.style.transform=\'translateY(0)\'; this.style.boxShadow=\'var(--shadow-md)\'">
-                <div style="width: 40px; height: 40px; border-radius: 8px; background: rgba(129, 140, 248, 0.2); display: flex; align-items: center; justify-content: center; margin-bottom: 20px; color: var(--color-primary-light);">
-                    <i data-lucide="lock"></i>
-                </div>
-                <h3 style="margin-bottom: 15px;">Automated Deployment Gating</h3>
-                <p style="color: var(--text-muted); line-height: 1.7;">Shift left on infrastructure health. Enforce CI/CD compliance dynamically based on IDI scores. Ensure risky changes do not reach production by automatically blocking deployments that degrade security, reliability, or cost efficiency, without requiring manual CAB reviews.</p>
+        <div class="uc-pains">
+            <h2>Sound familiar?</h2>
+            <ul><li><i data-lucide="x-circle"></i><span>Every business unit has its own cluster conventions and nobody can compare them.</span></li><li><i data-lucide="x-circle"></i><span>The change advisory board approves releases it cannot actually assess.</span></li><li><i data-lucide="x-circle"></i><span>Terraform, the console and three GitOps repos all claim to own the same VPC.</span></li><li><i data-lucide="x-circle"></i><span>Audit season means six weeks of screenshots.</span></li><li><i data-lucide="x-circle"></i><span>Leadership asks "are we getting better?" and the honest answer is "we don't know".</span></li></ul>
+        </div>
+        <nav class="uc-toc" aria-label="Scenarios on this page"><span>Real scenarios on this page:</span><a href="#s1">One health standard across forty teams</a><a href="#s2">Replacing a rubber-stamp change advisory board</a><a href="#s3">Three teams, one VPC, and a security group nobody owns</a></nav>
+        <p class="uc-note"><i data-lucide="info"></i> Each scenario is a composite of problems engineering teams commonly run into. Company details are illustrative; every Netpin capability described is real.</p>
+    </section>
+
+    <section class="container uc-scenarios">
+        <article class="uc-scenario" id="s1">
+            <div class="uc-scenario-head">
+                <span class="uc-num">Scenario 1</span>
+                <span class="uc-tag">IDI · Executive · Multi-cloud</span>
             </div>
-            
-            <div style="text-decoration: none; color: inherit; padding: 25px; border-radius: 12px; border: 1px solid var(--border-subtle); background: #ffffff; box-shadow: var(--shadow-md); transition: transform 0.2s ease, box-shadow 0.2s ease;" onmouseover="this.style.transform=\'translateY(-5px)\'; this.style.boxShadow=\'var(--shadow-lg)\'" onmouseout="this.style.transform=\'translateY(0)\'; this.style.boxShadow=\'var(--shadow-md)\'">
-                <div style="width: 40px; height: 40px; border-radius: 8px; background: rgba(129, 140, 248, 0.2); display: flex; align-items: center; justify-content: center; margin-bottom: 20px; color: var(--color-primary-light);">
-                    <i data-lucide="globe"></i>
+            <h2>One health standard across forty teams</h2>
+            <p class="uc-profile"><i data-lucide="building"></i> Global retailer · 40 product teams · 60 clusters on EKS, AKS and GKE · central platform team of 9</p>
+            <div class="uc-cols">
+                <div>
+                    <h3><i data-lucide="alert-triangle"></i> The situation</h3>
+                    <p>Each business unit ran Kubernetes its own way. Some had resource limits everywhere, others none; some used Helm, others raw manifests; RBAC ranged from strict to cluster-admin-for-all. When a regional outage was traced to a cluster without disruption budgets, leadership asked the platform team which other clusters had the same gap. It took three weeks to answer.</p>
+                    <h3><i data-lucide="flame"></i> Why it hurts</h3>
+                    <ul class="uc-hurts"><li>No common definition of "healthy" — every team believed theirs was fine.</li><li>Platform engineering could not prioritise across teams with objective data.</li><li>Leadership could not tell whether investment in reliability was paying off.</li></ul>
                 </div>
-                <h3 style="margin-bottom: 15px;">Deep Multi-Cloud Visibility</h3>
-                <p style="color: var(--text-muted); line-height: 1.7;">Whether you are running AWS EKS, GCP GKE, Azure AKS, or on-premise OpenShift, Netpin provides unified intelligence. Compare cluster health, cost analysis, and topology mapping globally across all your business units from a centralized dashboard.</p>
+                <div>
+                    <h3><i data-lucide="wand-2"></i> How Netpin handles it</h3>
+                    <ol class="uc-steps"><li><strong>Connect every cloud</strong><span>AWS, Azure and Google Cloud accounts are added once; EKS, AKS and GKE clusters are discovered and connected with short-lived credentials — no kubeconfig distribution.</span></li><li><strong>One score per project</strong><span>The Infrastructure Debt Index scores each team's environment on the same scale: infrastructure health, security, compliance and operational excellence.</span></li><li><strong>Where the points go</strong><span>Each team sees which dimension costs them most and the fixes that recover the most points — so improvement work is self-directed.</span></li><li><strong>Forecasts</strong><span>7, 14 and 30-day projections warn when a team is heading towards a risk threshold.</span></li><li><strong>Leadership view</strong><span>The Executive Brief turns the same data into grades and decisions — health, security, audit readiness, cost and delivery.</span></li></ol>
+                </div>
             </div>
-            
-            <div style="text-decoration: none; color: inherit; padding: 25px; border-radius: 12px; border: 1px solid var(--border-subtle); background: #ffffff; box-shadow: var(--shadow-md); transition: transform 0.2s ease, box-shadow 0.2s ease;" onmouseover="this.style.transform=\'translateY(-5px)\'; this.style.boxShadow=\'var(--shadow-lg)\'" onmouseout="this.style.transform=\'translateY(0)\'; this.style.boxShadow=\'var(--shadow-md)\'">
-                <div style="width: 40px; height: 40px; border-radius: 8px; background: rgba(129, 140, 248, 0.2); display: flex; align-items: center; justify-content: center; margin-bottom: 20px; color: var(--color-primary-light);">
-                    <i data-lucide="users"></i>
-                </div>
-                <h3 style="margin-bottom: 15px;">RBAC & SSO Integration</h3>
-                <p style="color: var(--text-muted); line-height: 1.7;">Enterprise-grade security built-in. Seamlessly integrate with Okta, Azure AD, or Google Workspace for SSO. Define granular Role-Based Access Control (RBAC) so developers only see the infrastructure metrics relevant to their specific namespaces.</p>
+            <h3 class="uc-outcomes-title"><i data-lucide="target"></i> What changes — and what to measure</h3>
+            <div class="uc-outcomes"><div class="uc-outcome"><strong>IDI per team</strong><span>Comparable across business units</span></div><div class="uc-outcome"><strong>Time to answer "who else has this gap?"</strong><span>Minutes instead of weeks</span></div><div class="uc-outcome"><strong>Teams below 60</strong><span>Should shrink every quarter</span></div></div>
+            <div class="uc-modules"><span>Used here:</span><span class="uc-chip">Infrastructure Debt Index</span><span class="uc-chip">Multi-cloud</span><span class="uc-chip">Executive Brief</span><span class="uc-chip">Topology</span></div>
+        </article>
+        <article class="uc-scenario" id="s2">
+            <div class="uc-scenario-head">
+                <span class="uc-num">Scenario 2</span>
+                <span class="uc-tag">Deploy Gate · Drift · Audit</span>
             </div>
-            
-            <div style="text-decoration: none; color: inherit; padding: 25px; border-radius: 12px; border: 1px solid var(--border-subtle); background: #ffffff; box-shadow: var(--shadow-md); transition: transform 0.2s ease, box-shadow 0.2s ease;" onmouseover="this.style.transform=\'translateY(-5px)\'; this.style.boxShadow=\'var(--shadow-lg)\'" onmouseout="this.style.transform=\'translateY(0)\'; this.style.boxShadow=\'var(--shadow-md)\'">
-                <div style="width: 40px; height: 40px; border-radius: 8px; background: rgba(129, 140, 248, 0.2); display: flex; align-items: center; justify-content: center; margin-bottom: 20px; color: var(--color-primary-light);">
-                    <i data-lucide="bar-chart-2"></i>
+            <h2>Replacing a rubber-stamp change advisory board</h2>
+            <p class="uc-profile"><i data-lucide="building"></i> Financial services group · 1,200 deployments a month · weekly CAB · ServiceNow change tickets</p>
+            <div class="uc-cols">
+                <div>
+                    <h3><i data-lucide="alert-triangle"></i> The situation</h3>
+                    <p>Every production change needed CAB approval. The board met weekly, reviewed hundreds of tickets in an hour and approved almost all of them — it had no way to assess the actual risk of a change. Meanwhile urgent fixes bypassed the process entirely, creating exactly the unreviewed changes auditors look for.</p>
+                    <h3><i data-lucide="flame"></i> Why it hurts</h3>
+                    <ul class="uc-hurts"><li>Release velocity was throttled by a meeting, not by risk.</li><li>Emergency changes outside the process were a recurring audit finding.</li><li>High-risk changes were approved as easily as trivial ones.</li></ul>
                 </div>
-                <h3 style="margin-bottom: 15px;">Advanced FinOps Reporting</h3>
-                <p style="color: var(--text-muted); line-height: 1.7;">Hold engineering teams accountable for their cloud spend. Generate automated showback and chargeback reports broken down by namespace, deployment, or custom labels. Export directly to your FinOps tools or financial department.</p>
+                <div>
+                    <h3><i data-lucide="wand-2"></i> How Netpin handles it</h3>
+                    <ol class="uc-steps"><li><strong>Gate every pipeline</strong><span>GitHub Actions, GitLab CI and Jenkins send each run to Deploy Gate; the decision is posted back as a commit status.</span></li><li><strong>Risk, not paperwork</strong><span>Each change is scored on privileged or root containers, public exposure, removed limits, open drift on the target, IDI, recent incidents, rollback history, failure rate and dependency health — scaled by blast radius and criticality.</span></li><li><strong>Approve, block or route</strong><span>Low-risk changes are approved automatically; risky ones are blocked in production or routed to manual review with every contributing factor listed.</span></li><li><strong>Audited overrides</strong><span>Overrides require a written justification and are recorded in audit logs — the evidence auditors ask for.</span></li><li><strong>Catch the bypasses</strong><span>Drift Intelligence detects changes made outside any pipeline and attributes them, closing the emergency-change gap.</span></li></ol>
+                </div>
+            </div>
+            <h3 class="uc-outcomes-title"><i data-lucide="target"></i> What changes — and what to measure</h3>
+            <div class="uc-outcomes"><div class="uc-outcome"><strong>% auto-approved</strong><span>Low-risk changes that no longer wait for a meeting</span></div><div class="uc-outcome"><strong>Manual changes in production</strong><span>Visible and trending down</span></div><div class="uc-outcome"><strong>Overrides with justification</strong><span>100% — enforced by the product</span></div></div>
+            <div class="uc-modules"><span>Used here:</span><span class="uc-chip">Deploy Gate</span><span class="uc-chip">Drift Intelligence</span><span class="uc-chip">Audit logs</span><span class="uc-chip">Blast radius</span></div>
+        </article>
+        <article class="uc-scenario" id="s3">
+            <div class="uc-scenario-head">
+                <span class="uc-num">Scenario 3</span>
+                <span class="uc-tag">Terraform drift · Attribution</span>
+            </div>
+            <h2>Three teams, one VPC, and a security group nobody owns</h2>
+            <p class="uc-profile"><i data-lucide="building"></i> Logistics enterprise · 300 Terraform workspaces · state in S3 · console access for 40 engineers</p>
+            <div class="uc-cols">
+                <div>
+                    <h3><i data-lucide="alert-triangle"></i> The situation</h3>
+                    <p>A security group allowing SSH from anywhere was discovered during a penetration test. Terraform said the group was fine. It turned out an engineer had added the rule in the console during an incident eighteen months earlier, two later Terraform runs had been applied with <code>-target</code> and never touched it, and a different team's module also referenced the group.</p>
+                    <h3><i data-lucide="flame"></i> Why it hurts</h3>
+                    <ul class="uc-hurts"><li>A critical exposure existed for eighteen months with nobody aware.</li><li><code>terraform plan</code> was run rarely and only per workspace, so nobody saw the difference.</li><li>Remediation was slow because ownership was unclear.</li></ul>
+                </div>
+                <div>
+                    <h3><i data-lucide="wand-2"></i> How Netpin handles it</h3>
+                    <ol class="uc-steps"><li><strong>Three-way comparison</strong><span>Netpin reads the code from Git, the state from S3 and the live cloud, and classifies the rule as an <em>out-of-band change</em> (code = state ≠ cloud).</span></li><li><strong>Severity from content</strong><span>Public SSH on a security group is rated critical and counted in security drift and the IDI security dimension.</span></li><li><strong>Attribution</strong><span>CloudTrail shows who added the rule, when and from the console.</span></li><li><strong>Impact</strong><span>The relational graph shows every instance and workload behind the group.</span></li><li><strong>Ready-to-run fix</strong><span><code>terraform apply -target=aws_security_group.…</code> to revert, or the HCL block to adopt; unmanaged resources get a Terraform <code>import</code> block.</span></li></ol>
+                </div>
+            </div>
+            <h3 class="uc-outcomes-title"><i data-lucide="target"></i> What changes — and what to measure</h3>
+            <div class="uc-outcomes"><div class="uc-outcome"><strong>Hourly</strong><span>Terraform drift sweep across every workspace</span></div><div class="uc-outcome"><strong>Unmanaged / ClickOps resources</strong><span>Counted, attributed and importable</span></div><div class="uc-outcome"><strong>Mean time to resolve drift</strong><span>Shown on the dashboard</span></div></div>
+            <div class="uc-modules"><span>Used here:</span><span class="uc-chip">Drift Intelligence</span><span class="uc-chip">Terraform</span><span class="uc-chip">Compliance</span><span class="uc-chip">Topology</span></div>
+        </article>
+    </section>
+
+    <section class="uc-week">
+        <div class="container">
+            <div class="section-header"><div class="section-label"><span>✦</span> Getting started</div><h2>Your first week with <span class="text-gradient">Netpin</span></h2></div>
+            <div class="uc-days"><div class="uc-day"><span>Week 1</span><strong>Pilot</strong><p>Connect two business units' cloud accounts and clusters; compare their IDI.</p></div><div class="uc-day"><span>Week 2</span><strong>Standards</strong><p>Agree thresholds with platform engineering; choose the frameworks that count towards IDI.</p></div><div class="uc-day"><span>Week 3</span><strong>Gate</strong><p>Turn on Deploy Gate in warn mode for production pipelines; review decisions.</p></div><div class="uc-day"><span>Week 4</span><strong>Enforce</strong><p>Switch production to block mode; route drift and compliance alerts to the right teams.</p></div><div class="uc-day"><span>Month 2</span><strong>Report</strong><p>Run the first quarterly Executive Brief for leadership.</p></div></div>
+        </div>
+    </section>
+
+    <section class="container uc-faqs">
+        <h2>Questions teams like yours ask</h2>
+        <details class="uc-faq"><summary>How does Netpin handle access control?</summary><p>Users belong to companies and projects with role-based permissions. Sign-in supports Google, Microsoft, Apple and any OIDC identity provider such as Okta.</p></details><details class="uc-faq"><summary>Do we have to give Netpin write access?</summary><p>No. Every connection is read-only. Netpin generates fixes for you to run or commit; it never changes your infrastructure.</p></details><details class="uc-faq"><summary>Can we run Netpin on-premises?</summary><p>On-premises deployment is available on the Enterprise plan. <a href="/contact.html">Talk to us</a> about your requirements.</p></details>
+    </section>
+
+    <section class="container uc-others-wrap">
+        <h2>Explore other use cases</h2>
+        <div class="uc-others"><a class="uc-other" href="startups.html"><i data-lucide="rocket"></i><strong>Startups</strong><span>Seed to Series C teams moving fast without a dedicated platform team.</span></a><a class="uc-other" href="platform-sre.html"><i data-lucide="server-cog"></i><strong>Platform &amp; SRE Teams</strong><span>On-call engineers who need to know what changed before the pager goes off.</span></a><a class="uc-other" href="security-compliance.html"><i data-lucide="shield-check"></i><strong>Security &amp; Compliance</strong><span>Teams who have to prove controls work every day, not once a year.</span></a><a class="uc-other" href="regulated-industries.html"><i data-lucide="landmark"></i><strong>Fintech &amp; Healthtech</strong><span>PCI DSS, HIPAA and SOC 2 environments where drift is an audit finding.</span></a><a class="uc-other" href="engineering-leaders.html"><i data-lucide="briefcase"></i><strong>Engineering Leaders &amp; FinOps</strong><span>CTOs, VPs and finance partners who need decisions, not dashboards.</span></a><a class="uc-other" href="devops-consultants.html"><i data-lucide="users"></i><strong>DevOps Consultants &amp; MSPs</strong><span>Agencies running many client environments who must show progress.</span></a></div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-box">
+                <h2 style="color: #ffffff !important;">See it on your own infrastructure</h2>
+                <p style="color: rgba(255, 255, 255, 0.9) !important;">Connect a cloud account or cluster read-only and get your drift, IDI, compliance posture and spend in minutes. No credit card required.</p>
+                <div class="cta-buttons">
+                    <a href="https://dash.netpin.io/register" class="btn btn-primary btn-large">Start Free Trial</a>
+                    <a href="/contact.html" class="btn btn-secondary btn-large">Book a Walkthrough</a>
+                </div>
             </div>
         </div>
     </section>
+
 <!-- Footer -->
     <netpin-footer></netpin-footer>
     <script src="/components/footer.js"></script>
@@ -108,10 +186,6 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             lucide.createIcons();
-
-        // Navbar scroll effect});
-        }
-
         });
     </script>
 

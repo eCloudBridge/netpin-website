@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netpin for Fintech &amp; Healthtech – PCI DSS, HIPAA and Change Evidence, Continuously</title>
+    <meta name="description" content="Regulated-industry scenarios: keeping the cardholder-data environment segmented, proving HIPAA safeguards between audits, and evidencing every production change.">
+    <meta name="keywords" content="PCI DSS Kubernetes, HIPAA cloud compliance, fintech change management, healthtech security, drift detection, Netpin">
+    <link rel="stylesheet" href="../css/style.css?v=3.4">
+    <link rel="canonical" href="https://netpin.io/use-cases/regulated-industries.html">
+    <meta property="og:title" content="Netpin for Fintech &amp; Healthtech – PCI DSS, HIPAA and Change Evidence, Continuously">
+    <meta property="og:description" content="Regulated-industry scenarios: keeping the cardholder-data environment segmented, proving HIPAA safeguards between audits, and evidencing every production change.">
+    <meta property="og:url" content="https://netpin.io/use-cases/regulated-industries.html">
+    <meta property="og:image" content="https://netpin.io/images/og-banner.png">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JQZBD8MC00"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-JQZBD8MC00');
+    </script>
+
+    <!-- Zoom Transition CSS -->
+    <style>
+        .hero-mockup, .showcase-image, .hero-screen {
+            overflow: hidden !important;
+            border-radius: 16px !important;
+            transform: none !important;
+        }
+        .hero-mockup img, .showcase-image img, .hero-screen img {
+            transition: transform 0.5s ease-in-out !important;
+            will-change: transform;
+        }
+        .hero-mockup:hover img, .showcase-image:hover img, .hero-screen:hover img {
+            transform: scale(1.08) !important;
+        }
+    </style>
+
+</head>
+<body>
+    
+
+    <netpin-header></netpin-header>
+    <script src="/components/header.js"></script>
+
+    <section class="container use-case-hero-section uc-hero">
+        <a href="index.html" class="uc-back">← All use cases</a>
+        <div class="section-label"><span>✦</span> Use case</div>
+        <h1 class="use-case-title">Netpin for <span class="text-gradient">Fintech &amp; Healthtech</span></h1>
+        <p class="use-case-subtitle">In regulated environments an unreviewed change is not just a risk — it is a finding. Netpin keeps cardholder-data and ePHI environments provably in their approved state, with drift detection, PCI DSS and HIPAA controls, and audit-ready change evidence.</p>
+        <div class="uc-hero-cta">
+            <a href="https://dash.netpin.io/register" class="btn btn-primary btn-large">Start Free Trial</a>
+            <a href="/contact.html" class="btn btn-ghost btn-large" style="border: 1px solid var(--border-subtle);">Talk to an Engineer</a>
+        </div>
+        <div class="uc-pains">
+            <h2>Sound familiar?</h2>
+            <ul><li><i data-lucide="x-circle"></i><span>Your QSA asks for evidence that every production change was authorised.</span></li><li><i data-lucide="x-circle"></i><span>The cardholder-data environment must stay segmented, but nobody checks the security groups daily.</span></li><li><i data-lucide="x-circle"></i><span>Encryption at rest is "enabled everywhere" — except where it is not.</span></li><li><i data-lucide="x-circle"></i><span>A Business Associate Agreement promises safeguards you cannot continuously prove.</span></li><li><i data-lucide="x-circle"></i><span>Emergency fixes during incidents bypass change control.</span></li></ul>
+        </div>
+        <nav class="uc-toc" aria-label="Scenarios on this page"><span>Real scenarios on this page:</span><a href="#s1">Keeping the cardholder-data environment segmented</a><a href="#s2">Proving ePHI safeguards between audits</a><a href="#s3">Authorised change, evidenced automatically</a></nav>
+        <p class="uc-note"><i data-lucide="info"></i> Each scenario is a composite of problems engineering teams commonly run into. Company details are illustrative; every Netpin capability described is real.</p>
+    </section>
+
+    <section class="container uc-scenarios">
+        <article class="uc-scenario" id="s1">
+            <div class="uc-scenario-head">
+                <span class="uc-num">Scenario 1</span>
+                <span class="uc-tag">PCI DSS · Drift</span>
+            </div>
+            <h2>Keeping the cardholder-data environment segmented</h2>
+            <p class="uc-profile"><i data-lucide="building"></i> Payments processor · PCI DSS Level 1 · dedicated CDE cluster and VPC · quarterly QSA reviews</p>
+            <div class="uc-cols">
+                <div>
+                    <h3><i data-lucide="alert-triangle"></i> The situation</h3>
+                    <p>During an incident an engineer added an ingress rule to let a monitoring tool outside the cardholder-data environment reach a database inside it. The rule was meant to be temporary. Months later the QSA found it while reviewing network diagrams, raising a segmentation finding that expanded the audit scope to the monitoring network.</p>
+                    <h3><i data-lucide="flame"></i> Why it hurts</h3>
+                    <ul class="uc-hurts"><li>Segmentation failures expand PCI scope — more systems, more cost, more risk.</li><li>Temporary emergency changes became permanent by default.</li><li>Daily review of network rules was not realistic for the team.</li></ul>
+                </div>
+                <div>
+                    <h3><i data-lucide="wand-2"></i> How Netpin handles it</h3>
+                    <ol class="uc-steps"><li><strong>Network drift</strong><span>Security groups and NetworkPolicies are compared with Terraform and manifests; the added rule is an out-of-band change, rated critical for a data-tier resource.</span></li><li><strong>PCI DSS controls</strong><span>Security-group, public-access, encryption and logging controls map to PCI DSS 4.0 requirements and are re-evaluated continuously.</span></li><li><strong>Attribution and timeline</strong><span>Who added the rule, when, and every later state — the evidence a QSA asks for.</span></li><li><strong>Alert</strong><span>Critical security drift on the CDE alerts the security channel immediately.</span></li><li><strong>Revert</strong><span>A generated <code>terraform apply -target</code> removes the rule; Deploy Gate keeps future releases from reintroducing it.</span></li></ol>
+                </div>
+            </div>
+            <h3 class="uc-outcomes-title"><i data-lucide="target"></i> What changes — and what to measure</h3>
+            <div class="uc-outcomes"><div class="uc-outcome"><strong>Unauthorised CDE changes</strong><span>Detected within the hour for Terraform, 15 minutes for Kubernetes</span></div><div class="uc-outcome"><strong>PCI DSS weighted score</strong><span>Tracked continuously</span></div><div class="uc-outcome"><strong>Segmentation exceptions at audit</strong><span>Zero</span></div></div>
+            <div class="uc-modules"><span>Used here:</span><span class="uc-chip">Drift Intelligence</span><span class="uc-chip">Continuous Compliance</span><span class="uc-chip">Alerts</span><span class="uc-chip">Deploy Gate</span></div>
+        </article>
+        <article class="uc-scenario" id="s2">
+            <div class="uc-scenario-head">
+                <span class="uc-num">Scenario 2</span>
+                <span class="uc-tag">HIPAA · Encryption · Logging</span>
+            </div>
+            <h2>Proving ePHI safeguards between audits</h2>
+            <p class="uc-profile"><i data-lucide="building"></i> Digital health platform · HIPAA · BAAs with hospital customers · AWS (RDS, S3) + EKS</p>
+            <div class="uc-cols">
+                <div>
+                    <h3><i data-lucide="alert-triangle"></i> The situation</h3>
+                    <p>A hospital customer's security team asked for evidence that all storage holding patient data was encrypted, access-logged and not publicly accessible. One S3 bucket created by an analytics contractor had default encryption but no access logging; one RDS read replica had been created without backups. Neither had been noticed.</p>
+                    <h3><i data-lucide="flame"></i> Why it hurts</h3>
+                    <ul class="uc-hurts"><li>HIPAA technical safeguards require ongoing assurance, not one-time checks.</li><li>Contractors and new services created resources outside the usual templates.</li><li>Customer trust — and contracts — depended on fast, complete answers.</li></ul>
+                </div>
+                <div>
+                    <h3><i data-lucide="wand-2"></i> How Netpin handles it</h3>
+                    <ol class="uc-steps"><li><strong>Storage controls</strong><span>S3 public-access block, TLS-only, encryption, versioning and logging; RDS encryption, public access, backups and Multi-AZ; KMS key rotation.</span></li><li><strong>Mapped to HIPAA</strong><span>Results map to Security Rule technical safeguards (access control, audit controls, integrity, transmission security).</span></li><li><strong>Unmanaged resources</strong><span>Resources created outside Terraform appear as unmanaged or ClickOps drift, with who created them.</span></li><li><strong>Customer-ready summary</strong><span>Audit readiness per framework in the Executive Brief, with evidence one click away.</span></li><li><strong>Stay compliant</strong><span>Regressions alert immediately; new resources are evaluated within hours.</span></li></ol>
+                </div>
+            </div>
+            <h3 class="uc-outcomes-title"><i data-lucide="target"></i> What changes — and what to measure</h3>
+            <div class="uc-outcomes"><div class="uc-outcome"><strong>Storage with full safeguards</strong><span>Target 100%</span></div><div class="uc-outcome"><strong>Time to answer a customer security review</strong><span>Hours with evidence</span></div><div class="uc-outcome"><strong>Unmanaged data stores</strong><span>Found and owned</span></div></div>
+            <div class="uc-modules"><span>Used here:</span><span class="uc-chip">Continuous Compliance</span><span class="uc-chip">Drift Intelligence</span><span class="uc-chip">Executive Brief</span></div>
+        </article>
+        <article class="uc-scenario" id="s3">
+            <div class="uc-scenario-head">
+                <span class="uc-num">Scenario 3</span>
+                <span class="uc-tag">Change management · Deploy Gate</span>
+            </div>
+            <h2>Authorised change, evidenced automatically</h2>
+            <p class="uc-profile"><i data-lucide="building"></i> Neobank · SOC 2 + PCI DSS · 300 production deployments a month · separation of duties required</p>
+            <div class="uc-cols">
+                <div>
+                    <h3><i data-lucide="alert-triangle"></i> The situation</h3>
+                    <p>Auditors sampled twenty-five production changes and asked for evidence of review, testing and approval for each. For pipeline deployments the evidence existed but was spread across GitHub, Jenkins and Jira. For four emergency changes made directly in the cluster there was none — resulting in a change-management exception.</p>
+                    <h3><i data-lucide="flame"></i> Why it hurts</h3>
+                    <ul class="uc-hurts"><li>Evidence assembly took days for each audit sample.</li><li>Direct changes in production had no record at all.</li><li>Separation of duties could not be demonstrated consistently.</li></ul>
+                </div>
+                <div>
+                    <h3><i data-lucide="wand-2"></i> How Netpin handles it</h3>
+                    <ol class="uc-steps"><li><strong>Every pipeline gated</strong><span>Each deployment's configuration, tests, security steps and failures are evaluated against your quality profile.</span></li><li><strong>Decision recorded</strong><span>Approved, blocked or manual review — with all factors — stored per deployment.</span></li><li><strong>Overrides need justification</strong><span>Audited, attributed exceptions instead of silent bypasses.</span></li><li><strong>Direct changes detected</strong><span>Drift Intelligence finds changes made outside the pipeline and shows who made them.</span></li><li><strong>Branch protection proven</strong><span>Supply-chain controls show required reviews and admin enforcement per repository.</span></li></ol>
+                </div>
+            </div>
+            <h3 class="uc-outcomes-title"><i data-lucide="target"></i> What changes — and what to measure</h3>
+            <div class="uc-outcomes"><div class="uc-outcome"><strong>Changes with recorded decision</strong><span>100% of pipeline deployments</span></div><div class="uc-outcome"><strong>Undocumented production changes</strong><span>Detected and attributed</span></div><div class="uc-outcome"><strong>Time to answer an audit sample</strong><span>Minutes</span></div></div>
+            <div class="uc-modules"><span>Used here:</span><span class="uc-chip">Deploy Gate</span><span class="uc-chip">Drift Intelligence</span><span class="uc-chip">Continuous Compliance</span><span class="uc-chip">Audit logs</span></div>
+        </article>
+    </section>
+
+    <section class="uc-week">
+        <div class="container">
+            <div class="section-header"><div class="section-label"><span>✦</span> Getting started</div><h2>Your first week with <span class="text-gradient">Netpin</span></h2></div>
+            <div class="uc-days"><div class="uc-day"><span>Day 1</span><strong>Scope</strong><p>Connect the CDE / ePHI accounts and clusters as their own project.</p></div><div class="uc-day"><span>Day 1</span><strong>Baseline</strong><p>Run compliance and drift; select PCI DSS / HIPAA / SOC 2 for IDI.</p></div><div class="uc-day"><span>Day 2–3</span><strong>Close gaps</strong><p>Fix critical controls and data gaps first.</p></div><div class="uc-day"><span>Day 4</span><strong>Gate</strong><p>Enable Deploy Gate in block mode for the regulated environment.</p></div><div class="uc-day"><span>Day 5</span><strong>Alert</strong><p>Route critical drift and failed controls to security and compliance.</p></div></div>
+        </div>
+    </section>
+
+    <section class="container uc-faqs">
+        <h2>Questions teams like yours ask</h2>
+        <details class="uc-faq"><summary>Is Netpin itself in scope for PCI or HIPAA?</summary><p>Netpin uses read-only access and never stores secret values, cardholder data or patient data; it reads configuration, not application data. Discuss your specific scoping with your assessor.</p></details><details class="uc-faq"><summary>Can we keep regulated environments separate?</summary><p>Yes. Use a dedicated project for the CDE or ePHI environment with its own connections, members and thresholds.</p></details><details class="uc-faq"><summary>Does Netpin store Terraform state or Kubernetes secrets?</summary><p>No. State is read in memory for comparison and sensitive values are redacted; Kubernetes Secrets are reduced to names and keys.</p></details>
+    </section>
+
+    <section class="container uc-others-wrap">
+        <h2>Explore other use cases</h2>
+        <div class="uc-others"><a class="uc-other" href="startups.html"><i data-lucide="rocket"></i><strong>Startups</strong><span>Seed to Series C teams moving fast without a dedicated platform team.</span></a><a class="uc-other" href="enterprise.html"><i data-lucide="building-2"></i><strong>Enterprise</strong><span>Many teams, many clusters, many clouds — one standard for safe change.</span></a><a class="uc-other" href="platform-sre.html"><i data-lucide="server-cog"></i><strong>Platform &amp; SRE Teams</strong><span>On-call engineers who need to know what changed before the pager goes off.</span></a><a class="uc-other" href="security-compliance.html"><i data-lucide="shield-check"></i><strong>Security &amp; Compliance</strong><span>Teams who have to prove controls work every day, not once a year.</span></a><a class="uc-other" href="engineering-leaders.html"><i data-lucide="briefcase"></i><strong>Engineering Leaders &amp; FinOps</strong><span>CTOs, VPs and finance partners who need decisions, not dashboards.</span></a><a class="uc-other" href="devops-consultants.html"><i data-lucide="users"></i><strong>DevOps Consultants &amp; MSPs</strong><span>Agencies running many client environments who must show progress.</span></a></div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-box">
+                <h2 style="color: #ffffff !important;">See it on your own infrastructure</h2>
+                <p style="color: rgba(255, 255, 255, 0.9) !important;">Connect a cloud account or cluster read-only and get your drift, IDI, compliance posture and spend in minutes. No credit card required.</p>
+                <div class="cta-buttons">
+                    <a href="https://dash.netpin.io/register" class="btn btn-primary btn-large">Start Free Trial</a>
+                    <a href="/contact.html" class="btn btn-secondary btn-large">Book a Walkthrough</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- Footer -->
+    <netpin-footer></netpin-footer>
+    <script src="/components/footer.js"></script>
+
+    <!-- Scroll Animations Engine -->
+    <script src="/js/scroll-animations.js"></script>
+
+    <!-- Lucide Icons Configuration -->
+    <style>
+        .lucide {
+            width: 1.25em;
+            height: 1.25em;
+            vertical-align: middle;
+            color: currentColor; /* Inherits the wrapper color */
+            stroke-width: 2.2;
+        }
+    </style>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            lucide.createIcons();
+        });
+    </script>
+
+    
+
+
+    
+    <!-- Custom Language Modal -->
+    <style>
+    .lang-modal-overlay {
+        display: none;
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(15, 23, 42, 0.4);
+        z-index: 9999;
+        align-items: center;
+        justify-content: center;
+        backdrop-filter: blur(4px);
+    }
+    .lang-modal {
+        background: #ffffff;
+        border-radius: 12px;
+        padding: 24px;
+        width: 90%;
+        max-width: 500px;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        position: relative;
+    }
+    .lang-modal-close {
+        position: absolute;
+        top: 16px; right: 16px;
+        background: none; border: none;
+        font-size: 1.5rem; cursor: pointer;
+        color: #64748b;
+    }
+    .lang-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin: 20px 0;
+    }
+    .lang-btn {
+        display: flex; align-items: center; gap: 10px;
+        padding: 12px 16px;
+        border: 1px solid #cbd5e1;
+        border-radius: 8px;
+        background: transparent;
+        cursor: pointer;
+        font-size: 1rem;
+        color: #0f172a;
+        transition: all 0.2s ease;
+    }
+    .lang-btn:hover {
+        border-color: #0b5cff;
+        background: #f8fafc;
+    }
+    .lang-select-wrapper select {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #cbd5e1;
+        border-radius: 8px;
+        font-size: 1rem;
+        background: white;
+        color: #0f172a;
+        cursor: pointer;
+    }
+    </style>
+
+    <div class="lang-modal-overlay notranslate" id="langModal" onclick="if(event.target===this) closeLangModal()">
+        <div class="lang-modal">
+            <button class="lang-modal-close" aria-label="Close language selector" onclick="closeLangModal()">&times;</button>
+            <h3 style="margin-bottom: 8px; color: #0f172a;">Select Language</h3>
+            <p style="color: #64748b; font-size: 0.95rem;">Choose your preferred language for the website.</p>
+            
+            <div class="lang-grid">
+                <button class="lang-btn" onclick="changeLanguage('en')"><span style="font-size: 1.2rem;">🇺🇸</span> English</button>
+                <button class="lang-btn" onclick="changeLanguage('es')"><span style="font-size: 1.2rem;">🇪🇸</span> Español</button>
+                <button class="lang-btn" onclick="changeLanguage('fr')"><span style="font-size: 1.2rem;">🇫🇷</span> Français</button>
+                <button class="lang-btn" onclick="changeLanguage('de')"><span style="font-size: 1.2rem;">🇩🇪</span> Deutsch</button>
+                <button class="lang-btn" onclick="changeLanguage('zh-CN')"><span style="font-size: 1.2rem;">🇨🇳</span> 中文</button>
+                <button class="lang-btn" onclick="changeLanguage('ja')"><span style="font-size: 1.2rem;">🇯🇵</span> 日本語</button>
+            </div>
+
+            <div class="lang-select-wrapper">
+                <select onchange="if(this.value) changeLanguage(this.value)">
+                    <option value="">More languages...</option>
+                    <option value="ar">Arabic (العربية)</option>
+                    <option value="hi">Hindi (हिन्दी)</option>
+                    <option value="pt">Portuguese (Português)</option>
+                    <option value="ru">Russian (Русский)</option>
+                    <option value="ko">Korean (한국어)</option>
+                    <option value="it">Italian (Italiano)</option>
+                    <option value="nl">Dutch (Nederlands)</option>
+                    <option value="pl">Polish (Polski)</option>
+                    <option value="tr">Turkish (Türkçe)</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        function openLangModal() {
+            document.getElementById('langModal').style.display = 'flex';
+        }
+        function closeLangModal() {
+            document.getElementById('langModal').style.display = 'none';
+        }
+                function changeLanguage(langCode) {
+            closeLangModal();
+            
+            // Try the instant native combo box trigger first
+            var selectField = document.querySelector('.goog-te-combo');
+            if (selectField) {
+                selectField.value = langCode;
+                selectField.dispatchEvent(new Event('change', { bubbles: true }));
+            } else {
+                // Fallback to cookie if script hasn't loaded yet
+                var domain = window.location.hostname;
+                if (langCode === 'en') {
+                    document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                    document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; domain=" + domain + "; path=/;";
+                    if (domain.includes('.')) document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; domain=." + domain + "; path=/;";
+                } else {
+                    document.cookie = "googtrans=/en/" + langCode + "; path=/";
+                    document.cookie = "googtrans=/en/" + langCode + "; domain=" + domain + "; path=/";
+                    if (domain.includes('.')) document.cookie = "googtrans=/en/" + langCode + "; domain=." + domain + "; path=/";
+                }
+                window.location.reload();
+            }
+        }
+    </script>
+
+<div id="google_translate_element" style="position: absolute; left: -9999px; opacity: 0; pointer-events: none;"></div>
+    <!-- Google Translate Script -->
+    <script type="text/javascript">
+        function resetToEnglish() {
+            document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; domain=" + window.location.hostname + "; path=/;";
+            window.location.reload();
+        }
+
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en'
+            }, 'google_translate_element');
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var userLang = navigator.language || navigator.userLanguage; 
+            var langCode = userLang.split('-')[0];
+            
+            // Auto-translate based on browser language if not English
+            if (langCode !== 'en' && document.cookie.indexOf('googtrans') === -1) {
+                document.cookie = "googtrans=/en/" + langCode + "; path=/";
+                // Also set for specific domain
+                document.cookie = "googtrans=/en/" + langCode + "; domain=" + window.location.hostname + "; path=/";
+                window.location.reload();
+            }
+        });
+    </script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+
+    
+
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/6a76e091224bc71d4a538d43/1jvg5qf74';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+</body>
+</html>

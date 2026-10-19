@@ -3,10 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Netpin Use Cases – DevOps & Kubernetes Monitoring</title>
-    <meta name="description" content="Discover how startups and enterprises use Netpin for Kubernetes monitoring, DevOps automation, and cost optimization.">
-    <meta name="keywords" content="Netpin use cases, DevOps monitoring, Kubernetes management, startup infrastructure, enterprise DevOps">
-    <link rel="stylesheet" href="../css/style.css">
+    <title>Netpin Use Cases – Real Scenarios for Startups, Enterprise, SRE, Security, Fintech and FinOps</title>
+    <meta name="description" content="21 detailed scenarios showing how startups, enterprises, SRE, security, regulated and FinOps teams use Netpin to catch drift, prove compliance, control cost and ship safely.">
+    <meta name="keywords" content="Netpin use cases, drift detection use case, Kubernetes compliance use case, DevOps scenarios, FinOps, SRE">
+    <link rel="stylesheet" href="../css/style.css?v=3.4">
+    <link rel="canonical" href="https://netpin.io/use-cases/index.html">
+    <meta property="og:title" content="Netpin Use Cases – Real Problems, Real Fixes">
+    <meta property="og:description" content="21 detailed scenarios for startups, enterprise, SRE, security, regulated industries, leaders and consultants.">
+    <meta property="og:url" content="https://netpin.io/use-cases/index.html">
+    <meta property="og:image" content="https://netpin.io/images/og-banner.png">
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-JQZBD8MC00"></script>
@@ -40,25 +45,37 @@
 
     <netpin-header></netpin-header>
     <script src="/components/header.js"></script>
-    <section class="container use-case-hero-section">
-        <h1 class="use-case-title">Netpin <span class="text-gradient">Use Cases</span></h1>
-        <p class="use-case-subtitle">See how different teams leverage our Infrastructure Intelligence Platform.</p>
-        
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
-            <a href="startups.html" style="text-decoration: none; color: inherit; padding: 25px; border-radius: 12px; border: 1px solid var(--border-subtle); background: #ffffff; box-shadow: var(--shadow-md); transition: transform 0.2s ease, box-shadow 0.2s ease;" onmouseover="this.style.transform=\'translateY(-5px)\'; this.style.boxShadow=\'var(--shadow-lg)\'" onmouseout="this.style.transform=\'translateY(0)\'; this.style.boxShadow=\'var(--shadow-md)\'" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='var(--color-primary)'" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='var(--border)'">
-                <h3 style="margin-bottom: 15px; color: var(--color-primary-light);">Netpin for Startups</h3>
-                <p style="color: var(--text-muted); font-size: 0.95rem;">Learn how fast-growing startups keep Kubernetes lightweight and optimized from day one.</p>
-            </a>
-            <a href="enterprise.html" style="text-decoration: none; color: inherit; padding: 25px; border-radius: 12px; border: 1px solid var(--border-subtle); background: #ffffff; box-shadow: var(--shadow-md); transition: transform 0.2s ease, box-shadow 0.2s ease;" onmouseover="this.style.transform=\'translateY(-5px)\'; this.style.boxShadow=\'var(--shadow-lg)\'" onmouseout="this.style.transform=\'translateY(0)\'; this.style.boxShadow=\'var(--shadow-md)\'" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='var(--color-primary)'" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='var(--border)'">
-                <h3 style="margin-bottom: 15px; color: var(--color-primary-light);">Netpin for Enterprise</h3>
-                <p style="color: var(--text-muted); font-size: 0.95rem;">Discover how large enterprises manage multi-cloud visibility and enforce deployment gating.</p>
-            </a>
-            <a href="devops-consultants.html" style="text-decoration: none; color: inherit; padding: 25px; border-radius: 12px; border: 1px solid var(--border-subtle); background: #ffffff; box-shadow: var(--shadow-md); transition: transform 0.2s ease, box-shadow 0.2s ease;" onmouseover="this.style.transform=\'translateY(-5px)\'; this.style.boxShadow=\'var(--shadow-lg)\'" onmouseout="this.style.transform=\'translateY(0)\'; this.style.boxShadow=\'var(--shadow-md)\'" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='var(--color-primary)'" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='var(--border)'">
-                <h3 style="margin-bottom: 15px; color: var(--color-primary-light);">Netpin for DevOps Consultants</h3>
-                <p style="color: var(--text-muted); font-size: 0.95rem;">See how consultants manage multi-client infrastructure, visualize topologies, and view live logs.</p>
-            </a>
+
+    <section class="container use-case-hero-section uc-hero" style="text-align: center;">
+        <div class="section-label" style="justify-content: center;"><span>✦</span> Use cases</div>
+        <h1 class="use-case-title">Real problems. <span class="text-gradient">Real fixes.</span></h1>
+        <p class="use-case-subtitle" style="margin-left: auto; margin-right: auto;">Twenty-one detailed scenarios — from a three-person startup to a regulated enterprise — showing exactly how teams use Netpin to find what changed, prove compliance, control cost and ship safely.</p>
+    </section>
+
+    <section class="container">
+        <h2 class="uc-hub-h2">Start with your team</h2>
+        <div class="uc-hub-grid"><a class="uc-hub-card" href="startups.html"><i data-lucide="rocket"></i><h3>Startups</h3><p>Seed to Series C teams moving fast without a dedicated platform team.</p><span>3 detailed scenarios →</span></a><a class="uc-hub-card" href="enterprise.html"><i data-lucide="building-2"></i><h3>Enterprise</h3><p>Many teams, many clusters, many clouds — one standard for safe change.</p><span>3 detailed scenarios →</span></a><a class="uc-hub-card" href="platform-sre.html"><i data-lucide="server-cog"></i><h3>Platform &amp; SRE Teams</h3><p>On-call engineers who need to know what changed before the pager goes off.</p><span>3 detailed scenarios →</span></a><a class="uc-hub-card" href="security-compliance.html"><i data-lucide="shield-check"></i><h3>Security &amp; Compliance</h3><p>Teams who have to prove controls work every day, not once a year.</p><span>3 detailed scenarios →</span></a><a class="uc-hub-card" href="regulated-industries.html"><i data-lucide="landmark"></i><h3>Fintech &amp; Healthtech</h3><p>PCI DSS, HIPAA and SOC 2 environments where drift is an audit finding.</p><span>3 detailed scenarios →</span></a><a class="uc-hub-card" href="engineering-leaders.html"><i data-lucide="briefcase"></i><h3>Engineering Leaders &amp; FinOps</h3><p>CTOs, VPs and finance partners who need decisions, not dashboards.</p><span>3 detailed scenarios →</span></a><a class="uc-hub-card" href="devops-consultants.html"><i data-lucide="users"></i><h3>DevOps Consultants &amp; MSPs</h3><p>Agencies running many client environments who must show progress.</p><span>3 detailed scenarios →</span></a></div>
+    </section>
+
+    <section class="container">
+        <h2 class="uc-hub-h2">Or start with the problem</h2>
+        <div class="uc-problems"><a class="uc-problem" href="platform-sre.html#s1"><i data-lucide="git-compare"></i><div><strong>"Someone changed production by hand"</strong><span>Drift detection, attribution and one-click revert</span></div></a><a class="uc-problem" href="security-compliance.html#s1"><i data-lucide="shield-alert"></i><div><strong>"We passed the audit, then a control broke"</strong><span>Continuous controls and posture regression alerts</span></div></a><a class="uc-problem" href="startups.html#s3"><i data-lucide="wallet"></i><div><strong>"The cloud bill keeps growing"</strong><span>Calibrated cost, safe rightsizing, savings that add up</span></div></a><a class="uc-problem" href="enterprise.html#s2"><i data-lucide="gavel"></i><div><strong>"Our CAB approves everything"</strong><span>Risk-based Deploy Gate with audited overrides</span></div></a><a class="uc-problem" href="platform-sre.html#s3"><i data-lucide="network"></i><div><strong>"We didn't know what depended on it"</strong><span>Topology and blast-radius scoring</span></div></a><a class="uc-problem" href="regulated-industries.html#s1"><i data-lucide="lock"></i><div><strong>"A temporary firewall rule became permanent"</strong><span>Network drift and PCI DSS controls</span></div></a><a class="uc-problem" href="engineering-leaders.html#s1"><i data-lucide="presentation"></i><div><strong>"The board wants to know if we're OK"</strong><span>Executive Brief with grades and decisions</span></div></a><a class="uc-problem" href="devops-consultants.html#s1"><i data-lucide="folder-search"></i><div><strong>"Nobody documented this estate"</strong><span>Day-one discovery and baseline</span></div></a></div>
+        <p class="uc-note" style="margin-top: 24px;"><i data-lucide="info"></i> Scenarios are composites of problems engineering teams commonly run into. Company details are illustrative; every capability described is real.</p>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-box">
+                <h2 style="color: #ffffff !important;">Recognise your team?</h2>
+                <p style="color: rgba(255, 255, 255, 0.9) !important;">Connect read-only and see your own drift, IDI, compliance and spend in minutes.</p>
+                <div class="cta-buttons">
+                    <a href="https://dash.netpin.io/register" class="btn btn-primary btn-large">Start Free Trial</a>
+                    <a href="/contact.html" class="btn btn-secondary btn-large">Talk to an Engineer</a>
+                </div>
+            </div>
         </div>
     </section>
+
 <!-- Footer -->
     <netpin-footer></netpin-footer>
     <script src="/components/footer.js"></script>
@@ -80,10 +97,6 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             lucide.createIcons();
-
-        // Navbar scroll effect});
-        }
-
         });
     </script>
 
