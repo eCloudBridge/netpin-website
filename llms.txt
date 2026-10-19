@@ -1,18 +1,30 @@
 # Netpin
 
-Netpin is a DevOps intelligence platform that helps teams measure and reduce Infrastructure Debt (IDI), optimize cloud costs, and improve system reliability in real-time. It provides deep visibility into Kubernetes and cloud resources.
+Netpin is the intelligence layer for cloud, Kubernetes and CI/CD. It discovers everything a team runs, detects configuration drift, scores infrastructure debt with the Infrastructure Debt Index (IDI), automates compliance, optimizes cloud cost and blocks risky releases — using read-only access.
 
 ## Core Information
 - Website: [https://netpin.io](https://netpin.io)
-- Contact: contact@netpin.io
+- Contact: hello@netpin.io
 - Documentation: [https://docs.netpin.io](https://docs.netpin.io)
 - Application: [https://dash.netpin.io](https://dash.netpin.io)
 
 ## Key Features
-- **Infrastructure Debt Index (IDI)**: A proprietary score quantifying your technical debt in infrastructure.
-- **Cost Optimization**: Real-time insights to identify and eliminate wasted cloud spend.
-- **Topology Visualization**: Interactive mapping of Kubernetes clusters and dependencies.
-- **Deployment Gating**: Policy-driven gates to prevent misconfigured deployments.
+- **Drift Intelligence**: Detects differences between declared state (Kubernetes manifests, Helm, Argo CD, Terraform code and state, approved baselines) and running infrastructure; classifies 14 drift types, attributes changes (Kubernetes managedFields, AWS CloudTrail), shows relational impact and generates fixes. Runtime sweep every 15 minutes, Terraform every hour.
+- **Infrastructure Debt Index (IDI)**: A 0–100 score (higher is healthier) weighting infrastructure health 40%, security posture 30%, compliance 20% and operational excellence 10%, with 7/14/30-day forecasts.
+- **Continuous Compliance**: Automated controls mapped to CIS AWS, CIS Kubernetes, Pod Security Standards, NSA/CISA, SOC 2, PCI DSS 4.0, HIPAA, ISO 27001:2022, NIST 800-53 and CIS Software Supply Chain; severity-weighted scores.
+- **Deploy Gate**: Approves, blocks or routes CI/CD releases (GitHub Actions, GitLab CI, Jenkins) for review based on pipeline quality and change risk (drift, IDI, blast radius, incidents, history).
+- **Cost Intelligence**: Resource-level cloud and Kubernetes cost calibrated to billing, month-end forecast, savings without double counting.
+- **Discovery & Topology**: Live dependency map with blast-radius scoring.
+- **Predictive Alerts & AI Copilot (NIE)**: Time-to-risk forecasts, deduplicated alerts to Slack/PagerDuty/email, explanations with evidence.
+- **Explain & Fix** and **Executive Brief**.
+- **Clouds**: AWS (EKS), Google Cloud (GKE), Azure (AKS), DigitalOcean (DOKS) with automatic cluster connection; any Kubernetes via kubeconfig.
+
+## Key Pages
+- [Features](https://netpin.io/features.html)
+- [Pricing](https://netpin.io/pricing.html)
+- [Blog: Drift Intelligence](https://netpin.io/blog/drift-intelligence.html)
+- [Blog: What is Infrastructure Debt?](https://netpin.io/blog/what-is-infrastructure-debt.html)
+- [Drift documentation](https://docs.netpin.io/drift.html)
 
 ## Social Links
 - [X/Twitter](https://x.com/netpinio?s=21&t=VkRUdMpeAx_UQTgCBIXlWw)

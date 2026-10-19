@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Netpin Features – Kubernetes Monitoring & Cost Optimization for DevOps</title>
-    <meta name="description" content="Explore Netpin's powerful DevOps features: Infrastructure Debt Index (IDI) scoring, Kubernetes topology visualization, and AI-powered cost optimization.">
-    <meta name="keywords" content="kubernetes monitoring features, IDI score, infrastructure topology visualization, deployment gating CI/CD, predictive infrastructure analytics, multi-cloud kubernetes management, DevOps observability platform, cost optimization">
+    <title>Netpin Features – Drift Detection, IDI, Compliance, Deploy Gate & Cloud Cost</title>
+    <meta name="description" content="Drift detection for Kubernetes, Helm and Terraform, the Infrastructure Debt Index, continuous compliance for 10 frameworks, Deploy Gate, cost intelligence, topology and AI-powered alerts.">
+    <meta name="keywords" content="drift detection, terraform drift, kubernetes compliance, SOC 2 automation, kubernetes monitoring features, IDI score, infrastructure topology visualization, deployment gating CI/CD, predictive infrastructure analytics, multi-cloud kubernetes management, DevOps observability platform, cost optimization">
     <meta name="robots" content="index, follow">
     <meta name="author" content="Netpin">
 
@@ -14,8 +14,8 @@
     <link rel="canonical" href="https://netpin.io/features.html">
 
     <!-- Open Graph -->
-    <meta property="og:title" content="Netpin Features – Kubernetes Monitoring & Cost Optimization for DevOps">
-    <meta property="og:description" content="Explore Netpin's powerful DevOps features: Infrastructure Debt Index (IDI) scoring, Kubernetes topology, and cost optimization.">
+    <meta property="og:title" content="Netpin Features – Drift Detection, IDI, Compliance, Deploy Gate & Cloud Cost">
+    <meta property="og:description" content="Drift detection, Infrastructure Debt Index, continuous compliance, Deploy Gate, cost intelligence and AI-powered alerts for cloud and Kubernetes.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://netpin.io/features.html">
     <meta property="og:image" content="https://netpin.io/images/og-banner.png">
@@ -25,8 +25,8 @@
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Netpin Features – Kubernetes Monitoring & Cost Optimization for DevOps">
-    <meta name="twitter:description" content="Explore Netpin's powerful DevOps features: Infrastructure Debt Index (IDI) scoring, Kubernetes topology, and cost optimization.">
+    <meta name="twitter:title" content="Netpin Features – Drift Detection, IDI, Compliance, Deploy Gate & Cloud Cost">
+    <meta name="twitter:description" content="Drift detection, Infrastructure Debt Index, continuous compliance, Deploy Gate, cost intelligence and AI-powered alerts for cloud and Kubernetes.">
     <meta name="twitter:image" content="https://netpin.io/images/og-banner.png">
 
     <!-- JSON-LD -->
@@ -36,7 +36,7 @@
       "@type": "WebPage",
       "url": "https://netpin.io/features.html",
       "name": "Netpin Features",
-      "description": "Explore Netpin's powerful features for Kubernetes infrastructure intelligence including IDI scoring, topology visualization, predictive forecasting, deployment gating, and multi-cloud support.",
+      "description": "Netpin features: Drift Intelligence, Infrastructure Debt Index, continuous compliance, Deploy Gate, cost intelligence, topology, predictive alerts, Explain & Fix and the Executive Brief.",
       "publisher": {
         "@type": "Organization",
         "name": "Netpin",
@@ -50,7 +50,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css?v=2.7">
+    <link rel="stylesheet" href="css/style.css?v=3.3">
     <link rel="icon" type="image/png" href="images/favicon.png">
     <link rel="apple-touch-icon" href="images/favicon.png">
 
@@ -104,7 +104,7 @@
 
         .feature-text .feature-tagline {
             font-size: 1.1rem;
-            color: var(--color-accent-cyan);
+            color: var(--color-primary);
             font-weight: 600;
             margin-bottom: 16px;
             text-transform: uppercase;
@@ -175,7 +175,7 @@
         .feature-stat .stat-value {
             font-size: 2rem;
             font-weight: 800;
-            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent-cyan) 100%);
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -207,6 +207,16 @@
             font-size: 0.95rem;
             color: var(--text-secondary);
         }
+
+
+        .feature-jump { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 32px; }
+        .feature-jump a { padding: 6px 14px; border: 1px solid var(--border-subtle); border-radius: 100px; font-size: 0.88rem; color: var(--text-secondary); text-decoration: none; background: #fff; }
+        .feature-jump a:hover { border-color: var(--color-primary); color: var(--color-primary); }
+        .feature-detail { scroll-margin-top: 80px; }
+        .feature-list li span { display: block; }
+        .feature-list code { font-family: 'JetBrains Mono', monospace; font-size: 0.85em; background: var(--color-slate-100); padding: 1px 5px; border-radius: 4px; }
+        .feature-visual-dark { background: transparent; border: 0; padding: 0; min-height: 0; }
+        .feature-visual-dark .drift-visual { width: 100%; }
 
         @media (max-width: 1024px) {
             .feature-detail .container {
@@ -264,229 +274,450 @@
             <div class="section-label">
                 <span>✦</span> Features
             </div>
-            <h1>Powerful Features for<br><span class="text-gradient">Modern Infrastructure</span></h1>
+            <h1>Everything Your Infrastructure<br><span class="text-gradient">Is Trying to Tell You</span></h1>
             <p>
-                Everything you need to understand, monitor, and improve your Kubernetes
-                infrastructure health. See the platform your DevOps team will love.
+                Netpin connects read-only to your clouds, clusters, source control and CI/CD, then answers the
+                questions every team asks: What do we run? What changed? How risky is it? Are we compliant?
+                What does it cost? Is this release safe?
             </p>
+            <nav class="feature-jump" aria-label="Jump to feature">
+                <a href="#drift">Drift</a><a href="#idi">IDI</a><a href="#compliance">Compliance</a><a href="#gating">Deploy Gate</a>
+                <a href="#cost">Cost</a><a href="#topology">Topology</a><a href="#alerts">Alerts &amp; AI</a><a href="#explain">Explain &amp; Fix</a>
+                <a href="#executive">Executive</a><a href="#multicloud">Multi-cloud</a>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Feature: Drift -->
+    <section class="feature-detail" id="drift">
+        <div class="container">
+            <div class="feature-text">
+                <div class="feature-tagline">New · What changed?</div>
+                <h2>Drift <span class="text-gradient">Intelligence</span></h2>
+                <p>
+                    Drift is any difference between what you declared and what is actually running. Netpin finds it
+                    continuously across Kubernetes, Helm, Argo CD and Terraform — then explains who changed it, why it
+                    matters, what it affects and exactly how to fix it.
+                </p>
+                <ul class="feature-list">
+                    <li><span><strong>Every source of truth</strong> — kubectl manifests, Helm release manifests, Argo CD sync status, approved baselines and a three-way Terraform code ↔ state ↔ cloud comparison</span></li>
+                    <li><span><strong>14 drift types</strong> — out-of-band changes, unapplied code, stale state, ClickOps, unmanaged resources, runtime overrides, GitOps out-of-sync and more</span></li>
+                    <li><span><strong>Attribution</strong> — the person or tool behind each change, from Kubernetes field managers and AWS CloudTrail</span></li>
+                    <li><span><strong>Relational impact</strong> — affected services, shared ConfigMaps and Secrets, and internet-facing paths</span></li>
+                    <li><span><strong>Ready-to-run fixes</strong> — revert patches, adopt-into-code snippets and Terraform import blocks</span></li>
+                    <li><span><strong>Pre-flight risk</strong> — warns when a deployment would overwrite a live hotfix</span></li>
+                </ul>
+                <a href="/blog/drift-intelligence.html" class="btn btn-primary">Read the Drift Deep-Dive</a>
+
+                <div class="feature-stats">
+                    <div class="feature-stat">
+                        <div class="stat-value">15 min</div>
+                        <div class="stat-label">Runtime drift sweep</div>
+                    </div>
+                    <div class="feature-stat">
+                        <div class="stat-value">60 min</div>
+                        <div class="stat-label">Terraform drift sweep</div>
+                    </div>
+                </div>
+
+                <div class="value-proposition">
+                    <h4>How it works</h4>
+                    <p>Only the fields you declared are compared, so autoscaler replica counts and server-generated fields never create noise. Secret values are redacted before anything is stored, and Netpin never changes your infrastructure.</p>
+                </div>
+            </div>
+            <div class="feature-visual feature-visual-dark">
+                <div class="drift-visual" role="img" aria-label="Example drift finding: a security group opened to the internet in the AWS console">
+                    <div class="dv-head">
+                        <span class="dv-sev" style="background: rgba(244,63,94,0.15); color: #fda4af; border-color: rgba(244,63,94,0.4);">CRITICAL</span>
+                        <span class="dv-type">Out-of-band change</span>
+                        <span class="dv-time">Terraform · code = state ≠ cloud</span>
+                    </div>
+                    <div class="dv-title">aws_security_group.api · us-east-1</div>
+                    <div class="dv-diff">
+                        <div class="dv-path">ingress[*]</div>
+                        <div class="dv-row dv-minus"><span>code</span><code>443 from 10.0.0.0/8</code><em>main.tf</em></div>
+                        <div class="dv-row dv-plus"><span>live</span><code>+ 22 from 0.0.0.0/0</code><em>console</em></div>
+                    </div>
+                    <div class="dv-grid">
+                        <div><span>Changed by</span><strong>user/alex</strong></div>
+                        <div><span>Via</span><strong>AWS console</strong></div>
+                        <div><span>Category</span><strong>Security</strong></div>
+                    </div>
+                    <div class="dv-fix"><span>Revert</span><code>terraform apply -target=aws_security_group.api</code></div>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Feature: IDI Analytics -->
-    <section class="feature-detail">
+    <section class="feature-detail" id="idi">
         <div class="container">
             <div class="feature-text">
-                <div class="feature-tagline">Quantify Technical Debt</div>
+                <div class="feature-tagline">How healthy are we?</div>
                 <h2>Infrastructure Debt Index <span class="text-gradient">(IDI)</span></h2>
                 <p>
-                    Our proprietary scoring system quantifies technical debt across four critical
-                    dimensions, giving you a single actionable number that represents your infrastructure health.
-                    Make data-driven decisions about where to invest your engineering time.
+                    One 0–100 score, higher is healthier, that turns every finding, open drift and failed control into a
+                    number engineering and leadership both understand — and shows exactly where the points are lost.
                 </p>
                 <ul class="feature-list">
-                    <li><strong>Security score</strong> tracks vulnerabilities, misconfigurations, and exposure risks
-                    </li>
-                    <li><strong>Compliance score</strong> monitors policy adherence and best practices</li>
-                    <li><strong>Efficiency score</strong> identifies resource waste and optimization opportunities</li>
-                    <li><strong>Reliability score</strong> measures resilience and fault tolerance</li>
+                    <li><span><strong>Infrastructure health (40%)</strong> — failed releases, crash loops, missing probes and limits, open drift</span></li>
+                    <li><span><strong>Security posture (30%)</strong> — failed security controls, misconfigurations and security drift</span></li>
+                    <li><span><strong>Compliance (20%)</strong> — severity-weighted pass rate of the frameworks you choose</span></li>
+                    <li><span><strong>Operational excellence (10%)</strong> — CI/CD coverage, GitOps and Helm discipline</span></li>
+                    <li><span><strong>Fastest ways to raise the score</strong> — fixes ranked by the IDI points they recover</span></li>
+                    <li><span><strong>Forecast</strong> — 7, 14 and 30-day projections with "reaches warning in ~N days"</span></li>
                 </ul>
-                <a href="#" class="btn btn-primary">Learn More About IDI</a>
+                <a href="https://docs.netpin.io/idi.html" class="btn btn-primary" target="_blank" rel="noopener">How the IDI Is Calculated</a>
 
                 <div class="feature-stats">
                     <div class="feature-stat">
-                        <div class="stat-value">73%</div>
-                        <div class="stat-label">Faster Debt Identification</div>
+                        <div class="stat-value">80+</div>
+                        <div class="stat-label">Healthy</div>
                     </div>
                     <div class="feature-stat">
-                        <div class="stat-value">4hrs</div>
-                        <div class="stat-label">Saved Per Week</div>
+                        <div class="stat-value">&lt; 60</div>
+                        <div class="stat-label">Needs action now</div>
                     </div>
                 </div>
 
                 <div class="value-proposition">
-                    <h4>💼 Sales Value</h4>
-                    <p>Help customers justify infrastructure investments to leadership with concrete, trackable metrics
-                        that demonstrate ROI over time.</p>
+                    <h4>How it works</h4>
+                    <p>Each dimension costs <em>weight × (100 − score)</em> points, so Netpin can tell you "raising infrastructure health by 10 adds 4 IDI points" — and Deploy Gate can block production releases while the IDI is below your threshold.</p>
                 </div>
             </div>
             <div class="feature-visual">
-                <img src="images/idi-score-gauge.png"
-                    alt="IDI Analytics Dashboard showing security, compliance, efficiency, and reliability scores">
+                <img src="images/idi-score-gauge.png" alt="IDI analytics with score gauge, category trends and forecast">
             </div>
         </div>
     </section>
 
-    <!-- Feature: Topology -->
-    <section class="feature-detail">
+    <!-- Feature: Compliance -->
+    <section class="feature-detail" id="compliance">
         <div class="container">
             <div class="feature-text">
-                <div class="feature-tagline">Visual Infrastructure Mapping</div>
-                <h2>Interactive <span class="text-gradient">Topology Visualization</span></h2>
+                <div class="feature-tagline">Are we compliant?</div>
+                <h2>Continuous <span class="text-gradient">Compliance</span></h2>
                 <p>
-                    See your entire Kubernetes infrastructure at a glance. Understand how resources
-                    connect and depend on each other with real-time interactive maps that make complex
-                    architectures easy to understand.
+                    Automated controls check real settings on every connected AWS account, Kubernetes cluster and
+                    repository. Each result counts towards every framework requirement it satisfies — evidence is
+                    collected once and stays current.
                 </p>
                 <ul class="feature-list">
-                    <li><strong>Real-time visualization</strong> of all cluster resources and their relationships</li>
-                    <li><strong>Traffic flow tracing</strong> from Ingress through Services to Pods</li>
-                    <li><strong>Smart filtering</strong> by namespace, resource type, or health status</li>
-                    <li><strong>Click-to-drill</strong> into any resource to see details and related findings</li>
+                    <li><span><strong>10 frameworks</strong> — CIS AWS Foundations, CIS Kubernetes, Pod Security Standards, NSA/CISA hardening, SOC 2, PCI DSS 4.0, HIPAA, ISO 27001:2022, NIST 800-53 and CIS Software Supply Chain</span></li>
+                    <li><span><strong>Honest coverage</strong> — every requirement is listed; manual-evidence items and missing data are shown, never counted as passes</span></li>
+                    <li><span><strong>Severity-weighted scores</strong> — a critical failure weighs 10×, high 5×, medium 3×, low 1×</span></li>
+                    <li><span><strong>Fix these first</strong> — controls ranked by weighted failures, with per-resource evidence and remediation</span></li>
+                    <li><span><strong>Exemptions built in</strong> — system namespaces and built-in roles never pollute your score</span></li>
                 </ul>
-                <a href="#" class="btn btn-primary">Explore Topology</a>
+                <a href="/blog/compliance-automation.html" class="btn btn-primary">Read About Compliance Automation</a>
 
                 <div class="feature-stats">
                     <div class="feature-stat">
-                        <div class="stat-value">80%</div>
-                        <div class="stat-label">Faster Root Cause Analysis</div>
+                        <div class="stat-value">10</div>
+                        <div class="stat-label">Frameworks mapped</div>
                     </div>
                     <div class="feature-stat">
-                        <div class="stat-value">5min</div>
-                        <div class="stat-label">Average Onboarding Time</div>
+                        <div class="stat-value">6 hrs</div>
+                        <div class="stat-label">Automatic re-scan</div>
                     </div>
                 </div>
 
                 <div class="value-proposition">
-                    <h4>💼 Sales Value</h4>
-                    <p>New team members can understand the entire infrastructure in minutes instead of weeks.
-                        Dramatically reduces onboarding time and tribal knowledge dependency.</p>
+                    <h4>How it works</h4>
+                    <p>One control — say "containers do not run privileged" — maps to CIS Kubernetes, Pod Security Standards, NSA/CISA, PCI DSS and NIST at once. Choose which frameworks count towards your IDI; all of them are always evaluated.</p>
                 </div>
             </div>
             <div class="feature-visual">
-                <img src="images/topology-graph.png"
-                    alt="Interactive topology visualization showing Kubernetes cluster resources and connections">
-            </div>
-        </div>
-    </section>
-
-    <!-- Feature: Forecasting -->
-    <section class="feature-detail">
-        <div class="container">
-            <div class="feature-text">
-                <div class="feature-tagline">Predict Before Problems Strike</div>
-                <h2>AI-Powered <span class="text-gradient">Predictive Alerts</span></h2>
-                <p>
-                    Don't just react to problems — predict them. Our AI analyzes trends and patterns to
-                    forecast where your IDI will be in the future, giving you time to act before issues become
-                    incidents.
-                </p>
-                <ul class="feature-list">
-                    <li><strong>7, 14, and 30-day</strong> IDI forecasts with confidence intervals</li>
-                    <li><strong>Threshold prediction</strong> tells you days until critical levels</li>
-                    <li><strong>Trend analysis</strong> with direction and confidence scores</li>
-                    <li><strong>Proactive alerts</strong> before issues become critical incidents</li>
-                </ul>
-                <a href="#" class="btn btn-primary">See Forecasting</a>
-
-                <div class="feature-stats">
-                    <div class="feature-stat">
-                        <div class="stat-value">67%</div>
-                        <div class="stat-label">Reduction in MTTR</div>
-                    </div>
-                    <div class="feature-stat">
-                        <div class="stat-value">94%</div>
-                        <div class="stat-label">Forecast Accuracy</div>
-                    </div>
-                </div>
-
-                <div class="value-proposition">
-                    <h4>💼 Sales Value</h4>
-                    <p>Transform from reactive firefighting to proactive maintenance. Show leadership a measurable
-                        reduction in incident response time and unplanned downtime costs.</p>
-                </div>
-            </div>
-            <div class="feature-visual">
-                <img src="images/predictive-alerts-mockup.png"
-                    alt="AI-powered predictive alerts dashboard showing forecasts and trend analysis">
+                <img src="images/compliance-frameworks.png" alt="Compliance frameworks with weighted scores and coverage">
             </div>
         </div>
     </section>
 
     <!-- Feature: Deployment Gating -->
-    <section class="feature-detail">
+    <section class="feature-detail" id="gating">
         <div class="container">
             <div class="feature-text">
-                <div class="feature-tagline">Ship with Confidence</div>
-                <h2>Intelligent <span class="text-gradient">Deployment Gating</span></h2>
+                <div class="feature-tagline">Is this release safe?</div>
+                <h2>Deploy <span class="text-gradient">Gate</span></h2>
                 <p>
-                    Stop risky deployments before they hit production. Integrate with your
-                    CI/CD pipeline for automated release control that protects your infrastructure health.
+                    Every pipeline run is evaluated against your quality policies and the live state of the
+                    infrastructure it is about to change. The decision is reported back to your CI as a commit status.
                 </p>
                 <ul class="feature-list">
-                    <li><strong>Automatic gate decisions</strong> based on IDI thresholds you define</li>
-                    <li><strong>Impact analysis</strong> projects how deployment will affect your scores</li>
-                    <li><strong>Dependency checks</strong> identify critical path resources before deploy</li>
-                    <li><strong>Native integrations</strong> with GitHub Actions, GitLab CI, Jenkins, and more</li>
+                    <li><span><strong>Five pipeline dimensions</strong> — configuration, misconfiguration, failures, log analysis and steps</span></li>
+                    <li><span><strong>Real change risk</strong> — privileged or root containers, public exposure, removed limits, open drift, low IDI, incidents, rollbacks, failure history and dependency health</span></li>
+                    <li><span><strong>Quality profiles and gates</strong> — required, warned or ignored practices and metric thresholds, SonarQube-style</span></li>
+                    <li><span><strong>Approved, blocked or manual review</strong> — with every contributing factor and its evidence</span></li>
+                    <li><span><strong>Audited overrides</strong> — unblock with a written justification, recorded in audit logs</span></li>
+                    <li><span><strong>Native CI</strong> — GitHub Actions, GitLab CI and Jenkins webhooks</span></li>
                 </ul>
-                <a href="#" class="btn btn-primary">Configure Gating</a>
+                <a href="/blog/deploy-gate.html" class="btn btn-primary">Read About Deploy Gate</a>
 
                 <div class="feature-stats">
                     <div class="feature-stat">
-                        <div class="stat-value">45%</div>
-                        <div class="stat-label">Fewer Production Incidents</div>
+                        <div class="stat-value">70</div>
+                        <div class="stat-label">Default risk ceiling in production</div>
                     </div>
                     <div class="feature-stat">
-                        <div class="stat-value">2min</div>
-                        <div class="stat-label">Integration Setup</div>
+                        <div class="stat-value">3</div>
+                        <div class="stat-label">Clear outcomes</div>
                     </div>
                 </div>
 
                 <div class="value-proposition">
-                    <h4>💼 Sales Value</h4>
-                    <p>Reduce the cost of production incidents by preventing them entirely. Each blocked risky
-                        deployment saves an average of $15,000 in incident response and customer impact costs.</p>
+                    <h4>How it works</h4>
+                    <p>Risk factors are scaled by blast radius and the target's criticality. Crossing a threshold blocks in production and warns elsewhere — so teams move fast in staging and stay safe in prod.</p>
                 </div>
             </div>
             <div class="feature-visual">
-                <img src="images/deploy-gate-flow.png"
-                    alt="Deployment gating interface showing gate decisions and impact analysis">
+                <img src="images/deploy-gate-flow.png" alt="Deploy Gate flow from code push to decision">
+            </div>
+        </div>
+    </section>
+
+    <!-- Feature: Cost -->
+    <section class="feature-detail" id="cost">
+        <div class="container">
+            <div class="feature-text">
+                <div class="feature-tagline">What are we spending?</div>
+                <h2>Cost <span class="text-gradient">Intelligence</span></h2>
+                <p>
+                    Spend for every connected cloud account, cluster and integration — priced resource by resource,
+                    calibrated to your real bill, forecast to month end and turned into savings you can act on.
+                </p>
+                <ul class="feature-list">
+                    <li><span><strong>Pricing you can trust</strong> — billed, calibrated to bill, AWS price list or list price; the basis is shown on every number</span></li>
+                    <li><span><strong>Month-end forecast</strong> — regression over daily spend with a 95% range and anomaly detection</span></li>
+                    <li><span><strong>Kubernetes allocation</strong> — node cost split by requests and p95 usage, idle capacity and per-workload efficiency</span></li>
+                    <li><span><strong>Savings without double counting</strong> — remove waste, modernise, schedule and commit, applied in order</span></li>
+                    <li><span><strong>Cost by integration</strong> — Helm releases, GitOps applications, repositories and CI servers</span></li>
+                </ul>
+                <a href="/blog/kubernetes-cost-optimization.html" class="btn btn-primary">Read About Cost Optimization</a>
+
+                <div class="feature-stats">
+                    <div class="feature-stat">
+                        <div class="stat-value">95%</div>
+                        <div class="stat-label">Forecast prediction range</div>
+                    </div>
+                    <div class="feature-stat">
+                        <div class="stat-value">p95</div>
+                        <div class="stat-label">Usage-based rightsizing</div>
+                    </div>
+                </div>
+
+                <div class="value-proposition">
+                    <h4>How it works</h4>
+                    <p>A Kubernetes node that is an EC2 instance is priced once, as that instance, and attributed to its cluster. Rightsizing frees capacity, which only becomes money when a node can be removed — so Netpin counts it there, not twice.</p>
+                </div>
+            </div>
+            <div class="feature-visual feature-visual-dark">
+                <div class="drift-visual" role="img" aria-label="Example cost summary with run-rate, forecast and savings">
+                    <div class="dv-head"><span class="dv-type">Calibrated to bill</span><span class="dv-time">prod-aws · this month</span></div>
+                    <div class="dv-grid" style="margin-top: 0;">
+                        <div><span>Run-rate</span><strong>$4,812 / mo</strong></div>
+                        <div><span>Month-end</span><strong>$4,950 ± 6%</strong></div>
+                        <div><span>Savings</span><strong>$920 / mo</strong></div>
+                    </div>
+                    <div class="dv-diff">
+                        <div class="dv-path">Top savings · applied in order</div>
+                        <div class="dv-row dv-plus"><span>waste</span><code>3 unattached EBS volumes</code><em>$118</em></div>
+                        <div class="dv-row dv-plus"><span>modern</span><code>gp2 → gp3 on 14 volumes</code><em>$96</em></div>
+                        <div class="dv-row dv-plus"><span>sched</span><code>staging nodes office-hours</code><em>$412</em></div>
+                        <div class="dv-row dv-plus"><span>commit</span><code>Compute Savings Plan</code><em>$294</em></div>
+                    </div>
+                    <div class="dv-fix" style="margin-top: 14px;"><span>Idle</span><code>prod-eks · 32% of node cost unused</code></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feature: Topology -->
+    <section class="feature-detail" id="topology">
+        <div class="container">
+            <div class="feature-text">
+                <div class="feature-tagline">What do we run?</div>
+                <h2>Discovery &amp; <span class="text-gradient">Topology</span></h2>
+                <p>
+                    A live map of every cloud resource, cluster and workload and how they depend on each other —
+                    with the blast radius of any change, before you make it.
+                </p>
+                <ul class="feature-list">
+                    <li><span><strong>Relationships discovered automatically</strong> — selectors, Ingress routes, mounted ConfigMaps and Secrets, service accounts, autoscalers and Helm ownership</span></li>
+                    <li><span><strong>Blast radius score</strong> — reach, dependency centrality, shared infrastructure and criticality, weighted higher in production</span></li>
+                    <li><span><strong>Deep Discovery</strong> — quick, standard or deep scans across Kubernetes, cloud, CI/CD, networking and deployment health</span></li>
+                    <li><span><strong>Drill in anywhere</strong> — click any node for its health, findings, drift and dependants</span></li>
+                </ul>
+                <a href="/blog/topology.html" class="btn btn-primary">Read About Topology</a>
+
+                <div class="feature-stats">
+                    <div class="feature-stat">
+                        <div class="stat-value">6</div>
+                        <div class="stat-label">Hops of impact analysis</div>
+                    </div>
+                    <div class="feature-stat">
+                        <div class="stat-value">0–100</div>
+                        <div class="stat-label">Blast radius score</div>
+                    </div>
+                </div>
+            </div>
+            <div class="feature-visual">
+                <img src="images/topology-graph.png" alt="Interactive topology of clusters, workloads and services">
+            </div>
+        </div>
+    </section>
+
+    <!-- Feature: Predictive Alerts -->
+    <section class="feature-detail" id="alerts">
+        <div class="container">
+            <div class="feature-text">
+                <div class="feature-tagline">What happens next?</div>
+                <h2>Predictive Alerts &amp; <span class="text-gradient">AI Copilot</span></h2>
+                <p>
+                    Don't wait for the incident. Netpin forecasts where risk is heading, raises one clean alert per
+                    real problem and explains everything through the Netpin Intelligence Engine (NIE).
+                </p>
+                <ul class="feature-list">
+                    <li><span><strong>Time to risk</strong> — days until the IDI crosses a risk threshold at the current rate</span></li>
+                    <li><span><strong>Change-risk prediction</strong> — an ML model with its top drivers and recommended remediations</span></li>
+                    <li><span><strong>Operational alerts</strong> — from drift, security, compliance, behaviour and deployment signals</span></li>
+                    <li><span><strong>No alert storms</strong> — fingerprinting, deduplication, cooldowns, hysteresis and maintenance windows</span></li>
+                    <li><span><strong>Escalation</strong> — unacknowledged alerts escalate to P1 automatically</span></li>
+                    <li><span><strong>Ask NIE</strong> — "why is risk high?", "what should we fix first?", answered with evidence</span></li>
+                </ul>
+                <a href="https://dash.netpin.io/register" class="btn btn-primary">Try Predictive Alerts</a>
+
+                <div class="feature-stats">
+                    <div class="feature-stat">
+                        <div class="stat-value">30 min</div>
+                        <div class="stat-label">Default auto-escalation</div>
+                    </div>
+                    <div class="feature-stat">
+                        <div class="stat-value">3</div>
+                        <div class="stat-label">Channels: Slack, PagerDuty, email</div>
+                    </div>
+                </div>
+            </div>
+            <div class="feature-visual">
+                <img src="images/predictive-alerts-mockup.png" alt="Predictive alerts with IDI forecast and alert inbox">
+            </div>
+        </div>
+    </section>
+
+    <!-- Feature: Explain & Fix -->
+    <section class="feature-detail" id="explain">
+        <div class="container">
+            <div class="feature-text">
+                <div class="feature-tagline">How do we fix it?</div>
+                <h2>Explain &amp; <span class="text-gradient">Fix</span></h2>
+                <p>
+                    Every finding, drift and alert opens a remediation packet grounded in your own data — so any
+                    engineer can fix it correctly, not just the one who knows the system.
+                </p>
+                <ul class="feature-list">
+                    <li><span><strong>What's wrong and why it matters</strong> — in plain language, with the IDI and compliance impact</span></li>
+                    <li><span><strong>Affected resources and blast radius</strong> — before you touch anything</span></li>
+                    <li><span><strong>How to fix and how to verify</strong> — ordered steps and, where available, a generated fix</span></li>
+                    <li><span><strong>Citations and gaps</strong> — the evidence behind every statement, and what is unknown</span></li>
+                    <li><span><strong>A learning loop</strong> — accept, applied, resolved or false-positive feedback re-ranks future recommendations</span></li>
+                </ul>
+            </div>
+            <div class="feature-visual feature-visual-dark">
+                <div class="drift-visual" role="img" aria-label="Example remediation packet">
+                    <div class="dv-head"><span class="dv-sev">HIGH</span><span class="dv-type">Explain &amp; Fix</span></div>
+                    <div class="dv-title">Container runs without resource limits</div>
+                    <div class="dv-diff">
+                        <div class="dv-path">What's wrong</div>
+                        <div style="color:#cbd5e1; font-family: Inter, sans-serif; font-size: 0.85rem; line-height:1.5;">deploy/orders-api can consume an entire node's memory and evict neighbours.</div>
+                    </div>
+                    <div class="dv-grid">
+                        <div><span>Affects</span><strong>4 workloads</strong></div>
+                        <div><span>IDI gain</span><strong>+1.6 pts</strong></div>
+                        <div><span>Effort</span><strong>Low</strong></div>
+                    </div>
+                    <div class="dv-fix"><span>Fix</span><code>resources.limits.memory: 1Gi</code></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feature: Executive -->
+    <section class="feature-detail" id="executive">
+        <div class="container">
+            <div class="feature-text">
+                <div class="feature-tagline">What should leadership know?</div>
+                <h2>Executive <span class="text-gradient">Brief</span></h2>
+                <p>
+                    The state of the platform in business terms — grades, money, risk, audit readiness and delivery —
+                    with the decisions leadership needs to make. Print it straight into the board pack.
+                </p>
+                <ul class="feature-list">
+                    <li><span><strong>Overall grade A–F</strong> with a one-paragraph verdict anyone can read</span></li>
+                    <li><span><strong>Five scorecards</strong> — platform health, security risk, audit readiness, cost efficiency and delivery</span></li>
+                    <li><span><strong>Decisions needed</strong> — ranked "now" and "this quarter", with impact in money or risk</span></li>
+                    <li><span><strong>Where the risk is</strong> — controls grouped into business areas, weakest first</span></li>
+                    <li><span><strong>Trust indicators</strong> — what the numbers are based on, so leaders know how far to rely on them</span></li>
+                </ul>
+            </div>
+            <div class="feature-visual feature-visual-dark">
+                <div class="drift-visual" role="img" aria-label="Example executive brief with grades">
+                    <div class="dv-head"><span class="dv-type">Last quarter</span><span class="dv-time">Overall grade</span></div>
+                    <div style="display:flex; align-items:center; gap:16px; margin-bottom:14px;">
+                        <div style="font-size:3rem; font-weight:800; color:#fbbf24; line-height:1;">C</div>
+                        <div style="color:#cbd5e1; font-size:0.88rem; line-height:1.5;">Stable with clear gaps: 3 critical security exposures open; audit readiness 46%; $11k/yr avoidable spend.</div>
+                    </div>
+                    <div class="dv-grid">
+                        <div><span>Health</span><strong>B</strong></div>
+                        <div><span>Security</span><strong>D</strong></div>
+                        <div><span>Audit</span><strong>F</strong></div>
+                    </div>
+                    <div class="dv-fix"><span>Now</span><code>Close 3 critical security exposures</code></div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Feature: Multi-Cloud -->
-    <section class="feature-detail">
+    <section class="feature-detail" id="multicloud">
         <div class="container">
             <div class="feature-text">
-                <div class="feature-tagline">One Platform, Every Cloud</div>
-                <h2>Multi-Cloud <span class="text-gradient">Management</span></h2>
+                <div class="feature-tagline">One platform, every cloud</div>
+                <h2>Multi-Cloud &amp; <span class="text-gradient">Integrations</span></h2>
                 <p>
-                    Connect clusters from any cloud provider or on-premises environment.
-                    One unified view for your entire infrastructure, regardless of where it runs.
+                    Connect a cloud account and Netpin discovers its managed Kubernetes clusters and connects to them
+                    automatically with short-lived credentials. Add Git and CI to light up drift, compliance and Deploy Gate.
                 </p>
                 <ul class="feature-list">
-                    <li><strong>AWS EKS</strong> with automatic IAM IRSA authentication</li>
-                    <li><strong>Google GKE</strong> with Workload Identity integration</li>
-                    <li><strong>Azure AKS</strong> with managed identity support</li>
-                    <li><strong>On-premises</strong> clusters via secure kubeconfig upload</li>
+                    <li><span><strong>AWS</strong> — EKS discovery and signed, short-lived EKS tokens from a least-privilege IAM identity</span></li>
+                    <li><span><strong>Google Cloud</strong> — GKE via a service account with <code>roles/container.viewer</code></span></li>
+                    <li><span><strong>Azure</strong> — AKS via a service principal, including Entra ID (AAD) enabled clusters</span></li>
+                    <li><span><strong>DigitalOcean</strong> — DOKS with a scoped API token</span></li>
+                    <li><span><strong>Any Kubernetes</strong> — on-premises or other clouds via kubeconfig or token</span></li>
+                    <li><span><strong>Integrations</strong> — GitHub, GitLab, Bitbucket, Jenkins, GitHub Actions and Argo CD; Slack, PagerDuty and email</span></li>
                 </ul>
-                <a href="#" class="btn btn-primary">Connect Your Cloud</a>
+                <a href="https://docs.netpin.io/iam/index.html" class="btn btn-primary" target="_blank" rel="noopener">See the IAM Policies</a>
 
                 <div class="feature-stats">
                     <div class="feature-stat">
-                        <div class="stat-value">3</div>
-                        <div class="stat-label">Major Clouds Supported</div>
+                        <div class="stat-value">4</div>
+                        <div class="stat-label">Clouds with automatic connection</div>
                     </div>
                     <div class="feature-stat">
-                        <div class="stat-value">∞</div>
-                        <div class="stat-label">Clusters You Can Connect</div>
+                        <div class="stat-value">0</div>
+                        <div class="stat-label">Write permissions required</div>
                     </div>
                 </div>
 
                 <div class="value-proposition">
-                    <h4>💼 Sales Value</h4>
-                    <p>Stop switching between cloud consoles. Consolidate infrastructure visibility across your entire
-                        hybrid and multi-cloud environment into one powerful dashboard.</p>
+                    <h4>Agentless by default</h4>
+                    <p>Everything works through read-only APIs. An optional lightweight in-cluster agent (read-only, non-root, under 64 MB) is available for environments that prefer push-based collection.</p>
                 </div>
             </div>
             <div class="feature-visual">
-                <img src="images/multicloud-mockup.png"
-                    alt="Multi-cloud management interface showing connected clusters from AWS, GCP, and Azure">
+                <img src="images/multicloud-mockup.png" alt="Clusters across AWS, GCP, Azure and DigitalOcean in one view">
             </div>
         </div>
     </section>
 
-    <!-- CTA Section -->
     <section class="cta-section">
         <div class="container">
             <div class="cta-box">
@@ -497,7 +728,7 @@
                 </p>
                 <div class="cta-buttons">
                     <a href="https://dash.netpin.io/register" class="btn btn-primary btn-large">Start Free Trial</a>
-                    <a href="#" class="btn btn-secondary btn-large">Request Demo</a>
+                    <a href="/contact.html" class="btn btn-secondary btn-large">Request Demo</a>
                 </div>
             </div>
         </div>

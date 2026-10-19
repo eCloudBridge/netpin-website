@@ -26,6 +26,7 @@ class NetpinFooter extends HTMLElement {
                     <h4>Product</h4>
                     <ul>
                         <li><a href="/features.html">Features</a></li>
+                        <li><a href="/features.html#drift">Drift Intelligence</a></li>
                         <li><a href="/pricing.html">Pricing</a></li>
                         <li><a href="/contact.html">Contact</a></li>
 

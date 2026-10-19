@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drift Intelligence: Find Every Change Made Outside Your Code – Netpin Blog</title>
+    <meta name="description" content="What configuration drift is, why terraform plan and GitOps miss it, and how Netpin detects, explains, attributes and fixes drift across Kubernetes, Helm, Argo CD and Terraform.">
+    <meta name="keywords" content="configuration drift, drift detection, Terraform drift, Kubernetes drift, Helm drift, GitOps drift, ClickOps, infrastructure as code, Netpin">
+    <link rel="stylesheet" href="../css/style.css?v=3.3">
+    <link rel="canonical" href="https://netpin.io/blog/drift-intelligence.html">
+    <meta property="og:title" content="Drift Intelligence: Find Every Change Made Outside Your Code">
+    <meta property="og:description" content="How Netpin detects, explains, attributes and fixes drift across Kubernetes, Helm, Argo CD and Terraform.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://netpin.io/blog/drift-intelligence.html">
+    <meta property="og:image" content="https://netpin.io/images/og-banner.png">
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Drift Intelligence: Find Every Change Made Outside Your Code",
+      "datePublished": "2026-10-19", "author": {"@type": "Organization", "name": "Netpin Engineering"},
+      "publisher": {"@type": "Organization", "name": "Netpin", "logo": {"@type": "ImageObject", "url": "https://netpin.io/images/logo-icon.png"}},
+      "mainEntityOfPage": "https://netpin.io/blog/drift-intelligence.html"}
+    </script>
+    <style>
+        /* Diagrams */
+        
+/* ── Diagrams, charts, formulas (generated) ───────────────────────────── */
+.ug-diagram { margin: 8px 0 26px; padding: 16px 16px 12px; border: 1px solid var(--color-slate-200); border-radius: 10px; background: #fbfcfd; }
+.ug-diagram-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.ug-diagram .ug-svg { display: block; max-width: 100%; height: auto; margin: 0 auto; font-family: Lato, "Helvetica Neue", Arial, sans-serif; }
+.ug-diagram.wide .ug-svg { min-width: 720px; }
+.ug-diagram figcaption { font-style: normal; font-size: 0.82rem; color: #64748b; padding-top: 10px; border-top: 1px dashed var(--color-slate-200); margin-top: 10px; }
+.ug-svg-title { font-size: 12.5px; font-weight: 700; }
+.ug-svg-sub { font-size: 10.5px; fill: #5b6b7b; }
+.ug-svg-edge { font-size: 10px; fill: #4a5866; font-weight: 700; }
+.ug-svg-label { font-size: 12px; fill: #2c3e50; }
+.ug-svg-value { font-size: 11.5px; fill: #2c3e50; font-weight: 700; }
+.ug-svg-axis { font-size: 10.5px; fill: #6c7a88; }
+.ug-svg-inbar { font-size: 11px; fill: #ffffff; font-weight: 700; }
+.ug-legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 0.8rem; color: var(--text-secondary); padding-top: 8px; }
+.ug-legend span { display: inline-flex; align-items: center; gap: 6px; }
+.ug-legend i { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+.ug-formula { margin: 8px 0 22px; border: 1px solid #d6cdee; border-left: 4px solid #7353ba; border-radius: 8px; background: #faf8fe; padding: 14px 18px; }
+.ug-formula-title { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: #4b2f8f; font-weight: 700; margin-bottom: 6px; }
+.ug-formula-expr { font-family: "Roboto Mono", Consolas, monospace; font-size: 0.92rem; color: #2c3e50; line-height: 1.7; overflow-x: auto; white-space: nowrap; }
+.ug-formula-terms { margin: 10px 0 0; font-size: 0.86rem; }
+.ug-formula-terms td { padding: 4px 10px 4px 0; border: 0; background: transparent !important; vertical-align: top; }
+.ug-formula-terms td:first-child { white-space: nowrap; }
+.ug-example { margin: 8px 0 24px; border: 1px solid #cfe6da; border-left: 4px solid #1e8e5a; border-radius: 8px; background: #f6fbf8; padding: 14px 18px; }
+.ug-example-title { font-weight: 700; color: #17673f; margin-bottom: 6px; }
+.ug-example p:last-child, .ug-example ol:last-child, .ug-example ul:last-child { margin-bottom: 0; }
+.ug-example code { background: #e6f2ec; }
+.ug-toc { border: 1px solid var(--color-slate-200); border-radius: 8px; padding: 12px 18px; margin: 0 0 26px; background: #fbfcfd; }
+.ug-toc strong { display: block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: #64748b; margin-bottom: 6px; }
+.ug-toc ol { columns: 2; column-gap: 32px; margin: 0 0 0 18px; font-size: 0.9rem; }
+@media (max-width: 720px) { .ug-toc ol { columns: 1; } .ug-diagram { padding: 12px 10px 10px; } }
+
+        .ug-diagram { background: #ffffff; }
+        .dv-hero .drift-visual { max-width: 100%; }
+        article a, .blog-article a { color: var(--color-primary); }
+        .blog-article code { font-family: 'JetBrains Mono', monospace; font-size: 0.88em; background: var(--color-slate-100); padding: 1px 6px; border-radius: 4px; }
+        .blog-article pre code { background: none; padding: 0; }
+        .blog-article .drift-visual code { background: none; padding: 0; color: inherit; }
+        .blog-article .dv-fix code { color: #e0e7ff; }
+    </style>
+
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JQZBD8MC00"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-JQZBD8MC00');
+    </script>
+
+    <!-- Zoom Transition CSS -->
+    <style>
+        .hero-mockup, .showcase-image, .hero-screen {
+            overflow: hidden !important;
+            border-radius: 16px !important;
+            transform: none !important;
+        }
+        .hero-mockup img, .showcase-image img, .hero-screen img {
+            transition: transform 0.5s ease-in-out !important;
+            will-change: transform;
+        }
+        .hero-mockup:hover img, .showcase-image:hover img, .hero-screen:hover img {
+            transform: scale(1.08) !important;
+        }
+    </style>
+
+
+    <!-- Force Solid Navbar on Blog Pages -->
+    <style>
+        .navbar { 
+            background: #ffffff !important; 
+            padding: 12px 0 !important; 
+            border-bottom: 1px solid var(--border-subtle) !important; 
+            box-shadow: var(--shadow-sm) !important; 
+        }
+    </style>
+</head>
+<body>
+    
+
+    <netpin-header></netpin-header>
+    <script src="/components/header.js"></script>
+        <section class="blog-hero" style="padding-top: 150px; padding-bottom: 80px; margin-bottom: 60px;">
+        <div class="blog-hero-content">
+            <span class="blog-badge" style="position: relative; display: inline-block; top: 0; left: 0; margin-bottom: 24px; font-size: 0.9rem;">Drift</span>
+            <h1 style="color: white; font-size: clamp(2rem, 4vw, 3.5rem); margin-bottom: 24px; line-height: 1.2;">Drift Intelligence: Find Every Change Made Outside Your Code</h1>
+            <div class="blog-card-meta" style="justify-content: center; color: rgba(255,255,255,0.85); font-size: 1rem;">
+                <span><i data-lucide="calendar" style="width: 18px; height: 18px;"></i> Oct 19, 2026</span>
+                <span><i data-lucide="clock" style="width: 18px; height: 18px;"></i> 14 min read</span>
+                <span><i data-lucide="user" style="width: 18px; height: 18px;"></i> Netpin Engineering</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="container" style="min-height: 60vh; padding-bottom: 100px;">
+        <div class="blog-article" style="max-width: 800px; margin: 0 auto; padding: 0 20px;">
+            <div class="dv-hero" style="margin-bottom: 50px;">
+                <div class="drift-visual" role="img" aria-label="Example drift finding: a container image changed with kubectl in production">
+                    <div class="dv-head"><span class="dv-sev">HIGH</span><span class="dv-type">Runtime override</span><span class="dv-time">detected 4 min ago</span></div>
+                    <div class="dv-title">deploy/checkout · prod-eks / payments</div>
+                    <div class="dv-diff"><div class="dv-path">spec.template.spec.containers[checkout].image</div>
+                        <div class="dv-row dv-minus"><span>desired</span><code>registry/checkout:1.42.0</code><em>Helm rev 18</em></div>
+                        <div class="dv-row dv-plus"><span>live</span><code>registry/checkout:hotfix-7</code><em>kubectl-set</em></div></div>
+                    <div class="dv-grid"><div><span>Changed by</span><strong>alex · kubectl</strong></div><div><span>Impact</span><strong>3 services · public</strong></div><div><span>IDI cost</span><strong>−2.4 pts</strong></div></div>
+                    <div class="dv-fix"><span>Revert</span><code>helm rollback checkout 18</code></div>
+                </div>
+            </div>
+            <div style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: 12px; padding: 30px; margin-bottom: 40px; box-shadow: var(--shadow-sm);">
+                <h4 style="margin-bottom: 15px; font-size: 1.2rem;">In this article</h4>
+            <ol style="color: var(--text-secondary); margin: 0; line-height: 1.8; padding-left: 22px; font-size: 1.05rem;">
+                <li style="margin-bottom: 12px;"><a href="#what">What drift is — and why it is dangerous</a></li>
+                <li style="margin-bottom: 12px;"><a href="#miss">Why your existing tools miss it</a></li>
+                <li style="margin-bottom: 12px;"><a href="#how">How Netpin detects drift</a></li>
+                <li style="margin-bottom: 12px;"><a href="#desired">Where the "desired state" comes from</a></li>
+                <li style="margin-bottom: 12px;"><a href="#types">The 14 types of drift</a></li>
+                <li style="margin-bottom: 12px;"><a href="#terraform">Terraform: the three-way comparison</a></li>
+                <li style="margin-bottom: 12px;"><a href="#who">Who changed it?</a></li>
+                <li style="margin-bottom: 12px;"><a href="#impact">What does it affect?</a></li>
+                <li style="margin-bottom: 12px;"><a href="#severity">How serious is it?</a></li>
+                <li style="margin-bottom: 12px;"><a href="#fix">Fixing drift</a></li>
+                <li style="margin-bottom: 12px;"><a href="#idi">Drift, your IDI and Deploy Gate</a></li>
+                <li style="margin-bottom: 12px;"><a href="#security">Security and privacy</a></li>
+                <li style="margin-bottom: 12px;"><a href="#start">Getting started</a></li>
+                <li style="margin-bottom: 12px;"><a href="#faq">FAQ</a></li>
+            </ol>
+            </div>
+            <p style="color: var(--text-secondary); margin-bottom: 25px; line-height: 1.8; font-size: 1.1rem;">It is 2:07am. Checkout is failing. The on-call engineer runs <code>kubectl set image</code> to roll out a hotfix build, the errors stop, and everyone goes back to bed. Nobody updates the Helm chart. Three days later a routine release ships the old image again — and checkout breaks for the second time this week.</p>
+            <p style="color: var(--text-secondary); margin-bottom: 25px; line-height: 1.8; font-size: 1.1rem;">That gap between what your code says and what is actually running has a name: <strong>drift</strong>. Every team has it. Most teams cannot see it. Netpin's <strong>Drift Intelligence</strong> finds every instance of it across Kubernetes, Helm, Argo CD and Terraform, and tells you who caused it, what it affects and exactly how to fix it.</p>
+            <h2 id="what" style="margin: 50px 0 20px; font-size: 2rem; color: var(--text-primary); scroll-margin-top: 90px;">What drift is — and why it is dangerous</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 25px; line-height: 1.8; font-size: 1.1rem;"><strong>Drift is any difference between the state you declared and the state that is running.</strong> The declaration might be a Kubernetes manifest, a Helm chart, an Argo CD application or Terraform code. The running state is whatever the cluster or cloud reports right now.</p>
+            <p style="color: var(--text-secondary); margin-bottom: 25px; line-height: 1.8; font-size: 1.1rem;">Drift happens for ordinary reasons: an emergency hotfix, a quick security-group change in the AWS console, a Terraform pull request that was merged but never applied, a GitOps controller that cannot reconcile, or an operator that quietly rewrites a field. Each one is reasonable in the moment. Together they create three serious problems:</p>
+            <ul style="color: var(--text-secondary); margin: 0 0 30px; line-height: 1.8; padding-left: 22px; font-size: 1.05rem;">
+                <li style="margin-bottom: 12px;"><strong>Hidden risk.</strong> A hand-made change can open a port to the internet, run a container as root or remove a memory limit — without code review, without a security scan, without anyone noticing.</li>
+                <li style="margin-bottom: 12px;"><strong>Surprise outages.</strong> The next deployment silently overwrites the live fix (like the checkout story above), or fails because reality no longer matches what the pipeline expects.</li>
+                <li style="margin-bottom: 12px;"><strong>Audit gaps.</strong> Changes made outside the approved process break change-management controls such as SOC 2 CC8.1, ISO 27001 A.8.32 and PCI DSS 6.5.1.</li>
+            </ul>
+            <blockquote style="border-left: 4px solid #0b5cff; margin: 30px 0; font-style: italic; color: var(--text-primary); font-size: 1.2rem; background: #eff6ff; padding: 20px; border-radius: 0 8px 8px 0;">"Your Git repository describes the infrastructure you meant to build. Drift is the infrastructure you actually have."</blockquote>
+            <h2 id="miss" style="margin: 50px 0 20px; font-size: 2rem; color: var(--text-primary); scroll-margin-top: 90px;">Why your existing tools miss it</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 25px; line-height: 1.8; font-size: 1.1rem;">Most teams already have tools that touch drift. Each one sees only a slice:</p>
+            <div style="overflow-x: auto; margin: 0 0 36px; border: 1px solid var(--color-slate-200); border-radius: 12px;">
+                <table style="width: 100%; border-collapse: collapse; min-width: 560px;">
+                    <thead><tr><th style="text-align:left; padding: 12px 14px; background: var(--color-slate-50); border-bottom: 1px solid var(--color-slate-200); font-size: 0.9rem;">Tool</th><th style="text-align:left; padding: 12px 14px; background: var(--color-slate-50); border-bottom: 1px solid var(--color-slate-200); font-size: 0.9rem;">What it sees</th><th style="text-align:left; padding: 12px 14px; background: var(--color-slate-50); border-bottom: 1px solid var(--color-slate-200); font-size: 0.9rem;">What it misses</th></tr></thead>
+                    <tbody>
+                    <tr><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;"><code>terraform plan</code></td><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">State vs cloud for one workspace, when someone runs it</td><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">Unapplied merges vs console changes; anything not in Terraform; Kubernetes</td></tr>
+                    <tr><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">Argo CD / Flux</td><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">Applications it manages</td><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">Everything installed by Helm, kubectl or by hand; cloud resources</td></tr>
+                    <tr><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">Security scanners</td><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">Misconfigurations right now</td><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">Whether the configuration was <em>intended</em>, who changed it, and when</td></tr>
+                    <tr><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">Cloud audit logs</td><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">Every API call</td><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">Which calls matter, and what the resource was supposed to look like</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="color: var(--text-secondary); margin-bottom: 25px; line-height: 1.8; font-size: 1.1rem;">Netpin combines all of these signals into one model: <em>what should be</em>, <em>what is</em>, <em>who changed it</em> and <em>what depends on it</em>.</p>
+            <h2 id="how" style="margin: 50px 0 20px; font-size: 2rem; color: var(--text-primary); scroll-margin-top: 90px;">How Netpin detects drift</h2>
+            <figure class="ug-diagram wide">
+                <div class="ug-diagram-scroll"><svg class="ug-svg" viewBox="0 0 848 207" width="848" height="207" role="img" aria-label="How Netpin turns a difference into an actionable finding — every 15 minutes for Kubernetes, every hour for Terraform, and on demand." xmlns="http://www.w3.org/2000/svg"><defs><marker id="ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#6b7a89"/></marker></defs><path d="M154.0,83.0 C168.0,83.0 168.0,124.0 182.0,124.0" fill="none" stroke="#8795a1" stroke-width="1.6" marker-end="url(#ah1)"/><path d="M154.0,165.0 C168.0,165.0 168.0,124.0 182.0,124.0" fill="none" stroke="#8795a1" stroke-width="1.6" marker-end="url(#ah1)"/><path d="M324.0,124.0 C338.0,124.0 338.0,124.0 352.0,124.0" fill="none" stroke="#8795a1" stroke-width="1.6" marker-end="url(#ah1)"/><path d="M494.0,124.0 C508.0,124.0 508.0,83.0 522.0,83.0" fill="none" stroke="#8795a1" stroke-width="1.6" marker-end="url(#ah1)"/><path d="M494.0,124.0 C508.0,124.0 508.0,165.0 522.0,165.0" fill="none" stroke="#8795a1" stroke-width="1.6" marker-end="url(#ah1)"/><path d="M664.0,83.0 C678.0,83.0 678.0,124.0 692.0,124.0" fill="none" stroke="#8795a1" stroke-width="1.6" marker-end="url(#ah1)"/><path d="M664.0,165.0 C678.0,165.0 678.0,124.0 692.0,124.0" fill="none" stroke="#8795a1" stroke-width="1.6" marker-end="url(#ah1)"/><rect x="14" y="55.0" width="140" height="56" rx="8" fill="#eaf3fb" stroke="#2980b9" stroke-width="1.4"/><rect x="14" y="61.0" width="3" height="44" rx="1.5" fill="#2980b9"/><text x="84.0" y="81.0" text-anchor="middle" class="ug-svg-title" fill="#1f5f8b">Live state</text><text x="84.0" y="96.0" text-anchor="middle" class="ug-svg-sub">Clusters, clouds</text><rect x="14" y="137.0" width="140" height="56" rx="8" fill="#eaf3fb" stroke="#2980b9" stroke-width="1.4"/><rect x="14" y="143.0" width="3" height="44" rx="1.5" fill="#2980b9"/><text x="84.0" y="156.5" text-anchor="middle" class="ug-svg-title" fill="#1f5f8b">Declared state</text><text x="84.0" y="171.5" text-anchor="middle" class="ug-svg-sub">Git, Helm, Argo CD,</text><text x="84.0" y="184.5" text-anchor="middle" class="ug-svg-sub">Terraform</text><rect x="184" y="96" width="140" height="56" rx="8" fill="#f1ecfb" stroke="#7353ba" stroke-width="1.4"/><rect x="184" y="102" width="3" height="44" rx="1.5" fill="#7353ba"/><text x="254.0" y="122.0" text-anchor="middle" class="ug-svg-title" fill="#4b2f8f">Compare</text><text x="254.0" y="137.0" text-anchor="middle" class="ug-svg-sub">Declared fields only</text><rect x="354" y="96" width="140" height="56" rx="8" fill="#f1ecfb" stroke="#7353ba" stroke-width="1.4"/><rect x="354" y="102" width="3" height="44" rx="1.5" fill="#7353ba"/><text x="424.0" y="122.0" text-anchor="middle" class="ug-svg-title" fill="#4b2f8f">Classify &amp; score</text><text x="424.0" y="137.0" text-anchor="middle" class="ug-svg-sub">Type, severity, risk</text><rect x="524" y="55.0" width="140" height="56" rx="8" fill="#f1ecfb" stroke="#7353ba" stroke-width="1.4"/><rect x="524" y="61.0" width="3" height="44" rx="1.5" fill="#7353ba"/><text x="594.0" y="73.5" text-anchor="middle" class="ug-svg-title" fill="#4b2f8f">Explain &amp;</text><text x="594.0" y="88.5" text-anchor="middle" class="ug-svg-title" fill="#4b2f8f">attribute</text><text x="594.0" y="103.5" text-anchor="middle" class="ug-svg-sub">Cause, who, when</text><rect x="524" y="137.0" width="140" height="56" rx="8" fill="#f1ecfb" stroke="#7353ba" stroke-width="1.4"/><rect x="524" y="143.0" width="3" height="44" rx="1.5" fill="#7353ba"/><text x="594.0" y="163.0" text-anchor="middle" class="ug-svg-title" fill="#4b2f8f">Impact</text><text x="594.0" y="178.0" text-anchor="middle" class="ug-svg-sub">Dependency graph</text><rect x="694" y="96" width="140" height="56" rx="8" fill="#e8f6ef" stroke="#1e8e5a" stroke-width="1.4"/><rect x="694" y="102" width="3" height="44" rx="1.5" fill="#1e8e5a"/><text x="764.0" y="115.5" text-anchor="middle" class="ug-svg-title" fill="#17673f">Finding + fix</text><text x="764.0" y="130.5" text-anchor="middle" class="ug-svg-sub">Alerts, IDI, Deploy</text><text x="764.0" y="143.5" text-anchor="middle" class="ug-svg-sub">Gate</text></svg></div>
+                <figcaption>How Netpin turns a difference into an actionable finding — every 15 minutes for Kubernetes, every hour for Terraform, and on demand.</figcaption>
+            </figure>
+            <p style="color: var(--text-secondary); margin-bottom: 25px; line-height: 1.8; font-size: 1.1rem;">Detection is a read-only pipeline that runs automatically — runtime drift every <strong>15 minutes</strong>, Terraform drift every <strong>hour</strong> — and immediately when you click <strong>Run drift detection</strong>. Optionally, a <em>live refresh</em> re-reads every connected cluster and cloud account first, so changes made seconds ago are caught.</p>
+            <ol style="color: var(--text-secondary); margin: 0 0 30px; line-height: 1.8; padding-left: 22px; font-size: 1.05rem;">
+                <li style="margin-bottom: 12px;"><strong>Collect and redact.</strong> Live configuration is read through the Kubernetes and cloud APIs with the credentials you connected. Secret values, tokens and private keys are stripped <em>before</em> anything is stored.</li>
+                <li style="margin-bottom: 12px;"><strong>Resolve the desired state.</strong> For each resource Netpin finds the most authoritative declaration (next section).</li>
+                <li style="margin-bottom: 12px;"><strong>Compare declared fields only.</strong> Fields that Kubernetes or the cloud fill in on their own — status, resource versions, timestamps, defaults, and replica counts managed by an autoscaler — are ignored. Lists are matched by key, so re-ordering containers is not drift.</li>
+                <li style="margin-bottom: 12px;"><strong>Classify and score.</strong> Each difference gets a drift type, a category (security, network, capacity…) and a severity based on <em>what</em> changed.</li>
+                <li style="margin-bottom: 12px;"><strong>Explain and attribute.</strong> A plain-language explanation, the probable cause with a confidence level, and who made the change.</li>
+                <li style="margin-bottom: 12px;"><strong>Measure impact.</strong> Netpin walks the dependency graph to find the services, shared configuration and public endpoints that are affected.</li>
+            </ol>
+            <h2 id="desired" style="margin: 50px 0 20px; font-size: 2rem; color: var(--text-primary); scroll-margin-top: 90px;">Where the "desired state" comes from</h2>
+            <figure class="ug-diagram">
+                <div class="ug-diagram-scroll"><svg class="ug-svg" viewBox="0 0 748 74" width="748" height="74" role="img" aria-label="The first source that declares a resource becomes its desired state. Anything undeclared is compared with an approved baseline, so nothing goes unmonitored." xmlns="http://www.w3.org/2000/svg"><defs><marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#6b7a89"/></marker></defs><path d="M114.0,37.0 C125.0,37.0 125.0,37.0 136.0,37.0" fill="none" stroke="#8795a1" stroke-width="1.6" marker-end="url(#ah2)"/><path d="M238.0,37.0 C249.0,37.0 249.0,37.0 260.0,37.0" fill="none" stroke="#8795a1" stroke-width="1.6" marker-end="url(#ah2)"/><path d="M362.0,37.0 C373.0,37.0 373.0,37.0 384.0,37.0" fill="none" stroke="#8795a1" stroke-width="1.6" marker-end="url(#ah2)"/><path d="M486.0,37.0 C497.0,37.0 497.0,37.0 508.0,37.0" fill="none" stroke="#8795a1" stroke-width="1.6" marker-end="url(#ah2)"/><path d="M610.0,37.0 C621.0,37.0 621.0,37.0 632.0,37.0" fill="none" stroke="#8795a1" stroke-width="1.6" marker-end="url(#ah2)"/><rect x="14" y="14" width="100" height="46" rx="8" fill="#eaf3fb" stroke="#2980b9" stroke-width="1.4"/><rect x="14" y="20" width="3" height="34" rx="1.5" fill="#2980b9"/><text x="64.0" y="41.5" text-anchor="middle" class="ug-svg-title" fill="#1f5f8b">Resource</text><rect x="138" y="14" width="100" height="46" rx="23.0" fill="#fff4e0" stroke="#c77700" stroke-width="1.6"/><text x="188.0" y="41.5" text-anchor="middle" class="ug-svg-title" fill="#8a5300">Argo CD?</text><rect x="262" y="14" width="100" height="46" rx="23.0" fill="#fff4e0" stroke="#c77700" stroke-width="1.6"/><text x="312.0" y="41.5" text-anchor="middle" class="ug-svg-title" fill="#8a5300">Terraform?</text><rect x="386" y="14" width="100" height="46" rx="23.0" fill="#fff4e0" stroke="#c77700" stroke-width="1.6"/><text x="436.0" y="41.5" text-anchor="middle" class="ug-svg-title" fill="#8a5300">Helm?</text><rect x="510" y="14" width="100" height="46" rx="23.0" fill="#fff4e0" stroke="#c77700" stroke-width="1.6"/><text x="560.0" y="34.0" text-anchor="middle" class="ug-svg-title" fill="#8a5300">kubectl</text><text x="560.0" y="49.0" text-anchor="middle" class="ug-svg-title" fill="#8a5300">apply?</text><rect x="634" y="14" width="100" height="46" rx="8" fill="#f4f5f6" stroke="#9aa5b1" stroke-width="1.4"/><rect x="634" y="20" width="3" height="34" rx="1.5" fill="#9aa5b1"/><text x="684.0" y="41.5" text-anchor="middle" class="ug-svg-title" fill="#5b6b7b">Baseline</text><rect x="238.4" y="28.0" width="21.2" height="17" rx="8" fill="#ffffff" stroke="#d5dbe0"/><text x="249.0" y="40.5" text-anchor="middle" class="ug-svg-edge">no</text><rect x="362.4" y="28.0" width="21.2" height="17" rx="8" fill="#ffffff" stroke="#d5dbe0"/><text x="373.0" y="40.5" text-anchor="middle" class="ug-svg-edge">no</text><rect x="486.4" y="28.0" width="21.2" height="17" rx="8" fill="#ffffff" stroke="#d5dbe0"/><text x="497.0" y="40.5" text-anchor="middle" class="ug-svg-edge">no</text><rect x="610.4" y="28.0" width="21.2" height="17" rx="8" fill="#ffffff" stroke="#d5dbe0"/><text x="621.0" y="40.5" text-anchor="middle" class="ug-svg-edge">no</text></svg></div>
+                <figcaption>The first source that declares a resource becomes its desired state. Anything undeclared is compared with an approved baseline, so nothing goes unmonitored.</figcaption>
+            </figure>
+            <p style="color: var(--text-secondary); margin-bottom: 25px; line-height: 1.8; font-size: 1.1rem;">The hard part of drift detection is knowing what a resource is <em>supposed</em> to look like. Netpin checks these sources in order and uses the first one that declares the resource:</p>
+            <div style="overflow-x: auto; margin: 0 0 36px; border: 1px solid var(--color-slate-200); border-radius: 12px;">
+                <table style="width: 100%; border-collapse: collapse; min-width: 560px;">
+                    <thead><tr><th style="text-align:left; padding: 12px 14px; background: var(--color-slate-50); border-bottom: 1px solid var(--color-slate-200); font-size: 0.9rem;">Source</th><th style="text-align:left; padding: 12px 14px; background: var(--color-slate-50); border-bottom: 1px solid var(--color-slate-200); font-size: 0.9rem;">What Netpin reads</th><th style="text-align:left; padding: 12px 14px; background: var(--color-slate-50); border-bottom: 1px solid var(--color-slate-200); font-size: 0.9rem;">Typical use</th></tr></thead>
+                    <tbody>
+                    <tr><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;"><strong>Argo CD</strong></td><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">The Application's sync and health status</td><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">GitOps-managed apps</td></tr>
+                    <tr><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;"><strong>Terraform</strong></td><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;"><code>.tf</code> code from GitHub, GitLab or Bitbucket <em>and</em> the state file (e.g. in S3)</td><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">Cloud resources on AWS, GCP, Azure, DigitalOcean</td></tr>
+                    <tr><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;"><strong>Helm</strong></td><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">The rendered manifest stored with each release</td><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">Anything installed by a chart</td></tr>
+                    <tr><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;"><strong>kubectl</strong></td><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">The <code>last-applied-configuration</code> annotation</td><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">Objects applied with <code>kubectl apply</code></td></tr>
+                    <tr><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;"><strong>Baseline</strong></td><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">The first configuration Netpin saw, or the last one you accepted</td><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">Everything else</td></tr>
+                    <tr><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;"><strong>Posture baseline</strong></td><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">The previous security scan</td><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">New security violations (posture regression)</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="color: var(--text-secondary); margin-bottom: 25px; line-height: 1.8; font-size: 1.1rem;">Baselines move forward automatically when a change arrives through an approved path — a new Helm revision or a fresh <code>kubectl apply</code>. A hand edit does <em>not</em> move the baseline; it becomes drift.</p>
+            <h2 id="types" style="margin: 50px 0 20px; font-size: 2rem; color: var(--text-primary); scroll-margin-top: 90px;">The 14 types of drift</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 25px; line-height: 1.8; font-size: 1.1rem;">"Something is different" is not actionable. Netpin classifies every finding so the fix is obvious:</p>
+            <div style="overflow-x: auto; margin: 0 0 36px; border: 1px solid var(--color-slate-200); border-radius: 12px;">
+                <table style="width: 100%; border-collapse: collapse; min-width: 560px;">
+                    <thead><tr><th style="text-align:left; padding: 12px 14px; background: var(--color-slate-50); border-bottom: 1px solid var(--color-slate-200); font-size: 0.9rem;">Drift type</th><th style="text-align:left; padding: 12px 14px; background: var(--color-slate-50); border-bottom: 1px solid var(--color-slate-200); font-size: 0.9rem;">What happened</th><th style="text-align:left; padding: 12px 14px; background: var(--color-slate-50); border-bottom: 1px solid var(--color-slate-200); font-size: 0.9rem;">Typical fix</th></tr></thead>
+                    <tbody>
+                    <tr><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">Out-of-band change</td><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">The cloud was changed outside IaC; code and state agree</td><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">Revert, or adopt into code</td></tr>
+                    <tr><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">Conflicting change</td><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">Code, state and cloud all disagree</td><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">Decide which is right, then apply</td></tr>
+                    <tr><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">Unapplied code</td><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">Merged to the default branch, never applied</td><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">Run the pipeline</td></tr>
+                    <tr><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">Stale state</td><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">Cloud matches code, but the state file is old</td><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;"><code>terraform apply -refresh-only</code></td></tr>
+                    <tr><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">Deleted out-of-band</td><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">In state, missing from the cloud</td><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">Re-create, or remove from code</td></tr>
+                    <tr><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">Unmanaged</td><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">In the cloud, in no IaC</td><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">Import (Netpin writes the block)</td></tr>
+                    <tr><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">ClickOps</td><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">Created by hand in a cloud console</td><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">Import or delete; review console access</td></tr>
+                    <tr><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">Pending create / destroy</td><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">Declared but not created / removed from code but still running</td><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">Apply the plan</td></tr>
+                    <tr><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">Runtime override</td><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">A Kubernetes object edited after its last apply</td><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">Revert patch, or update the manifest</td></tr>
+                    <tr><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">Baseline deviation</td><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">Differs from the approved baseline</td><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">Revert, or accept as the new baseline</td></tr>
+                    <tr><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">Release mismatch</td><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">The running build is not the last released build</td><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">Redeploy or release properly</td></tr>
+                    <tr><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">Posture regression</td><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">A new security violation since the last scan</td><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">Fix the misconfiguration</td></tr>
+                    <tr><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">GitOps out of sync</td><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">Argo CD reports desired ≠ live</td><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">Sync, or commit the live change</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <h2 id="terraform" style="margin: 50px 0 20px; font-size: 2rem; color: var(--text-primary); scroll-margin-top: 90px;">Terraform: the three-way comparison</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 25px; line-height: 1.8; font-size: 1.1rem;"><code>terraform plan</code> compares state with the cloud. That tells you <em>something</em> is different — but not whether someone clicked in the console or whether a merged pull request was never applied. Those need opposite fixes.</p>
+            <figure class="ug-diagram">
+                <div class="ug-diagram-scroll"><svg class="ug-svg" viewBox="0 0 468 262" width="468" height="262" role="img" aria-label="Three-way Terraform comparison: adding your code to the usual state-vs-cloud check tells you the cause, not just the symptom." xmlns="http://www.w3.org/2000/svg"><defs><marker id="ah3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#6b7a89"/></marker></defs><path d="M204.0,38.0 C233.0,38.0 233.0,38.0 262.0,38.0" fill="none" stroke="#8795a1" stroke-width="1.6" marker-end="url(#ah3)"/><path d="M204.0,100.0 C233.0,100.0 233.0,100.0 262.0,100.0" fill="none" stroke="#8795a1" stroke-width="1.6" marker-end="url(#ah3)"/><path d="M204.0,162.0 C233.0,162.0 233.0,162.0 262.0,162.0" fill="none" stroke="#8795a1" stroke-width="1.6" marker-end="url(#ah3)"/><path d="M204.0,224.0 C233.0,224.0 233.0,224.0 262.0,224.0" fill="none" stroke="#8795a1" stroke-width="1.6" marker-end="url(#ah3)"/><rect x="14" y="14" width="190" height="48" rx="24.0" fill="#fff4e0" stroke="#c77700" stroke-width="1.6"/><text x="109.0" y="42.5" text-anchor="middle" class="ug-svg-title" fill="#8a5300">code = state ≠ cloud</text><rect x="14" y="76" width="190" height="48" rx="24.0" fill="#fff4e0" stroke="#c77700" stroke-width="1.6"/><text x="109.0" y="104.5" text-anchor="middle" class="ug-svg-title" fill="#8a5300">code ≠ state = cloud</text><rect x="14" y="138" width="190" height="48" rx="24.0" fill="#fff4e0" stroke="#c77700" stroke-width="1.6"/><text x="109.0" y="166.5" text-anchor="middle" class="ug-svg-title" fill="#8a5300">code = cloud ≠ state</text><rect x="14" y="200" width="190" height="48" rx="24.0" fill="#fff4e0" stroke="#c77700" stroke-width="1.6"/><text x="109.0" y="228.5" text-anchor="middle" class="ug-svg-title" fill="#8a5300">all three differ</text><rect x="264" y="14" width="190" height="48" rx="8" fill="#fdecea" stroke="#c0392b" stroke-width="1.4"/><rect x="264" y="20" width="3" height="36" rx="1.5" fill="#c0392b"/><text x="359.0" y="36.0" text-anchor="middle" class="ug-svg-title" fill="#922b21">Out-of-band change</text><text x="359.0" y="51.0" text-anchor="middle" class="ug-svg-sub">Someone changed the cloud</text><rect x="264" y="76" width="190" height="48" rx="8" fill="#ffffff" stroke="#5b6b7b" stroke-width="1.4"/><rect x="264" y="82" width="3" height="36" rx="1.5" fill="#5b6b7b"/><text x="359.0" y="98.0" text-anchor="middle" class="ug-svg-title" fill="#2c3e50">Unapplied code</text><text x="359.0" y="113.0" text-anchor="middle" class="ug-svg-sub">Merged, never applied</text><rect x="264" y="138" width="190" height="48" rx="8" fill="#f4f5f6" stroke="#9aa5b1" stroke-width="1.4"/><rect x="264" y="144" width="3" height="36" rx="1.5" fill="#9aa5b1"/><text x="359.0" y="160.0" text-anchor="middle" class="ug-svg-title" fill="#5b6b7b">Stale state</text><text x="359.0" y="175.0" text-anchor="middle" class="ug-svg-sub">Refresh the state file</text><rect x="264" y="200" width="190" height="48" rx="8" fill="#fdecea" stroke="#c0392b" stroke-width="1.4"/><rect x="264" y="206" width="3" height="36" rx="1.5" fill="#c0392b"/><text x="359.0" y="222.0" text-anchor="middle" class="ug-svg-title" fill="#922b21">Conflicting change</text><text x="359.0" y="237.0" text-anchor="middle" class="ug-svg-sub">Decide which is right</text></svg></div>
+                <figcaption>Three-way Terraform comparison: adding your code to the usual state-vs-cloud check tells you the cause, not just the symptom.</figcaption>
+            </figure>
+            <p style="color: var(--text-secondary); margin-bottom: 25px; line-height: 1.8; font-size: 1.1rem;">Netpin adds the third leg: your code. It finds repositories with <code>.tf</code> files, evaluates variables, <code>.tfvars</code>, locals and modules so values are concrete, skips attributes in <code>lifecycle.ignore_changes</code>, loads the state from your backend, and compares all three per attribute.</p>
+            <div style="border: 1px solid #a7f3d0; border-left: 4px solid #059669; background: #f0fdf4; border-radius: 10px; padding: 18px 22px; margin: 0 0 32px;">
+                <div style="font-weight: 700; color: #047857; margin-bottom: 8px;">Example — a security group opened in the console</div>
+                <div style="color: var(--text-secondary); line-height: 1.75;">Code and state allow port 443 from <code>10.0.0.0/8</code>. The cloud has an extra rule: port 22 from <code>0.0.0.0/0</code>. Code = state ≠ cloud, so it is an <strong>out-of-band change</strong>, severity <strong>critical</strong> (public SSH). CloudTrail shows <code>AuthorizeSecurityGroupIngress</code> by an IAM user from the AWS console. Netpin offers <code>terraform apply -target=aws_security_group.api</code> to revert, or the HCL block to keep the rule.</div>
+            </div>
+            <h2 id="who" style="margin: 50px 0 20px; font-size: 2rem; color: var(--text-primary); scroll-margin-top: 90px;">Who changed it?</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 25px; line-height: 1.8; font-size: 1.1rem;">Every finding answers the first question in any incident review. Netpin uses the platform's own audit trail — no agent required:</p>
+            <ul style="color: var(--text-secondary); margin: 0 0 30px; line-height: 1.8; padding-left: 22px; font-size: 1.05rem;">
+                <li style="margin-bottom: 12px;"><strong>Kubernetes</strong> records which tool last wrote each field (<code>managedFields</code>): <code>kubectl-edit</code>, <code>kubectl-patch</code>, <code>helm</code>, <code>argocd-controller</code>, an autoscaler or an operator — and when.</li>
+                <li style="margin-bottom: 12px;"><strong>AWS CloudTrail</strong> shows the IAM user or role and whether the change came from the console, the CLI, an SDK or Terraform.</li>
+            </ul>
+            <p style="color: var(--text-secondary); margin-bottom: 25px; line-height: 1.8; font-size: 1.1rem;">Changes made by people are counted as <strong>manual changes</strong> — a number worth watching. Changes from automation are labelled with the tool.</p>
+            <h2 id="impact" style="margin: 50px 0 20px; font-size: 2rem; color: var(--text-primary); scroll-margin-top: 90px;">What does it affect?</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 25px; line-height: 1.8; font-size: 1.1rem;">A one-line change to a ConfigMap sounds harmless — until you learn that two services mount it and one of them is public. Netpin builds a dependency graph from live specifications (Service selectors, Ingress routes, mounted ConfigMaps and Secrets, ServiceAccounts, autoscalers, NetworkPolicies, Helm ownership) and walks it from the drifted resource.</p>
+            <figure class="ug-diagram wide">
+                <div class="ug-diagram-scroll"><svg class="ug-svg" viewBox="0 0 788 148" width="788" height="148" role="img" aria-label="A drifted ConfigMap is shared by two Deployments and reachable from the internet — so a &#x27;small&#x27; change is really a public, two-service change." xmlns="http://www.w3.org/2000/svg"><defs><marker id="ah4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#6b7a89"/></marker></defs><path d="M134.0,74.0 C153.0,74.0 153.0,74.0 172.0,74.0" fill="none" stroke="#8795a1" stroke-width="1.6" marker-end="url(#ah4)"/><path d="M294.0,74.0 C313.0,74.0 313.0,74.0 332.0,74.0" fill="none" stroke="#8795a1" stroke-width="1.6" marker-end="url(#ah4)"/><path d="M454.0,74.0 C473.0,74.0 473.0,38.0 492.0,38.0" fill="none" stroke="#8795a1" stroke-width="1.6" marker-end="url(#ah4)"/><path d="M614.0,38.0 C633.0,38.0 633.0,74.0 652.0,74.0" fill="none" stroke="#8795a1" stroke-width="1.6" marker-end="url(#ah4)"/><path d="M614.0,110.0 C633.0,110.0 633.0,74.0 652.0,74.0" fill="none" stroke="#8795a1" stroke-width="1.6" marker-end="url(#ah4)"/><rect x="14" y="50.0" width="120" height="48" rx="8" fill="#fdecea" stroke="#c0392b" stroke-width="1.4"/><rect x="14" y="56.0" width="3" height="36" rx="1.5" fill="#c0392b"/><text x="74.0" y="72.0" text-anchor="middle" class="ug-svg-title" fill="#922b21">Public host</text><text x="74.0" y="87.0" text-anchor="middle" class="ug-svg-sub">shop.example.com</text><rect x="174" y="50.0" width="120" height="48" rx="8" fill="#ffffff" stroke="#5b6b7b" stroke-width="1.4"/><rect x="174" y="56.0" width="3" height="36" rx="1.5" fill="#5b6b7b"/><text x="234.0" y="78.5" text-anchor="middle" class="ug-svg-title" fill="#2c3e50">Ingress</text><rect x="334" y="50.0" width="120" height="48" rx="8" fill="#ffffff" stroke="#5b6b7b" stroke-width="1.4"/><rect x="334" y="56.0" width="3" height="36" rx="1.5" fill="#5b6b7b"/><text x="394.0" y="78.5" text-anchor="middle" class="ug-svg-title" fill="#2c3e50">Service</text><rect x="494" y="14" width="120" height="48" rx="8" fill="#ffffff" stroke="#5b6b7b" stroke-width="1.4"/><rect x="494" y="20" width="3" height="36" rx="1.5" fill="#5b6b7b"/><text x="554.0" y="36.0" text-anchor="middle" class="ug-svg-title" fill="#2c3e50">Deployment</text><text x="554.0" y="51.0" text-anchor="middle" class="ug-svg-sub">web</text><rect x="494" y="86" width="120" height="48" rx="8" fill="#ffffff" stroke="#5b6b7b" stroke-width="1.4"/><rect x="494" y="92" width="3" height="36" rx="1.5" fill="#5b6b7b"/><text x="554.0" y="108.0" text-anchor="middle" class="ug-svg-title" fill="#2c3e50">Deployment</text><text x="554.0" y="123.0" text-anchor="middle" class="ug-svg-sub">worker</text><rect x="654" y="50.0" width="120" height="48" rx="24.0" fill="#fff4e0" stroke="#c77700" stroke-width="1.6"/><text x="714.0" y="72.0" text-anchor="middle" class="ug-svg-title" fill="#8a5300">ConfigMap ✎</text><text x="714.0" y="87.0" text-anchor="middle" class="ug-svg-sub">drifted</text><rect x="611.2" y="47.0" width="43.6" height="17" rx="8" fill="#ffffff" stroke="#d5dbe0"/><text x="633.0" y="59.5" text-anchor="middle" class="ug-svg-edge">mounts</text><rect x="611.2" y="83.0" width="43.6" height="17" rx="8" fill="#ffffff" stroke="#d5dbe0"/><text x="633.0" y="95.5" text-anchor="middle" class="ug-svg-edge">mounts</text></svg></div>
+                <figcaption>A drifted ConfigMap is shared by two Deployments and reachable from the internet — so a 'small' change is really a public, two-service change.</figcaption>
+            </figure>
+            <ul style="color: var(--text-secondary); margin: 0 0 30px; line-height: 1.8; padding-left: 22px; font-size: 1.05rem;">
+                <li style="margin-bottom: 12px;"><strong>Affected if this changes</strong> — everything that depends on the resource.</li>
+                <li style="margin-bottom: 12px;"><strong>Shares configuration or identity with</strong> — workloads using the same ConfigMap, Secret or ServiceAccount, where a change for one silently changes the others.</li>
+                <li style="margin-bottom: 12px;"><strong>Internet-facing paths</strong> — routes from a public host down to the resource.</li>
+                <li style="margin-bottom: 12px;"><strong>Impact score</strong> — a 0–100 summary that weighs closer and more critical resources higher and adds points for shared configuration and public exposure.</li>
+            </ul>
+            <h2 id="severity" style="margin: 50px 0 20px; font-size: 2rem; color: var(--text-primary); scroll-margin-top: 90px;">How serious is it?</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 25px; line-height: 1.8; font-size: 1.1rem;">Severity depends on <em>what</em> changed. Privileged containers, host networking, RBAC rules, public exposure, encryption and IAM are rated high or critical; a label or capacity tweak is usually medium or low. Each open finding then lowers a <strong>drift score</strong> by a deterministic amount, shown on the finding with its full rationale:</p>
+            <figure class="ug-diagram">
+                <div class="ug-diagram-scroll"><svg class="ug-svg" viewBox="0 0 520 164" width="520" height="164" role="img" aria-label="Base deduction per open drift finding, before multipliers." xmlns="http://www.w3.org/2000/svg"><line x1="187.5" y1="8" x2="187.5" y2="154" stroke="#eef0f2"/><line x1="275.0" y1="8" x2="275.0" y2="154" stroke="#eef0f2"/><line x1="362.5" y1="8" x2="362.5" y2="154" stroke="#eef0f2"/><line x1="450.0" y1="8" x2="450.0" y2="154" stroke="#eef0f2"/><line x1="100" y1="8" x2="100" y2="154" stroke="#c9d0d6"/><text x="90" y="26.0" text-anchor="end" class="ug-svg-label">Critical</text><path d="M100,12 h314.2 a4,4 0 0 1 4,4 v12 a4,4 0 0 1 -4,4 h-314.2 z" fill="#c0392b"/><text x="426.2" y="26.0" class="ug-svg-value">20 pts</text><text x="90" y="56.0" text-anchor="end" class="ug-svg-label">High</text><path d="M100,42 h155.1 a4,4 0 0 1 4,4 v12 a4,4 0 0 1 -4,4 h-155.1 z" fill="#c77700"/><text x="267.1" y="56.0" class="ug-svg-value">10 pts</text><text x="90" y="86.0" text-anchor="end" class="ug-svg-label">Medium</text><path d="M100,72 h75.5 a4,4 0 0 1 4,4 v12 a4,4 0 0 1 -4,4 h-75.5 z" fill="#2980b9"/><text x="187.5" y="86.0" class="ug-svg-value">5 pts</text><text x="90" y="116.0" text-anchor="end" class="ug-svg-label">Low</text><path d="M100,102 h27.8 a4,4 0 0 1 4,4 v12 a4,4 0 0 1 -4,4 h-27.8 z" fill="#138d90"/><text x="139.8" y="116.0" class="ug-svg-value">2 pts</text><text x="90" y="146.0" text-anchor="end" class="ug-svg-label">Info</text><path d="M100,132 h4.0 a4,4 0 0 1 4,4 v12 a4,4 0 0 1 -4,4 h-4.0 z" fill="#8795a1"/><text x="116.0" y="146.0" class="ug-svg-value">0.5 pts</text></svg></div>
+                <figcaption>Base deduction per open drift finding, before multipliers.</figcaption>
+            </figure>
+            <div style="border: 1px solid #ddd6fe; border-left: 4px solid #7c3aed; background: #faf5ff; border-radius: 10px; padding: 18px 22px; margin: 0 0 32px;">
+                <div style="font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #6d28d9; margin-bottom: 8px;">The formula</div>
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.95rem; color: var(--text-primary); overflow-x: auto; line-height: 1.7; margin-bottom: 10px;">deduction = base(severity) × criticality × duration × recurrence × blast radius × history × confidence</div>
+                <table style="font-size: 0.92rem;"><tr><td style="padding: 4px 14px 4px 0; vertical-align: top;"><code>criticality</code></td><td style="padding: 4px 0; color: var(--text-secondary);">critical 2.5 · high 1.8 · medium 1.0 · low 0.5</td></tr><tr><td style="padding: 4px 14px 4px 0; vertical-align: top;"><code>duration</code></td><td style="padding: 4px 0; color: var(--text-secondary);">&lt; 1 day 1.0 · 1–7 days 1.2 · 7–30 days 1.5 · &gt; 30 days 2.0</td></tr><tr><td style="padding: 4px 14px 4px 0; vertical-align: top;"><code>recurrence</code></td><td style="padding: 4px 0; color: var(--text-secondary);">+15% each time it comes back, up to +75%</td></tr><tr><td style="padding: 4px 14px 4px 0; vertical-align: top;"><code>blast radius</code></td><td style="padding: 4px 0; color: var(--text-secondary);">0.5 (isolated) to 1.0 (wide reach)</td></tr><tr><td style="padding: 4px 14px 4px 0; vertical-align: top;"><code>history</code></td><td style="padding: 4px 0; color: var(--text-secondary);">×1.2 if this resource caused an incident before</td></tr></table>
+            </div>
+            <div style="border: 1px solid #a7f3d0; border-left: 4px solid #059669; background: #f0fdf4; border-radius: 10px; padding: 18px 22px; margin: 0 0 32px;">
+                <div style="font-weight: 700; color: #047857; margin-bottom: 8px;">Example — one finding</div>
+                <div style="color: var(--text-secondary); line-height: 1.75;">A <strong>high</strong> severity drift on a <strong>high</strong>-criticality Deployment, open <strong>3 days</strong>, seen <strong>twice</strong>, blast radius <strong>60</strong>, confidence <strong>0.9</strong>: <code>10 × 1.8 × 1.2 × 1.15 × 0.8 × 0.9 = 17.88 points</code>. Leave it a month and it costs <code>29.81</code> — old drift is expensive drift.</div>
+            </div>
+            <p style="color: var(--text-secondary); margin-bottom: 25px; line-height: 1.8; font-size: 1.1rem;">The drift score (0–100, higher is better) combines ten weighted dimensions — configuration and security drift weigh the most. 80+ is healthy, 60–79 is a warning, below 60 is critical.</p>
+            <h2 id="fix" style="margin: 50px 0 20px; font-size: 2rem; color: var(--text-primary); scroll-margin-top: 90px;">Fixing drift</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 25px; line-height: 1.8; font-size: 1.1rem;">Every finding opens a detail view with six tabs — <strong>Overview</strong>, <strong>Impact</strong>, <strong>State &amp; Field Diff</strong>, <strong>Timeline</strong>, <strong>Evidence</strong> and <strong>Remediation</strong> — and the remediation is ready to run:</p>
+            <div style="overflow-x: auto; margin: 0 0 36px; border: 1px solid var(--color-slate-200); border-radius: 12px;">
+                <table style="width: 100%; border-collapse: collapse; min-width: 560px;">
+                    <thead><tr><th style="text-align:left; padding: 12px 14px; background: var(--color-slate-50); border-bottom: 1px solid var(--color-slate-200); font-size: 0.9rem;">Option</th><th style="text-align:left; padding: 12px 14px; background: var(--color-slate-50); border-bottom: 1px solid var(--color-slate-200); font-size: 0.9rem;">When to use it</th><th style="text-align:left; padding: 12px 14px; background: var(--color-slate-50); border-bottom: 1px solid var(--color-slate-200); font-size: 0.9rem;">What Netpin gives you</th></tr></thead>
+                    <tbody>
+                    <tr><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;"><strong>Revert</strong></td><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">The change was a mistake</td><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">A <code>kubectl patch</code>, <code>helm rollback</code> or <code>terraform apply -target</code></td></tr>
+                    <tr><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;"><strong>Adopt into code</strong></td><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">The change was right</td><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">A manifest, values or HCL snippet with the live values</td></tr>
+                    <tr><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;"><strong>Import</strong></td><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">The resource is unmanaged</td><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">A Terraform <code>import { }</code> block</td></tr>
+                    <tr><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;"><strong>Accept / ignore</strong></td><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">Intentional and documented</td><td style="padding: 12px 14px; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">The live configuration becomes the new baseline</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <figure class="ug-diagram">
+                <div class="ug-diagram-scroll"><svg class="ug-svg" viewBox="0 0 686 150" width="686" height="150" role="img" aria-label="Drift resolves itself when a complete scan sees live matching desired again; drift that returns is re-opened and weighs more." xmlns="http://www.w3.org/2000/svg"><defs><marker id="ah5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#6b7a89"/></marker></defs><path d="M144.0,75.0 C166.0,75.0 166.0,38.0 188.0,38.0" fill="none" stroke="#8795a1" stroke-width="1.6" marker-end="url(#ah5)"/><path d="M144.0,75.0 C166.0,75.0 166.0,112.0 188.0,112.0" fill="none" stroke="#8795a1" stroke-width="1.6" marker-end="url(#ah5)"/><path d="M320.0,38.0 C342.0,38.0 342.0,75.0 364.0,75.0" fill="none" stroke="#8795a1" stroke-width="1.6" marker-end="url(#ah5)"/><path d="M144.0,75.0 C254.0,75.0 254.0,75.0 364.0,75.0" fill="none" stroke="#8795a1" stroke-width="1.6" marker-end="url(#ah5)"/><path d="M496.0,75.0 C518.0,75.0 518.0,75.0 540.0,75.0" fill="none" stroke="#8795a1" stroke-width="1.6" marker-end="url(#ah5)"/><rect x="14" y="51.0" width="130" height="48" rx="8" fill="#fdecea" stroke="#c0392b" stroke-width="1.4"/><rect x="14" y="57.0" width="3" height="36" rx="1.5" fill="#c0392b"/><text x="79.0" y="73.0" text-anchor="middle" class="ug-svg-title" fill="#922b21">Open</text><text x="79.0" y="88.0" text-anchor="middle" class="ug-svg-sub">Detected</text><rect x="190" y="14" width="130" height="48" rx="24.0" fill="#fff4e0" stroke="#c77700" stroke-width="1.6"/><text x="255.0" y="36.0" text-anchor="middle" class="ug-svg-title" fill="#8a5300">Acknowledged</text><text x="255.0" y="51.0" text-anchor="middle" class="ug-svg-sub">Owned</text><rect x="190" y="88" width="130" height="48" rx="8" fill="#f4f5f6" stroke="#9aa5b1" stroke-width="1.4"/><rect x="190" y="94" width="3" height="36" rx="1.5" fill="#9aa5b1"/><text x="255.0" y="110.0" text-anchor="middle" class="ug-svg-title" fill="#5b6b7b">Ignored</text><text x="255.0" y="125.0" text-anchor="middle" class="ug-svg-sub">Intentional</text><rect x="366" y="51.0" width="130" height="48" rx="8" fill="#e8f6ef" stroke="#1e8e5a" stroke-width="1.4"/><rect x="366" y="57.0" width="3" height="36" rx="1.5" fill="#1e8e5a"/><text x="431.0" y="73.0" text-anchor="middle" class="ug-svg-title" fill="#17673f">Resolved</text><text x="431.0" y="88.0" text-anchor="middle" class="ug-svg-sub">Live = desired</text><rect x="542" y="51.0" width="130" height="48" rx="8" fill="#fdecea" stroke="#c0392b" stroke-width="1.4"/><rect x="542" y="57.0" width="3" height="36" rx="1.5" fill="#c0392b"/><text x="607.0" y="73.0" text-anchor="middle" class="ug-svg-title" fill="#922b21">Re-opened</text><text x="607.0" y="88.0" text-anchor="middle" class="ug-svg-sub">Came back</text><rect x="237.8" y="66.0" width="32.4" height="17" rx="8" fill="#ffffff" stroke="#d5dbe0"/><text x="254.0" y="78.5" text-anchor="middle" class="ug-svg-edge">auto</text></svg></div>
+                <figcaption>Drift resolves itself when a complete scan sees live matching desired again; drift that returns is re-opened and weighs more.</figcaption>
+            </figure>
+            <p style="color: var(--text-secondary); margin-bottom: 25px; line-height: 1.8; font-size: 1.1rem;">Netpin never applies a fix on its own. When a complete scan sees live matching desired again, the finding resolves automatically; if a source could not be read, it waits rather than guessing.</p>
+            <h2 id="idi" style="margin: 50px 0 20px; font-size: 2rem; color: var(--text-primary); scroll-margin-top: 90px;">Drift, your IDI and Deploy Gate</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 25px; line-height: 1.8; font-size: 1.1rem;">Drift is not a separate silo. It feeds the rest of Netpin:</p>
+            <ul style="color: var(--text-secondary); margin: 0 0 30px; line-height: 1.8; padding-left: 22px; font-size: 1.05rem;">
+                <li style="margin-bottom: 12px;"><strong>Infrastructure Debt Index.</strong> Open drift lowers infrastructure health and security posture. The <em>Impact on IDI</em> tab shows exactly how many points drift costs and what your score would be without it — the easiest way to justify fixing drift first.</li>
+                <li style="margin-bottom: 12px;"><strong>Deploy Gate and pre-flight risk.</strong> Before a release, Netpin checks the target for open drift. A deployment that would <em>overwrite</em> a live hotfix is flagged as a drift overwrite and never shown as a plain "allow". In production, a drift score below your threshold (60 by default) blocks the release.</li>
+                <li style="margin-bottom: 12px;"><strong>Alerts.</strong> Critical and security drift raise deduplicated alerts to Slack, PagerDuty or email, with escalation if nobody acknowledges them.</li>
+                <li style="margin-bottom: 12px;"><strong>Compliance.</strong> Drift on a security-sensitive field usually also fails a compliance control — you see both, linked.</li>
+            </ul>
+            <h2 id="security" style="margin: 50px 0 20px; font-size: 2rem; color: var(--text-primary); scroll-margin-top: 90px;">Security and privacy</h2>
+            <ul style="color: var(--text-secondary); margin: 0 0 30px; line-height: 1.8; padding-left: 22px; font-size: 1.05rem;">
+                <li style="margin-bottom: 12px;"><strong>Read-only.</strong> Netpin uses <code>get</code> and <code>list</code> permissions only and never writes to your clusters or clouds.</li>
+                <li style="margin-bottom: 12px;"><strong>Secret values are never stored.</strong> Kubernetes Secrets are reduced to names and keys; sensitive values in any configuration, Helm release or Terraform state are redacted before storage.</li>
+                <li style="margin-bottom: 12px;"><strong>Short-lived credentials.</strong> Managed clusters on EKS, GKE, AKS and DigitalOcean are reached with tokens minted on demand and kept only in memory.</li>
+                <li style="margin-bottom: 12px;"><strong>No agent required.</strong> Everything works through the Kubernetes and cloud APIs.</li>
+            </ul>
+            <h2 id="start" style="margin: 50px 0 20px; font-size: 2rem; color: var(--text-primary); scroll-margin-top: 90px;">Getting started</h2>
+            <ol style="color: var(--text-secondary); margin: 0 0 30px; line-height: 1.8; padding-left: 22px; font-size: 1.05rem;">
+                <li style="margin-bottom: 12px;"><strong>Connect your sources.</strong> A cloud account (clusters are discovered and connected automatically), any other Kubernetes cluster, your Git provider and Argo CD.</li>
+                <li style="margin-bottom: 12px;"><strong>Grant read access.</strong> Cluster read RBAC; for full cloud coverage add <code>cloudtrail:LookupEvents</code> (attribution) and read access to your Terraform state bucket.</li>
+                <li style="margin-bottom: 12px;"><strong>Run drift detection.</strong> Resources declared by Helm, kubectl or Terraform are compared immediately; everything else gets a baseline on the first scan and reports drift from the next change.</li>
+                <li style="margin-bottom: 12px;"><strong>Work the queue.</strong> Start with critical and security drift, use the generated fixes, and watch the drift score and IDI recover.</li>
+            </ol>
+            <div style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: 12px; padding: 30px; margin-bottom: 40px; box-shadow: var(--shadow-sm);">
+                <h4 style="margin-bottom: 15px; font-size: 1.2rem;">Minimal read-only ClusterRole for runtime drift</h4>
+            <pre style="background: #0f172a; color: #e2e8f0; padding: 20px; border-radius: 12px; overflow-x: auto; font-family: 'JetBrains Mono', monospace; font-size: 0.88rem; line-height: 1.6; margin: 0;"><code>apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: netpin-drift-reader
+rules:
+  - apiGroups: ["", "apps", "batch", "networking.k8s.io", "rbac.authorization.k8s.io", "autoscaling", "policy"]
+    resources: ["*"]
+    verbs: ["get", "list", "watch"]</code></pre>
+            </div>
+            <h2 id="faq" style="margin: 50px 0 20px; font-size: 2rem; color: var(--text-primary); scroll-margin-top: 90px;">FAQ</h2>
+            <h3 style="margin: 30px 0 14px; font-size: 1.35rem; color: var(--text-primary);">Will Netpin flood me with noise?</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 25px; line-height: 1.8; font-size: 1.1rem;">No. Only fields you declared are compared; server-generated fields, defaults and autoscaler-managed replicas are ignored. Intentional changes can be accepted as the new baseline, and suppression rules hide fields you always change at runtime.</p>
+            <h3 style="margin: 30px 0 14px; font-size: 1.35rem; color: var(--text-primary);">Why did my first scan show almost no drift?</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 25px; line-height: 1.8; font-size: 1.1rem;">Resources without a manifest, Helm release or Terraform declaration get a baseline on the first scan. Drift on those is reported from the next change onward. Declared resources are compared immediately.</p>
+            <h3 style="margin: 30px 0 14px; font-size: 1.35rem; color: var(--text-primary);">How fast is drift detected?</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 25px; line-height: 1.8; font-size: 1.1rem;">Within 15 minutes for Kubernetes and an hour for Terraform — or instantly with Run drift detection and live refresh.</p>
+            <h3 style="margin: 30px 0 14px; font-size: 1.35rem; color: var(--text-primary);">What is the difference between drift and a compliance failure?</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 25px; line-height: 1.8; font-size: 1.1rem;">Drift means a resource no longer matches its own source of truth. A compliance failure means it breaks a security rule, whatever the source says. A hand-added <code>privileged: true</code> is both.</p>
+            <h3 style="margin: 30px 0 14px; font-size: 1.35rem; color: var(--text-primary);">Which Terraform backends are supported?</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 25px; line-height: 1.8; font-size: 1.1rem;">S3 state is read with the connected AWS account, and committed state files are supported. For backends Netpin cannot read yet, the code-to-cloud comparison still runs.</p>
+            <blockquote style="border-left: 4px solid #059669; margin: 30px 0; font-style: italic; color: var(--text-primary); font-size: 1.2rem; background: #f0fdf4; padding: 20px; border-radius: 0 8px 8px 0;">Drift is inevitable. Not knowing about it is optional.</blockquote>
+            <div style="text-align: center; background: linear-gradient(135deg, #0b5cff, #7c3aed); border-radius: 16px; padding: 40px 30px; margin-top: 50px; color: #fff;">
+                <h3 style="color: #fff; font-size: 1.6rem; margin-bottom: 12px;">See your drift in minutes</h3>
+                <p style="color: rgba(255,255,255,0.9); margin-bottom: 24px; font-size: 1.05rem;">Connect a cluster or cloud account read-only and run your first drift scan. No credit card required.</p>
+                <a href="https://dash.netpin.io/register" class="btn btn-large" style="background: #fff; color: #0b5cff; border-radius: 100px; padding: 14px 30px; font-weight: 700; text-decoration: none;">Start Free Trial</a>
+                <a href="https://docs.netpin.io/drift.html" style="display: block; margin-top: 16px; color: #fff; text-decoration: underline;">Read the Drift documentation</a>
+            </div>
+        </div>
+</section>
+<!-- Footer -->
+    <netpin-footer></netpin-footer>
+    <script src="/components/footer.js"></script>
+
+    <!-- Scroll Animations Engine -->
+    <script src="/js/scroll-animations.js"></script>
+
+    <!-- Lucide Icons Configuration -->
+    <style>
+        .lucide {
+            width: 1.25em;
+            height: 1.25em;
+            vertical-align: middle;
+            color: currentColor; /* Inherits the wrapper color */
+            stroke-width: 2.2;
+        }
+    </style>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            lucide.createIcons();
+
+        // Navbar scroll effect});
+        }
+
+        });
+    </script>
+
+    
+
+
+    
+    <!-- Custom Language Modal -->
+    <style>
+    .lang-modal-overlay {
+        display: none;
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(15, 23, 42, 0.4);
+        z-index: 9999;
+        align-items: center;
+        justify-content: center;
+        backdrop-filter: blur(4px);
+    }
+    .lang-modal {
+        background: #ffffff;
+        border-radius: 12px;
+        padding: 24px;
+        width: 90%;
+        max-width: 500px;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        position: relative;
+    }
+    .lang-modal-close {
+        position: absolute;
+        top: 16px; right: 16px;
+        background: none; border: none;
+        font-size: 1.5rem; cursor: pointer;
+        color: #64748b;
+    }
+    .lang-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin: 20px 0;
+    }
+    .lang-btn {
+        display: flex; align-items: center; gap: 10px;
+        padding: 12px 16px;
+        border: 1px solid #cbd5e1;
+        border-radius: 8px;
+        background: transparent;
+        cursor: pointer;
+        font-size: 1rem;
+        color: #0f172a;
+        transition: all 0.2s ease;
+    }
+    .lang-btn:hover {
+        border-color: #0b5cff;
+        background: #f8fafc;
+    }
+    .lang-select-wrapper select {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #cbd5e1;
+        border-radius: 8px;
+        font-size: 1rem;
+        background: white;
+        color: #0f172a;
+        cursor: pointer;
+    }
+    </style>
+
+    <div class="lang-modal-overlay notranslate" id="langModal" onclick="if(event.target===this) closeLangModal()">
+        <div class="lang-modal">
+            <button class="lang-modal-close" aria-label="Close language selector" onclick="closeLangModal()">&times;</button>
+            <h3 style="margin-bottom: 8px; color: #0f172a;">Select Language</h3>
+            <p style="color: #64748b; font-size: 0.95rem;">Choose your preferred language for the website.</p>
+            
+            <div class="lang-grid">
+                <button class="lang-btn" onclick="changeLanguage('en')"><span style="font-size: 1.2rem;">🇺🇸</span> English</button>
+                <button class="lang-btn" onclick="changeLanguage('es')"><span style="font-size: 1.2rem;">🇪🇸</span> Español</button>
+                <button class="lang-btn" onclick="changeLanguage('fr')"><span style="font-size: 1.2rem;">🇫🇷</span> Français</button>
+                <button class="lang-btn" onclick="changeLanguage('de')"><span style="font-size: 1.2rem;">🇩🇪</span> Deutsch</button>
+                <button class="lang-btn" onclick="changeLanguage('zh-CN')"><span style="font-size: 1.2rem;">🇨🇳</span> 中文</button>
+                <button class="lang-btn" onclick="changeLanguage('ja')"><span style="font-size: 1.2rem;">🇯🇵</span> 日本語</button>
+            </div>
+
+            <div class="lang-select-wrapper">
+                <select onchange="if(this.value) changeLanguage(this.value)">
+                    <option value="">More languages...</option>
+                    <option value="ar">Arabic (العربية)</option>
+                    <option value="hi">Hindi (हिन्दी)</option>
+                    <option value="pt">Portuguese (Português)</option>
+                    <option value="ru">Russian (Русский)</option>
+                    <option value="ko">Korean (한국어)</option>
+                    <option value="it">Italian (Italiano)</option>
+                    <option value="nl">Dutch (Nederlands)</option>
+                    <option value="pl">Polish (Polski)</option>
+                    <option value="tr">Turkish (Türkçe)</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        function openLangModal() {
+            document.getElementById('langModal').style.display = 'flex';
+        }
+        function closeLangModal() {
+            document.getElementById('langModal').style.display = 'none';
+        }
+                function changeLanguage(langCode) {
+            closeLangModal();
+            
+            // Try the instant native combo box trigger first
+            var selectField = document.querySelector('.goog-te-combo');
+            if (selectField) {
+                selectField.value = langCode;
+                selectField.dispatchEvent(new Event('change', { bubbles: true }));
+            } else {
+                // Fallback to cookie if script hasn't loaded yet
+                var domain = window.location.hostname;
+                if (langCode === 'en') {
+                    document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                    document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; domain=" + domain + "; path=/;";
+                    if (domain.includes('.')) document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; domain=." + domain + "; path=/;";
+                } else {
+                    document.cookie = "googtrans=/en/" + langCode + "; path=/";
+                    document.cookie = "googtrans=/en/" + langCode + "; domain=" + domain + "; path=/";
+                    if (domain.includes('.')) document.cookie = "googtrans=/en/" + langCode + "; domain=." + domain + "; path=/";
+                }
+                window.location.reload();
+            }
+        }
+    </script>
+
+<div id="google_translate_element" style="position: absolute; left: -9999px; opacity: 0; pointer-events: none;"></div>
+    <!-- Google Translate Script -->
+    <script type="text/javascript">
+        function resetToEnglish() {
+            document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; domain=" + window.location.hostname + "; path=/;";
+            window.location.reload();
+        }
+
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en'
+            }, 'google_translate_element');
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var userLang = navigator.language || navigator.userLanguage; 
+            var langCode = userLang.split('-')[0];
+            
+            // Auto-translate based on browser language if not English
+            if (langCode !== 'en' && document.cookie.indexOf('googtrans') === -1) {
+                document.cookie = "googtrans=/en/" + langCode + "; path=/";
+                // Also set for specific domain
+                document.cookie = "googtrans=/en/" + langCode + "; domain=" + window.location.hostname + "; path=/";
+                window.location.reload();
+            }
+        });
+    </script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+
+    
+
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/6a76e091224bc71d4a538d43/1jvg5qf74';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+</body>
+</html>
