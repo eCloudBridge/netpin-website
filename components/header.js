@@ -1,37 +1,14 @@
 class NetpinHeader extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `
-    <style>
-        .header-inception-badge {
-            display: inline-flex;
-            align-items: center;
-            text-decoration: none;
-            transition: transform 0.2s ease, opacity 0.2s ease;
-        }
-        .header-inception-badge:hover {
-            transform: translateY(-1px);
-            opacity: 0.95;
-        }
-        @media (max-width: 992px) {
-            .header-inception-badge {
-                display: none !important;
-            }
-        }
-    </style>
     <nav class="navbar" id="navbar">
         <div class="container">
-            <div style="display: flex; align-items: center; gap: 14px;">
-                <a href="/" class="logo"
-                    style="display: flex; align-items: center; gap: 8px; text-decoration: none;">
-                    <img src="/images/logo-icon.png" alt="Netpin Logo" style="height: 32px; width: auto; display: block;" />
-                    <span
-                        style="font-size: 1.5rem; font-weight: 800; color: var(--color-primary); letter-spacing: -0.025em;">netpin.io</span>
-                </a>
-                <a href="/nvidia-inception.html" class="header-inception-badge" title="Netpin is an NVIDIA Inception Program Member">
-                    <img src="/images/nvidia-inception-badge.png" alt="NVIDIA Inception Member"
-                        style="height: 28px; width: auto; display: block; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.08);" />
-                </a>
-            </div>
+            <a href="/" class="logo"
+                style="display: flex; align-items: center; gap: 8px; text-decoration: none;">
+                <img src="/images/logo-icon.png" alt="Netpin Logo" style="height: 32px; width: auto; display: block;" />
+                <span
+                    style="font-size: 1.5rem; font-weight: 800; color: var(--color-primary); letter-spacing: -0.025em;">netpin.io</span>
+            </a>
 
             <ul class="nav-links" id="nav-links">
                 <button class="nav-close" id="nav-close" aria-label="Close menu">&times;</button>
@@ -42,7 +19,6 @@ class NetpinHeader extends HTMLElement {
                 <li><a href="/contact.html">Contact</a></li>
                 <li><a href="/blog/index.html">Blog</a></li>
                 <li><a href="/use-cases/index.html">Use Cases</a></li>
-                <li><a href="/nvidia-inception.html" style="color: #65a30d; font-weight: 600;">✦ NVIDIA Inception</a></li>
             </ul>
 
             <div class="nav-cta" style="display: flex; align-items: center; gap: 10px;">
