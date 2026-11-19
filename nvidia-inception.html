@@ -85,22 +85,22 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 18px 28px;
+            padding: 24px 36px;
             background: #ffffff;
             border: 1px solid var(--border-subtle);
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
-            margin-bottom: 32px;
+            border-radius: 20px;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.07);
+            margin-bottom: 36px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .inception-badge-showcase:hover {
             transform: translateY(-3px);
-            box-shadow: 0 14px 40px rgba(118, 185, 0, 0.15);
+            box-shadow: 0 16px 45px rgba(118, 185, 0, 0.18);
         }
 
         .inception-badge-showcase img {
-            height: 64px;
+            height: 96px;
             width: auto;
             display: block;
         }
@@ -404,6 +404,14 @@
                 padding: 140px 0 60px;
             }
 
+            .inception-badge-showcase {
+                padding: 18px 24px;
+            }
+
+            .inception-badge-showcase img {
+                height: 68px;
+            }
+
             .benefits-grid {
                 grid-template-columns: 1fr;
             }
@@ -419,17 +427,13 @@
 
     <!-- Navigation -->
     <netpin-header></netpin-header>
-    <script src="/components/header.js"></script>
+    <script src="/components/header.js?v=2.0"></script>
 
     <!-- Hero Section -->
     <section class="inception-hero">
         <div class="container">
             <div class="inception-badge-showcase">
                 <img src="/images/nvidia-inception-badge.png" alt="NVIDIA Inception Program Member Badge">
-            </div>
-
-            <div class="section-label" style="display: inline-flex; align-items: center; gap: 8px; margin-bottom: 16px;">
-                <span style="color: #65a30d;">✦</span> NVIDIA Inception Member
             </div>
 
             <h1 style="font-size: 3.5rem; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 24px; max-width: 950px; margin-left: auto; margin-right: auto;">
