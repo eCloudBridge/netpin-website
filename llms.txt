@@ -22,6 +22,7 @@ Netpin is the intelligence layer for cloud, Kubernetes and CI/CD. It discovers e
 ## Key Pages
 - [Features](https://netpin.io/features.html)
 - [Pricing](https://netpin.io/pricing.html)
+- [NVIDIA Inception Member](https://netpin.io/nvidia-inception.html)
 - [Blog: Drift Intelligence](https://netpin.io/blog/drift-intelligence.html)
 - [Blog: What is Infrastructure Debt?](https://netpin.io/blog/what-is-infrastructure-debt.html)
 - [Drift documentation](https://docs.netpin.io/drift.html)

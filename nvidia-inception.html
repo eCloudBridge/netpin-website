@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netpin Joins the NVIDIA Inception Program | AI Infrastructure Intelligence</title>
+    <meta name="description" content="Netpin is a member of the NVIDIA Inception Program. Discover how accelerated computing and NVIDIA AI frameworks supercharge the Netpin Intelligence Engine (NIE) for Kubernetes and cloud observability.">
+    <meta name="keywords" content="NVIDIA Inception, Netpin NVIDIA, AI infrastructure intelligence, Kubernetes drift intelligence, GPU accelerated telemetry, predictive DevOps, Infrastructure Debt Index">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Netpin">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://netpin.io/nvidia-inception.html">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Netpin Joins the NVIDIA Inception Program | AI Infrastructure Intelligence">
+    <meta property="og:description" content="Discover how NVIDIA Inception accelerates Netpin's predictive infrastructure intelligence and real-time Kubernetes drift detection.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://netpin.io/nvidia-inception.html">
+    <meta property="og:image" content="https://netpin.io/images/og-banner.png">
+    <meta property="og:site_name" content="Netpin">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Netpin Joins the NVIDIA Inception Program | AI Infrastructure Intelligence">
+    <meta name="twitter:description" content="Discover how NVIDIA Inception accelerates Netpin's predictive infrastructure intelligence and real-time Kubernetes drift detection.">
+    <meta name="twitter:image" content="https://netpin.io/images/og-banner.png">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Netpin Joins the NVIDIA Inception Program",
+      "url": "https://netpin.io/nvidia-inception.html",
+      "description": "Netpin is a member of the NVIDIA Inception Program, accelerating AI-driven infrastructure intelligence and predictive Kubernetes monitoring.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Netpin",
+        "url": "https://netpin.io",
+        "logo": "https://netpin.io/images/logo-icon.png"
+      },
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "NVIDIA Inception",
+          "url": "https://www.nvidia.com/en-us/startups/"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css?v=2.7">
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="apple-touch-icon" href="images/favicon.png">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JQZBD8MC00"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-JQZBD8MC00');
+    </script>
+
+    <style>
+        .inception-hero {
+            padding: 160px 0 90px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .inception-badge-showcase {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 18px 28px;
+            background: #ffffff;
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+            margin-bottom: 32px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .inception-badge-showcase:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 40px rgba(118, 185, 0, 0.15);
+        }
+
+        .inception-badge-showcase img {
+            height: 64px;
+            width: auto;
+            display: block;
+        }
+
+        .hero-lead {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto 36px;
+            line-height: 1.7;
+        }
+
+        .inception-meta-strip {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 40px;
+        }
+
+        .inception-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: var(--color-bg-glass);
+            border: 1px solid var(--border-subtle);
+            border-radius: 999px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .inception-pill i {
+            color: #76b900;
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Overview Section */
+        .overview-section {
+            padding: 80px 0;
+            background: var(--color-bg-secondary);
+            border-top: 1px solid var(--border-subtle);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .overview-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .overview-text h2 {
+            font-size: 2.25rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .overview-text p {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            line-height: 1.75;
+            margin-bottom: 20px;
+        }
+
+        .architecture-card {
+            background: #ffffff;
+            border: 1px solid var(--border-subtle);
+            border-radius: 20px;
+            padding: 36px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .architecture-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .architecture-header h4 {
+            margin: 0;
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .flow-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .flow-step:last-child {
+            margin-bottom: 0;
+        }
+
+        .step-circle {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(11, 92, 255, 0.1);
+            color: var(--color-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .step-circle.nvidia {
+            background: rgba(118, 185, 0, 0.15);
+            color: #65a30d;
+        }
+
+        .flow-content h5 {
+            font-size: 0.95rem;
+            margin-bottom: 4px;
+        }
+
+        .flow-content p {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* Benefits Grid */
+        .benefits-section {
+            padding: 100px 0;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            margin-top: 60px;
+        }
+
+        .benefit-card {
+            background: #ffffff;
+            border: 1px solid var(--border-subtle);
+            border-radius: 20px;
+            padding: 36px 30px;
+            transition: all 0.3s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(118, 185, 0, 0.4);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .benefit-icon-box {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            background: rgba(118, 185, 0, 0.12);
+            color: #65a30d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+
+        .benefit-icon-box i {
+            width: 26px;
+            height: 26px;
+        }
+
+        .benefit-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+
+        .benefit-card p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.65;
+            margin: 0;
+        }
+
+        /* Impact Section */
+        .impact-section {
+            padding: 90px 0;
+            background: var(--color-bg-secondary);
+        }
+
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+            margin-top: 50px;
+        }
+
+        .impact-card {
+            background: #ffffff;
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 30px;
+        }
+
+        .impact-card h4 {
+            font-size: 1.15rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .impact-card h4 i {
+            color: var(--color-primary);
+        }
+
+        .impact-card p {
+            font-size: 0.925rem;
+            color: var(--text-secondary);
+            line-height: 1.65;
+            margin: 0;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 100px 0;
+        }
+
+        .faq-list {
+            max-width: 840px;
+            margin: 50px auto 0;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .faq-item {
+            background: #ffffff;
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 30px 32px;
+        }
+
+        .faq-item h4 {
+            font-size: 1.15rem;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        .faq-item p {
+            font-size: 0.975rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        /* CTA Section */
+        .inception-cta {
+            padding: 100px 0;
+            background: linear-gradient(135deg, rgba(11, 92, 255, 0.05), rgba(118, 185, 0, 0.05));
+            border-top: 1px solid var(--border-subtle);
+            text-align: center;
+        }
+
+        .inception-cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+        }
+
+        .inception-cta p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 650px;
+            margin: 0 auto 36px;
+        }
+
+        @media (max-width: 1024px) {
+            .overview-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .benefits-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .impact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .inception-hero {
+                padding: 140px 0 60px;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .inception-cta h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <netpin-header></netpin-header>
+    <script src="/components/header.js"></script>
+
+    <!-- Hero Section -->
+    <section class="inception-hero">
+        <div class="container">
+            <div class="inception-badge-showcase">
+                <img src="/images/nvidia-inception-badge.png" alt="NVIDIA Inception Program Member Badge">
+            </div>
+
+            <div class="section-label" style="display: inline-flex; align-items: center; gap: 8px; margin-bottom: 16px;">
+                <span style="color: #65a30d;">✦</span> NVIDIA Inception Member
+            </div>
+
+            <h1 style="font-size: 3.5rem; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 24px; max-width: 950px; margin-left: auto; margin-right: auto;">
+                Netpin Joins the <span class="text-gradient">NVIDIA Inception Program</span>
+            </h1>
+
+            <p class="hero-lead">
+                Netpin has been accepted into the prestigious NVIDIA Inception Program, supercharging the
+                Netpin Intelligence Engine (NIE) with accelerated computing, predictive AI models, and
+                high-throughput graph analytics for Kubernetes and cloud infrastructure.
+            </p>
+
+            <div class="inception-meta-strip">
+                <div class="inception-pill">
+                    <i data-lucide="cpu"></i>
+                    <span>Accelerated Telemetry Processing</span>
+                </div>
+                <div class="inception-pill">
+                    <i data-lucide="git-branch"></i>
+                    <span>Real-Time Graph Topology</span>
+                </div>
+                <div class="inception-pill">
+                    <i data-lucide="trending-up"></i>
+                    <span>Predictive Drift Forecasting</span>
+                </div>
+                <div class="inception-pill">
+                    <i data-lucide="shield-check"></i>
+                    <span>100% Read-Only Zero Trust</span>
+                </div>
+            </div>
+
+            <div style="display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;">
+                <a href="https://dash.netpin.io/register" class="btn btn-primary btn-large">Start Free Trial</a>
+                <a href="/features.html" class="btn btn-ghost btn-large" style="border: 1px solid var(--border-subtle);">Explore Features</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Overview Section -->
+    <section class="overview-section">
+        <div class="container">
+            <div class="overview-grid">
+                <div class="overview-text">
+                    <div class="section-label" style="margin-bottom: 12px;"><span>✦</span> Strategic Alignment</div>
+                    <h2>Why AI Belongs in <span class="text-gradient">Infrastructure Observability</span></h2>
+                    <p>
+                        Modern cloud environments and Kubernetes clusters generate millions of state changes, configuration updates, and telemetry points every hour. Traditional observability dashboards only tell you what is running or alert you after an outage has already begun.
+                    </p>
+                    <p>
+                        Netpin changes the paradigm by computing the <strong>Infrastructure Debt Index (IDI)</strong>, detecting configuration drift across 14 classification categories, and forecasting failure probabilities before they impact production.
+                    </p>
+                    <p>
+                        Joining <strong>NVIDIA Inception</strong> allows Netpin to harness NVIDIA's cutting-edge accelerated computing platforms, high-performance SDKs, and deep AI expertise to scale our intelligence engine across enterprise infrastructure footprints.
+                    </p>
+                </div>
+
+                <div class="architecture-card">
+                    <div class="architecture-header">
+                        <i data-lucide="layers" style="color: var(--color-primary); width: 24px; height: 24px;"></i>
+                        <h4>Netpin Intelligence Pipeline</h4>
+                    </div>
+
+                    <div class="flow-step">
+                        <div class="step-circle">1</div>
+                        <div class="flow-content">
+                            <h5>Read-Only Telemetry Ingestion</h5>
+                            <p>Non-intrusive metadata collection across Kubernetes clusters, CloudTrail, Helm, and Terraform.</p>
+                        </div>
+                    </div>
+
+                    <div class="flow-step">
+                        <div class="step-circle nvidia">2</div>
+                        <div class="flow-content">
+                            <h5>NVIDIA-Accelerated Computation</h5>
+                            <p>High-throughput graph traversal algorithms for blast-radius mapping and accelerated inference pipelines.</p>
+                        </div>
+                    </div>
+
+                    <div class="flow-step">
+                        <div class="step-circle">3</div>
+                        <div class="flow-content">
+                            <h5>Predictive Modeling &amp; Scoring</h5>
+                            <p>Netpin Intelligence Engine (NIE) calculates IDI scores, 30-day forecast trajectories, and drift fixes.</p>
+                        </div>
+                    </div>
+
+                    <div class="flow-step">
+                        <div class="step-circle">4</div>
+                        <div class="flow-content">
+                            <h5>Actionable Prevention</h5>
+                            <p>Automated CI/CD Deploy Gates, deduplicated PagerDuty alerts, and one-click remediation snippets.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Grid -->
+    <section class="benefits-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label"><span>✦</span> Program Advantages</div>
+                <h2>How NVIDIA Inception <span class="text-gradient">Powers Netpin</span></h2>
+                <p>
+                    Our membership provides dedicated resources, technical mentorship, and accelerated compute capacity to deliver unmatched speed and depth to DevOps teams.
+                </p>
+            </div>
+
+            <div class="benefits-grid">
+                <!-- Benefit 1 -->
+                <div class="benefit-card">
+                    <div class="benefit-icon-box">
+                        <i data-lucide="network"></i>
+                    </div>
+                    <h3>Accelerated Graph &amp; Topology Analytics</h3>
+                    <p>
+                        Evaluating multi-cloud dependencies requires traversing massive relationship graphs. Utilizing accelerated computing speeds up blast-radius calculations and dependency path simulations across thousands of pods and microservices.
+                    </p>
+                </div>
+
+                <!-- Benefit 2 -->
+                <div class="benefit-card">
+                    <div class="benefit-icon-box">
+                        <i data-lucide="cpu"></i>
+                    </div>
+                    <h3>Predictive Drift &amp; Risk Modeling (NIE)</h3>
+                    <p>
+                        Leveraging NVIDIA AI libraries, TensorRT optimization, and NIM microservices to run low-latency predictive models that forecast infrastructure degradation and technical debt 7, 14, and 30 days ahead of time.
+                    </p>
+                </div>
+
+                <!-- Benefit 3 -->
+                <div class="benefit-card">
+                    <div class="benefit-icon-box">
+                        <i data-lucide="server"></i>
+                    </div>
+                    <h3>Hardware Access &amp; Cloud Credits</h3>
+                    <p>
+                        Preferred pricing on leading NVIDIA hardware and GPU cloud credits through NVIDIA's hyperscaler partners (AWS, GCP, Azure), lowering compute costs for continuous model retraining and evaluation.
+                    </p>
+                </div>
+
+                <!-- Benefit 4 -->
+                <div class="benefit-card">
+                    <div class="benefit-icon-box">
+                        <i data-lucide="graduation-cap"></i>
+                    </div>
+                    <h3>Deep Learning Institute (DLI) Mentorship</h3>
+                    <p>
+                        Direct access to NVIDIA engineers, architects, and curriculum from the NVIDIA Deep Learning Institute to ensure Netpin's core engineering team adopts state-of-the-art accelerated computing architectures.
+                    </p>
+                </div>
+
+                <!-- Benefit 5 -->
+                <div class="benefit-card">
+                    <div class="benefit-icon-box">
+                        <i data-lucide="zap"></i>
+                    </div>
+                    <h3>High-Throughput Stream Processing</h3>
+                    <p>
+                        Ingesting and analyzing Kubernetes managedFields, CloudTrail audit logs, and IaC baselines in near real-time, executing runtime sweeps every 15 minutes with zero latency degradation.
+                    </p>
+                </div>
+
+                <!-- Benefit 6 -->
+                <div class="benefit-card">
+                    <div class="benefit-icon-box">
+                        <i data-lucide="globe"></i>
+                    </div>
+                    <h3>Global AI Ecosystem &amp; Collaboration</h3>
+                    <p>
+                        Engagement with NVIDIA's worldwide startup ecosystem, enterprise partners, and events such as NVIDIA GTC to showcase next-generation cloud infrastructure intelligence to industry leaders.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact for Customers -->
+    <section class="impact-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label"><span>✦</span> Customer Value</div>
+                <h2>What This Means for <span class="text-gradient">DevOps &amp; SRE Teams</span></h2>
+                <p>
+                    Every enhancement in compute performance and machine learning directly benefits the engineering teams who rely on Netpin every day.
+                </p>
+            </div>
+
+            <div class="impact-grid">
+                <div class="impact-card">
+                    <h4><i data-lucide="clock"></i> Earlier Risk Detection</h4>
+                    <p>
+                        Predictive algorithms pinpoint subtle configuration drift and security regressions days before they escalate into high-severity incidents, dramatically lowering MTTR and on-call fatigue.
+                    </p>
+                </div>
+
+                <div class="impact-card">
+                    <h4><i data-lucide="gauge"></i> Instant CI/CD Release Gating</h4>
+                    <p>
+                        Our Deploy Gate checks releases against 5 risk dimensions in seconds. Accelerated graph analytics evaluate deployment impact immediately inside your GitHub Actions, GitLab CI, or Jenkins pipelines.
+                    </p>
+                </div>
+
+                <div class="impact-card">
+                    <h4><i data-lucide="lock"></i> Zero Security Compromises</h4>
+                    <p>
+                        Netpin maintains strict separation between infrastructure intelligence and customer secrets. All accelerated computing occurs on anonymized telemetry, maintaining our 100% read-only zero-trust guarantee.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label"><span>✦</span> Transparency &amp; Details</div>
+                <h2>Frequently Asked <span class="text-gradient">Questions</span></h2>
+                <p>
+                    Clear answers regarding Netpin's participation in the NVIDIA Inception Program.
+                </p>
+            </div>
+
+            <div class="faq-list">
+                <div class="faq-item">
+                    <h4>What is the NVIDIA Inception Program?</h4>
+                    <p>
+                        NVIDIA Inception is a free, non-equity startup acceleration program designed to nurture startups revolutionizing industries with artificial intelligence and accelerated computing. It provides members with technical guidance, developer tools, hardware credits, and go-to-market opportunities.
+                    </p>
+                </div>
+
+                <div class="faq-item">
+                    <h4>Does membership mean NVIDIA endorses or certifies Netpin?</h4>
+                    <p>
+                        No. Participation in the NVIDIA Inception Program is a factual alignment within NVIDIA's startup developer ecosystem. It does not constitute a formal certification, corporate endorsement, product warranty, or equity investment by NVIDIA Corporation.
+                    </p>
+                </div>
+
+                <div class="faq-item">
+                    <h4>Do Netpin customers need NVIDIA GPUs in their clusters to use Netpin?</h4>
+                    <p>
+                        No. Netpin works seamlessly on any standard Kubernetes cluster (EKS, GKE, AKS, DOKS, or self-hosted) and cloud environment without requiring GPU hardware on the customer side. The Netpin agent is a lightweight, read-only daemon requiring minimal CPU and RAM. Accelerated compute and AI model pipelines operate within Netpin's cloud infrastructure.
+                    </p>
+                </div>
+
+                <div class="faq-item">
+                    <h4>Is customer infrastructure data shared with NVIDIA?</h4>
+                    <p>
+                        No. Customer telemetry and metadata are strictly governed by Netpin's zero-trust security framework and Privacy Policy. Data is encrypted in transit with TLS 1.3 and at rest with AES-256. Netpin only analyzes infrastructure configuration metadata; application payloads and customer data are never stored or shared with external parties.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="inception-cta">
+        <div class="container">
+            <h2>Experience AI-Powered <span class="text-gradient">Infrastructure Intelligence</span></h2>
+            <p>
+                Connect your first Kubernetes cluster in under 5 minutes with read-only access. Start measuring your Infrastructure Debt Index and predicting drift today.
+            </p>
+            <div style="display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;">
+                <a href="https://dash.netpin.io/register" class="btn btn-primary btn-large">Start Free Trial</a>
+                <a href="/contact.html" class="btn btn-ghost btn-large" style="border: 1px solid var(--border-subtle);">Schedule a Technical Demo</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <netpin-footer></netpin-footer>
+    <script src="/components/footer.js"></script>
+
+    <!-- Scripts -->
+    <script src="/js/scroll-animations.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            lucide.createIcons();
+        });
+    </script>
+</body>
+
+</html>
+

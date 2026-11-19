@@ -20,6 +20,15 @@ class NetpinFooter extends HTMLElement {
                         <i data-lucide="mail"></i> <a href="mailto:hello@netpin.io"
                             style="color: inherit; text-decoration: none;">hello@netpin.io</a>
                     </p>
+                    <div style="margin-top: 22px;">
+                        <a href="/nvidia-inception.html" title="Netpin is an NVIDIA Inception Program Member"
+                            style="display: inline-block; text-decoration: none;">
+                            <img src="/images/nvidia-inception-badge.png" alt="NVIDIA Inception Program Member"
+                                style="height: 48px; width: auto; display: block; border-radius: 6px; box-shadow: var(--shadow-sm); transition: transform 0.2s ease, box-shadow 0.2s ease;"
+                                onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='var(--shadow-md)';"
+                                onmouseout="this.style.transform='none'; this.style.boxShadow='var(--shadow-sm)';" />
+                        </a>
+                    </div>
                 </div>
 
                 <div class="footer-column">
@@ -46,6 +55,7 @@ class NetpinFooter extends HTMLElement {
                     <h4>Company</h4>
                     <ul>
                         <li><a href="/about.html">About Us</a></li>
+                        <li><a href="/nvidia-inception.html">NVIDIA Inception</a></li>
                         <li><a href="#">Careers</a></li>
                         <li><a href="#">Press</a></li>
                         <li><a href="/contact.html">Contact</a></li>
