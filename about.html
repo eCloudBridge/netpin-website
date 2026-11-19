@@ -221,54 +221,20 @@
             font-size: 1.25rem;
         }
 
-        .stats-section {
-            padding: 100px 0;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 32px;
-        }
-
-        .stat-card {
-            text-align: center;
-            padding: 40px 20px;
-            background: var(--color-bg-glass);
-            border: 1px solid var(--border-subtle);
-            border-radius: 20px;
-        }
-
-        .stat-card .stat-number {
-            font-size: 3.5rem;
-            font-weight: 800;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 8px;
-        }
-
-        .stat-card .stat-text {
-            color: var(--text-secondary);
-            font-size: 1rem;
-        }
-
         @media (max-width: 1024px) {
             .mission-grid {
                 grid-template-columns: 1fr;
             }
 
             .values-grid,
-            .team-grid,
-            .stats-grid {
+            .team-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
 
         @media (max-width: 768px) {
 
-            .values-grid,
-            .stats-grid {
+            .values-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -386,30 +352,6 @@
                         We've been on-call. We've fought production fires.
                         We build for engineers, by engineers.
                     </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Stats -->
-    <section class="stats-section">
-        <div class="container">
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-number">10K+</div>
-                    <div class="stat-text">Clusters Monitored</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">500+</div>
-                    <div class="stat-text">Teams Using Netpin</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">1M+</div>
-                    <div class="stat-text">Findings Detected</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">99.9%</div>
-                    <div class="stat-text">Uptime SLA</div>
                 </div>
             </div>
         </div>

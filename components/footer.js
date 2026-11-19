@@ -66,7 +66,7 @@ class NetpinFooter extends HTMLElement {
 
             <div class="footer-bottom"
                 style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;">
-                <p>© 2026 Netpin. All rights reserved.</p>
+                <p>© 2026 Netpin, a product of ECLOUDBRIDGE TECHNOLOGIES PRIVATE LIMITED. All rights reserved.</p>
 
                 <div class="footer-social">
                     <a href="https://x.com/netpinio?s=21&t=VkRUdMpeAx_UQTgCBIXlWw" target="_blank"

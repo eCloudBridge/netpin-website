@@ -219,9 +219,12 @@
 
         .offices-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 32px;
-            margin-top: 60px;
+            margin-top: 48px;
+            max-width: 680px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .office-card {
@@ -233,7 +236,7 @@
 
         .office-card h4 {
             font-size: 1.25rem;
-            margin-bottom: 16px;
+            margin-bottom: 8px;
             display: flex;
             align-items: center;
             gap: 10px;
@@ -242,20 +245,20 @@
         .office-card p {
             font-size: 0.95rem;
             color: var(--text-muted);
-            line-height: 1.7;
+            line-height: 1.5;
         }
 
         @media (max-width: 1024px) {
             .contact-grid {
                 grid-template-columns: 1fr;
             }
-
-            .offices-grid {
-                grid-template-columns: 1fr;
-            }
         }
 
         @media (max-width: 768px) {
+            .offices-grid {
+                grid-template-columns: 1fr;
+            }
+
             .form-row {
                 grid-template-columns: 1fr;
             }
@@ -415,41 +418,22 @@
         </div>
     </section>
 
-    <!-- Offices -->
+    <!-- Locations -->
     <section class="offices-section">
         <div class="container">
             <div class="section-header">
-                <h2>Our <span class="text-gradient">Offices</span></h2>
+                <h2>Our <span class="text-gradient">Locations</span></h2>
             </div>
 
             <div class="offices-grid">
-                <!-- Temporarily hiding SF and London offices as requested
-                <div class="office-card">
-                    <h4><i data-lucide="map-pin"></i> San Francisco</h4>
-                    <p>
-                        535 Mission St, 14th Floor<br>
-                        San Francisco, CA 94105<br>
-                        United States
-                    </p>
-                </div>
-
-                <div class="office-card">
-                    <h4><i data-lucide="map-pin"></i> London</h4>
-                    <p>
-                        123 Old Street<br>
-                        London EC1V 9BD<br>
-                        United Kingdom
-                    </p>
-                </div>
-                -->
-
                 <div class="office-card">
                     <h4><i data-lucide="map-pin"></i> Bangalore</h4>
-                    <p>
-                        WeWork Embassy Golf Links<br>
-                        Bangalore, Karnataka 560071<br>
-                        India
-                    </p>
+                    <p>India</p>
+                </div>
+
+                <div class="office-card">
+                    <h4><i data-lucide="map-pin"></i> Goa</h4>
+                    <p>India</p>
                 </div>
             </div>
         </div>
